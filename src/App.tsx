@@ -22,6 +22,12 @@ import { sectionCtas } from './data/content'
 export default function App() {
   return (
     <>
+      <a
+        href="#top"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold-400 focus:px-4 focus:py-2 focus:font-semibold focus:text-ink-950"
+      >
+        Przejdź do treści
+      </a>
       <Navbar />
       <main>
         <Hero />

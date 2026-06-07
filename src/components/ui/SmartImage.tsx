@@ -50,6 +50,7 @@ export function SmartImage({ src, alt, className = '', priority = false, fallbac
       src={current}
       alt={alt}
       loading={priority ? 'eager' : 'lazy'}
+      fetchPriority={priority ? 'high' : 'auto'}
       decoding="async"
       onError={handleError}
       className={className}
