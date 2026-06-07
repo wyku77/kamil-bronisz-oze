@@ -15,6 +15,7 @@ import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { FloatingActions } from './components/FloatingActions'
 import { ExitIntent } from './components/ExitIntent'
+import { ConsentBanner } from './components/ConsentBanner'
 import { sectionCtas } from './data/content'
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
       <Footer />
       <FloatingActions />
       <ExitIntent />
+      <ConsentBanner />
     </>
   )
 }

@@ -7,6 +7,14 @@ interface ImportMetaEnv {
   readonly VITE_LEAD_WEBHOOK_URL?: string
   /** Numer WhatsApp w formacie międzynarodowym bez znaków (np. 48512491787). */
   readonly VITE_WHATSAPP?: string
+  /** Google Tag Manager — ID kontenera (np. GTM-XXXXXXX). */
+  readonly VITE_GTM_ID?: string
+  /** Meta (Facebook) Pixel — ID piksela (np. 1234567890). */
+  readonly VITE_META_PIXEL_ID?: string
+  /** Google Ads — ID konta (np. AW-XXXXXXXXX). */
+  readonly VITE_GADS_ID?: string
+  /** Google Ads — etykieta konwersji (część po „/" w send_to). */
+  readonly VITE_GADS_CONVERSION_LABEL?: string
 }
 
 interface ImportMeta {

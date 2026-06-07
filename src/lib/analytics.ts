@@ -10,8 +10,13 @@ declare global {
   interface Window {
     dataLayer?: DataLayerEvent[]
     fbq?: (...args: unknown[]) => void
+    gtag?: (...args: unknown[]) => void
   }
 }
+
+// Konwersja Google Ads (gdy wpinasz Ads bezpośrednio, bez GTM).
+const GADS_ID = import.meta.env.VITE_GADS_ID as string | undefined
+const GADS_CONVERSION_LABEL = import.meta.env.VITE_GADS_CONVERSION_LABEL as string | undefined
 
 export function pushEvent(event: string, payload: Record<string, unknown> = {}): void {
   if (typeof window === 'undefined') return
@@ -22,6 +27,16 @@ export function pushEvent(event: string, payload: Record<string, unknown> = {}):
   if (typeof window.fbq === 'function') {
     if (event === 'lead_submit') window.fbq('track', 'Lead', payload)
     if (event === 'calculator_complete') window.fbq('track', 'CompleteRegistration', payload)
+  }
+
+  // Konwersja Google Ads na pozyskaniu leada (gdy Ads wpięty bezpośrednio).
+  if (
+    event === 'lead_submit' &&
+    typeof window.gtag === 'function' &&
+    GADS_ID &&
+    GADS_CONVERSION_LABEL
+  ) {
+    window.gtag('event', 'conversion', { send_to: `${GADS_ID}/${GADS_CONVERSION_LABEL}` })
   }
 }
 
