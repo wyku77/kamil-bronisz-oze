@@ -64,7 +64,7 @@ export const hero = {
     { value: 90, suffix: '%', label: 'Mniejsze rachunki za prąd' },
     { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
-    { value: 24, suffix: '/7', label: 'Zarządzanie energią z AI' },
+    { value: 1339, suffix: '', label: 'Opinii w Google · 4,9 ★' },
   ],
   floating: {
     savingsLabel: 'Oszczędność rachunku',

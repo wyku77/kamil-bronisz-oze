@@ -4,6 +4,7 @@ import { hero } from '../data/content'
 import { SmartImage } from './ui/SmartImage'
 import { CountUp } from './ui/CountUp'
 import { track } from '../lib/analytics'
+import heroPhoto from '../assets/realizacje/20241212_134324.jpg'
 
 export function Hero() {
   return (
@@ -92,8 +93,8 @@ export function Hero() {
         >
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl ring-1 ring-gold-400/15">
             <SmartImage
-              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1100&q=80"
-              alt="Nowoczesny dom z instalacją fotowoltaiczną i magazynem energii"
+              src={heroPhoto}
+              alt="Realny montaż inteligentnego magazynu energii — realizacja Kamil Bronisz"
               priority
               className="h-[420px] w-full object-cover sm:h-[520px]"
             />
