@@ -35,6 +35,12 @@ jobs:
 
       - name: Zbuduj stronę
         run: npm run build
+        env:
+          # Klucz Web3Forms (leady na e-mail) — ustaw w repo: Settings → Secrets and
+          # variables → Actions → Variables → VITE_WEB3FORMS_KEY. Bezpieczny do ujawnienia.
+          VITE_WEB3FORMS_KEY: ${{ vars.VITE_WEB3FORMS_KEY }}
+          # Webhook n8n/Make (docelowo). Pusty = pomijany.
+          VITE_LEAD_WEBHOOK_URL: ${{ vars.VITE_LEAD_WEBHOOK_URL }}
 
       - name: Skonfiguruj Pages
         uses: actions/configure-pages@v5

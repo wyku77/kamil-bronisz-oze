@@ -69,6 +69,9 @@ export type LeadPayload = {
 }
 
 const WEBHOOK_URL = import.meta.env.VITE_LEAD_WEBHOOK_URL as string | undefined
+/** Klucz Web3Forms — leady lecą prosto na e-mail (start, gdy leadów jest mało). */
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 const STORAGE_KEY = 'kb_leads'
 
 function getUTM() {
@@ -164,10 +167,10 @@ export function buildLeadPayload(
   }
 }
 
-export type SubmitResult = { ok: boolean; mode: 'webhook' | 'local' }
+export type SubmitResult = { ok: boolean; mode: 'webhook' | 'email' | 'local' }
 
 export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
-  // Tryb produkcyjny: wyślij na webhook (n8n / Make / własny endpoint)
+  // 1) Tryb produkcyjny: webhook (n8n / Make / własny endpoint) — ma pierwszeństwo
   if (WEBHOOK_URL) {
     try {
       const res = await fetch(WEBHOOK_URL, {
@@ -182,7 +185,27 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
     }
   }
 
-  // Fallback: zapis lokalny (deweloperski lub awaryjny)
+  // 2) Start: wyślij leada prosto na e-mail przez Web3Forms
+  if (WEB3FORMS_KEY) {
+    try {
+      const res = await fetch(WEB3FORMS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `🔥 Nowy lead OZE (${payload.leadTemperature}) — ${payload.name || 'bez nazwy'}`,
+          from_name: 'Strona OZE — kalkulator',
+          replyto: payload.email,
+          ...payload,
+        }),
+      })
+      if (res.ok) return { ok: true, mode: 'email' }
+    } catch (err) {
+      console.error('[leads] Błąd wysyłki e-mail (Web3Forms), zapisuję lokalnie:', err)
+    }
+  }
+
+  // 3) Fallback: zapis lokalny (deweloperski lub awaryjny)
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     const list: LeadPayload[] = raw ? JSON.parse(raw) : []
@@ -193,9 +216,9 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
     return { ok: false, mode: 'local' }
   }
 
-  if (!WEBHOOK_URL) {
+  if (!WEBHOOK_URL && !WEB3FORMS_KEY) {
     console.info(
-      '%c[leads] Lead zapisany lokalnie (brak VITE_LEAD_WEBHOOK_URL).',
+      '%c[leads] Lead zapisany lokalnie (brak VITE_LEAD_WEBHOOK_URL i VITE_WEB3FORMS_KEY).',
       'color:#d4a017;font-weight:bold',
       payload,
     )
