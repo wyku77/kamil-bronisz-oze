@@ -46,7 +46,7 @@ const svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http
   <!-- stopka: nazwisko -->
   <text x="80" y="566" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#ffffff">Kamil Bronisz</text>
   <text x="80" y="566" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#ffffff" opacity="0">Kamil Bronisz</text>
-  <text x="318" y="566" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="500" fill="url(#gold)">&#8212; ekspert OZE</text>
+  <text x="318" y="566" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="500" fill="url(#gold)">&#8212; konsultant energetyczny</text>
 
   <!-- ramka -->
   <rect x="20" y="20" width="${W - 40}" height="${H - 40}" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>

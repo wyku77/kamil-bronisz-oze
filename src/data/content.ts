@@ -11,7 +11,7 @@ import kamilPhoto from '../assets/kamil-bronisz.jpg'
 
 export const site = {
   name: 'Kamil Bronisz',
-  role: 'Ekspert ds. magazynów energii i zarządzania energią',
+  role: 'Konsultant energetyczny',
   tagline: 'Niezależność energetyczna, którą widać na rachunku.',
   phone: '512 491 787',
   phoneHref: 'tel:+48512491787',
@@ -153,7 +153,7 @@ export const process: { eyebrow: string; title: string; lead: string; steps: Pro
 export const about = {
   eyebrow: 'O mnie',
   name: 'Kamil Bronisz',
-  role: 'Ekspert ds. magazynów energii i zarządzania energią',
+  role: 'Konsultant energetyczny',
   photo: kamilPhoto,
   lead: 'Pomagam właścicielom domów i firmom realnie obniżyć rachunki i uniezależnić się energetycznie — w oparciu o twarde liczby, nie obietnice.',
   paragraphs: [
@@ -185,37 +185,37 @@ export const testimonials: { eyebrow: string; title: string; lead: string; items
   items: [
     {
       name: 'Marek W.',
-      role: 'Dom jednorodzinny, Katowice',
+      role: 'Dom jednorodzinny, Lublin',
       rating: 5,
       text: 'Kamil dobrał magazyn energii idealnie pod nasze zużycie — bez wciskania większej instalacji. Rachunki spadły o ponad 80%, a w aplikacji widzę wszystko na bieżąco.',
     },
     {
       name: 'Tomasz P.',
-      role: 'Właściciel firmy, Tychy',
+      role: 'Właściciel firmy, Puławy',
       rating: 5,
       text: 'Konkretne wyliczenia, jasny czas zwrotu i zero żargonu. Magazyn z zarządzaniem energią zwróci się szybciej, niż zakładałem. Pełen profesjonalizm.',
     },
     {
       name: 'Katarzyna M.',
-      role: 'Dom jednorodzinny, Sosnowiec',
+      role: 'Dom jednorodzinny, Świdnik',
       rating: 5,
       text: 'Najbardziej doceniam podejście doradcze. Najpierw analiza i liczby, dopiero potem oferta. Taryfa dynamiczna z magazynem to u nas strzał w dziesiątkę.',
     },
     {
       name: 'Robert J.',
-      role: 'Gospodarstwo rolne, Opolskie',
+      role: 'Gospodarstwo rolne, Wojciechów',
       rating: 5,
       text: 'Pomoc w dotacji na magazyn i sprawny montaż. Świetny kontakt po uruchomieniu — system jest zoptymalizowany pod nasze realne zużycie.',
     },
     {
       name: 'Magdalena S.',
-      role: 'Willa, Mikołów',
+      role: 'Willa, Nałęczów',
       rating: 5,
       text: 'Fotowoltaika, magazyn energii i sterowanie całym domem. Nowoczesne, ciche i naprawdę oszczędne. Polecam każdemu, kto myśli o niezależności.',
     },
     {
       name: 'Paweł K.',
-      role: 'Dom z pompą ciepła, Gliwice',
+      role: 'Dom z pompą ciepła, Kraśnik',
       rating: 5,
       text: 'Dom z pompą ciepła i autem elektrycznym to spore zużycie — Kamil policzył wszystko i dobrał magazyn tak, że rachunki są minimalne. Wielkie dzięki.',
     },

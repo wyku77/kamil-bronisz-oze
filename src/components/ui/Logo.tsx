@@ -3,7 +3,7 @@ type LogoProps = {
   href?: string
 }
 
-/** Logo marki osobistej: Kamil Bronisz — ekspert OZE. */
+/** Logo marki osobistej: Kamil Bronisz — Konsultant energetyczny. */
 export function Logo({ className = '', href = '#top' }: LogoProps) {
   return (
     <a
@@ -20,8 +20,8 @@ export function Logo({ className = '', href = '#top' }: LogoProps) {
         <span className="font-display text-lg font-extrabold tracking-tight text-white">
           Kamil <span className="text-gradient">Bronisz</span>
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/45">
-          Ekspert OZE
+        <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-white/45">
+          Konsultant energetyczny
         </span>
       </span>
     </a>

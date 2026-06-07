@@ -48,7 +48,7 @@ export function About() {
         <Reveal direction="left">
           <span className="eyebrow">{about.eyebrow}</span>
           <h2 className="mt-5 h-section text-white">
-            Twój doradca od <span className="text-gradient">magazynów energii</span> i zarządzania energią
+            Twój konsultant od <span className="text-gradient">magazynów energii</span> i zarządzania energią
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-white/75">{about.lead}</p>
 

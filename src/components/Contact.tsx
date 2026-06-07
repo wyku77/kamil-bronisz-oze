@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import { CheckCircle2, Mail, MessageCircle, Phone, Send } from 'lucide-react'
-import { site } from '../data/content'
+import { site, about } from '../data/content'
 import { Reveal } from './ui/Reveal'
+import { SmartImage } from './ui/SmartImage'
 import { submitLead, type LeadPayload } from '../lib/leads'
 import { track } from '../lib/analytics'
 
@@ -87,6 +88,11 @@ export function Contact() {
               <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-gold-300 to-gold-500 font-display text-xl font-bold text-ink-950">
                 KB
               </span>
+              <SmartImage
+                src={about.photo}
+                alt={`${site.name} — ${site.role}`}
+                className="h-14 w-14 shrink-0 rounded-2xl object-cover ring-1 ring-gold-400/30"
+              />
               <div>
                 <p className="font-display text-lg font-bold">{site.name}</p>
                 <p className="text-sm text-gold-300">{site.role}</p>
