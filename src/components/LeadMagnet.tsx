@@ -42,7 +42,7 @@ export function LeadMagnet() {
               {!unlocked ? (
                 <form onSubmit={handleSubmit} className="mt-6 space-y-3">
                   <div className="relative">
-                    <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+                    <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
                     <input
                       type="tel"
                       inputMode="tel"
@@ -55,7 +55,7 @@ export function LeadMagnet() {
                     />
                   </div>
                   <div className="relative">
-                    <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+                    <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
                     <input
                       type="email"
                       inputMode="email"
@@ -75,14 +75,14 @@ export function LeadMagnet() {
                   >
                     {status === 'sending' ? 'Wysyłam…' : leadMagnet.button}
                   </button>
-                  <p className="text-xs text-white/40">{leadMagnet.consent}</p>
+                  <p className="text-xs text-white/60">{leadMagnet.consent}</p>
                 </form>
               ) : (
                 <div className="mt-6 flex items-center gap-3 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.07] p-4">
                   <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-300" />
                   <div>
                     <p className="font-semibold text-emerald-200">{leadMagnet.successTitle}</p>
-                    <p className="text-xs text-white/55">{leadMagnet.successNote}</p>
+                    <p className="text-xs text-white/70">{leadMagnet.successNote}</p>
                   </div>
                 </div>
               )}

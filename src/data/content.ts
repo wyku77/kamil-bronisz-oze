@@ -105,7 +105,7 @@ export const benefits: { eyebrow: string; title: string; lead: string; items: Be
     {
       icon: 'gauge',
       title: 'Zarabiasz na taryfach dynamicznych',
-      text: 'Taryfy dynamiczne oferują już więksi sprzedawcy energii, a w 2026 dochodzą 15-minutowe rozliczenia. Z magazynem i automatyką kupujesz prąd tanio i korzystasz w szczycie — to dodatkowy zysk.',
+      text: 'Z magazynem i automatyką kupujesz prąd, gdy jest tani, a korzystasz z niego, gdy jest drogi — to dodatkowy zysk co miesiąc.',
     },
   ],
 }
@@ -281,23 +281,38 @@ export const energyStorage = {
   objections: [
     {
       q: 'Czy magazyn opłaca się bez dotacji?',
-      a: 'Tak. Cena odkupu nadwyżek z sieci jest dziś bardzo niska, więc kluczowe jest zużycie własnej energii. Magazyn pozwala korzystać z prądu z paneli wieczorem i w nocy, podnosząc autokonsumpcję do 80–90% — i to tu powstają realne oszczędności, niezależnie od dotacji.',
+      a: [
+        'Tak. Cena odkupu nadwyżek oddanych do sieci jest dziś bardzo niska — dlatego liczy się zużycie **własnej** energii, a nie jej sprzedaż.',
+        'Magazyn pozwala korzystać z prądu z paneli wieczorem i w nocy. To tu — jak w przykładzie wyżej — powstają realne oszczędności, niezależnie od dotacji.',
+      ],
     },
     {
       q: 'Czy to bezpieczne? Słyszałem o pożarach baterii',
-      a: 'Stosuję ogniwa w technologii LFP (litowo-żelazowo-fosforanowej) — najbezpieczniejszej dla domu, odpornej na przegrzanie. Magazyny mają certyfikaty, system zarządzania baterią (BMS) i zabezpieczenia.',
+      a: [
+        'Stosuję ogniwa w technologii **LFP** (litowo-żelazowo-fosforanowej) — najbezpieczniejszej dla domu, odpornej na przegrzanie.',
+        'Każdy magazyn ma certyfikaty, system zarządzania baterią (BMS) i zabezpieczenia.',
+      ],
     },
     {
       q: 'Co zimą, gdy słońca jest mało?',
-      a: 'Wtedy pracuje taryfa dynamiczna: system ładuje magazyn tanim prądem z sieci w nocy i oddaje go w drogich godzinach szczytu. Magazyn pracuje na Twój rachunek cały rok, nie tylko latem.',
+      a: [
+        'Wtedy pracuje taryfa dynamiczna: system ładuje magazyn tanim prądem z sieci w nocy i oddaje go w drogich godzinach szczytu.',
+        'Dzięki temu magazyn pracuje na Twój rachunek **przez cały rok**, nie tylko latem.',
+      ],
     },
     {
       q: 'Ile żyje magazyn energii?',
-      a: 'Nowoczesne magazyny LFP projektowane są na 6 000–10 000 cykli, co przy codziennym użyciu oznacza kilkanaście lat pracy. Producenci dają zwykle ok. 10 lat gwarancji.',
+      a: [
+        'Nowoczesne magazyny LFP projektowane są na **6 000–10 000 cykli** — przy codziennym użyciu to kilkanaście lat pracy.',
+        'Producenci dają zwykle ok. **10 lat gwarancji**.',
+      ],
     },
     {
       q: 'Mam już fotowoltaikę — da się dołożyć magazyn?',
-      a: 'W większości przypadków tak (retrofit) — przez falownik hybrydowy lub dodatkowy moduł z bramą wyspową. Na bezpłatnej analizie sprawdzam, co najlepiej pasuje do Twojej instalacji.',
+      a: [
+        'W większości przypadków tak (**retrofit**) — przez falownik hybrydowy lub dodatkowy moduł z bramą wyspową.',
+        'Na bezpłatnej analizie sprawdzam, co najlepiej pasuje do Twojej instalacji.',
+      ],
     },
   ],
   subsidy: {

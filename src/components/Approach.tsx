@@ -19,7 +19,7 @@ export function Approach() {
             <p className="font-display text-lg font-bold text-white/80">{approach.bad.title}</p>
             <ul className="mt-4 space-y-3">
               {approach.bad.items.map((it) => (
-                <li key={it} className="flex items-start gap-3 text-sm text-white/55">
+                <li key={it} className="flex items-start gap-3 text-sm text-white/70">
                   <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-red-500/15 text-red-400">
                     <X className="h-3 w-3" />
                   </span>
@@ -65,7 +65,7 @@ export function Approach() {
                 {approach.table.rows.map((r, i) => (
                   <tr key={r.label} className={i % 2 ? 'bg-white/[0.015]' : ''}>
                     <td className="px-4 py-3 text-white/75">{r.label}</td>
-                    <td className="px-4 py-3 text-center text-white/45">{r.pv}</td>
+                    <td className="px-4 py-3 text-center text-white/60">{r.pv}</td>
                     <td className="px-4 py-3 text-center font-medium text-gold-200">{r.full}</td>
                   </tr>
                 ))}

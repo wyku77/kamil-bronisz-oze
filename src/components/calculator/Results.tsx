@@ -111,7 +111,7 @@ export function Results({ result, onRecalculate }: Props) {
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-gold-400/15 text-gold-300">
             <PiggyBank className="h-6 w-6" />
           </span>
-          <p className="mt-4 text-sm text-white/55">Roczne oszczędności</p>
+          <p className="mt-4 text-sm text-white/70">Roczne oszczędności</p>
           <p className="mt-1 font-display text-3xl font-extrabold text-gradient">
             <CountUp to={result.annualSavings} suffix=" zł" />
           </p>
@@ -121,7 +121,7 @@ export function Results({ result, onRecalculate }: Props) {
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-500/20 text-brand-300">
             <Clock className="h-6 w-6" />
           </span>
-          <p className="mt-4 text-sm text-white/55">Zwrot po dofinansowaniu</p>
+          <p className="mt-4 text-sm text-white/70">Zwrot po dofinansowaniu</p>
           <p className="mt-1 font-display text-3xl font-extrabold text-white">
             <CountUp to={result.paybackYears} decimals={1} suffix=" lat" />
           </p>
@@ -132,11 +132,11 @@ export function Results({ result, onRecalculate }: Props) {
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-500/15 text-emerald-300">
             <Leaf className="h-6 w-6" />
           </span>
-          <p className="mt-4 text-sm text-white/55">Redukcja CO₂ rocznie</p>
+          <p className="mt-4 text-sm text-white/70">Redukcja CO₂ rocznie</p>
           <p className="mt-1 font-display text-3xl font-extrabold text-white">
             <CountUp to={result.co2PerYear} suffix=" kg" />
           </p>
-          <p className="mt-1 text-xs text-white/40">
+          <p className="mt-1 text-xs text-white/60">
             ~{formatNumber(Math.round(result.co2Over20y / 1000))} ton w 20 lat
           </p>
         </div>
@@ -163,7 +163,7 @@ export function Results({ result, onRecalculate }: Props) {
             <Sun className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-sm text-white/55">Rekomendowana moc PV</p>
+            <p className="text-sm text-white/70">Rekomendowana moc PV</p>
             <p className="font-display text-2xl font-bold text-white">
               <CountUp to={result.pvPowerKwp} decimals={1} suffix=" kWp" />
             </p>
@@ -175,7 +175,7 @@ export function Results({ result, onRecalculate }: Props) {
             <BatteryCharging className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-sm text-white/55">Sugerowany magazyn</p>
+            <p className="text-sm text-white/70">Sugerowany magazyn</p>
             <p className="font-display text-2xl font-bold text-white">
               <CountUp to={result.storageKwh} suffix=" kWh" />
             </p>
@@ -184,8 +184,8 @@ export function Results({ result, onRecalculate }: Props) {
 
         <div className="card flex items-center justify-between gap-2 p-6">
           <div>
-            <p className="text-sm text-white/55">Autokonsumpcja</p>
-            <p className="text-xs text-white/40">udział własnej energii</p>
+            <p className="text-sm text-white/70">Autokonsumpcja</p>
+            <p className="text-xs text-white/60">udział własnej energii</p>
           </div>
           <Ring value={result.selfConsumption} />
         </div>
@@ -196,18 +196,18 @@ export function Results({ result, onRecalculate }: Props) {
         <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-center">
           <div>
             <h4 className="font-display text-lg font-bold text-white">Twoje oszczędności w czasie</h4>
-            <p className="mt-1.5 text-sm text-white/55">
+            <p className="mt-1.5 text-sm text-white/70">
               Skumulowane oszczędności z uwzględnieniem wzrostu cen energii (~5%/rok).
             </p>
             <div className="mt-5 grid grid-cols-2 gap-4">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-xs text-white/50">W ciągu 10 lat</p>
+                <p className="text-xs text-white/65">W ciągu 10 lat</p>
                 <p className="mt-1 font-display text-2xl font-extrabold text-gradient">
                   <CountUp to={result.savings10y} suffix=" zł" />
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-xs text-white/50">W ciągu 20 lat</p>
+                <p className="text-xs text-white/65">W ciągu 20 lat</p>
                 <p className="mt-1 font-display text-2xl font-extrabold text-gradient">
                   <CountUp to={result.savings20y} suffix=" zł" />
                 </p>
@@ -225,13 +225,13 @@ export function Results({ result, onRecalculate }: Props) {
             <BadgePercent className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-sm text-white/55">Dofinansowanie</p>
+            <p className="text-sm text-white/70">Dofinansowanie</p>
             <p className="font-display text-2xl font-bold text-emerald-300">{formatPLN(result.subsidy)}</p>
-            <p className="mt-0.5 text-xs text-white/40">program „{SUBSIDY_PROGRAM}"</p>
+            <p className="mt-0.5 text-xs text-white/60">program „{SUBSIDY_PROGRAM}"</p>
           </div>
         </div>
         <div className="card flex flex-col justify-center p-6">
-          <p className="text-sm text-white/55">Roczna produkcja energii</p>
+          <p className="text-sm text-white/70">Roczna produkcja energii</p>
           <p className="mt-1 font-display text-2xl font-bold text-white">
             {formatNumber(result.pvProduction)} kWh
           </p>

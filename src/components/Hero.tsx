@@ -109,7 +109,7 @@ export function Hero() {
           >
             <p className="text-xs font-medium text-white/60">{hero.floating.savingsLabel}</p>
             <p className="mt-1 font-display text-3xl font-bold text-gradient">{hero.floating.savingsValue}</p>
-            <p className="mt-1 text-[11px] text-white/50">{hero.floating.savingsNote}</p>
+            <p className="mt-1 text-[11px] text-white/65">{hero.floating.savingsNote}</p>
           </motion.div>
 
           {/* Pływająca karta — magazyn naładowany */}
@@ -144,13 +144,13 @@ export function Hero() {
               <p className="font-display text-3xl font-bold text-gradient sm:text-4xl">
                 <CountUp to={s.value} prefix={s.prefix ?? ''} suffix={s.suffix ?? ''} />
               </p>
-              <p className="mt-2 text-sm text-white/55">{s.label}</p>
+              <p className="mt-2 text-sm text-white/70">{s.label}</p>
             </div>
           ))}
         </div>
       </motion.div>
 
-      <div className="container-px relative mt-8 text-center text-xs text-white/40">
+      <div className="container-px relative mt-8 text-center text-xs text-white/60">
         {hero.title} {hero.titleAccent} — {hero.titleEnd.toLowerCase()}.
       </div>
     </section>

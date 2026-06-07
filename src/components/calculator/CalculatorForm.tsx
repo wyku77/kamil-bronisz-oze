@@ -79,7 +79,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
           onChange={(e) => set('monthlyBill', Number(e.target.value))}
           className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-full bg-white/10 accent-gold-400"
         />
-        <div className="mt-1 flex justify-between text-[11px] text-white/40">
+        <div className="mt-1 flex justify-between text-[11px] text-white/60">
           <span>50 zł</span>
           <span>3000 zł</span>
         </div>
@@ -90,7 +90,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
         <div>
           <label htmlFor="consumption" className="field-label">
             Roczne zużycie energii
-            <span className="ml-1 font-normal text-white/40">(jeśli znasz)</span>
+            <span className="ml-1 font-normal text-white/60">(jeśli znasz)</span>
           </label>
           <div className="relative">
             <input
@@ -103,7 +103,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
               value={value.annualConsumption || ''}
               onChange={(e) => set('annualConsumption', Number(e.target.value) || 0)}
             />
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-white/40">
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-white/60">
               kWh
             </span>
           </div>
@@ -164,7 +164,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
         Oblicz oszczędności
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </button>
-      <p className="text-center text-xs text-white/40">
+      <p className="text-center text-xs text-white/60">
         Wyniki są orientacyjne. Dokładne wyliczenie przygotuję podczas bezpłatnej analizy.
       </p>
     </form>

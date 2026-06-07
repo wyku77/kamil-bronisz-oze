@@ -41,7 +41,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
         <span className="eyebrow w-fit">
           <Sparkles className="h-3.5 w-3.5" /> Twoja wstępna analiza jest gotowa
         </span>
-        <p className="mt-5 text-sm uppercase tracking-wider text-white/50">Szacowane roczne oszczędności</p>
+        <p className="mt-5 text-sm uppercase tracking-wider text-white/65">Szacowane roczne oszczędności</p>
         <p className="mt-1 font-display text-5xl font-extrabold text-gradient sm:text-6xl">
           <CountUp to={result.annualSavings} suffix=" zł" />
         </p>
@@ -56,7 +56,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
           <div className="grid grid-cols-3 gap-3 blur-[6px]">
             {['Moc PV', 'Magazyn', 'Autokonsumpcja', 'Zwrot', 'Oszczędności 20 lat', 'CO₂'].map((l) => (
               <div key={l} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-[11px] text-white/50">{l}</p>
+                <p className="text-[11px] text-white/65">{l}</p>
                 <p className="mt-2 h-5 w-12 rounded bg-white/15" />
               </div>
             ))}
@@ -72,7 +72,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
       {/* Formularz lead magnet */}
       <div className="rounded-3xl border border-gold-400/25 bg-white/[0.04] p-6 shadow-glow-gold backdrop-blur-sm sm:p-8">
         <h3 className="font-display text-xl font-bold text-white">Odblokuj pełne wyniki</h3>
-        <p className="mt-1.5 text-sm text-white/55">
+        <p className="mt-1.5 text-sm text-white/70">
           Wyślę Ci też pełną analizę i odezwę się, by odpowiedzieć na pytania. Bez spamu.
         </p>
 
@@ -158,7 +158,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
             </select>
           </div>
 
-          <label className="flex items-start gap-3 text-xs leading-relaxed text-white/55">
+          <label className="flex items-start gap-3 text-xs leading-relaxed text-white/70">
             <input
               type="checkbox"
               className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/30 bg-transparent text-gold-500 focus:ring-gold-400"
@@ -175,7 +175,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
             {sending ? 'Przygotowuję wyniki…' : 'Pokaż moje pełne wyniki'}
           </button>
 
-          <p className="text-center text-[11px] text-white/45">{leadMicrocopy}</p>
+          <p className="text-center text-[11px] text-white/60">{leadMicrocopy}</p>
           <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
             <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
             <span>
@@ -184,7 +184,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
             </span>
           </div>
 
-          <div className="flex items-center justify-center gap-4 text-[11px] text-white/40">
+          <div className="flex items-center justify-center gap-4 text-[11px] text-white/60">
             <button type="button" onClick={onBack} className="flex items-center gap-1 hover:text-white/70">
               <ArrowLeft className="h-3.5 w-3.5" /> Zmień dane
             </button>

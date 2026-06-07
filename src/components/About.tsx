@@ -109,7 +109,7 @@ export function About() {
             )}
           </div>
 
-          <p className="mt-5 flex items-center gap-2 text-sm text-white/50">
+          <p className="mt-5 flex items-center gap-2 text-sm text-white/65">
             <CheckCircle2 className="h-4 w-4 text-gold-300" />
             {about.badges.join(' • ')}
           </p>

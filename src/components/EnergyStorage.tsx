@@ -5,6 +5,19 @@ import { energyStorage } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { track } from '../lib/analytics'
 
+/** Renderuje tekst z markerami **pogrubienia** (np. kluczowe liczby). */
+function renderBold(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-white">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    ),
+  )
+}
+
 // Reprezentatywna dobowa krzywa cen energii (zł/kWh) — ilustracja taryfy dynamicznej.
 const PRICES = [
   0.45, 0.4, 0.38, 0.37, 0.4, 0.5, 0.7, 0.95, 0.9, 0.75, 0.6, 0.5, 0.42, 0.4, 0.45, 0.55, 0.78, 1.05,
@@ -25,7 +38,7 @@ function TariffChart() {
           <p className="font-display text-sm font-bold text-white">{energyStorage.tariff.title}</p>
         </div>
       </div>
-      <p className="mt-3 text-xs leading-relaxed text-white/55">{energyStorage.tariff.lead}</p>
+      <p className="mt-3 text-xs leading-relaxed text-white/70">{energyStorage.tariff.lead}</p>
 
       <div className="mt-5 flex items-end gap-[3px]" style={{ height: 150 }}>
         {PRICES.map((p, h) => {
@@ -49,7 +62,7 @@ function TariffChart() {
           )
         })}
       </div>
-      <div className="mt-2 flex justify-between text-[10px] text-white/40">
+      <div className="mt-2 flex justify-between text-[10px] text-white/60">
         <span>00:00</span>
         <span>06:00</span>
         <span>12:00</span>
@@ -94,11 +107,11 @@ export function EnergyStorage() {
             </p>
             <div className="mt-6 grid items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
               <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-center">
-                <p className="text-xs text-white/55">{energyStorage.miniCase.before.label}</p>
+                <p className="text-xs text-white/70">{energyStorage.miniCase.before.label}</p>
                 <p className="mt-3 font-display text-3xl font-bold text-white/70">{energyStorage.miniCase.before.self}</p>
-                <p className="text-[11px] text-white/50">{energyStorage.miniCase.before.selfLabel}</p>
+                <p className="text-[11px] text-white/65">{energyStorage.miniCase.before.selfLabel}</p>
                 <p className="mt-3 font-display text-xl font-bold text-white/70">{energyStorage.miniCase.before.bill}</p>
-                <p className="text-[11px] text-white/50">{energyStorage.miniCase.before.billLabel}</p>
+                <p className="text-[11px] text-white/65">{energyStorage.miniCase.before.billLabel}</p>
               </div>
               <div className="grid place-items-center text-gold-300">
                 <ArrowRight className="hidden h-6 w-6 sm:block" />
@@ -150,7 +163,13 @@ export function EnergyStorage() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <p className="px-5 pb-4 text-sm leading-relaxed text-white/65">{item.a}</p>
+                        <div className="space-y-2 px-5 pb-4">
+                          {item.a.map((p, j) => (
+                            <p key={j} className="text-sm leading-relaxed text-white/70">
+                              {renderBold(p)}
+                            </p>
+                          ))}
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>

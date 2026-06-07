@@ -61,10 +61,10 @@ export function Testimonials() {
               <span className="font-display text-2xl font-bold text-white">{googleReviews.rating}</span>
               <Stars rating={5} />
             </div>
-            <p className="text-xs text-white/55">
+            <p className="text-xs text-white/70">
               <span className="font-semibold text-white/80">{googleReviews.count}</span> {googleReviews.note}
             </p>
-            <p className="mt-0.5 text-[11px] text-white/40">{googleReviews.attribution}</p>
+            <p className="mt-0.5 text-[11px] text-white/60">{googleReviews.attribution}</p>
           </div>
           <a
             href={googleReviews.url}

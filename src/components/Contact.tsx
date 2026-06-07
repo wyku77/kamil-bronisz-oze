@@ -126,7 +126,7 @@ export function Contact() {
                 <Phone className="h-6 w-6" />
               </span>
               <span>
-                <span className="block text-sm text-white/50">Zadzwoń bezpośrednio</span>
+                <span className="block text-sm text-white/65">Zadzwoń bezpośrednio</span>
                 <span className="font-display text-lg font-bold">{site.phone}</span>
               </span>
             </a>
@@ -140,7 +140,7 @@ export function Contact() {
                 <Mail className="h-6 w-6" />
               </span>
               <span>
-                <span className="block text-sm text-white/50">Napisz e-mail</span>
+                <span className="block text-sm text-white/65">Napisz e-mail</span>
                 <span className="font-medium">{site.email}</span>
               </span>
             </a>
@@ -155,7 +155,7 @@ export function Contact() {
               <MessageCircle className="h-5 w-5" /> Napisz na WhatsApp
             </a>
 
-            <p className="flex items-center gap-2 px-1 text-sm text-white/50">
+            <p className="flex items-center gap-2 px-1 text-sm text-white/65">
               <CheckCircle2 className="h-4 w-4 text-gold-300" />
               {site.area}
             </p>
@@ -206,7 +206,7 @@ export function Contact() {
                       </button>
                     ))}
                   </div>
-                  <p className="text-center text-[11px] text-white/45">Krok 1 z 2 • {leadMicrocopy}</p>
+                  <p className="text-center text-[11px] text-white/60">Krok 1 z 2 • {leadMicrocopy}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -215,12 +215,12 @@ export function Contact() {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="flex shrink-0 items-center gap-1 text-xs text-white/50 transition-colors hover:text-white/80"
+                      className="flex shrink-0 items-center gap-1 text-xs text-white/65 transition-colors hover:text-white/80"
                     >
                       <ArrowLeft className="h-3.5 w-3.5" /> Wstecz
                     </button>
                   </div>
-                  <p className="text-xs text-white/45">
+                  <p className="text-xs text-white/60">
                     Termin:{' '}
                     <span className="font-medium text-gold-300">
                       {leadTimeframe.options.find((o) => o.value === form.timeframe)?.label}
@@ -322,7 +322,7 @@ export function Contact() {
                     />
                   </div>
 
-                  <label className="flex items-start gap-3 text-xs leading-relaxed text-white/55">
+                  <label className="flex items-start gap-3 text-xs leading-relaxed text-white/70">
                     <input
                       type="checkbox"
                       className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/30 bg-transparent text-gold-500 focus:ring-gold-400"
@@ -342,7 +342,7 @@ export function Contact() {
                     {!sending && <Send className="h-4 w-4" />}
                   </button>
 
-                  <p className="text-center text-[11px] text-white/45">{leadMicrocopy}</p>
+                  <p className="text-center text-[11px] text-white/60">{leadMicrocopy}</p>
                   <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
                     <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
                     <span>

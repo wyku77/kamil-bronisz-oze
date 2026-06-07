@@ -72,7 +72,7 @@ export function ExitIntent() {
               type="button"
               onClick={close}
               aria-label="Zamknij"
-              className="absolute right-4 top-4 text-white/50 transition-colors hover:text-white"
+              className="absolute right-4 top-4 text-white/65 transition-colors hover:text-white"
             >
               <X className="h-5 w-5" />
             </button>
@@ -83,7 +83,7 @@ export function ExitIntent() {
                 <p className="mt-3 text-sm leading-relaxed text-white/65">{exitIntent.text}</p>
                 <form onSubmit={handleSubmit} className="mt-5 space-y-3">
                   <div className="relative">
-                    <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+                    <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
                     <input
                       type="tel"
                       inputMode="tel"
@@ -106,7 +106,7 @@ export function ExitIntent() {
                   <button
                     type="button"
                     onClick={close}
-                    className="w-full text-center text-xs text-white/40 transition-colors hover:text-white/70"
+                    className="w-full text-center text-xs text-white/60 transition-colors hover:text-white/70"
                   >
                     {exitIntent.dismiss}
                   </button>

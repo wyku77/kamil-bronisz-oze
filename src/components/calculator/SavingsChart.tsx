@@ -47,13 +47,13 @@ export function SavingsChart({ data, paybackYear }: SavingsChartProps) {
       {/* Oś X — co 5 lat */}
       <div className="mt-2 flex gap-1.5 sm:gap-2">
         {data.map((d) => (
-          <div key={d.year} className="flex-1 text-center text-[10px] text-white/40">
+          <div key={d.year} className="flex-1 text-center text-[10px] text-white/60">
             {d.year % 5 === 0 || d.year === 1 ? `${d.year}` : ''}
           </div>
         ))}
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-white/55">
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-white/70">
         <span className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm bg-gradient-to-t from-gold-600 to-gold-300" />
           Skumulowane oszczędności

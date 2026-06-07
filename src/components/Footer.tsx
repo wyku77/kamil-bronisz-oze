@@ -20,7 +20,7 @@ export function Footer() {
           {/* Marka */}
           <div>
             <Logo />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
               {site.tagline} Projektuję inteligentne systemy: magazyny energii z AI, fotowoltaika, zarządzanie
               energią domu (HEMS) i taryfy dynamiczne — dla domów i firm.
             </p>
@@ -87,7 +87,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/45 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 sm:flex-row">
           <p>
             © {year} {site.name} — {site.role}.
           </p>
