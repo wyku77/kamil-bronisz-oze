@@ -401,5 +401,6 @@ export const googleReviews = {
   url: 'https://share.google/igMkIhQFc3MaFw0Os',
   label: 'Opinie w Google',
   note: 'opinii w Google',
+  attribution: 'Oceny firmy Begolden, z którą realizuję instalacje',
   cta: 'Zobacz opinie w Google',
 }
