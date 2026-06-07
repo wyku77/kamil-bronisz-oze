@@ -408,11 +408,12 @@ export const exitIntent = {
   successText: 'Zadzwonię na podany numer w dogodnym terminie.',
 }
 
-// --- Opinie w Google (wizytówka firmy) ---
+// --- Opinie w Google (wizytówka firmy Begolden) ---
 export const googleReviews = {
   rating: '4,9',
+  count: '1 339',
   url: 'https://share.google/igMkIhQFc3MaFw0Os',
   label: 'Opinie w Google',
-  note: 'Średnia ocena klientów w Google',
+  note: 'opinii w Google',
   cta: 'Zobacz opinie w Google',
 }
