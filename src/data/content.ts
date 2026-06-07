@@ -90,12 +90,7 @@ export const benefits: { eyebrow: string; title: string; lead: string; items: Be
     {
       icon: 'piggy-bank',
       title: 'Niższe rachunki za prąd',
-      text: 'Zużywasz własną, tanią energię zamiast kupować ją z sieci w najdroższych godzinach. Rachunek spada nawet o 90%.',
-    },
-    {
-      icon: 'shield-check',
-      title: 'Bezpieczeństwo energetyczne',
-      text: 'Uniezależniasz się od podwyżek i polityki cenowej sprzedawców. Sam decydujesz, kiedy i z czego korzystasz.',
+      text: 'Zużywasz własną, tanią energię zamiast drogiej z sieci. Rachunek spada nawet o 90%.',
     },
     {
       icon: 'battery-charging',
@@ -106,11 +101,6 @@ export const benefits: { eyebrow: string; title: string; lead: string; items: Be
       icon: 'cpu',
       title: 'Zarządzanie energią z AI',
       text: 'System HEMS automatycznie ładuje magazyn, gdy energia jest tania, i oddaje ją, gdy droga. Pracuje za Ciebie 24/7.',
-    },
-    {
-      icon: 'trending-up',
-      title: 'Wyższa wartość nieruchomości',
-      text: 'Dom z fotowoltaiką, magazynem i niskimi kosztami energii jest atrakcyjniejszy i więcej wart na rynku.',
     },
     {
       icon: 'gauge',
@@ -168,7 +158,7 @@ export const about = {
   paragraphs: [
     'Od kilku lat doradzam w branży OZE i specjalizuję się w tym, co w 2026 roku decyduje o opłacalności: inteligentnych magazynach energii ze sztuczną inteligencją oraz nowoczesnym zarządzaniu energią całego domu (HEMS).',
     'Zamiast „sprzedawać instalację", najpierw analizuję Twoją sytuację i dobieram system, który naprawdę się opłaca — bez przewymiarowania. Pracuję w modelu konsultingowym: najpierw bezpłatna analiza i konkretne wyliczenia, a decyzja zawsze należy do Ciebie.',
-    'Prowadzę Cię przez całość — od doboru rozwiązania i dotacji, przez montaż „pod klucz", po opiekę i optymalizację taryf dynamicznych po uruchomieniu.',
+    'Prowadzę Cię przez całość — od doboru rozwiązania i dotacji, przez montaż „pod klucz", po opiekę i optymalizację taryf dynamicznych po uruchomieniu. A dom z fotowoltaiką i magazynem jest dodatkowo więcej wart na rynku.',
   ],
   highlights: [
     { icon: 'battery-charging', label: 'Specjalizacja: inteligentne magazyny energii' },
@@ -247,19 +237,15 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
   items: [
     {
       q: 'Czy fotowoltaika nadal się opłaca?',
-      a: 'Tak, ale dziś opłaca się fotowoltaika połączona z magazynem energii. Po zmianach w net-billingu cena odkupu energii oddanej do sieci jest bardzo niska, więc kluczowa jest autokonsumpcja — czyli zużywanie własnego prądu. Magazyn pozwala korzystać z energii wieczorem i w nocy, dzięki czemu cała inwestycja realnie się zwraca.',
-    },
-    {
-      q: 'Czy magazyn energii ma sens?',
-      a: 'Zdecydowanie. Magazyn zwiększa autokonsumpcję nawet do 80–90%, daje zasilanie awaryjne podczas przerw w dostawie prądu i jest niezbędny, aby zarabiać na taryfach dynamicznych. Dodatkowo w 2026 roku można otrzymać dotację na magazyn energii do 16 000 zł.',
+      a: 'Tak — ale dziś opłaca się fotowoltaika połączona z magazynem energii. Cena odkupu nadwyżek oddanych do sieci jest niska, dlatego o opłacalności decyduje magazyn. Szczegóły w sekcji Magazyny energii.',
     },
     {
       q: 'Jak działa taryfa dynamiczna?',
-      a: 'W taryfie dynamicznej cena energii zmienia się co godzinę, zależnie od sytuacji na rynku. Obowiązek jej oferowania mają już więksi sprzedawcy energii (od 2024 r.), a w 2026 dochodzą 15-minutowe interwały rozliczeń i szybsza zmiana sprzedawcy. Realnie zyskują na niej osoby z magazynem energii i automatyką (HEMS) — system ładuje baterię, gdy prąd jest tani, a korzysta z niej, gdy jest najdroższy.',
+      a: 'Cena prądu zmienia się w ciągu doby. Obowiązek oferowania taryf dynamicznych mają już więksi sprzedawcy (od 2024 r.), a w 2026 dochodzą 15-minutowe interwały rozliczeń i szybsza zmiana sprzedawcy. Najwięcej zyskują osoby z magazynem energii — jak to działa, pokazuję w sekcji Magazyny energii.',
     },
     {
       q: 'Co daje inteligentny magazyn energii z AI?',
-      a: 'Nowoczesny magazyn energii ze sztuczną inteligencją łączy falownik, baterię, opcjonalną ładowarkę do auta i zarządzanie energią w jednym, kompaktowym systemie. AI automatycznie optymalizuje pracę pod taryfy dynamiczne — ładuje, gdy prąd jest tani, i oddaje energię, gdy jest drogi — a Ty sterujesz całym domem z poziomu aplikacji. Dobieram rozwiązanie pod Twoje potrzeby, niezależnie od marki urządzenia.',
+      a: 'Nowoczesny magazyn energii ze sztuczną inteligencją łączy falownik, baterię, opcjonalną ładowarkę do auta i zarządzanie energią w jednym, kompaktowym systemie. AI automatycznie optymalizuje pracę pod taryfy dynamiczne — ładuje, gdy prąd jest tani, i oddaje energię, gdy jest drogi — a Ty sterujesz całym domem z poziomu aplikacji. Najczęściej dobieram do tego Sigenergy — z systemem zarządzania energią (EMS) i pracą wyspową, co spełnia też wymogi nowej dotacji.',
     },
     {
       q: 'Ile trwa montaż?',
@@ -267,7 +253,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
-      a: 'Tak. W 2026 roku dostępne są dotacje na magazyny energii (do 16 000 zł) oraz magazyny ciepła, a także program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę przejść przez wszystkie formalności.',
+      a: 'Tak. Poza dotacją na magazyn energii (szczegóły w sekcji Magazyny) dostępne są też dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
     },
   ],
 }

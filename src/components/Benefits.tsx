@@ -14,7 +14,7 @@ export function Benefits() {
           <p className="mt-5 text-lg leading-relaxed text-white/65">{benefits.lead}</p>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.items.map((b, i) => (
             <Reveal as="article" key={b.title} delay={i * 0.06} className="card card-hover group p-7">
               <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-gold-300/20 to-gold-500/10 text-gold-300 ring-1 ring-gold-400/20 transition-transform duration-300 group-hover:scale-105">
