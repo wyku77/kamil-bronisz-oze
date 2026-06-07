@@ -227,13 +227,19 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
 }
 
 /**
- * Lekki lead z magnetu (sam e-mail) — np. checklista/poradnik, exit-intent.
+ * Lekki lead z magnetu (telefon i/lub e-mail) — np. checklista/poradnik, exit-intent.
  * Wysyłka tą samą ścieżką co główne leady: webhook → e-mail → localStorage.
  */
-export async function submitLeadMagnet(email: string, source: string): Promise<SubmitResult> {
+export async function submitLeadMagnet(
+  contact: { phone?: string; email?: string },
+  source: string,
+): Promise<SubmitResult> {
+  const phone = (contact.phone ?? '').trim()
+  const email = (contact.email ?? '').trim()
   const base = {
     name: '',
-    email: email.trim(),
+    phone,
+    email,
     consent: true,
     source,
     submittedAt: new Date().toISOString(),
@@ -262,9 +268,9 @@ export async function submitLeadMagnet(email: string, source: string): Promise<S
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `📩 Nowy zapis (${source}): ${email}`,
+          subject: `📞 Nowy lead (${source}): ${phone || email}`,
           from_name: 'Strona OZE — lead magnet',
-          replyto: email,
+          ...(email ? { replyto: email } : {}),
           ...base,
         }),
       })

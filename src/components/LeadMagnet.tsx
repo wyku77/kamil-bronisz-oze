@@ -1,26 +1,27 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Mail } from 'lucide-react'
+import { CheckCircle2, Mail, Phone } from 'lucide-react'
 import { leadMagnet } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { submitLeadMagnet } from '../lib/leads'
 import { track } from '../lib/analytics'
 
-const isEmail = (v: string) => /\S+@\S+\.\S+/.test(v)
+const isPhone = (v: string) => v.replace(/\D/g, '').length >= 9
 
 export function LeadMagnet() {
+  const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
   const [error, setError] = useState('')
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!isEmail(email)) {
-      setError('Podaj poprawny adres e-mail.')
+    if (!isPhone(phone)) {
+      setError('Podaj poprawny numer telefonu.')
       return
     }
     setError('')
     setStatus('sending')
-    await submitLeadMagnet(email, 'lead_magnet_dotacja')
+    await submitLeadMagnet({ phone, email }, 'lead_magnet_dotacja')
     track.leadSubmit({ source: 'lead_magnet', leadTemperature: 'cieply' })
     setStatus('done')
   }
@@ -41,6 +42,19 @@ export function LeadMagnet() {
               {!unlocked ? (
                 <form onSubmit={handleSubmit} className="mt-6 space-y-3">
                   <div className="relative">
+                    <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+                    <input
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      placeholder={leadMagnet.phonePlaceholder}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="field pl-11"
+                      aria-label="Numer telefonu"
+                    />
+                  </div>
+                  <div className="relative">
                     <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
                     <input
                       type="email"
@@ -50,7 +64,7 @@ export function LeadMagnet() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="field pl-11"
-                      aria-label="Adres e-mail"
+                      aria-label="Adres e-mail (opcjonalnie)"
                     />
                   </div>
                   {error && <p className="text-xs text-red-400">{error}</p>}
@@ -96,7 +110,7 @@ export function LeadMagnet() {
               {!unlocked && (
                 <div className="absolute inset-0 grid place-items-center">
                   <span className="rounded-full border border-white/15 bg-ink-900/80 px-4 py-2 text-xs font-medium text-white/70 backdrop-blur">
-                    🔒 Zostaw e-mail, by odblokować
+                    🔒 Zostaw numer, by odblokować
                   </span>
                 </div>
               )}

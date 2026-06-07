@@ -9,6 +9,14 @@
 // src/assets/kamil-bronisz.jpg.
 import kamilPhoto from '../assets/kamil-bronisz.jpg'
 
+// Zdjęcia realizacji (zoptymalizowane) — przypisane do opinii klientów.
+import r1 from '../assets/realizacje/20241212_134324.jpg'
+import r2 from '../assets/realizacje/20254688_15685.jpg'
+import r3 from '../assets/realizacje/IMG-20260129-WA0007.jpg'
+import r4 from '../assets/realizacje/IMG-20260402-WA0005.jpg'
+import r5 from '../assets/realizacje/IMG-20260402-WA0007.jpg'
+import r6 from '../assets/realizacje/IMG-20260415-WA0003.jpg'
+
 export const site = {
   name: 'Kamil Bronisz',
   role: 'Konsultant energetyczny',
@@ -177,47 +185,54 @@ export type Testimonial = {
   role: string
   text: string
   rating: number
+  photo: string
 }
 
 export const testimonials: { eyebrow: string; title: string; lead: string; items: Testimonial[] } = {
-  eyebrow: 'Opinie klientów',
+  eyebrow: 'Realizacje i opinie',
   title: 'Zaufali mi właściciele domów i firm',
-  lead: 'Najlepszą rekomendacją są klienci, którzy realnie obniżyli rachunki i odzyskali kontrolę nad energią.',
+  lead: 'Najlepszą rekomendacją są realne realizacje i klienci, którzy obniżyli rachunki i odzyskali kontrolę nad energią.',
   items: [
     {
       name: 'Marek W.',
       role: 'Dom jednorodzinny, Lublin',
       rating: 5,
+      photo: r1,
       text: 'Kamil dobrał magazyn energii idealnie pod nasze zużycie — bez wciskania większej instalacji. Rachunki spadły o ponad 80%, a w aplikacji widzę wszystko na bieżąco.',
     },
     {
       name: 'Tomasz P.',
       role: 'Właściciel firmy, Puławy',
       rating: 5,
+      photo: r5,
       text: 'Konkretne wyliczenia, jasny czas zwrotu i zero żargonu. Magazyn z zarządzaniem energią zwróci się szybciej, niż zakładałem. Pełen profesjonalizm.',
     },
     {
       name: 'Katarzyna M.',
       role: 'Dom jednorodzinny, Świdnik',
       rating: 5,
+      photo: r3,
       text: 'Najbardziej doceniam podejście doradcze. Najpierw analiza i liczby, dopiero potem oferta. Taryfa dynamiczna z magazynem to u nas strzał w dziesiątkę.',
     },
     {
       name: 'Robert J.',
       role: 'Gospodarstwo rolne, Wojciechów',
       rating: 5,
+      photo: r6,
       text: 'Pomoc w dotacji na magazyn i sprawny montaż. Świetny kontakt po uruchomieniu — system jest zoptymalizowany pod nasze realne zużycie.',
     },
     {
       name: 'Magdalena S.',
       role: 'Willa, Nałęczów',
       rating: 5,
+      photo: r4,
       text: 'Fotowoltaika, magazyn energii i sterowanie całym domem. Nowoczesne, ciche i naprawdę oszczędne. Polecam każdemu, kto myśli o niezależności.',
     },
     {
       name: 'Paweł K.',
       role: 'Dom z pompą ciepła, Kraśnik',
       rating: 5,
+      photo: r2,
       text: 'Dom z pompą ciepła i autem elektrycznym to spore zużycie — Kamil policzył wszystko i dobrał magazyn tak, że rachunki są minimalne. Wielkie dzięki.',
     },
   ],
@@ -364,12 +379,13 @@ export const sectionCtas = {
 export const leadMagnet = {
   eyebrow: 'Bezpłatny poradnik',
   title: 'Czy załapiesz się na dotację do magazynu energii w 2026?',
-  lead: 'Zostaw e-mail, a od razu pokażę Ci checklistę 7 punktów, które decydują o dotacji i opłacalności magazynu. Bez telefonu, bez zobowiązań.',
-  emailPlaceholder: 'Twój adres e-mail',
+  lead: 'Zostaw numer telefonu, a od razu odblokuję checklistę 7 punktów, które decydują o dotacji i opłacalności magazynu. Oddzwonię z bezpłatną, niezobowiązującą analizą.',
+  phonePlaceholder: 'Twój numer telefonu',
+  emailPlaceholder: 'E-mail (opcjonalnie — wyślę kopię)',
   button: 'Pokaż checklistę',
-  consent: 'Zapisując się, zgadzasz się na kontakt e-mail. Możesz wypisać się w każdej chwili.',
+  consent: 'Zostawiając numer, zgadzasz się na kontakt telefoniczny w sprawie analizy. Bez zobowiązań.',
   successTitle: 'Gotowe! Oto Twoja checklista 👇',
-  successNote: 'Kopię i pełny poradnik prześlę Ci też na e-mail.',
+  successNote: 'Oddzwonię w dogodnym terminie i prześlę pełny poradnik.',
   checklist: [
     'Magazyn ma system zarządzania energią (EMS/HEMS) — bez tego dotacja może nie przysługiwać.',
     'Magazyn potrafi pracować wyspowo (off-grid) — wymóg nowego programu.',
@@ -384,10 +400,19 @@ export const leadMagnet = {
 // --- Exit-intent (próba wyjścia) ---
 export const exitIntent = {
   title: 'Zanim wyjdziesz…',
-  text: 'Zostaw e-mail — wyślę Ci checklistę dotacji do magazynu energii 2026 i pomogę policzyć oszczędności. Bez zobowiązań.',
-  emailPlaceholder: 'Twój adres e-mail',
-  button: 'Wyślij mi materiały',
+  text: 'Zostaw numer telefonu — oddzwonię z bezpłatną wyceną oszczędności i powiem, czy załapiesz się na dotację do magazynu energii 2026. Bez zobowiązań.',
+  phonePlaceholder: 'Twój numer telefonu',
+  button: 'Poproszę o kontakt',
   dismiss: 'Nie, dziękuję',
-  successTitle: 'Dziękuję! Materiały są w drodze.',
-  successText: 'Odezwę się na podany adres e-mail.',
+  successTitle: 'Dziękuję! Wkrótce się odezwę.',
+  successText: 'Zadzwonię na podany numer w dogodnym terminie.',
+}
+
+// --- Opinie w Google (wizytówka firmy) ---
+export const googleReviews = {
+  rating: '4,9',
+  url: 'https://share.google/igMkIhQFc3MaFw0Os',
+  label: 'Opinie w Google',
+  note: 'Średnia ocena klientów w Google',
+  cta: 'Zobacz opinie w Google',
 }

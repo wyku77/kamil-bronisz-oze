@@ -22,6 +22,9 @@ dist-ssr
 *.pdf
 *.xlsx
 
+# Oryginały zdjęć realizacji (źródło) — w repo trafiają tylko zoptymalizowane (src/assets/realizacje)
+/realizacje/
+
 # Editor / lokalne narzędzia
 .vscode/*
 !.vscode/extensions.json
