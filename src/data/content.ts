@@ -30,6 +30,7 @@ export const site = {
 
 export const nav = [
   { label: 'Dlaczego warto', href: '#dlaczego-warto' },
+  { label: 'Magazyny', href: '#magazyny-energii' },
   { label: 'Współpraca', href: '#wspolpraca' },
   { label: 'O mnie', href: '#o-mnie' },
   { label: 'Kalkulator', href: '#kalkulator' },
@@ -262,4 +263,131 @@ export const finalCta = {
   lead: 'Bezpłatna, niezobowiązująca analiza Twojego zużycia. Otrzymasz konkretne liczby: dobór magazynu, oszczędności i czas zwrotu — bez sprzedażowej prezentacji.',
   primary: 'Bezpłatna analiza',
   secondary: 'Oblicz w kalkulatorze',
+}
+
+// --- Sekcja: Magazyny energii (edukacja + obiekcje + dotacja) ---
+export const energyStorage = {
+  eyebrow: 'Magazyny energii',
+  title: 'Dlaczego magazyn energii to dziś serce instalacji',
+  lead: 'Po zmianach w rozliczeniach (net-billing) o opłacalności decyduje autokonsumpcja — ile własnej energii zużyjesz u siebie. Magazyn z inteligentnym zarządzaniem (HEMS) podnosi ją nawet do 80–90%.',
+  objections: [
+    {
+      q: 'Czy magazyn opłaca się bez dotacji?',
+      a: 'Tak. Cena odkupu nadwyżek z sieci jest dziś bardzo niska, więc kluczowe jest zużycie własnej energii. Magazyn pozwala korzystać z prądu z paneli wieczorem i w nocy, podnosząc autokonsumpcję do 80–90% — i to tu powstają realne oszczędności, niezależnie od dotacji.',
+    },
+    {
+      q: 'Czy to bezpieczne? Słyszałem o pożarach baterii',
+      a: 'Stosuję ogniwa w technologii LFP (litowo-żelazowo-fosforanowej) — najbezpieczniejszej dla domu, odpornej na przegrzanie. Magazyny mają certyfikaty, system zarządzania baterią (BMS) i zabezpieczenia.',
+    },
+    {
+      q: 'Co zimą, gdy słońca jest mało?',
+      a: 'Wtedy pracuje taryfa dynamiczna: system ładuje magazyn tanim prądem z sieci w nocy i oddaje go w drogich godzinach szczytu. Magazyn pracuje na Twój rachunek cały rok, nie tylko latem.',
+    },
+    {
+      q: 'Ile żyje magazyn energii?',
+      a: 'Nowoczesne magazyny LFP projektowane są na 6 000–10 000 cykli, co przy codziennym użyciu oznacza kilkanaście lat pracy. Producenci dają zwykle ok. 10 lat gwarancji.',
+    },
+    {
+      q: 'Mam już fotowoltaikę — da się dołożyć magazyn?',
+      a: 'W większości przypadków tak (retrofit) — przez falownik hybrydowy lub dodatkowy moduł z bramą wyspową. Na bezpłatnej analizie sprawdzam, co najlepiej pasuje do Twojej instalacji.',
+    },
+  ],
+  subsidy: {
+    badge: 'Dotacja 2026',
+    title: 'Do 16 000 zł dotacji na magazyn energii',
+    text: 'Zapowiedziany program „Przydomowe Magazyny Energii" przewiduje dofinansowanie do 16 000 zł — ale z warunkami: magazyn musi mieć system zarządzania energią (EMS) i umieć pracować wyspowo (off-grid). Prosty magazyn bez aktywnego sterowania może nie przejść weryfikacji.',
+    note: 'Nabór planowany na II/III kwartał 2026. Dobieram rozwiązania, które te wymogi spełniają — i pomagam przejść przez formalności.',
+    cta: 'Sprawdź, czy się kwalifikujesz',
+  },
+  tariff: {
+    title: 'Tak pracuje magazyn z taryfą dynamiczną',
+    lead: 'Ceny prądu zmieniają się w ciągu doby. System ładuje magazyn, gdy energia jest tania, i korzysta z niej, gdy jest najdroższa.',
+    chargeLabel: 'Ładowanie (tanio)',
+    dischargeLabel: 'Korzystanie z magazynu (drogo)',
+  },
+}
+
+// --- Sekcja: Konsultant, nie akwizytor + porównanie ---
+export const approach = {
+  eyebrow: 'Konsultant, nie akwizytor',
+  title: 'Najpierw liczby, potem decyzja — zawsze Twoja',
+  lead: 'Nie pukam do drzwi i nie wciskam największej instalacji. Pracuję w modelu konsultingowym: liczę, co realnie się opłaca, a Ty decydujesz bez presji.',
+  bad: {
+    title: 'Typowy akwizytor',
+    items: [
+      'Naciska na szybką decyzję „tylko dziś promocja"',
+      'Sprzedaje jak największą instalację',
+      'Liczy swoją prowizję, nie Twój zwrot',
+      'Znika po podpisaniu umowy',
+    ],
+  },
+  good: {
+    title: 'Konsultant energetyczny',
+    items: [
+      'Najpierw bezpłatna analiza i twarde liczby',
+      'Dobór bez przewymiarowania',
+      'Liczę Twój czas zwrotu, nie swoją prowizję',
+      'Opieka i optymalizacja po uruchomieniu',
+    ],
+  },
+  table: {
+    title: 'Sama fotowoltaika vs fotowoltaika z magazynem',
+    head: ['', 'Sama PV', 'PV + magazyn z AI'],
+    rows: [
+      { label: 'Autokonsumpcja energii', pv: '~30%', full: '80–90%' },
+      { label: 'Prąd wieczorem i w nocy', pv: 'z sieci (drogo)', full: 'z magazynu' },
+      { label: 'Zasilanie awaryjne (backup)', pv: 'nie', full: 'tak' },
+      { label: 'Zysk z taryfy dynamicznej', pv: 'znikomy', full: 'tak (arbitraż)' },
+      { label: 'Dotacja 2026', pv: 'nie obejmuje paneli', full: 'do 16 000 zł' },
+      { label: 'Niezależność od podwyżek', pv: 'częściowa', full: 'wysoka' },
+    ],
+  },
+}
+
+// --- Lekkie paski CTA pomiędzy sekcjami ---
+export const sectionCtas = {
+  afterBenefits: {
+    text: 'Ciekawi Cię, ile magazyn energii zaoszczędzi u Ciebie?',
+    button: 'Oblicz moje oszczędności',
+    href: '#kalkulator',
+    label: 'cta_after_benefits',
+  },
+  afterTestimonials: {
+    text: 'Chcesz takie same oszczędności u siebie?',
+    button: 'Umów bezpłatną analizę',
+    href: '#kontakt',
+    label: 'cta_after_testimonials',
+  },
+}
+
+// --- Miękki lead magnet (e-mail → checklista) ---
+export const leadMagnet = {
+  eyebrow: 'Bezpłatny poradnik',
+  title: 'Czy załapiesz się na dotację do magazynu energii w 2026?',
+  lead: 'Zostaw e-mail, a od razu pokażę Ci checklistę 7 punktów, które decydują o dotacji i opłacalności magazynu. Bez telefonu, bez zobowiązań.',
+  emailPlaceholder: 'Twój adres e-mail',
+  button: 'Pokaż checklistę',
+  consent: 'Zapisując się, zgadzasz się na kontakt e-mail. Możesz wypisać się w każdej chwili.',
+  successTitle: 'Gotowe! Oto Twoja checklista 👇',
+  successNote: 'Kopię i pełny poradnik prześlę Ci też na e-mail.',
+  checklist: [
+    'Magazyn ma system zarządzania energią (EMS/HEMS) — bez tego dotacja może nie przysługiwać.',
+    'Magazyn potrafi pracować wyspowo (off-grid) — wymóg nowego programu.',
+    'Pojemność dobrana do realnego zużycia wieczorno-nocnego (bez przewymiarowania).',
+    'Ogniwa w technologii LFP — bezpieczeństwo i długa żywotność.',
+    'Falownik hybrydowy lub gotowość pod retrofit, jeśli masz już fotowoltaikę.',
+    'Integracja z taryfą dynamiczną — zarabianie na różnicy cen energii.',
+    'Komplet formalności i zgłoszenie w naborze (II/III kw. 2026).',
+  ],
+}
+
+// --- Exit-intent (próba wyjścia) ---
+export const exitIntent = {
+  title: 'Zanim wyjdziesz…',
+  text: 'Zostaw e-mail — wyślę Ci checklistę dotacji do magazynu energii 2026 i pomogę policzyć oszczędności. Bez zobowiązań.',
+  emailPlaceholder: 'Twój adres e-mail',
+  button: 'Wyślij mi materiały',
+  dismiss: 'Nie, dziękuję',
+  successTitle: 'Dziękuję! Materiały są w drodze.',
+  successText: 'Odezwę się na podany adres e-mail.',
 }

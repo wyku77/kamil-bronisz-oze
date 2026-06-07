@@ -226,6 +226,65 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
   return { ok: true, mode: 'local' }
 }
 
+/**
+ * Lekki lead z magnetu (sam e-mail) — np. checklista/poradnik, exit-intent.
+ * Wysyłka tą samą ścieżką co główne leady: webhook → e-mail → localStorage.
+ */
+export async function submitLeadMagnet(email: string, source: string): Promise<SubmitResult> {
+  const base = {
+    name: '',
+    email: email.trim(),
+    consent: true,
+    source,
+    submittedAt: new Date().toISOString(),
+    pageUrl: typeof window !== 'undefined' ? window.location.href : '',
+    referrer: typeof document !== 'undefined' ? document.referrer : '',
+    ...getUTM(),
+  }
+
+  if (WEBHOOK_URL) {
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(base),
+      })
+      if (res.ok) return { ok: true, mode: 'webhook' }
+    } catch (err) {
+      console.error('[leads] Błąd wysyłki magnetu na webhook:', err)
+    }
+  }
+
+  if (WEB3FORMS_KEY) {
+    try {
+      const res = await fetch(WEB3FORMS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `📩 Nowy zapis (${source}): ${email}`,
+          from_name: 'Strona OZE — lead magnet',
+          replyto: email,
+          ...base,
+        }),
+      })
+      if (res.ok) return { ok: true, mode: 'email' }
+    } catch (err) {
+      console.error('[leads] Błąd wysyłki magnetu e-mail:', err)
+    }
+  }
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    const list = raw ? JSON.parse(raw) : []
+    list.push(base)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list))
+  } catch {
+    return { ok: false, mode: 'local' }
+  }
+  return { ok: true, mode: 'local' }
+}
+
 /** Eksport zebranych lokalnie leadów (np. do ręcznego wgrania do Airtable). */
 export function exportLocalLeads(): LeadPayload[] {
   try {
