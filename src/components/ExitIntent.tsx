@@ -27,7 +27,8 @@ export function ExitIntent() {
         document.removeEventListener('mouseout', onLeave)
       }
     }
-    const timer = window.setTimeout(() => document.addEventListener('mouseout', onLeave), 4000)
+    // Nasłuch włącza się dopiero po 2 minutach — klient ma czas zapoznać się ze stroną.
+    const timer = window.setTimeout(() => document.addEventListener('mouseout', onLeave), 120000)
     return () => {
       window.clearTimeout(timer)
       document.removeEventListener('mouseout', onLeave)

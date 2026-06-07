@@ -87,7 +87,7 @@ export function Testimonials() {
               <SmartImage
                 src={t.photo}
                 alt={`Realizacja — magazyn energii (${t.role})`}
-                className="h-44 w-full object-cover"
+                className="h-60 w-full bg-ink-950/60 object-contain"
               />
               <div className="flex flex-1 flex-col p-6">
                 <Stars rating={t.rating} />

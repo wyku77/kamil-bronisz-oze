@@ -4,7 +4,7 @@ import { hero } from '../data/content'
 import { SmartImage } from './ui/SmartImage'
 import { CountUp } from './ui/CountUp'
 import { track } from '../lib/analytics'
-import heroPhoto from '../assets/realizacje/20241212_134324.jpg'
+import heroPhoto from '../assets/realizacje/20241212_134324-1.jpg'
 
 export function Hero() {
   return (
