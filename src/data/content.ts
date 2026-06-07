@@ -4,6 +4,11 @@
  * komponenty automatycznie pobierają dane z tego pliku.
  */
 
+// Zdjęcie importowane jako moduł — Vite sam ustawia poprawny adres (działa też
+// pod ścieżką GitHub Pages /kamil-bronisz-oze/). Aby zmienić zdjęcie, podmień plik
+// src/assets/kamil-bronisz.jpg.
+import kamilPhoto from '../assets/kamil-bronisz.jpg'
+
 export const site = {
   name: 'Kamil Bronisz',
   role: 'Ekspert ds. magazynów energii i zarządzania energią',
@@ -149,7 +154,7 @@ export const about = {
   eyebrow: 'O mnie',
   name: 'Kamil Bronisz',
   role: 'Ekspert ds. magazynów energii i zarządzania energią',
-  photo: '/kamil-bronisz.jpg',
+  photo: kamilPhoto,
   lead: 'Pomagam właścicielom domów i firmom realnie obniżyć rachunki i uniezależnić się energetycznie — w oparciu o twarde liczby, nie obietnice.',
   paragraphs: [
     'Od kilku lat doradzam w branży OZE i specjalizuję się w tym, co w 2026 roku decyduje o opłacalności: inteligentnych magazynach energii ze sztuczną inteligencją oraz nowoczesnym zarządzaniu energią całego domu (HEMS).',

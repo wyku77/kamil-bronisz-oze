@@ -65,7 +65,7 @@ src/
 - **Teksty, dane kontaktowe, FAQ, opinie** → `src/data/content.ts`
 - **Założenia kalkulatora** (ceny energii, uzysk PV, koszty, dotacje) → sekcja `STAŁE`
   w `src/lib/calc.ts`
-- **Zdjęcie Kamila** → podmień `public/kamil-bronisz.jpg`
+- **Zdjęcie Kamila** → podmień `src/assets/kamil-bronisz.jpg`
 - **Numery telefonu / e-mail / WhatsApp / social** → `site` w `src/data/content.ts`
 
 ---
