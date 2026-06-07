@@ -106,7 +106,7 @@ export const benefits: { eyebrow: string; title: string; lead: string; items: Be
     {
       icon: 'gauge',
       title: 'Zarabiasz na taryfach dynamicznych',
-      text: 'Od 2026 taryfy dynamiczne są obowiązkowe. Z magazynem i automatyką kupujesz prąd tanio i korzystasz w szczycie — to dodatkowy zysk.',
+      text: 'Taryfy dynamiczne oferują już więksi sprzedawcy energii, a w 2026 dochodzą 15-minutowe rozliczenia. Z magazynem i automatyką kupujesz prąd tanio i korzystasz w szczycie — to dodatkowy zysk.',
     },
   ],
 }
@@ -239,7 +239,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Jak działa taryfa dynamiczna?',
-      a: 'W taryfie dynamicznej cena energii zmienia się co godzinę, zależnie od sytuacji na rynku. Od 1 stycznia 2026 sprzedawcy mają obowiązek ją oferować. Realnie zyskują na niej osoby z magazynem energii i automatyką (HEMS) — system ładuje baterię, gdy prąd jest tani, a korzysta z niej, gdy jest najdroższy.',
+      a: 'W taryfie dynamicznej cena energii zmienia się co godzinę, zależnie od sytuacji na rynku. Obowiązek jej oferowania mają już więksi sprzedawcy energii (od 2024 r.), a w 2026 dochodzą 15-minutowe interwały rozliczeń i szybsza zmiana sprzedawcy. Realnie zyskują na niej osoby z magazynem energii i automatyką (HEMS) — system ładuje baterię, gdy prąd jest tani, a korzysta z niej, gdy jest najdroższy.',
     },
     {
       q: 'Co daje inteligentny magazyn energii z AI?',

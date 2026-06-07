@@ -92,10 +92,10 @@ export function Footer() {
             © {year} {site.name} — {site.role}.
           </p>
           <div className="flex gap-5">
-            <a href="#" className="transition-colors hover:text-gold-300">
+            <a href="polityka-prywatnosci.html" className="transition-colors hover:text-gold-300">
               Polityka prywatności
             </a>
-            <a href="#" className="transition-colors hover:text-gold-300">
+            <a href="polityka-prywatnosci.html#rodo" className="transition-colors hover:text-gold-300">
               RODO
             </a>
           </div>

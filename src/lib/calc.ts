@@ -3,7 +3,7 @@
  * ──────────────────────────────────────────────────────────────────────────
  * Wszystkie założenia są zebrane w stałych poniżej i oparte na realiach rynku
  * polskiego w 2026 r. (net-billing, RCEm ~0,13 zł/kWh, taryfy dynamiczne
- * obowiązkowe od 1.01.2026, dotacja na magazyn energii do 16 000 zł).
+ * dostępne (15-min interwały rozliczeń od 2026), dotacja na magazyn energii do 16 000 zł).
  *
  * Wyniki są ORIENTACYJNE — dokładne wyliczenie powstaje na bezpłatnej analizie.
  * Aby dostroić model, zmieniaj wyłącznie wartości w sekcji STAŁE.
