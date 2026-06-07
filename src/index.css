@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 5.5rem; /* offset dla sticky navbar przy linkach kotwicowych */
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-white antialiased;
+  }
+
+  ::selection {
+    @apply bg-gold-400/30 text-white;
+  }
+
+  /* Dostępność: ograniczenie ruchu */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Tekst z gradientem złota */
+  .text-gradient {
+    @apply bg-gradient-to-r from-gold-300 via-gold-200 to-gold-400 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-brand-200 via-brand-300 to-brand-400 bg-clip-text text-transparent;
+  }
+
+  /* Przyciski */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-gold-300 to-gold-500 text-ink-950 shadow-glow-gold hover:-translate-y-0.5 hover:shadow-[0_0_70px_-10px_rgba(212,160,23,0.65)];
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/5 text-white backdrop-blur hover:border-white/35 hover:bg-white/10;
+  }
+
+  .btn-outline {
+    @apply btn border border-gold-400/40 bg-transparent text-gold-300 hover:border-gold-400 hover:bg-gold-400/10;
+  }
+
+  /* Szklane karty */
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  .card {
+    @apply rounded-3xl border border-white/10 bg-white/[0.03] shadow-card backdrop-blur-sm transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-gold-400/30 hover:bg-white/[0.05] hover:shadow-card-hover;
+  }
+
+  /* Etykieta sekcji (eyebrow) */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-gold-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-300 backdrop-blur;
+  }
+
+  .section {
+    @apply scroll-mt-24 py-20 sm:py-28;
+  }
+
+  .h-section {
+    @apply font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl;
+  }
+
+  /* Pola formularzy (na ciemnym tle) */
+  .field {
+    @apply w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/40 transition-colors focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-white/70;
+  }
+}
+
+@layer utilities {
+  .bg-mesh {
+    background-image: radial-gradient(60% 60% at 18% 8%, rgba(81, 128, 191, 0.22) 0%, transparent 60%),
+      radial-gradient(50% 50% at 92% 14%, rgba(212, 160, 23, 0.22) 0%, transparent 55%),
+      radial-gradient(70% 70% at 60% 100%, rgba(16, 22, 31, 0.9) 0%, transparent 60%);
+  }
+
+  .bg-mesh-gold {
+    background-image: radial-gradient(60% 60% at 80% 10%, rgba(212, 160, 23, 0.18) 0%, transparent 55%),
+      radial-gradient(50% 50% at 10% 90%, rgba(81, 128, 191, 0.16) 0%, transparent 55%);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+}
+
+/* Pasek przewijania */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1018;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#d4a017, #9a6c18);
+  border-radius: 9999px;
+}
+
+/* Ujednolicenie wyglądu list rozwijanych na ciemnym tle */
+select.field option {
+  color: #0a1018;
+}
