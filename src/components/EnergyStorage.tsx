@@ -82,6 +82,39 @@ export function EnergyStorage() {
           <p className="mt-5 text-lg leading-relaxed text-white/65">{energyStorage.lead}</p>
         </Reveal>
 
+        {/* Mini-case: konkretne liczby + awersja do straty */}
+        <Reveal className="mx-auto mt-10 max-w-3xl">
+          <div className="rounded-3xl border border-gold-400/20 bg-white/[0.03] p-6 sm:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="eyebrow">{energyStorage.miniCase.badge}</span>
+              <p className="font-display text-sm font-semibold text-white/80">{energyStorage.miniCase.title}</p>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-white/75">
+              <span className="font-semibold text-gold-200">Co miesiąc tracisz:</span> {energyStorage.miniCase.loss}
+            </p>
+            <div className="mt-6 grid items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-center">
+                <p className="text-xs text-white/55">{energyStorage.miniCase.before.label}</p>
+                <p className="mt-3 font-display text-3xl font-bold text-white/70">{energyStorage.miniCase.before.self}</p>
+                <p className="text-[11px] text-white/50">{energyStorage.miniCase.before.selfLabel}</p>
+                <p className="mt-3 font-display text-xl font-bold text-white/70">{energyStorage.miniCase.before.bill}</p>
+                <p className="text-[11px] text-white/50">{energyStorage.miniCase.before.billLabel}</p>
+              </div>
+              <div className="grid place-items-center text-gold-300">
+                <ArrowRight className="hidden h-6 w-6 sm:block" />
+                <ArrowRight className="h-6 w-6 rotate-90 sm:hidden" />
+              </div>
+              <div className="rounded-2xl border border-gold-400/30 bg-gold-400/10 p-5 text-center">
+                <p className="text-xs text-gold-200/90">{energyStorage.miniCase.after.label}</p>
+                <p className="mt-3 font-display text-3xl font-extrabold text-gradient">{energyStorage.miniCase.after.self}</p>
+                <p className="text-[11px] text-white/60">{energyStorage.miniCase.after.selfLabel}</p>
+                <p className="mt-3 font-display text-xl font-extrabold text-gradient">{energyStorage.miniCase.after.bill}</p>
+                <p className="text-[11px] text-white/60">{energyStorage.miniCase.after.billLabel}</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
         <div className="mt-12 grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Obiekcje (akordeon) */}
           <Reveal direction="right" className="space-y-3">

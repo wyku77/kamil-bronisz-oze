@@ -271,6 +271,13 @@ export const energyStorage = {
   eyebrow: 'Magazyny energii',
   title: 'Dlaczego magazyn energii to dziś serce instalacji',
   lead: 'Po zmianach w rozliczeniach (net-billing) o opłacalności decyduje autokonsumpcja — ile własnej energii zużyjesz u siebie. Magazyn z inteligentnym zarządzaniem (HEMS) podnosi ją nawet do 80–90%.',
+  miniCase: {
+    badge: 'Przykład z życia',
+    title: 'Dom 5 000 kWh/rok + magazyn 10 kWh',
+    loss: 'Bez magazynu większość taniej energii z paneli oddajesz do sieci za grosze — a wieczorem odkupujesz ją drożej. Magazyn kończy ten układ.',
+    before: { label: 'Sama fotowoltaika', self: '30%', selfLabel: 'autokonsumpcja', bill: '~580 zł', billLabel: 'rachunek / mies.' },
+    after: { label: 'Fotowoltaika + magazyn z AI', self: '86%', selfLabel: 'autokonsumpcja', bill: '~70 zł', billLabel: 'rachunek / mies.' },
+  },
   objections: [
     {
       q: 'Czy magazyn opłaca się bez dotacji?',
@@ -419,3 +426,14 @@ export const leadTimeframe = {
 
 // --- Mikrocopy redukujące tarcie pod formularzami ---
 export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez nacisku • bez zobowiązań'
+
+// --- Pasek odliczania do naboru dotacji (FOMO oparte na realnym terminie) ---
+export const subsidyDeadline = {
+  // Orientacyjny termin (koniec II kwartału 2026) — łatwy do zmiany.
+  targetDate: '2026-06-30T23:59:59',
+  label: 'Dotacja na magazyn energii 2026',
+  text: 'Planowany nabór „Przydomowe Magazyny Energii" — II/III kwartał 2026. Przygotuj instalację, zanim ruszą wnioski.',
+  unit: 'dni do planowanego naboru',
+  cta: 'Sprawdź, czy się łapiesz',
+  passed: 'Nabór coraz bliżej — nie przegap dofinansowania.',
+}

@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Mail, MessageCircle, Phone, Send, Star } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, Mail, MessageCircle, Phone, Send, Star } from 'lucide-react'
 import { site, about, googleReviews, leadMicrocopy, leadTimeframe } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
@@ -35,9 +35,16 @@ export function Contact() {
   const [error, setError] = useState<string | null>(null)
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
+  const [step, setStep] = useState<1 | 2>(1)
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((f) => ({ ...f, [key]: value }))
+
+  const chooseTimeframe = (value: string) => {
+    setForm((f) => ({ ...f, timeframe: value }))
+    setError(null)
+    setStep(2)
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -74,6 +81,7 @@ export function Contact() {
     setSending(false)
     setSent(true)
     setForm(initial)
+    setStep(1)
   }
 
   return (
@@ -170,13 +178,54 @@ export function Contact() {
                     </a>
                     .
                   </p>
-                  <button type="button" onClick={() => setSent(false)} className="btn-outline mt-6">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSent(false)
+                      setStep(1)
+                    }}
+                    className="btn-outline mt-6"
+                  >
                     Wyślij kolejne zgłoszenie
                   </button>
                 </div>
+              ) : step === 1 ? (
+                <div className="space-y-5">
+                  <h3 className="font-display text-xl font-bold text-white">Zarezerwuj bezpłatną analizę</h3>
+                  <p className="text-sm text-white/60">{leadTimeframe.label}</p>
+                  <div className="grid gap-2.5">
+                    {leadTimeframe.options.map((o) => (
+                      <button
+                        key={o.value}
+                        type="button"
+                        onClick={() => chooseTimeframe(o.value)}
+                        className="group flex items-center justify-between gap-3 rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-4 text-left text-sm font-medium text-white/85 transition-all hover:border-gold-400/50 hover:bg-gold-400/10"
+                      >
+                        {o.label}
+                        <ArrowRight className="h-4 w-4 text-gold-300 transition-transform group-hover:translate-x-1" />
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-center text-[11px] text-white/45">Krok 1 z 2 • {leadMicrocopy}</p>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                  <h3 className="font-display text-xl font-bold text-white">Zarezerwuj termin analizy</h3>
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="font-display text-xl font-bold text-white">Twoje dane kontaktowe</h3>
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="flex shrink-0 items-center gap-1 text-xs text-white/50 transition-colors hover:text-white/80"
+                    >
+                      <ArrowLeft className="h-3.5 w-3.5" /> Wstecz
+                    </button>
+                  </div>
+                  <p className="text-xs text-white/45">
+                    Termin:{' '}
+                    <span className="font-medium text-gold-300">
+                      {leadTimeframe.options.find((o) => o.value === form.timeframe)?.label}
+                    </span>
+                  </p>
 
                   <div>
                     <label htmlFor="c-name" className="field-label">
@@ -257,25 +306,6 @@ export function Contact() {
                         ))}
                       </select>
                     </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="c-timeframe" className="field-label">
-                      {leadTimeframe.label}*
-                    </label>
-                    <select
-                      id="c-timeframe"
-                      className="field"
-                      value={form.timeframe}
-                      onChange={(e) => set('timeframe', e.target.value)}
-                    >
-                      <option value="">{leadTimeframe.placeholder}</option>
-                      {leadTimeframe.options.map((o) => (
-                        <option key={o.value} value={o.value}>
-                          {o.label}
-                        </option>
-                      ))}
-                    </select>
                   </div>
 
                   <div>

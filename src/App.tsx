@@ -17,6 +17,7 @@ import { FloatingActions } from './components/FloatingActions'
 import { ExitIntent } from './components/ExitIntent'
 import { ConsentBanner } from './components/ConsentBanner'
 import { MobileCTA } from './components/MobileCTA'
+import { SubsidyDeadline } from './components/SubsidyDeadline'
 import { sectionCtas } from './data/content'
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <SubsidyDeadline />
         <Benefits />
         <SectionCTA {...sectionCtas.afterBenefits} />
         <EnergyStorage />

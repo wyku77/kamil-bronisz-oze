@@ -85,13 +85,23 @@ export function Results({ result, onRecalculate }: Props) {
             <span className="font-bold text-gold-300">{Math.round(result.billReduction * 100)}%</span>. Oto szczegóły.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={onRecalculate}
-          className="flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:border-white/35 hover:text-white"
-        >
-          <RefreshCw className="h-4 w-4" /> Przelicz ponownie
-        </button>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <a
+            href="#kontakt"
+            onClick={() => track.ctaClick('results_book_top')}
+            className="btn-primary group !py-2.5 !text-sm"
+          >
+            Zarezerwuj 15-min rozmowę
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+          <button
+            type="button"
+            onClick={onRecalculate}
+            className="flex items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:border-white/35 hover:text-white"
+          >
+            <RefreshCw className="h-4 w-4" /> Przelicz ponownie
+          </button>
+        </div>
       </div>
 
       {/* Główne metryki */}
@@ -231,15 +241,15 @@ export function Results({ result, onRecalculate }: Props) {
       {/* CTA */}
       <div className="relative overflow-hidden rounded-3xl border border-gold-400/25 bg-gradient-to-br from-gold-400/15 via-ink-800 to-ink-900 p-6 text-center sm:p-8">
         <h4 className="font-display text-xl font-bold text-white sm:text-2xl">
-          Chcesz dokładne wyliczenia dla swojego obiektu?
+          Następny krok: zarezerwuj bezpłatną 15-min rozmowę
         </h4>
         <p className="mx-auto mt-2 max-w-xl text-sm text-white/65">
-          To wynik orientacyjny. Na bezpłatnej analizie przygotuję precyzyjny dobór systemu, ofertę i czas zwrotu —
-          bez zobowiązań.
+          To wynik orientacyjny. Na 15-minutowej rozmowie przejdę z Tobą przez dobór systemu, ofertę i czas zwrotu —
+          w dogodnej dla Ciebie porze, bez zobowiązań.
         </p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#kontakt" onClick={() => track.ctaClick('results_cta')} className="btn-primary group">
-            Umów bezpłatną analizę
+          <a href="#kontakt" onClick={() => track.ctaClick('results_book')} className="btn-primary group">
+            Zarezerwuj 15-min rozmowę
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a
