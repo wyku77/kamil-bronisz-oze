@@ -40,7 +40,8 @@ export function Contact() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!form.name.trim()) return setError('Podaj imię i nazwisko.')
-    if (!form.phone.trim() && !form.email.trim()) return setError('Podaj numer telefonu lub adres e-mail.')
+    if (form.phone.replace(/\D/g, '').length < 9) return setError('Podaj poprawny numer telefonu.')
+    if (!/\S+@\S+\.\S+/.test(form.email)) return setError('Podaj poprawny adres e-mail.')
     if (!form.consent) return setError('Zaznacz zgodę na kontakt.')
     setError(null)
     setSending(true)
@@ -186,7 +187,7 @@ export function Contact() {
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label htmlFor="c-phone" className="field-label">
-                        Telefon
+                        Telefon*
                       </label>
                       <input
                         id="c-phone"
@@ -200,7 +201,7 @@ export function Contact() {
                     </div>
                     <div>
                       <label htmlFor="c-email" className="field-label">
-                        E-mail
+                        E-mail*
                       </label>
                       <input
                         id="c-email"
