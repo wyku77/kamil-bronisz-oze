@@ -403,4 +403,19 @@ export const googleReviews = {
   note: 'opinii w Google',
   attribution: 'Oceny firmy Begolden, z którą realizuję instalacje',
   cta: 'Zobacz opinie w Google',
+  short: '4,9 ★ w Google',
 }
+
+// --- Kwalifikacja leada: kiedy planuje inwestycję (sygnał „temperatury") ---
+export const leadTimeframe = {
+  label: 'Kiedy planujesz inwestycję?',
+  placeholder: 'Wybierz…',
+  options: [
+    { value: 'asap', label: 'Jak najszybciej' },
+    { value: '1-3m', label: 'W ciągu 1–3 miesięcy' },
+    { value: 'rozeznanie', label: 'Na razie się rozeznaję' },
+  ],
+}
+
+// --- Mikrocopy redukujące tarcie pod formularzami ---
+export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez nacisku • bez zobowiązań'

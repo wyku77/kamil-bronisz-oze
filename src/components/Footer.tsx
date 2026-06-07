@@ -15,7 +15,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-ink-900 text-white/70">
-      <div className="container-px py-16">
+      <div className="container-px pt-16 pb-28 sm:pb-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr]">
           {/* Marka */}
           <div>

@@ -16,6 +16,7 @@ import { Footer } from './components/Footer'
 import { FloatingActions } from './components/FloatingActions'
 import { ExitIntent } from './components/ExitIntent'
 import { ConsentBanner } from './components/ConsentBanner'
+import { MobileCTA } from './components/MobileCTA'
 import { sectionCtas } from './data/content'
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
       <FloatingActions />
       <ExitIntent />
       <ConsentBanner />
+      <MobileCTA />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Mail, MessageCircle, Phone, Send } from 'lucide-react'
-import { site, about } from '../data/content'
+import { CheckCircle2, Mail, MessageCircle, Phone, Send, Star } from 'lucide-react'
+import { site, about, googleReviews, leadMicrocopy, leadTimeframe } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
 import { submitLead, type LeadPayload } from '../lib/leads'
@@ -13,6 +13,7 @@ type FormState = {
   phone: string
   email: string
   postalCode: string
+  timeframe: string
   time: string
   message: string
   consent: boolean
@@ -23,6 +24,7 @@ const initial: FormState = {
   phone: '',
   email: '',
   postalCode: '',
+  timeframe: '',
   time: times[0],
   message: '',
   consent: false,
@@ -42,9 +44,14 @@ export function Contact() {
     if (!form.name.trim()) return setError('Podaj imię i nazwisko.')
     if (form.phone.replace(/\D/g, '').length < 9) return setError('Podaj poprawny numer telefonu.')
     if (!/\S+@\S+\.\S+/.test(form.email)) return setError('Podaj poprawny adres e-mail.')
+    if (!form.timeframe) return setError('Zaznacz, kiedy planujesz inwestycję.')
     if (!form.consent) return setError('Zaznacz zgodę na kontakt.')
     setError(null)
     setSending(true)
+
+    // Temperatura leada na podstawie gotowości zakupowej (kiedy planuje).
+    const temperature: LeadPayload['leadTemperature'] =
+      form.timeframe === 'asap' ? 'goracy' : form.timeframe === '1-3m' ? 'cieply' : 'zimny'
 
     // Minimalny payload zgodny ze strukturą leada (bez danych z kalkulatora)
     const payload: Partial<LeadPayload> & Record<string, unknown> = {
@@ -53,15 +60,17 @@ export function Contact() {
       email: form.email.trim(),
       postalCode: form.postalCode.trim(),
       consent: form.consent,
+      timeframe: form.timeframe,
       preferredTime: form.time,
       message: form.message.trim(),
+      leadTemperature: temperature,
       source: 'formularz-kontakt',
       submittedAt: new Date().toISOString(),
       pageUrl: window.location.href,
     }
 
     await submitLead(payload as LeadPayload)
-    track.leadSubmit({ source: 'formularz-kontakt' })
+    track.leadSubmit({ source: 'formularz-kontakt', leadTemperature: temperature })
     setSending(false)
     setSent(true)
     setForm(initial)
@@ -251,6 +260,25 @@ export function Contact() {
                   </div>
 
                   <div>
+                    <label htmlFor="c-timeframe" className="field-label">
+                      {leadTimeframe.label}*
+                    </label>
+                    <select
+                      id="c-timeframe"
+                      className="field"
+                      value={form.timeframe}
+                      onChange={(e) => set('timeframe', e.target.value)}
+                    >
+                      <option value="">{leadTimeframe.placeholder}</option>
+                      {leadTimeframe.options.map((o) => (
+                        <option key={o.value} value={o.value}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
                     <label htmlFor="c-message" className="field-label">
                       Wiadomość
                     </label>
@@ -283,6 +311,15 @@ export function Contact() {
                     {sending ? 'Wysyłam…' : 'Umów bezpłatną analizę'}
                     {!sending && <Send className="h-4 w-4" />}
                   </button>
+
+                  <p className="text-center text-[11px] text-white/45">{leadMicrocopy}</p>
+                  <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
+                    <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
+                    <span>
+                      <span className="font-semibold">{googleReviews.rating}</span> w Google · {googleReviews.count}{' '}
+                      {googleReviews.note}
+                    </span>
+                  </div>
                 </form>
               )}
             </div>

@@ -20,6 +20,8 @@ export type LeadContact = {
   email: string
   postalCode: string
   consent: boolean
+  /** Kiedy klient planuje inwestycję — sygnał „temperatury" leada. */
+  timeframe: string
 }
 
 export type LeadPayload = {
@@ -29,6 +31,7 @@ export type LeadPayload = {
   email: string
   postalCode: string
   consent: boolean
+  timeframe: string
 
   // Parametry z kalkulatora
   objectType: string
@@ -110,6 +113,10 @@ function scoreLead(contact: LeadContact, input: CalcInput, result: CalcResult): 
   if (input.heatPump || input.ev) score += 8
   if (contact.phone.trim()) score += 12
 
+  // Gotowość zakupowa (kiedy planuje) — kluczowy sygnał „ciepłego" leada.
+  if (contact.timeframe === 'asap') score += 15
+  else if (contact.timeframe === '1-3m') score += 8
+
   score = Math.min(score, 100)
   const temperature = score >= 70 ? 'goracy' : score >= 45 ? 'cieply' : 'zimny'
   return { score, temperature }
@@ -128,6 +135,7 @@ export function buildLeadPayload(
     email: contact.email.trim(),
     postalCode: contact.postalCode.trim(),
     consent: contact.consent,
+    timeframe: contact.timeframe,
 
     objectType: input.objectType,
     voivodeship: input.voivodeship,

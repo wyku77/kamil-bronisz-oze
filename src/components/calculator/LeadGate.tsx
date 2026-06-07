@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from 'react'
-import { ArrowLeft, Lock, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowLeft, Lock, ShieldCheck, Sparkles, Star } from 'lucide-react'
 import type { CalcResult } from '../../lib/calc'
 import type { LeadContact } from '../../lib/leads'
 import { CountUp } from '../ui/CountUp'
+import { googleReviews, leadMicrocopy, leadTimeframe } from '../../data/content'
 
 type Props = {
   result: CalcResult
@@ -10,7 +11,7 @@ type Props = {
   onBack: () => void
 }
 
-const empty: LeadContact = { name: '', phone: '', email: '', postalCode: '', consent: false }
+const empty: LeadContact = { name: '', phone: '', email: '', postalCode: '', consent: false, timeframe: '' }
 
 export function LeadGate({ result, onUnlock, onBack }: Props) {
   const [form, setForm] = useState<LeadContact>(empty)
@@ -25,6 +26,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
     if (!form.name.trim()) return setError('Podaj imię.')
     if (!form.phone.trim()) return setError('Podaj numer telefonu.')
     if (!form.email.trim()) return setError('Podaj adres e-mail.')
+    if (!form.timeframe) return setError('Zaznacz, kiedy planujesz inwestycję.')
     if (!form.consent) return setError('Zaznacz zgodę, aby zobaczyć pełne wyniki.')
     setError(null)
     setSending(true)
@@ -137,6 +139,25 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
             />
           </div>
 
+          <div>
+            <label htmlFor="l-timeframe" className="field-label">
+              {leadTimeframe.label}*
+            </label>
+            <select
+              id="l-timeframe"
+              className="field"
+              value={form.timeframe}
+              onChange={(e) => set('timeframe', e.target.value)}
+            >
+              <option value="">{leadTimeframe.placeholder}</option>
+              {leadTimeframe.options.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <label className="flex items-start gap-3 text-xs leading-relaxed text-white/55">
             <input
               type="checkbox"
@@ -153,6 +174,15 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
           <button type="submit" disabled={sending} className="btn-primary w-full disabled:opacity-60">
             {sending ? 'Przygotowuję wyniki…' : 'Pokaż moje pełne wyniki'}
           </button>
+
+          <p className="text-center text-[11px] text-white/45">{leadMicrocopy}</p>
+          <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
+            <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
+            <span>
+              <span className="font-semibold">{googleReviews.rating}</span> w Google · {googleReviews.count}{' '}
+              {googleReviews.note}
+            </span>
+          </div>
 
           <div className="flex items-center justify-center gap-4 text-[11px] text-white/40">
             <button type="button" onClick={onBack} className="flex items-center gap-1 hover:text-white/70">

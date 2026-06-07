@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUp, MessageCircle, Phone } from 'lucide-react'
+import { ArrowUp, MessageCircle } from 'lucide-react'
 import { site } from '../data/content'
 import { track } from '../lib/analytics'
 
@@ -15,7 +15,7 @@ export function FloatingActions() {
   }, [])
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+    <div className="fixed bottom-28 right-5 z-40 flex flex-col items-end gap-3 sm:bottom-5">
       <AnimatePresence>
         {showTop && (
           <motion.button
@@ -31,15 +31,6 @@ export function FloatingActions() {
           </motion.button>
         )}
       </AnimatePresence>
-
-      <a
-        href={site.phoneHref}
-        aria-label="Zadzwoń"
-        onClick={() => track.ctaClick('floating_phone')}
-        className="grid h-12 w-12 place-items-center rounded-full bg-gold-400 text-ink-950 shadow-glow-gold transition-transform hover:-translate-y-0.5 sm:hidden"
-      >
-        <Phone className="h-5 w-5" />
-      </a>
 
       <a
         href={`https://wa.me/${site.whatsapp}`}
