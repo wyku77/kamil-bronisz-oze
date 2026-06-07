@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -5,21 +6,25 @@ import {
   BatteryCharging,
   Car,
   Clock,
+  Download,
   Leaf,
   MessageCircle,
   PiggyBank,
   RefreshCw,
   Sun,
 } from 'lucide-react'
-import { SUBSIDY_PROGRAM, type CalcResult } from '../../lib/calc'
+import { SUBSIDY_PROGRAM, type CalcInput, type CalcResult } from '../../lib/calc'
 import { site } from '../../data/content'
 import { CountUp } from '../ui/CountUp'
 import { formatPLN, formatNumber } from '../../lib/format'
+import { generateWycenaPdf } from '../../lib/pdf'
 import { SavingsChart } from './SavingsChart'
 import { track } from '../../lib/analytics'
 
 type Props = {
   result: CalcResult
+  input: CalcInput
+  name: string
   onRecalculate: () => void
 }
 
@@ -65,7 +70,21 @@ function Ring({ value }: { value: number }) {
   )
 }
 
-export function Results({ result, onRecalculate }: Props) {
+export function Results({ result, input, name, onRecalculate }: Props) {
+  const [pdfLoading, setPdfLoading] = useState(false)
+
+  const handlePdf = async () => {
+    setPdfLoading(true)
+    try {
+      await generateWycenaPdf(input, result, name)
+      track.ctaClick('pdf_download')
+    } catch (err) {
+      console.error('[pdf] Nie udało się wygenerować PDF:', err)
+    } finally {
+      setPdfLoading(false)
+    }
+  }
+
   const series = Array.from({ length: 20 }, (_, i) => {
     const year = i + 1
     const value =
@@ -252,6 +271,14 @@ export function Results({ result, onRecalculate }: Props) {
             Zarezerwuj 15-min rozmowę
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
+          <button
+            type="button"
+            onClick={handlePdf}
+            disabled={pdfLoading}
+            className="btn-ghost disabled:opacity-60"
+          >
+            <Download className="h-4 w-4" /> {pdfLoading ? 'Generuję PDF…' : 'Pobierz PDF z wyceną'}
+          </button>
           <a
             href={`https://wa.me/${site.whatsapp}`}
             target="_blank"

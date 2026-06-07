@@ -20,3 +20,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+declare module 'pdfmake/build/pdfmake'
+declare module 'pdfmake/build/vfs_fonts'

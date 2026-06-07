@@ -26,6 +26,7 @@ export function Calculator() {
   const [input, setInput] = useState<CalcInput>(defaultInput)
   const [result, setResult] = useState<CalcResult | null>(null)
   const [stage, setStage] = useState<Stage>('form')
+  const [leadName, setLeadName] = useState('')
   const panelRef = useRef<HTMLDivElement>(null)
 
   const scrollToPanel = () => {
@@ -51,6 +52,7 @@ export function Calculator() {
 
   const handleUnlock = async (contact: LeadContact) => {
     if (!result) return
+    setLeadName(contact.name)
     const payload = buildLeadPayload(contact, input, result, 'kalkulator')
     await submitLead(payload)
     track.leadSubmit({
@@ -121,7 +123,7 @@ export function Calculator() {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <Results result={result} onRecalculate={handleRecalculate} />
+                  <Results result={result} input={input} name={leadName} onRecalculate={handleRecalculate} />
                 </motion.div>
               )}
             </AnimatePresence>
