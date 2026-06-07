@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react'
+import { MapPin, Star } from 'lucide-react'
 import { testimonials, googleReviews } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
@@ -75,6 +75,12 @@ export function Testimonials() {
           >
             {googleReviews.cta}
           </a>
+        </Reveal>
+
+        {/* Lokalny dowód społeczny (statyczny, prawdziwy) */}
+        <Reveal className="mx-auto mt-3 flex max-w-xl items-center justify-center gap-2 text-center text-xs text-white/70">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-gold-300" />
+          {googleReviews.local}
         </Reveal>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

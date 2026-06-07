@@ -426,6 +426,7 @@ export const googleReviews = {
   attribution: 'Oceny firmy Begolden, z którą realizuję instalacje',
   cta: 'Zobacz opinie w Google',
   short: '4,9 ★ w Google',
+  local: 'Realizacje magazynów energii — Lublin i okolice (woj. lubelskie)',
 }
 
 // --- Kwalifikacja leada: kiedy planuje inwestycję (sygnał „temperatury") ---
