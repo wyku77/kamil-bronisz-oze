@@ -73,12 +73,9 @@
       .back { color: var(--muted); text-decoration: none; font-size: .85rem; }
       .back:hover { color: #fff; }
       @media (max-width: 560px) {
-        .top .wrap { gap: .5rem; padding: .55rem .85rem; }
-        .brand .badge { width: 34px; height: 34px; border-radius: 9px; }
-        .brand b { font-size: .95rem; }
-        .brand .brand-sub { display: none; }
-        .top .right .back { display: none; }
-        .top .right .btn-primary { padding: .5rem .9rem; font-size: .82rem; }
+        .top .wrap { padding: .7rem 1rem; }
+        .brand-text b { font-size: 1.05rem; }
+        .brand .badge { width: 38px; height: 38px; }
       }
       /* Hero */
       .hero { padding: 4rem 0 2.5rem; }
@@ -212,6 +209,24 @@
       .logos { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; align-items: center; }
       .logos .chip { background: #fff; border-radius: 14px; padding: .85rem 1.25rem; display: grid; place-items: center; height: 84px; min-width: 150px; }
       .logos .chip img { max-height: 52px; max-width: 160px; width: auto; height: auto; object-fit: contain; display: block; }
+      /* Górne menu (hamburger) — spójne ze stroną główną */
+      [id] { scroll-margin-top: 86px; }
+      .menu-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,.15); background: transparent; color: #fff; cursor: pointer; padding: 0; }
+      .menu-btn:hover { border-color: rgba(255,255,255,.35); }
+      .menu-btn svg { width: 22px; height: 22px; }
+      .mobile-menu { position: fixed; inset: 0; z-index: 60; visibility: hidden; }
+      .mobile-menu.open { visibility: visible; }
+      .mobile-menu .scrim { position: absolute; inset: 0; background: rgba(7,11,18,.9); opacity: 0; transition: opacity .25s ease; }
+      .mobile-menu.open .scrim { opacity: 1; }
+      .mobile-menu .panel { position: absolute; top: 0; right: 0; height: 100%; width: 84%; max-width: 360px; background: #0a1018; box-shadow: -20px 0 60px rgba(0,0,0,.5); transform: translateX(100%); transition: transform .3s cubic-bezier(.22,1,.36,1); display: flex; flex-direction: column; padding: 1.25rem; overflow-y: auto; }
+      .mobile-menu.open .panel { transform: none; }
+      .mobile-menu .mhead { display: flex; align-items: center; justify-content: space-between; }
+      .mobile-menu .mlinks { margin-top: 1.6rem; display: flex; flex-direction: column; gap: .15rem; }
+      .mobile-menu .mlinks a { padding: .8rem 1rem; border-radius: 12px; color: rgba(255,255,255,.82); text-decoration: none; font-size: 1.05rem; }
+      .mobile-menu .mlinks a:hover { background: rgba(255,255,255,.05); color: #fff; }
+      .mobile-menu .mlinks a.gold { display: flex; align-items: center; gap: .5rem; border: 1px solid rgba(225,189,91,.3); background: rgba(225,189,91,.1); color: var(--gold3); font-weight: 600; margin-bottom: .4rem; }
+      .mobile-menu .mfoot { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: .8rem; }
+      .mobile-menu .mfoot a.phone { display: flex; align-items: center; gap: .5rem; color: #fff; font-weight: 600; text-decoration: none; }
     </style>
 
     <!-- Dane strukturalne: FAQ (rich results), nawigacja okruszkowa, usługa -->
@@ -272,10 +287,41 @@
           </span>
         </a>
         <div class="right">
-          <a class="back" href="./">← Strona główna</a>
+          <button type="button" class="menu-btn" id="menuOpen" aria-label="Otwórz menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </button>
         </div>
       </div>
     </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="scrim"></div>
+      <div class="panel">
+        <div class="mhead">
+          <a class="brand" href="./" aria-label="Kamil Bronisz — strona główna">
+            <span class="badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" /></svg></span>
+            <span class="brand-text"><b>Kamil <span class="grad">Bronisz</span></b><span class="brand-sub">Konsultant energetyczny</span></span>
+          </a>
+          <button type="button" class="menu-btn" id="menuClose" aria-label="Zamknij menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+          </button>
+        </div>
+        <nav class="mlinks">
+          <a class="gold" href="#kwalifikacja">🍃 Sprawdź dotację</a>
+          <a href="#finansowanie">Co możesz sfinansować</a>
+          <a href="#zrodla">Na co wymienić piec</a>
+          <a href="#oszczednosci">Kalkulator oszczędności</a>
+          <a href="#poziomy">Poziomy dofinansowania</a>
+          <a href="#realizacje">Realizacje</a>
+          <a href="#faq">Najczęstsze pytania</a>
+          <a href="./">← Strona główna</a>
+        </nav>
+        <div class="mfoot">
+          <a class="phone" href="tel:+48512491787">📞 512 491 787</a>
+          <a class="btn btn-primary" href="#kwalifikacja" style="justify-content: center">Umów bezpłatną analizę</a>
+        </div>
+      </div>
+    </div>
 
     <main>
       <section class="hero">
@@ -416,7 +462,7 @@
 
       <section class="block">
         <div class="wrap">
-          <h2>Co możesz sfinansować</h2>
+          <h2 id="finansowanie">Co możesz sfinansować</h2>
           <p class="sub">Zakres dofinansowania zależy od wybranej ścieżki i poziomu dotacji.</p>
           <div class="grid grid-3">
             <div class="card"><h3>Wymiana źródła ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesne ogrzewanie: pompę ciepła, piec na pellet lub piec zgazowujący drewno.</p></div>
@@ -431,7 +477,7 @@
 
       <section class="block">
         <div class="wrap">
-          <h2>Na co wymienić stary piec?</h2>
+          <h2 id="zrodla">Na co wymienić stary piec?</h2>
           <p class="sub">Nie ma jednej dobrej drogi — dobieram źródło ciepła pod Twój dom, budżet i dostęp do paliwa. Oto trzy najczęstsze kierunki:</p>
           <div class="grid grid-3">
             <div class="pick">
@@ -508,7 +554,7 @@
 
       <section class="block">
         <div class="wrap">
-          <h2>Trzy poziomy dofinansowania</h2>
+          <h2 id="poziomy">Trzy poziomy dofinansowania</h2>
           <p class="sub">Dotacja pokrywa <b>procent kosztów kwalifikowanych</b> — im niższy dochód w gospodarstwie, tym wyższy udział dofinansowania.</p>
           <div class="grid grid-3">
             <div class="level"><span class="tag">Poziom podstawowy</span><div class="amt">do 40%</div><p>Dla wyższych dochodów — niższy udział dotacji, ale wciąż realne wsparcie do kosztów.</p></div>
@@ -591,7 +637,7 @@
 
       <section class="block">
         <div class="wrap">
-          <h2>Najczęstsze pytania</h2>
+          <h2 id="faq">Najczęstsze pytania</h2>
           <div class="faq">
             <details>
               <summary>Kto może skorzystać?</summary>
@@ -933,6 +979,22 @@
           w.innerHTML = LOGOS.map(function (l) {
             return '<div class="chip"><img loading="lazy" src="' + l.src + '" alt="' + l.alt + '"></div>';
           }).join('');
+        })();
+
+        // === Górne menu (hamburger) — spójne ze stroną główną ===
+        (function () {
+          var menu = document.getElementById('mobileMenu');
+          var openBtn = document.getElementById('menuOpen');
+          var closeBtn = document.getElementById('menuClose');
+          var scrim = menu ? menu.querySelector('.scrim') : null;
+          if (!menu || !openBtn) return;
+          function openMenu() { menu.classList.add('open'); openBtn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+          function closeMenu() { menu.classList.remove('open'); openBtn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+          openBtn.addEventListener('click', openMenu);
+          if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+          if (scrim) scrim.addEventListener('click', closeMenu);
+          menu.querySelectorAll('.mlinks a, .mfoot a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
         })();
       })();
     </script>
