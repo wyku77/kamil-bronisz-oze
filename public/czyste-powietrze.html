@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a1018" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- Ograniczenie cache'owania HTML, by zmiany były widoczne szybciej -->
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
     <title>Czyste Powietrze 2026 — dotacja na pompę ciepła i termomodernizację | Kamil Bronisz</title>
     <meta
       name="description"
@@ -191,6 +194,10 @@
       .ba figure img { width: 100%; height: 170px; object-fit: cover; display: block; }
       .ba figcaption { position: absolute; top: 8px; left: 8px; background: rgba(10,16,24,.82); color: var(--gold3); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 3px 8px; border-radius: 6px; }
       .ba .cap { padding: .8rem 1rem; color: var(--muted); font-size: .9rem; }
+      /* pasek logo producentów (białe kafelki, by każde logo było czytelne) */
+      .logos { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.5rem; align-items: center; }
+      .logos .chip { background: #fff; border-radius: 12px; padding: .7rem 1rem; display: grid; place-items: center; height: 64px; min-width: 112px; }
+      .logos .chip img { max-height: 40px; max-width: 130px; width: auto; height: auto; object-fit: contain; display: block; }
     </style>
 
     <!-- Dane strukturalne: FAQ (rich results), nawigacja okruszkowa, usługa -->
@@ -544,6 +551,14 @@
         </div>
       </section>
 
+      <section class="block" id="producenci">
+        <div class="wrap">
+          <h2>Zaufani producenci</h2>
+          <p class="sub">Dobieram sprawdzony sprzęt renomowanych marek — pompy ciepła, piece i komponenty instalacji.</p>
+          <div id="logos" class="logos"></div>
+        </div>
+      </section>
+
       <section class="block" id="realizacje">
         <div class="wrap">
           <h2>Realizacje — przed i po</h2>
@@ -857,7 +872,13 @@
         // === Galeria realizacji (przed–po) ===
         // Gdy będą zdjęcia, dodaj wpisy (pliki w public/realizacje-czyste-powietrze/), np.:
         // { before: 'realizacje-czyste-powietrze/dom1-przed.jpg', after: 'realizacje-czyste-powietrze/dom1-po.jpg', cap: 'Wymiana kopciucha na pompę ciepła — Świdnik' }
-        var GALLERY = [];
+        var GALLERY = [
+          {
+            before: 'realizacje-czyste-powietrze/dom1-przed.jpg',
+            after: 'realizacje-czyste-powietrze/dom1-po.jpg',
+            cap: 'Realizacja — województwo lubelskie',
+          },
+        ];
         (function renderGallery() {
           var wrap = document.getElementById('gallery');
           var empty = document.getElementById('galleryEmpty');
@@ -868,6 +889,23 @@
               + '<figure><figcaption>Przed</figcaption><img loading="lazy" src="' + g.before + '" alt="Realizacja przed: ' + (g.cap || '') + '"></figure>'
               + '<figure><figcaption>Po</figcaption><img loading="lazy" src="' + g.after + '" alt="Realizacja po: ' + (g.cap || '') + '"></figure>'
               + '</div>' + (g.cap ? '<div class="cap">' + g.cap + '</div>' : '') + '</div>';
+          }).join('');
+        })();
+
+        // === Loga producentów (pliki w public/loga-producentow/) ===
+        var LOGOS = [
+          { src: 'loga-producentow/panasonic.png', alt: 'Panasonic' },
+          { src: 'loga-producentow/Midea.jpg', alt: 'Midea' },
+          { src: 'loga-producentow/Ferroli.png', alt: 'Ferroli' },
+          { src: 'loga-producentow/pereko.jpg', alt: 'Pereko' },
+          { src: 'loga-producentow/kfa-armatura.png', alt: 'KFA Armatura' },
+          { src: 'loga-producentow/walendowscy.png', alt: 'Walendowscy' },
+        ];
+        (function renderLogos() {
+          var w = document.getElementById('logos');
+          if (!w) return;
+          w.innerHTML = LOGOS.map(function (l) {
+            return '<div class="chip"><img loading="lazy" src="' + l.src + '" alt="' + l.alt + '"></div>';
           }).join('');
         })();
       })();
