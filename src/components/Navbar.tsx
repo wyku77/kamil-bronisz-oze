@@ -25,6 +25,7 @@ export function Navbar() {
   }, [open])
 
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
         scrolled
@@ -82,8 +83,9 @@ export function Navbar() {
           <Menu className="h-5 w-5" />
         </button>
       </nav>
+    </header>
 
-      {/* Menu mobilne */}
+      {/* Menu mobilne — poza <header>, bo backdrop-blur paska psuł tło menu (prześwity) */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -145,6 +147,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   )
 }
