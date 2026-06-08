@@ -179,6 +179,18 @@
       .fab .ring { position: absolute; inset: 0; border-radius: 50%; background: rgba(37,211,102,.55); animation: fabring 2s ease-out infinite; }
       @keyframes fabring { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.8); opacity: 0; } }
       @media (max-width: 720px) { .fab { bottom: 5.4rem; } }
+      /* mini-kalkulator: te same chipy co w kwizie */
+      .copts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; padding-left: 2.1rem; }
+      @media (max-width: 480px) { .opts, .copts { padding-left: 0; } }
+      /* a11y: wyraźny focus klawiatury */
+      .opt:focus-visible, .btn:focus-visible, .faq summary:focus-visible, .inp:focus-visible, .fab:focus-visible { outline: 2px solid var(--gold3); outline-offset: 2px; }
+      /* galeria realizacji (przed–po) */
+      .ba { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.03); }
+      .ba .pair { display: grid; grid-template-columns: 1fr 1fr; }
+      .ba figure { position: relative; margin: 0; }
+      .ba figure img { width: 100%; height: 170px; object-fit: cover; display: block; }
+      .ba figcaption { position: absolute; top: 8px; left: 8px; background: rgba(10,16,24,.82); color: var(--gold3); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 3px 8px; border-radius: 6px; }
+      .ba .cap { padding: .8rem 1rem; color: var(--muted); font-size: .9rem; }
     </style>
 
     <!-- Dane strukturalne: FAQ (rich results), nawigacja okruszkowa, usługa -->
@@ -316,7 +328,7 @@
               </div>
             </div>
 
-            <div class="result" id="qResult"></div>
+            <div class="result" id="qResult" aria-live="polite"></div>
 
             <form class="lead-form" id="leadForm" novalidate>
               <p style="color: #fff; font-weight: 600; margin-bottom: .2rem">Zostaw numer — oddzwonię i policzę Twój poziom dofinansowania.</p>
@@ -435,6 +447,40 @@
         </div>
       </section>
 
+      <section class="block" id="oszczednosci">
+        <div class="wrap">
+          <div class="qual">
+            <span class="eyebrow">Szybki szacunek</span>
+            <h2 style="margin-top: .9rem">Ile możesz zaoszczędzić na ogrzewaniu?</h2>
+            <p class="sub">Orientacyjna roczna oszczędność po wymianie starego źródła na pompę ciepła. To tylko wstępny szacunek — dokładną kalkulację pod Twój dom zrobię na bezpłatnej analizie.</p>
+            <div class="steps">
+              <div class="q">
+                <div class="qlabel"><span class="num">A</span> Czym ogrzewasz teraz?</div>
+                <div class="copts" data-c="src">
+                  <button type="button" class="opt" data-v="wegiel">Węgiel</button>
+                  <button type="button" class="opt" data-v="gaz">Gaz</button>
+                  <button type="button" class="opt" data-v="prad">Prąd</button>
+                  <button type="button" class="opt" data-v="olej">Olej</button>
+                </div>
+              </div>
+              <div class="q">
+                <div class="qlabel"><span class="num">B</span> Wielkość domu</div>
+                <div class="copts" data-c="size">
+                  <button type="button" class="opt" data-v="s">do 100 m²</button>
+                  <button type="button" class="opt" data-v="m">100–150 m²</button>
+                  <button type="button" class="opt" data-v="l">powyżej 150 m²</button>
+                </div>
+              </div>
+            </div>
+            <div class="result" id="calcResult" aria-live="polite"></div>
+            <div class="cta-row" id="calcCta" style="display: none; margin-top: 1.3rem">
+              <a class="btn btn-primary" href="#kwalifikacja">Policz dokładnie — umów analizę</a>
+              <a class="btn btn-ghost" href="tel:+48512491787">📞 Zadzwoń: 512 491 787</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="block">
         <div class="wrap">
           <h2>Trzy poziomy dofinansowania</h2>
@@ -446,7 +492,20 @@
           </div>
           <div class="note">
             ⚠️ Procenty i progi dochodowe programu Czyste Powietrze bywają aktualizowane przez NFOŚiGW. Na bezpłatnej
-            analizie sprawdzę aktualny stan i Twoją realną kwalifikację — bez zgadywania.
+            analizie sprawdzę aktualny stan, Twoją realną kwalifikację i <b>policzę konkretną kwotę w złotówkach</b> dla
+            Twojego zakresu prac — bez zgadywania.
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <h2>Nabór i terminy — nie czekaj do ostatniej chwili</h2>
+          <p class="sub">Czyste Powietrze to program z określonym horyzontem, nie nabór „na zawsze".</p>
+          <div class="note">
+            ⏳ Program zaplanowano <b>do 2029 roku</b>, ale budżet i zasady bywają aktualizowane przez NFOŚiGW, a kolejne
+            nabory potrafią zaostrzać warunki. Im wcześniej złożysz wniosek, tym pewniejsze dofinansowanie i spokojniejsza
+            realizacja — najlepiej z zapasem przed sezonem grzewczym.
           </div>
         </div>
       </section>
@@ -481,6 +540,18 @@
               </p>
               <span class="proof">📍 Realizacje OZE — całe województwo lubelskie</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="realizacje">
+        <div class="wrap">
+          <h2>Realizacje — przed i po</h2>
+          <p class="sub">Efekty wymiany źródła ciepła i termomodernizacji u klientów z województwa lubelskiego.</p>
+          <div id="gallery" class="grid grid-3"></div>
+          <div class="note" id="galleryEmpty">
+            📸 Galeria realizacji (zdjęcia „przed–po") jest w przygotowaniu. Chcesz zobaczyć przykłady z Twojej okolicy?
+            <a href="#kwalifikacja">Zostaw numer</a> albo zadzwoń — prześlę konkretne realizacje.
           </div>
         </div>
       </section>
@@ -566,6 +637,47 @@
     <script>
       (function () {
         var WEB3FORMS_KEY = 'eed5cd68-dee8-4328-9697-29e7ad4bed91';
+
+        // === Analityka (gotowe pod GTM / Meta Pixel / Google Ads) ===
+        // Wpisz ID, gdy je założysz. Puste = nic się nie ładuje (brak śledzenia).
+        var GTM_ID = '';      // np. 'GTM-XXXXXXX'
+        var PIXEL_ID = '';    // Meta Pixel, np. '1234567890'
+        var GADS_ID = '';     // np. 'AW-123456789'
+        var GADS_LABEL = '';  // etykieta konwersji Google Ads
+        window.dataLayer = window.dataLayer || [];
+        if (GTM_ID) {
+          (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM_ID);
+        }
+        if (PIXEL_ID) {
+          !(function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+          window.fbq('init', PIXEL_ID); window.fbq('track', 'PageView');
+        }
+        if (GADS_ID) {
+          var gs = document.createElement('script'); gs.async = true; gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + GADS_ID; document.head.appendChild(gs);
+          window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+          window.gtag('js', new Date()); window.gtag('config', GADS_ID);
+        }
+        function track(event, payload) {
+          payload = payload || {};
+          window.dataLayer.push(Object.assign({ event: event }, payload));
+          if (typeof window.fbq === 'function') {
+            if (event === 'lead_submit') window.fbq('track', 'Lead', payload);
+            if (event === 'quiz_complete') window.fbq('track', 'CompleteRegistration', payload);
+          }
+          if (event === 'lead_submit' && typeof window.gtag === 'function' && GADS_ID && GADS_LABEL) {
+            window.gtag('event', 'conversion', { send_to: GADS_ID + '/' + GADS_LABEL });
+          }
+        }
+        // Kliknięcia w telefon i WhatsApp (CTA)
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest('a'); if (!a) return;
+          var href = a.getAttribute('href') || '';
+          if (/^tel:/.test(href)) track('cta_click', { cta_label: 'tel', source: 'czyste-powietrze' });
+          else if (/wa\.me|whatsapp/i.test(href)) track('cta_click', { cta_label: 'whatsapp', source: 'czyste-powietrze' });
+        });
+        var quizDone = false;
+        document.querySelectorAll('.opt').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+
         var ans = { owner: null, heat: null, insul: null, newsrc: null, when: null };
 
         document.querySelectorAll('.opts').forEach(function (group) {
@@ -573,8 +685,9 @@
             var btn = e.target.closest('.opt');
             if (!btn) return;
             var q = group.getAttribute('data-q');
-            group.querySelectorAll('.opt').forEach(function (b) { b.classList.remove('sel'); });
+            group.querySelectorAll('.opt').forEach(function (b) { b.classList.remove('sel'); b.setAttribute('aria-pressed', 'false'); });
             btn.classList.add('sel');
+            btn.setAttribute('aria-pressed', 'true');
             ans[q] = btn.getAttribute('data-v');
             renderResult();
           });
@@ -587,6 +700,7 @@
         function renderResult() {
           // Pokazujemy wynik i formularz dopiero po odpowiedzi na wszystkie 5 pytań.
           if (ans.owner === null || ans.heat === null || ans.insul === null || ans.newsrc === null || ans.when === null) return;
+          if (!quizDone) { quizDone = true; track('quiz_complete', { source: 'czyste-powietrze', wlasciciel: ans.owner, zrodlo: ans.heat, ocieplony: ans.insul, nowe_zrodlo: ans.newsrc, termin: ans.when }); }
           var res = document.getElementById('qResult');
           var form = document.getElementById('leadForm');
           var html = '';
@@ -695,6 +809,7 @@
             var t = document.getElementById('thanks');
             t.classList.add('show');
             t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            track('lead_submit', { source: 'czyste-powietrze', voivodeship: voiv, city: city, zrodlo: ans.heat, nowe_zrodlo: ans.newsrc, termin: ans.when });
           } catch (_) {
             err.textContent = 'Coś poszło nie tak z wysyłką. Zadzwoń: 512 491 787 — odbiorę.';
             err.classList.add('show');
@@ -702,6 +817,59 @@
             btn.textContent = orig;
           }
         });
+
+        // === Mini-kalkulator oszczędności na ogrzewaniu ===
+        var calc = { src: null, size: null };
+        var COST = {
+          wegiel: { s: 3500, m: 5500, l: 8000 },
+          gaz: { s: 4500, m: 7000, l: 10000 },
+          prad: { s: 6500, m: 9500, l: 13500 },
+          olej: { s: 5500, m: 8500, l: 12500 },
+        };
+        var calcDone = false;
+        function fmt(n) { return n.toLocaleString('pl-PL'); }
+        document.querySelectorAll('.copts').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.opt');
+            if (!btn) return;
+            var c = group.getAttribute('data-c');
+            group.querySelectorAll('.opt').forEach(function (b) { b.classList.remove('sel'); b.setAttribute('aria-pressed', 'false'); });
+            btn.classList.add('sel');
+            btn.setAttribute('aria-pressed', 'true');
+            calc[c] = btn.getAttribute('data-v');
+            renderCalc();
+          });
+        });
+        function renderCalc() {
+          if (!calc.src || !calc.size) return;
+          var cost = COST[calc.src][calc.size];
+          var low = Math.round((cost * 0.4) / 100) * 100;
+          var high = Math.round((cost * 0.6) / 100) * 100;
+          var res = document.getElementById('calcResult');
+          res.innerHTML = 'Szacunkowa oszczędność po przejściu na <b>pompę ciepła</b>: '
+            + '<span class="pct">ok. ' + fmt(low) + '–' + fmt(high) + ' zł</span> rocznie.'
+            + '<br><br>To wartość <b>orientacyjna</b> — dokładną kalkulację pod Twój dom i taryfę policzę na bezpłatnej analizie.';
+          res.classList.add('show');
+          document.getElementById('calcCta').style.display = 'flex';
+          if (!calcDone) { calcDone = true; track('calc_complete', { source: 'czyste-powietrze', zrodlo: calc.src, wielkosc: calc.size, oszcz_min: low, oszcz_max: high }); }
+        }
+
+        // === Galeria realizacji (przed–po) ===
+        // Gdy będą zdjęcia, dodaj wpisy (pliki w public/realizacje-czyste-powietrze/), np.:
+        // { before: 'realizacje-czyste-powietrze/dom1-przed.jpg', after: 'realizacje-czyste-powietrze/dom1-po.jpg', cap: 'Wymiana kopciucha na pompę ciepła — Świdnik' }
+        var GALLERY = [];
+        (function renderGallery() {
+          var wrap = document.getElementById('gallery');
+          var empty = document.getElementById('galleryEmpty');
+          if (!GALLERY.length) { wrap.style.display = 'none'; return; }
+          empty.style.display = 'none';
+          wrap.innerHTML = GALLERY.map(function (g) {
+            return '<div class="ba"><div class="pair">'
+              + '<figure><figcaption>Przed</figcaption><img loading="lazy" src="' + g.before + '" alt="Realizacja przed: ' + (g.cap || '') + '"></figure>'
+              + '<figure><figcaption>Po</figcaption><img loading="lazy" src="' + g.after + '" alt="Realizacja po: ' + (g.cap || '') + '"></figure>'
+              + '</div>' + (g.cap ? '<div class="cap">' + g.cap + '</div>' : '') + '</div>';
+          }).join('');
+        })();
       })();
     </script>
   </body>
