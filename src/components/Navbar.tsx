@@ -35,39 +35,39 @@ export function Navbar() {
       <nav className="container-px flex items-center justify-between">
         <Logo />
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-0.5 xl:flex">
           <a
             href="czyste-powietrze.html"
             onClick={() => track.ctaClick('navbar_czyste_powietrze')}
-            className="flex items-center gap-1.5 rounded-full border border-gold-400/30 bg-gold-400/10 px-3.5 py-2 text-sm font-semibold text-gold-300 transition-colors hover:bg-gold-400/20"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-gold-400/30 bg-gold-400/10 px-3 py-2 text-sm font-semibold text-gold-300 transition-colors hover:bg-gold-400/20"
           >
-            <Leaf className="h-4 w-4" />
+            <Leaf className="h-4 w-4 shrink-0" />
             Czyste Powietrze
           </a>
           {nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="rounded-full px-3.5 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+              className="whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
             >
               {item.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <a
             href={site.phoneHref}
             onClick={() => track.ctaClick('navbar_phone')}
-            className="flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-gold-300"
+            className="flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-white transition-colors hover:text-gold-300"
           >
-            <Phone className="h-4 w-4 text-gold-400" />
+            <Phone className="h-4 w-4 shrink-0 text-gold-400" />
             {site.phone}
           </a>
           <a
             href="#kontakt"
             onClick={() => track.ctaClick('navbar_cta')}
-            className="btn-primary !py-2.5 !text-sm"
+            className="btn-primary whitespace-nowrap !py-2.5 !text-sm"
           >
             Bezpłatna analiza
           </a>
@@ -76,7 +76,7 @@ export function Navbar() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 text-white lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 text-white xl:hidden"
           aria-label="Otwórz menu"
         >
           <Menu className="h-5 w-5" />
@@ -90,7 +90,7 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] lg:hidden"
+            className="fixed inset-0 z-[60] xl:hidden"
           >
             <div className="absolute inset-0 bg-ink-950/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
             <motion.div

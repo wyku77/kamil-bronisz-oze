@@ -62,13 +62,21 @@
       .brand b { font-family: 'Sora', sans-serif; font-size: 1rem; line-height: 1; }
       .brand span { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
       .top .right { margin-left: auto; display: flex; gap: .6rem; align-items: center; }
-      .btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .65rem 1.2rem; font-weight: 600; font-size: .9rem; text-decoration: none; transition: .2s; }
+      .btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .65rem 1.2rem; font-weight: 600; font-size: .9rem; text-decoration: none; transition: .2s; white-space: nowrap; }
       .btn-primary { background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); }
       .btn-primary:hover { transform: translateY(-1px); }
       .btn-ghost { border: 1px solid var(--line); color: #fff; }
       .btn-ghost:hover { border-color: rgba(255,255,255,.35); }
       .back { color: var(--muted); text-decoration: none; font-size: .85rem; }
       .back:hover { color: #fff; }
+      @media (max-width: 560px) {
+        .top .wrap { gap: .5rem; padding: .55rem .85rem; }
+        .brand .badge { width: 34px; height: 34px; border-radius: 9px; }
+        .brand b { font-size: .95rem; }
+        .brand .brand-sub { display: none; }
+        .top .right .back { display: none; }
+        .top .right .btn-primary { padding: .5rem .9rem; font-size: .82rem; }
+      }
       /* Hero */
       .hero { padding: 4rem 0 2.5rem; }
       .eyebrow { display: inline-flex; gap: 8px; border: 1px solid rgba(225,189,91,.25); background: rgba(225,189,91,.1); color: var(--gold3); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .18em; padding: 6px 16px; border-radius: 999px; }
@@ -253,11 +261,11 @@
       <div class="wrap">
         <a class="brand" href="./">
           <span class="badge">KB</span>
-          <span><b>Kamil Bronisz</b><span>Konsultant energetyczny</span></span>
+          <span><b>Kamil Bronisz</b><span class="brand-sub">Konsultant energetyczny</span></span>
         </a>
         <div class="right">
           <a class="back" href="./">← Strona główna</a>
-          <a class="btn btn-primary" href="tel:+48512491787">Zadzwoń: 512 491 787</a>
+          <a class="btn btn-primary" href="tel:+48512491787">📞 512 491 787</a>
         </div>
       </div>
     </header>
