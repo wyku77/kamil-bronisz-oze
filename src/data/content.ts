@@ -17,6 +17,28 @@ import r4 from '../assets/realizacje/IMG-20260402-WA0005.jpg'
 import r5 from '../assets/realizacje/IMG-20260402-WA0007.jpg'
 import r6 from '../assets/realizacje/IMG-20260415-WA0003.jpg'
 
+// Logotypy marek (pełny kolor) — pasek zaufania pod hero.
+import logoSigenergy from '../assets/marki/sigenergy.png'
+import logoFoxess from '../assets/marki/foxess.jpg'
+import logoSolax from '../assets/marki/solax.png'
+import logoDeye from '../assets/marki/deye.png'
+import logoJinko from '../assets/marki/jinko.png'
+import logoLesso from '../assets/marki/lesso.png'
+import logoTwsolar from '../assets/marki/tw-solar.jpg'
+
+export const brands = {
+  label: 'Pracuję na sprawdzonym sprzęcie uznanych marek',
+  items: [
+    { src: logoSigenergy, alt: 'Sigenergy' },
+    { src: logoFoxess, alt: 'FoxESS' },
+    { src: logoSolax, alt: 'SolaX' },
+    { src: logoDeye, alt: 'Deye' },
+    { src: logoJinko, alt: 'Jinko Solar' },
+    { src: logoLesso, alt: 'Lesso' },
+    { src: logoTwsolar, alt: 'TW-Solar' },
+  ],
+}
+
 export const site = {
   name: 'Kamil Bronisz',
   role: 'Konsultant energetyczny',

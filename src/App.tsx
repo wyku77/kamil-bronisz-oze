@@ -18,6 +18,7 @@ import { ExitIntent } from './components/ExitIntent'
 import { ConsentBanner } from './components/ConsentBanner'
 import { MobileCTA } from './components/MobileCTA'
 import { SubsidyDeadline } from './components/SubsidyDeadline'
+import { Brands } from './components/Brands'
 import { sectionCtas } from './data/content'
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Brands />
         <SubsidyDeadline />
         <Benefits />
         <SectionCTA {...sectionCtas.afterBenefits} />

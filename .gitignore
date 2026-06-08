@@ -25,6 +25,9 @@ dist-ssr
 # Oryginały zdjęć realizacji (źródło) — w repo trafiają tylko zoptymalizowane (src/assets/realizacje)
 /realizacje/
 
+# Oryginały logotypów marek — w repo trafiają tylko zoptymalizowane (src/assets/marki)
+/ikony/
+
 # Editor / lokalne narzędzia
 .vscode/*
 !.vscode/extensions.json
