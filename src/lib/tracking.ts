@@ -10,9 +10,10 @@
 const GTM_ID = import.meta.env.VITE_GTM_ID as string | undefined
 const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID as string | undefined
 const GADS_ID = import.meta.env.VITE_GADS_ID as string | undefined
+const GA4_ID = import.meta.env.VITE_GA4_ID as string | undefined
 
 /** Czy skonfigurowano jakiekolwiek narzędzie (czy w ogóle pokazywać baner cookie). */
-export const hasTrackers = Boolean(GTM_ID || META_PIXEL_ID || GADS_ID)
+export const hasTrackers = Boolean(GTM_ID || META_PIXEL_ID || GADS_ID || GA4_ID)
 
 let loaded = false
 
@@ -32,11 +33,12 @@ export function loadTrackers(): void {
     document.head.appendChild(s)
   }
 
-  // Google Ads (gtag.js)
-  if (GADS_ID) {
+  // Google gtag.js — wspólny dla GA4 (statystyki) i Google Ads (konwersje)
+  if (GA4_ID || GADS_ID) {
+    const firstId = GA4_ID || GADS_ID
     const s = document.createElement('script')
     s.async = true
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GADS_ID
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + firstId
     document.head.appendChild(s)
     w.dataLayer = w.dataLayer || []
     w.gtag = function gtag() {
@@ -45,7 +47,8 @@ export function loadTrackers(): void {
       w.dataLayer.push(arguments)
     }
     w.gtag('js', new Date())
-    w.gtag('config', GADS_ID)
+    if (GA4_ID) w.gtag('config', GA4_ID)
+    if (GADS_ID) w.gtag('config', GADS_ID)
   }
 
   // Meta (Facebook) Pixel

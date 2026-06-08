@@ -658,11 +658,18 @@
 
         // === Analityka (gotowe pod GTM / Meta Pixel / Google Ads) ===
         // Wpisz ID, gdy je założysz. Puste = nic się nie ładuje (brak śledzenia).
+        var GA4_ID = 'G-2TVSMSFJYK'; // Google Analytics 4
         var GTM_ID = '';      // np. 'GTM-XXXXXXX'
         var PIXEL_ID = '';    // Meta Pixel, np. '1234567890'
         var GADS_ID = '';     // np. 'AW-123456789'
         var GADS_LABEL = '';  // etykieta konwersji Google Ads
         window.dataLayer = window.dataLayer || [];
+        if (GA4_ID) {
+          var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID; document.head.appendChild(ga);
+          window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', GA4_ID);
+        }
         if (GTM_ID) {
           (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM_ID);
         }
@@ -678,6 +685,7 @@
         function track(event, payload) {
           payload = payload || {};
           window.dataLayer.push(Object.assign({ event: event }, payload));
+          if (typeof window.gtag === 'function') window.gtag('event', event, payload);
           if (typeof window.fbq === 'function') {
             if (event === 'lead_submit') window.fbq('track', 'Lead', payload);
             if (event === 'quiz_complete') window.fbq('track', 'CompleteRegistration', payload);

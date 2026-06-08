@@ -23,6 +23,11 @@ export function pushEvent(event: string, payload: Record<string, unknown> = {}):
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({ event, ...payload })
 
+  // GA4 (gtag) — przekaż zdarzenie jako event GA4 (jeśli gtag wczytany po zgodzie).
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', event, payload)
+  }
+
   // Jeśli wpięty jest Meta Pixel — przekaż też tam kluczowe zdarzenia.
   if (typeof window.fbq === 'function') {
     if (event === 'lead_submit') window.fbq('track', 'Lead', payload)
