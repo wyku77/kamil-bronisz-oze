@@ -57,10 +57,13 @@
       /* Top bar */
       header.top { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(10, 16, 24, 0.85); backdrop-filter: blur(8px); }
       .top .wrap { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.25rem; }
-      .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: #fff; }
-      .brand .badge { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(135deg, var(--gold3), #bb8718); color: var(--ink-950); font-family: 'Sora', sans-serif; font-weight: 800; }
-      .brand b { font-family: 'Sora', sans-serif; font-size: 1rem; line-height: 1; }
-      .brand span { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+      .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: #fff; }
+      .brand .badge { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--gold3), #bb8718); color: var(--ink-950); box-shadow: 0 0 40px -12px rgba(212, 160, 23, 0.5); }
+      .brand .badge svg { width: 20px; height: 20px; }
+      .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
+      .brand-text b { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.125rem; letter-spacing: -0.01em; color: #fff; }
+      .brand-text .grad { background: linear-gradient(90deg, var(--gold3), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .brand-sub { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); margin-top: 3px; }
       .top .right { margin-left: auto; display: flex; gap: .6rem; align-items: center; }
       .btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .65rem 1.2rem; font-weight: 600; font-size: .9rem; text-decoration: none; transition: .2s; white-space: nowrap; }
       .btn-primary { background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); }
@@ -259,13 +262,17 @@
   <body>
     <header class="top">
       <div class="wrap">
-        <a class="brand" href="./">
-          <span class="badge">KB</span>
-          <span><b>Kamil Bronisz</b><span class="brand-sub">Konsultant energetyczny</span></span>
+        <a class="brand" href="./" aria-label="Kamil Bronisz — strona główna">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" /></svg>
+          </span>
+          <span class="brand-text">
+            <b>Kamil <span class="grad">Bronisz</span></b>
+            <span class="brand-sub">Konsultant energetyczny</span>
+          </span>
         </a>
         <div class="right">
           <a class="back" href="./">← Strona główna</a>
-          <a class="btn btn-primary" href="tel:+48512491787">📞 512 491 787</a>
         </div>
       </div>
     </header>
