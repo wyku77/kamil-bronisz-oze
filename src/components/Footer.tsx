@@ -60,6 +60,11 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href="czyste-powietrze.html" className="transition-colors hover:text-gold-300">
+                  Czyste Powietrze
+                </a>
+              </li>
             </ul>
           </div>
 
