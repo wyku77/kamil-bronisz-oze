@@ -189,15 +189,18 @@
       .opt:focus-visible, .btn:focus-visible, .faq summary:focus-visible, .inp:focus-visible, .fab:focus-visible { outline: 2px solid var(--gold3); outline-offset: 2px; }
       /* galeria realizacji (przed–po) */
       .ba { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.03); }
+      .ba-grid { display: grid; gap: 1.3rem; margin-top: 1.6rem; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); }
+      @media (max-width: 520px) { .ba-grid { grid-template-columns: 1fr; } }
       .ba .pair { display: grid; grid-template-columns: 1fr 1fr; }
       .ba figure { position: relative; margin: 0; }
-      .ba figure img { width: 100%; height: 170px; object-fit: cover; display: block; }
+      .ba figure img { width: 100%; height: 280px; object-fit: cover; display: block; }
+      @media (max-width: 520px) { .ba figure img { height: 180px; } }
       .ba figcaption { position: absolute; top: 8px; left: 8px; background: rgba(10,16,24,.82); color: var(--gold3); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 3px 8px; border-radius: 6px; }
       .ba .cap { padding: .8rem 1rem; color: var(--muted); font-size: .9rem; }
       /* pasek logo producentów (białe kafelki, by każde logo było czytelne) */
-      .logos { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.5rem; align-items: center; }
-      .logos .chip { background: #fff; border-radius: 12px; padding: .7rem 1rem; display: grid; place-items: center; height: 64px; min-width: 112px; }
-      .logos .chip img { max-height: 40px; max-width: 130px; width: auto; height: auto; object-fit: contain; display: block; }
+      .logos { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; align-items: center; }
+      .logos .chip { background: #fff; border-radius: 14px; padding: .85rem 1.25rem; display: grid; place-items: center; height: 84px; min-width: 150px; }
+      .logos .chip img { max-height: 52px; max-width: 160px; width: auto; height: auto; object-fit: contain; display: block; }
     </style>
 
     <!-- Dane strukturalne: FAQ (rich results), nawigacja okruszkowa, usługa -->
@@ -563,7 +566,7 @@
         <div class="wrap">
           <h2>Realizacje — przed i po</h2>
           <p class="sub">Efekty wymiany źródła ciepła i termomodernizacji u klientów z województwa lubelskiego.</p>
-          <div id="gallery" class="grid grid-3"></div>
+          <div id="gallery" class="ba-grid"></div>
           <div class="note" id="galleryEmpty">
             📸 Galeria realizacji (zdjęcia „przed–po") jest w przygotowaniu. Chcesz zobaczyć przykłady z Twojej okolicy?
             <a href="#kwalifikacja">Zostaw numer</a> albo zadzwoń — prześlę konkretne realizacje.
@@ -895,7 +898,7 @@
         // === Loga producentów (pliki w public/loga-producentow/) ===
         var LOGOS = [
           { src: 'loga-producentow/panasonic.png', alt: 'Panasonic' },
-          { src: 'loga-producentow/Midea.jpg', alt: 'Midea' },
+          { src: 'loga-producentow/Midea.png', alt: 'Midea' },
           { src: 'loga-producentow/Ferroli.png', alt: 'Ferroli' },
           { src: 'loga-producentow/pereko.jpg', alt: 'Pereko' },
           { src: 'loga-producentow/kfa-armatura.png', alt: 'KFA Armatura' },
