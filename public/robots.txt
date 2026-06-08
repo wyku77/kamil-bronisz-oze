@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wyku77.github.io/kamil-bronisz-oze/sitemap.xml
+Sitemap: https://kamilbronisz.pl/sitemap.xml
