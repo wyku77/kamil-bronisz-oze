@@ -88,6 +88,64 @@
       footer.bot { border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; padding: 1.6rem 0; }
       footer.bot .wrap { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; justify-content: space-between; }
       .disc { color: rgba(255,255,255,.45); font-size: .8rem; }
+      /* --- Etap 1: kwalifikacja + formularz + mobilny pasek CTA --- */
+      .qual { border: 1px solid rgba(225,189,91,.25); border-radius: 24px; background: radial-gradient(120% 120% at 0% 0%, rgba(225,189,91,.10), transparent), var(--ink-900); padding: 1.8rem; }
+      .steps { display: grid; gap: 1.4rem; margin-top: 1.4rem; }
+      .q .qlabel { font-weight: 600; color: #fff; display: flex; gap: .6rem; align-items: baseline; }
+      .q .qlabel .num { display: grid; place-items: center; min-width: 26px; height: 26px; border-radius: 50%; background: rgba(225,189,91,.15); color: var(--gold3); font-size: .8rem; font-weight: 700; font-family: 'Sora', sans-serif; flex: none; }
+      .opts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; padding-left: 2.1rem; }
+      .opt { border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--text); border-radius: 999px; padding: .55rem 1.1rem; font: inherit; font-size: .92rem; cursor: pointer; transition: .15s; }
+      .opt:hover { border-color: rgba(225,189,91,.5); }
+      .opt.sel { background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); border-color: transparent; font-weight: 600; }
+      .result { margin-top: 1.4rem; border-radius: 16px; border: 1px solid rgba(225,189,91,.28); background: rgba(225,189,91,.07); padding: 1.1rem 1.3rem; color: var(--text); font-size: .96rem; display: none; }
+      .result.show { display: block; animation: fade .3s ease; }
+      .result b { color: var(--gold3); }
+      .result .pct { font-family: 'Sora', sans-serif; font-weight: 800; color: #fff; }
+      @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      .lead-form { margin-top: 1.4rem; display: none; }
+      .lead-form.show { display: block; animation: fade .3s ease; }
+      .lead-form .row { display: grid; gap: .9rem; grid-template-columns: 1fr 1fr; }
+      @media (max-width: 560px) { .lead-form .row { grid-template-columns: 1fr; } }
+      .fl { display: block; font-size: .8rem; color: var(--muted); margin-bottom: .35rem; font-weight: 500; }
+      .inp { width: 100%; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem; color: #fff; font: inherit; }
+      .inp:focus { outline: none; border-color: rgba(225,189,91,.6); }
+      .inp::placeholder { color: rgba(255,255,255,.4); }
+      .consent { display: flex; gap: .6rem; align-items: flex-start; margin-top: .9rem; font-size: .82rem; color: var(--muted); line-height: 1.5; }
+      .consent input { margin-top: .2rem; width: 16px; height: 16px; flex: none; }
+      .lead-form .btn-primary { width: 100%; justify-content: center; margin-top: 1rem; border: 0; cursor: pointer; font: inherit; font-weight: 600; }
+      .formnote { text-align: center; font-size: .75rem; color: rgba(255,255,255,.5); margin-top: .7rem; }
+      .err { color: #ffc2c2; background: rgba(255,80,80,.12); border-radius: 10px; padding: .6rem .9rem; font-size: .85rem; margin-top: .8rem; display: none; }
+      .err.show { display: block; }
+      .thanks { display: none; text-align: center; padding: 1.5rem .5rem; }
+      .thanks.show { display: block; animation: fade .3s ease; }
+      .thanks .big { font-family: 'Sora', sans-serif; font-size: 1.3rem; color: #fff; }
+      .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+      .mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: none; gap: .6rem; padding: .6rem .8rem; background: rgba(10,16,24,.96); border-top: 1px solid var(--line); backdrop-filter: blur(8px); }
+      .mobile-cta .btn { flex: 1; justify-content: center; }
+      @media (max-width: 720px) { .mobile-cta { display: flex; } body { padding-bottom: 4.6rem; } }
+      /* --- Etap 2: pasek zaufania, wybór źródła, proces, o mnie, dowód --- */
+      .trust { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 1.5rem; color: var(--muted); font-size: .9rem; }
+      .trust span { display: inline-flex; align-items: center; gap: .45rem; }
+      .trust b { color: var(--gold3); font-weight: 600; }
+      .pick { border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 18px; padding: 1.3rem 1.4rem; }
+      .pick h3 { color: #fff; font-family: 'Sora', sans-serif; font-size: 1.08rem; }
+      .pick .for { color: var(--gold3); font-size: .82rem; margin-top: .35rem; font-weight: 600; }
+      .pick ul { list-style: none; margin-top: .8rem; }
+      .pick ul li { font-size: .9rem; color: var(--text); padding-left: 1.4rem; position: relative; margin: .45rem 0; }
+      .pick ul li.plus::before { content: '+'; position: absolute; left: 0; color: #5ec97a; font-weight: 800; }
+      .pick ul li.warn::before { content: '!'; position: absolute; left: 0; color: var(--gold3); font-weight: 800; }
+      .proc { display: grid; gap: 1rem; margin-top: 1.6rem; }
+      .pstep { display: flex; gap: 1rem; align-items: flex-start; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 16px; padding: 1.1rem 1.3rem; }
+      .pstep .n { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--gold3), #bb8718); color: var(--ink-950); font-family: 'Sora', sans-serif; font-weight: 800; }
+      .pstep h3 { color: #fff; font-size: 1.02rem; font-family: 'Sora', sans-serif; }
+      .pstep p { color: var(--muted); font-size: .92rem; margin-top: .3rem; }
+      .about-wrap { display: grid; grid-template-columns: 120px 1fr; gap: 1.4rem; align-items: center; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 20px; padding: 1.4rem 1.6rem; margin-top: 1.4rem; }
+      .about-wrap img { width: 120px; height: 120px; border-radius: 16px; object-fit: cover; border: 1px solid var(--line); }
+      .about-wrap h3 { color: #fff; font-family: 'Sora', sans-serif; font-size: 1.15rem; }
+      .about-wrap .rolelab { color: var(--gold3); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin-top: .25rem; }
+      .about-wrap p { color: var(--muted); font-size: .95rem; margin-top: .6rem; }
+      @media (max-width: 560px) { .about-wrap { grid-template-columns: 1fr; text-align: center; justify-items: center; } }
+      .proof { margin-top: 1.4rem; color: var(--muted); font-size: .9rem; display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 999px; padding: .6rem 1.1rem; }
     </style>
   </head>
   <body>
@@ -108,15 +166,135 @@
       <section class="hero">
         <div class="wrap">
           <span class="eyebrow">Dotacje 2026</span>
-          <h1>Program <span class="g">Czyste Powietrze</span> — pompa ciepła i termomodernizacja z dofinansowaniem</h1>
+          <h1>Program <span class="g">Czyste Powietrze</span> — wymiana starego pieca i termomodernizacja z dofinansowaniem</h1>
           <p class="lead">
             Czyste Powietrze to rządowy program dla właścicieli i współwłaścicieli domów jednorodzinnych. Dopłaca do
-            wymiany starego źródła ciepła na pompę ciepła, ocieplenia domu, wymiany okien i drzwi oraz wentylacji.
-            Sprawdzę, czy się kwalifikujesz, i poprowadzę Cię przez cały wniosek.
+            wymiany starego „kopciucha" na nowoczesne źródło ciepła — <b>pompę ciepła, piec na pellet lub piec
+            zgazowujący drewno</b> — a także do ocieplenia domu, wymiany okien i drzwi oraz wentylacji. Sprawdzę, czy
+            się kwalifikujesz, dobiorę najlepsze rozwiązanie i poprowadzę Cię przez cały wniosek.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="./#kontakt">Sprawdź, czy się kwalifikujesz</a>
+            <a class="btn btn-primary" href="#kwalifikacja">Sprawdź, czy się kwalifikujesz</a>
             <a class="btn btn-ghost" href="tel:+48512491787">Zadzwoń teraz</a>
+          </div>
+          <div class="trust">
+            <span>📍 <b>Lublin i okolice</b></span>
+            <span>📋 <b>Formalności biorę na siebie</b></span>
+            <span>⚡ <b>Łączę z PV i magazynem energii</b></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="kwalifikacja">
+        <div class="wrap">
+          <div class="qual">
+            <span class="eyebrow">Sprawdź w 20 sekund</span>
+            <h2 style="margin-top: .9rem">Czy łapiesz się na Czyste Powietrze?</h2>
+            <p class="sub">Odpowiedz na 5 krótkich pytań — od razu zobaczysz wstępny wynik. Dokładny poziom dofinansowania policzę dla Ciebie po krótkiej rozmowie.</p>
+
+            <div class="steps">
+              <div class="q">
+                <div class="qlabel"><span class="num">1</span> Czy jesteś właścicielem lub współwłaścicielem domu jednorodzinnego?</div>
+                <div class="opts" data-q="owner">
+                  <button type="button" class="opt" data-v="tak">Tak</button>
+                  <button type="button" class="opt" data-v="nie">Nie</button>
+                </div>
+              </div>
+              <div class="q">
+                <div class="qlabel"><span class="num">2</span> Czym teraz ogrzewasz dom?</div>
+                <div class="opts" data-q="heat">
+                  <button type="button" class="opt" data-v="wegiel">Stary piec węglowy („kopciuch")</button>
+                  <button type="button" class="opt" data-v="gaz">Piec gazowy</button>
+                  <button type="button" class="opt" data-v="drewno">Piec / kominek na drewno</button>
+                  <button type="button" class="opt" data-v="elektr">Ogrzewanie elektryczne</button>
+                  <button type="button" class="opt" data-v="inne">Inne</button>
+                </div>
+              </div>
+              <div class="q">
+                <div class="qlabel"><span class="num">3</span> Czy Twój dom jest już ocieplony?</div>
+                <div class="opts" data-q="insul">
+                  <button type="button" class="opt" data-v="tak">Tak</button>
+                  <button type="button" class="opt" data-v="czesc">Częściowo</button>
+                  <button type="button" class="opt" data-v="nie">Nie</button>
+                </div>
+              </div>
+              <div class="q">
+                <div class="qlabel"><span class="num">4</span> Jakie nowe źródło ciepła Cię interesuje?</div>
+                <div class="opts" data-q="newsrc">
+                  <button type="button" class="opt" data-v="pompa">Pompa ciepła</button>
+                  <button type="button" class="opt" data-v="pellet">Piec peletowy</button>
+                  <button type="button" class="opt" data-v="zgaz">Piec zgazowujący drewno</button>
+                  <button type="button" class="opt" data-v="niewiem">Nie wiem — doradź</button>
+                </div>
+              </div>
+              <div class="q">
+                <div class="qlabel"><span class="num">5</span> Kiedy planujesz wymianę?</div>
+                <div class="opts" data-q="when">
+                  <button type="button" class="opt" data-v="asap">Jak najszybciej</button>
+                  <button type="button" class="opt" data-v="do3m">Do 3 miesięcy</button>
+                  <button type="button" class="opt" data-v="do12m">3–12 miesięcy</button>
+                  <button type="button" class="opt" data-v="rozeznaje">Na razie się rozeznaję</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="result" id="qResult"></div>
+
+            <form class="lead-form" id="leadForm" novalidate>
+              <p style="color: #fff; font-weight: 600; margin-bottom: .2rem">Zostaw numer — oddzwonię i policzę Twój poziom dofinansowania.</p>
+              <p class="sub" style="margin-top: .2rem; margin-bottom: 1rem">Bez zobowiązań. Krótka, konkretna rozmowa.</p>
+              <div class="row">
+                <div>
+                  <label class="fl" for="f-name">Imię *</label>
+                  <input class="inp" id="f-name" name="name" type="text" placeholder="Jan" autocomplete="given-name" />
+                </div>
+                <div>
+                  <label class="fl" for="f-phone">Telefon *</label>
+                  <input class="inp" id="f-phone" name="phone" type="tel" placeholder="600 100 200" autocomplete="tel" />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label class="fl" for="f-voiv">Województwo *</label>
+                  <select class="inp" id="f-voiv" name="voivodeship">
+                    <option value="">Wybierz województwo</option>
+                    <option>dolnośląskie</option>
+                    <option>kujawsko-pomorskie</option>
+                    <option>lubelskie</option>
+                    <option>lubuskie</option>
+                    <option>łódzkie</option>
+                    <option>małopolskie</option>
+                    <option>mazowieckie</option>
+                    <option>opolskie</option>
+                    <option>podkarpackie</option>
+                    <option>podlaskie</option>
+                    <option>pomorskie</option>
+                    <option>śląskie</option>
+                    <option>świętokrzyskie</option>
+                    <option>warmińsko-mazurskie</option>
+                    <option>wielkopolskie</option>
+                    <option>zachodniopomorskie</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="fl" for="f-city">Miejscowość *</label>
+                  <input class="inp" id="f-city" name="city" type="text" placeholder="np. Świdnik" autocomplete="address-level2" />
+                </div>
+              </div>
+              <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              <label class="consent">
+                <input type="checkbox" id="f-consent" />
+                <span>Wyrażam zgodę na kontakt telefoniczny i przetwarzanie moich danych w celu przygotowania oferty, zgodnie z <a href="polityka-prywatnosci.html">polityką prywatności</a>. *</span>
+              </label>
+              <div class="err" id="formErr"></div>
+              <button type="submit" class="btn btn-primary" id="submitBtn">Oddzwońcie do mnie</button>
+              <p class="formnote">🔒 Dane bezpieczne, zgodnie z RODO · oddzwaniam zwykle tego samego dnia</p>
+            </form>
+
+            <div class="thanks" id="thanks">
+              <p class="big">Dziękuję! 📞</p>
+              <p class="sub" style="margin: .6rem auto 0">Mam Twój numer — oddzwonię i sprawdzimy Twój poziom dofinansowania w Czyste Powietrze. Do usłyszenia!</p>
+            </div>
           </div>
         </div>
       </section>
@@ -126,7 +304,7 @@
           <h2>Co możesz sfinansować</h2>
           <p class="sub">Zakres dofinansowania zależy od wybranej ścieżki i poziomu dotacji.</p>
           <div class="grid grid-3">
-            <div class="card"><h3>Pompa ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesną pompę ciepła (powietrze–woda lub gruntowa).</p></div>
+            <div class="card"><h3>Wymiana źródła ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesne ogrzewanie: pompę ciepła, piec na pellet lub piec zgazowujący drewno.</p></div>
             <div class="card"><h3>Ocieplenie domu</h3><p>Docieplenie ścian, dachu, stropów i podłóg — niższe zużycie energii na ogrzewanie.</p></div>
             <div class="card"><h3>Okna i drzwi</h3><p>Wymiana stolarki okiennej i drzwiowej na energooszczędną.</p></div>
             <div class="card"><h3>Wentylacja z rekuperacją</h3><p>Odzysk ciepła z powietrza — komfort i dodatkowe oszczędności.</p></div>
@@ -138,29 +316,93 @@
 
       <section class="block">
         <div class="wrap">
-          <h2>Trzy poziomy dofinansowania</h2>
-          <p class="sub">Wysokość dotacji zależy od dochodu w gospodarstwie domowym — im niższy dochód, tym wyższe wsparcie.</p>
+          <h2>Na co wymienić stary piec?</h2>
+          <p class="sub">Nie ma jednej dobrej drogi — dobieram źródło ciepła pod Twój dom, budżet i dostęp do paliwa. Oto trzy najczęstsze kierunki:</p>
           <div class="grid grid-3">
-            <div class="level"><span class="tag">Poziom podstawowy</span><div class="amt">do kilkudziesięciu tys. zł</div><p>Dla wyższych progów dochodowych — niższy procent i kwota dofinansowania.</p></div>
-            <div class="level"><span class="tag">Poziom podwyższony</span><div class="amt">wyższe wsparcie</div><p>Dla średnich progów dochodowych — większy udział dotacji w kosztach.</p></div>
-            <div class="level"><span class="tag">Poziom najwyższy</span><div class="amt">nawet ponad 100 000 zł</div><p>Dla najniższych dochodów i kompleksowej termomodernizacji — najwyższe dofinansowanie.</p></div>
+            <div class="pick">
+              <h3>Pompa ciepła</h3>
+              <p class="for">Dla ceniących wygodę i najniższe rachunki</p>
+              <ul>
+                <li class="plus">Najniższe koszty eksploatacji</li>
+                <li class="plus">Bezobsługowa, świetna z PV i taryfą dynamiczną</li>
+                <li class="plus">Chłodzenie latem (wybrane modele)</li>
+                <li class="warn">Wyższy koszt startu — ale najwyższe dotacje</li>
+              </ul>
+            </div>
+            <div class="pick">
+              <h3>Piec peletowy</h3>
+              <p class="for">Dla chcących „klasyczne" ciepło bez przebudowy</p>
+              <ul>
+                <li class="plus">Niższy koszt inwestycji</li>
+                <li class="plus">Automatyczny podajnik — wygoda obsługi</li>
+                <li class="plus">Bez dużej modernizacji instalacji c.o.</li>
+                <li class="warn">Trzeba dokupywać pellet i czyścić piec</li>
+              </ul>
+            </div>
+            <div class="pick">
+              <h3>Piec zgazowujący drewno</h3>
+              <p class="for">Dla mających dostęp do taniego drewna</p>
+              <ul>
+                <li class="plus">Najtańsze paliwo, wysoka sprawność</li>
+                <li class="plus">Niezależność od cen prądu i gazu</li>
+                <li class="warn">Wymaga bufora ciepła</li>
+                <li class="warn">Ręczny załadunek drewna</li>
+              </ul>
+            </div>
           </div>
           <div class="note">
-            ⚠️ Warunki, progi dochodowe i maksymalne kwoty programu Czyste Powietrze bywają aktualizowane przez
-            NFOŚiGW. Na bezpłatnej analizie sprawdzę aktualny stan i Twoją realną kwalifikację — bez zgadywania.
+            💬 Nie wiesz, co wybrać? To naturalne — na bezpłatnej analizie porównam koszty i dobiorę rozwiązanie pod
+            Twój dom. Często najlepszy efekt daje połączenie nowego źródła ciepła z fotowoltaiką i magazynem energii.
           </div>
         </div>
       </section>
 
       <section class="block">
         <div class="wrap">
-          <h2>Jak Ci pomagam</h2>
-          <ul class="list">
-            <li><b>Weryfikacja kwalifikacji</b> — sprawdzam poziom dofinansowania i co realnie Ci przysługuje.</li>
-            <li><b>Dobór zakresu</b> — co opłaca się zrobić najpierw (np. pompa ciepła + ocieplenie) dla maksymalnego efektu.</li>
-            <li><b>Wniosek i formalności</b> — pomagam skompletować dokumenty i złożyć wniosek.</li>
-            <li><b>Połączenie z fotowoltaiką i magazynem energii</b> — łączę Czyste Powietrze z inwestycją w PV i magazyn, żeby rachunki spadły maksymalnie.</li>
-          </ul>
+          <h2>Trzy poziomy dofinansowania</h2>
+          <p class="sub">Dotacja pokrywa <b>procent kosztów kwalifikowanych</b> — im niższy dochód w gospodarstwie, tym wyższy udział dofinansowania.</p>
+          <div class="grid grid-3">
+            <div class="level"><span class="tag">Poziom podstawowy</span><div class="amt">do 40%</div><p>Dla wyższych dochodów — niższy udział dotacji, ale wciąż realne wsparcie do kosztów.</p></div>
+            <div class="level"><span class="tag">Poziom podwyższony</span><div class="amt">do 70%</div><p>Dla średnich dochodów — znacząco wyższy udział dofinansowania w kosztach inwestycji.</p></div>
+            <div class="level"><span class="tag">Poziom najwyższy</span><div class="amt">do 100%</div><p>Dla najniższych dochodów i kompleksowej termomodernizacji — nawet pełne pokrycie kosztów kwalifikowanych.</p></div>
+          </div>
+          <div class="note">
+            ⚠️ Procenty i progi dochodowe programu Czyste Powietrze bywają aktualizowane przez NFOŚiGW. Na bezpłatnej
+            analizie sprawdzę aktualny stan i Twoją realną kwalifikację — bez zgadywania.
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <h2>Jak wygląda współpraca — krok po kroku</h2>
+          <p class="sub">Prowadzę Cię od pierwszej rozmowy aż po wypłatę dotacji. Formalności biorę na siebie.</p>
+          <div class="proc">
+            <div class="pstep"><span class="n">1</span><div><h3>Analiza kwalifikacji</h3><p>Sprawdzam, czy i na jakim poziomie się kwalifikujesz oraz co realnie Ci przysługuje — bez zgadywania.</p></div></div>
+            <div class="pstep"><span class="n">2</span><div><h3>Dobór źródła ciepła i zakresu</h3><p>Porównuję pompę ciepła, piec peletowy i piec zgazowujący drewno, dobieram zakres prac (np. źródło + ocieplenie) pod Twój dom i budżet.</p></div></div>
+            <div class="pstep"><span class="n">3</span><div><h3>Wniosek i formalności</h3><p>Kompletujemy dokumenty i składamy wniosek — przeprowadzam Cię przez cały proces.</p></div></div>
+            <div class="pstep"><span class="n">4</span><div><h3>Realizacja</h3><p>Montaż nowego źródła ciepła i pozostałych prac przez sprawdzonych wykonawców.</p></div></div>
+            <div class="pstep"><span class="n">5</span><div><h3>Rozliczenie dotacji</h3><p>Pomagam rozliczyć inwestycję i wypłacić dofinansowanie. Mogę też połączyć ją z PV i magazynem energii.</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <h2>Kto Ci pomoże</h2>
+          <div class="about-wrap">
+            <img src="kamil-bronisz.jpg" alt="Kamil Bronisz — konsultant energetyczny" loading="lazy" />
+            <div>
+              <h3>Kamil Bronisz</h3>
+              <div class="rolelab">Konsultant energetyczny</div>
+              <p>
+                Pomagam właścicielom domów w woj. lubelskim przejść przez Czyste Powietrze i powiązane dotacje —
+                od doboru źródła ciepła, przez wniosek, po rozliczenie. Działam doradczo: tłumaczę opcje prostym
+                językiem i dobieram rozwiązanie, które najszybciej obniży rachunki.
+              </p>
+              <span class="proof">📍 Realizacje OZE — Lublin i okolice (woj. lubelskie)</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -169,9 +411,13 @@
           <h2>Najczęstsze pytania</h2>
           <div class="grid grid-2">
             <div class="card"><h3>Kto może skorzystać?</h3><p>Właściciele i współwłaściciele domów jednorodzinnych (lub wydzielonego lokalu z księgą wieczystą). Poziom dotacji zależy od dochodu.</p></div>
-            <div class="card"><h3>Czy łączę to z dotacją na magazyn?</h3><p>Tak — Czyste Powietrze (pompa, termomodernizacja) i dotacja na magazyn energii to różne programy; pomagam zaplanować je tak, by się uzupełniały.</p></div>
-            <div class="card"><h3>Czy pomagasz w formalnościach?</h3><p>Tak. Przeprowadzam przez weryfikację, dobór zakresu i wniosek — formalności biorę na siebie.</p></div>
-            <div class="card"><h3>Ile to trwa?</h3><p>Zależy od zakresu i kompletu dokumentów. Na bezpłatnej analizie podam realny harmonogram.</p></div>
+            <div class="card"><h3>Czy mogę dostać pieniądze z góry?</h3><p>W części ścieżek programu możliwe jest prefinansowanie, czyli wypłata zaliczki przed zakończeniem prac. Sprawdzę, czy kwalifikujesz się do tej opcji.</p></div>
+            <div class="card"><h3>Czy stary piec trzeba zlikwidować?</h3><p>Tak — warunkiem wymiany jest trwałe usunięcie starego, nieekologicznego źródła ciepła. Pomagam dopiąć ten wymóg formalnie.</p></div>
+            <div class="card"><h3>Najpierw wniosek czy wymiana pieca?</h3><p>Zwykle zaczynamy od wniosku i kwalifikacji, a dopiero potem realizujemy prace — żeby nie stracić dofinansowania. Doradzę właściwą kolejność w Twoim przypadku.</p></div>
+            <div class="card"><h3>Mam piec gazowy — czy się łapię?</h3><p>To zależy od aktualnych zasad programu i Twojej sytuacji. Na analizie sprawdzę, czy i w jakim zakresie kwalifikujesz się do wsparcia.</p></div>
+            <div class="card"><h3>Ile czeka się na wypłatę?</h3><p>Czas zależy od kompletności dokumentów i etapu programu. Pilnuję terminów i statusu wniosku, żeby nie było przestojów.</p></div>
+            <div class="card"><h3>Czy łączę to z dotacją na magazyn / PV?</h3><p>Tak — Czyste Powietrze, dotacja na magazyn energii i fotowoltaika to różne programy; planuję je tak, by się uzupełniały i maksymalnie obniżyły rachunki.</p></div>
+            <div class="card"><h3>Jakich dokumentów potrzebuję?</h3><p>Najczęściej dane nieruchomości, informacja o dochodzie i o obecnym źródle ciepła. Dokładną listę przygotuję pod Twój przypadek — formalności biorę na siebie.</p></div>
           </div>
         </div>
       </section>
@@ -181,7 +427,7 @@
           <h2>Sprawdź, czy łapiesz się na Czyste Powietrze</h2>
           <p>Bezpłatna analiza — sprawdzę Twój poziom dofinansowania i połączę go z oszczędnościami z fotowoltaiki i magazynu energii.</p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="./#kontakt">Umów bezpłatną analizę</a>
+            <a class="btn btn-primary" href="#kwalifikacja">Umów bezpłatną analizę</a>
             <a class="btn wa" href="https://wa.me/48512491787" target="_blank" rel="noopener noreferrer">Napisz na WhatsApp</a>
           </div>
         </div>
@@ -194,5 +440,152 @@
         <a href="./">← Wróć na stronę główną</a>
       </div>
     </footer>
+
+    <nav class="mobile-cta">
+      <a class="btn btn-primary" href="#kwalifikacja">Sprawdź dotację</a>
+      <a class="btn wa" href="https://wa.me/48512491787" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </nav>
+
+    <script>
+      (function () {
+        var WEB3FORMS_KEY = 'eed5cd68-dee8-4328-9697-29e7ad4bed91';
+        var ans = { owner: null, heat: null, insul: null, newsrc: null, when: null };
+
+        document.querySelectorAll('.opts').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.opt');
+            if (!btn) return;
+            var q = group.getAttribute('data-q');
+            group.querySelectorAll('.opt').forEach(function (b) { b.classList.remove('sel'); });
+            btn.classList.add('sel');
+            ans[q] = btn.getAttribute('data-v');
+            renderResult();
+          });
+        });
+
+        var SRC_LABEL = {
+          pompa: 'pompa ciepła', pellet: 'piec peletowy', zgaz: 'piec zgazowujący drewno', niewiem: 'dobór źródła',
+        };
+
+        function renderResult() {
+          // Pokazujemy wynik i formularz dopiero po odpowiedzi na wszystkie 5 pytań.
+          if (ans.owner === null || ans.heat === null || ans.insul === null || ans.newsrc === null || ans.when === null) return;
+          var res = document.getElementById('qResult');
+          var form = document.getElementById('leadForm');
+          var html = '';
+
+          if (ans.owner === 'nie') {
+            html = 'Program Czyste Powietrze wymaga <b>tytułu własności</b> do domu jednorodzinnego. '
+              + 'Jeśli jesteś w trakcie zakupu albo masz inną sytuację — zostaw numer, sprawdzę Twój przypadek '
+              + 'indywidualnie i wskażę realne opcje.';
+          } else {
+            html = 'Świetnie — <b>prawdopodobnie kwalifikujesz się</b> do Czyste Powietrze. ';
+
+            // Obecne źródło ciepła
+            if (ans.heat === 'wegiel') {
+              html += 'Wymiana starego „kopciucha" to <b>rdzeń programu</b> — zwykle najszerszy zakres wsparcia. ';
+            } else if (ans.heat === 'drewno') {
+              html += 'Wymiana starego pieca na drewno na nowoczesne źródło zwykle <b>kwalifikuje się</b> do dotacji. ';
+            } else if (ans.heat === 'gaz') {
+              html += 'Przy piecu gazowym zakres wsparcia bywa węższy — sprawdzę Twój przypadek pod aktualne zasady. ';
+            } else {
+              html += 'Sprawdzę, czy Twoje obecne źródło ciepła kwalifikuje się do wymiany w programie. ';
+            }
+
+            // Ocieplenie → poziom wsparcia
+            if (ans.insul === 'nie') {
+              html += 'Brak ocieplenia działa <b>na Twoją korzyść</b>: kompleksowa termomodernizacja razem z wymianą '
+                + 'źródła ciepła to najwyższy poziom — nawet <span class="pct">do 100%</span> kosztów kwalifikowanych. ';
+            } else if (ans.insul === 'czesc') {
+              html += 'Przy częściowym ociepleniu domykamy termomodernizację i wymieniamy źródło ciepła — to zwykle '
+                + '<b>wysoki poziom dofinansowania</b>. ';
+            } else {
+              html += 'Skupimy się na samej wymianie źródła ciepła — najszybszy efekt na rachunku. ';
+            }
+
+            // Preferowane nowe źródło
+            if (ans.newsrc === 'pompa') {
+              html += 'Pompa ciepła to najniższe koszty eksploatacji, zwłaszcza w parze z fotowoltaiką i taryfą dynamiczną. ';
+            } else if (ans.newsrc === 'pellet') {
+              html += 'Piec peletowy: niższy koszt startu i automatyczny podajnik — wygodne „klasyczne" ciepło. ';
+            } else if (ans.newsrc === 'zgaz') {
+              html += 'Piec zgazowujący drewno: najtańsze paliwo, jeśli masz dostęp do drewna. ';
+            } else {
+              html += 'Bez obaw, że nie wiesz co wybrać — dobiorę źródło ciepła pod Twój dom i budżet. ';
+            }
+
+            html += '<br><br>Twój <b>dokładny poziom — od <span class="pct">40%</span> do nawet '
+              + '<span class="pct">100%</span></b> kosztów — policzę po krótkiej rozmowie.';
+          }
+
+          res.innerHTML = html;
+          res.classList.add('show');
+          form.classList.add('show');
+        }
+
+        var form = document.getElementById('leadForm');
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          var err = document.getElementById('formErr');
+          var name = document.getElementById('f-name').value.trim();
+          var phone = document.getElementById('f-phone').value.trim();
+          var voiv = document.getElementById('f-voiv').value;
+          var city = document.getElementById('f-city').value.trim();
+          var consent = document.getElementById('f-consent').checked;
+          var botcheck = form.querySelector('[name=botcheck]').value;
+          err.classList.remove('show');
+          function fail(msg) { err.textContent = msg; err.classList.add('show'); }
+          if (!name) return fail('Podaj imię — bez niego nie wyślę formularza.');
+          if (phone.replace(/\D/g, '').length < 9) return fail('Podaj poprawny numer telefonu.');
+          if (!voiv) return fail('Wybierz województwo.');
+          if (!city) return fail('Podaj miejscowość.');
+          if (!consent) return fail('Zaznacz zgodę, żebym mógł oddzwonić.');
+          if (botcheck) return; // honeypot — bot
+
+          var btn = document.getElementById('submitBtn');
+          var orig = btn.textContent;
+          btn.disabled = true;
+          btn.textContent = 'Wysyłam…';
+
+          var payload = {
+            access_key: WEB3FORMS_KEY,
+            subject: '📞 Lead Czyste Powietrze: ' + name + ' — ' + phone + ' (' + city + ', ' + voiv + ')',
+            from_name: 'Strona OZE — Czyste Powietrze',
+            name: name,
+            phone: phone,
+            voivodeship: voiv,
+            city: city,
+            consent: consent ? 'tak' : 'nie',
+            wlasciciel: ans.owner || '',
+            obecne_zrodlo_ciepla: ans.heat || '',
+            dom_ocieplony: ans.insul || '',
+            interesujace_zrodlo: ans.newsrc || '',
+            termin_wymiany: ans.when || '',
+            source: 'czyste-powietrze',
+            pageUrl: location.href,
+            submittedAt: new Date().toISOString(),
+          };
+
+          try {
+            var r = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            if (!r.ok) throw new Error('http');
+            form.style.display = 'none';
+            document.getElementById('qResult').style.display = 'none';
+            var t = document.getElementById('thanks');
+            t.classList.add('show');
+            t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } catch (_) {
+            err.textContent = 'Coś poszło nie tak z wysyłką. Zadzwoń: 512 491 787 — odbiorę.';
+            err.classList.add('show');
+            btn.disabled = false;
+            btn.textContent = orig;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

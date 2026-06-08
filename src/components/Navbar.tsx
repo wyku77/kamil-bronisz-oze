@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, Phone, X } from 'lucide-react'
+import { Leaf, Menu, Phone, X } from 'lucide-react'
 import { nav, site } from '../data/content'
 import { Logo } from './ui/Logo'
 import { track } from '../lib/analytics'
@@ -36,6 +36,14 @@ export function Navbar() {
         <Logo />
 
         <div className="hidden items-center gap-1 lg:flex">
+          <a
+            href="czyste-powietrze.html"
+            onClick={() => track.ctaClick('navbar_czyste_powietrze')}
+            className="flex items-center gap-1.5 rounded-full border border-gold-400/30 bg-gold-400/10 px-3.5 py-2 text-sm font-semibold text-gold-300 transition-colors hover:bg-gold-400/20"
+          >
+            <Leaf className="h-4 w-4" />
+            Czyste Powietrze
+          </a>
           {nav.map((item) => (
             <a
               key={item.href}
@@ -105,6 +113,13 @@ export function Navbar() {
               </div>
 
               <div className="mt-8 flex flex-col gap-1">
+                <a
+                  href="czyste-powietrze.html"
+                  onClick={() => setOpen(false)}
+                  className="mb-1 flex items-center gap-2 rounded-xl border border-gold-400/30 bg-gold-400/10 px-4 py-3 text-base font-semibold text-gold-300"
+                >
+                  <Leaf className="h-4 w-4" /> Czyste Powietrze — dotacja
+                </a>
                 {nav.map((item) => (
                   <a
                     key={item.href}
