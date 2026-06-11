@@ -12,7 +12,7 @@
     <title>Magazyn energii z AI i fotowoltaika | Kamil Bronisz, konsultant OZE</title>
     <meta
       name="description"
-      content="Obniż rachunki za energię nawet o 90% i zyskaj niezależność energetyczną. Projektuję inteligentne systemy: fotowoltaika z magazynem energii ze sztuczną inteligencją, zarządzanie energią domu (HEMS) i taryfy dynamiczne. Umów bezpłatną analizę lub oblicz oszczędności w kalkulatorze."
+      content="Magazyn energii z AI i fotowoltaika — obniż rachunki nawet o 90% i zyskaj niezależność energetyczną. Bezpłatna, niezobowiązująca analiza. Zadzwoń lub napisz."
     />
     <meta
       name="keywords"
@@ -69,13 +69,13 @@
         "email": "kamil.bronisz@begolden.com.pl",
         "image": "https://kamilbronisz.pl/og-image.png",
         "priceRange": "$$",
-        "areaServed": "Polska",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "1339",
-          "bestRating": "5"
-        },
+        "foundingDate": "2021",
+        "sameAs": ["https://www.facebook.com/begoldenfotowoltaika"],
+        "areaServed": [
+          { "@type": "Country", "name": "Polska" },
+          { "@type": "AdministrativeArea", "name": "województwo lubelskie" },
+          { "@type": "City", "name": "Lublin" }
+        ],
         "founder": {
           "@type": "Person",
           "name": "Kamil Bronisz",
@@ -150,6 +150,63 @@
             }
           }
         ]
+      }
+    </script>
+
+    <!-- Dane strukturalne: witryna -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://kamilbronisz.pl/#website",
+        "url": "https://kamilbronisz.pl/",
+        "name": "Kamil Bronisz — Konsultant energetyczny",
+        "inLanguage": "pl-PL",
+        "publisher": { "@id": "https://kamilbronisz.pl/#service" }
+      }
+    </script>
+
+    <!-- Dane strukturalne: osoba-ekspert -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://kamilbronisz.pl/#person",
+        "name": "Kamil Bronisz",
+        "jobTitle": "Konsultant energetyczny",
+        "url": "https://kamilbronisz.pl/",
+        "image": "https://kamilbronisz.pl/og-image.png",
+        "telephone": "+48512491787",
+        "email": "kamil.bronisz@begolden.com.pl",
+        "worksFor": { "@id": "https://kamilbronisz.pl/#service" },
+        "sameAs": ["https://www.facebook.com/begoldenfotowoltaika"],
+        "knowsAbout": [
+          "magazyn energii",
+          "magazyn energii Sigenergy",
+          "fotowoltaika z magazynem energii",
+          "inteligentne zarządzanie energią",
+          "HEMS",
+          "taryfy dynamiczne",
+          "niezależność energetyczna"
+        ]
+      }
+    </script>
+
+    <!-- Dane strukturalne: usługi (frazy kluczowe) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://kamilbronisz.pl/#magazyn-energii",
+        "name": "Magazyn energii z fotowoltaiką i zarządzaniem energią (HEMS)",
+        "serviceType": "Magazyn energii Sigenergy",
+        "description": "Dobór i montaż inteligentnych magazynów energii (m.in. Sigenergy) z fotowoltaiką, systemem zarządzania energią (HEMS) i optymalizacją taryf dynamicznych — dla domów i firm. Wyższa autokonsumpcja, niezależność energetyczna i pomoc w dotacji 2026.",
+        "provider": { "@id": "https://kamilbronisz.pl/#service" },
+        "areaServed": [
+          { "@type": "Country", "name": "Polska" },
+          { "@type": "AdministrativeArea", "name": "województwo lubelskie" }
+        ],
+        "brand": "Sigenergy"
       }
     </script>
   </head>
