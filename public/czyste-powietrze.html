@@ -72,6 +72,23 @@
       .btn-ghost:hover { border-color: rgba(255,255,255,.35); }
       .back { color: var(--muted); text-decoration: none; font-size: .85rem; }
       .back:hover { color: #fff; }
+      /* Pełny pasek nawigacyjny (desktop) — spójny ze stroną główną */
+      header.top .wrap { max-width: 1240px; }
+      .nav-desk { display: none; align-items: center; gap: .15rem; margin: 0 auto; }
+      .nav-right { display: none; align-items: center; gap: 1.1rem; }
+      .nav-pill { display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap; border-radius: 999px; border: 1px solid rgba(225,189,91,.3); background: rgba(225,189,91,.1); color: var(--gold3); font-size: .9rem; font-weight: 600; padding: .5rem .95rem; text-decoration: none; transition: background .2s; }
+      .nav-pill:hover { background: rgba(225,189,91,.2); }
+      .nav-pill svg { width: 16px; height: 16px; }
+      .nav-link { white-space: nowrap; border-radius: 999px; padding: .5rem .75rem; font-size: .9rem; font-weight: 500; color: rgba(255,255,255,.7); text-decoration: none; transition: .2s; }
+      .nav-link:hover { background: rgba(255,255,255,.05); color: #fff; }
+      .nav-phone { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; font-size: .9rem; font-weight: 600; color: #fff; text-decoration: none; transition: color .2s; }
+      .nav-phone:hover { color: var(--gold3); }
+      .nav-phone svg { width: 16px; height: 16px; color: var(--gold); }
+      .nav-right .btn-primary { white-space: nowrap; }
+      @media (min-width: 1200px) {
+        .nav-desk, .nav-right { display: flex; }
+        header.top .right { display: none; }
+      }
       @media (max-width: 560px) {
         .top .wrap { padding: .7rem 1rem; }
         .brand-text b { font-size: 1.05rem; }
@@ -341,6 +358,28 @@
             <span class="brand-sub">Konsultant energetyczny</span>
           </span>
         </a>
+
+        <nav class="nav-desk">
+          <a class="nav-pill" href="czyste-powietrze.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+            Czyste Powietrze
+          </a>
+          <a class="nav-link" href="./#magazyny-energii">Magazyny</a>
+          <a class="nav-link" href="./#kalkulator">Kalkulator</a>
+          <a class="nav-link" href="./#o-mnie">O mnie</a>
+          <a class="nav-link" href="./#opinie">Opinie</a>
+          <a class="nav-link" href="./#faq">FAQ</a>
+          <a class="nav-link" href="./#kontakt">Kontakt</a>
+        </nav>
+
+        <div class="nav-right">
+          <a class="nav-phone" href="tel:+48512491787">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            512 491 787
+          </a>
+          <a class="btn btn-primary" href="#kwalifikacja">Bezpłatna analiza</a>
+        </div>
+
         <div class="right">
           <button type="button" class="menu-btn" id="menuOpen" aria-label="Otwórz menu" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
