@@ -79,7 +79,7 @@ export function About() {
                 <Phone className="h-4 w-4" /> {site.phone}
               </a>
               <a
-                href={`https://wa.me/${site.whatsapp}`}
+                href={site.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline !py-2.5 !text-sm"

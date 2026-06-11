@@ -26,7 +26,7 @@ export function Footer() {
             </p>
             <div className="mt-5 flex gap-3">
               <a
-                href={`https://wa.me/${site.whatsapp}`}
+                href={site.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"

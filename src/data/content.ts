@@ -49,6 +49,12 @@ export const site = {
   emailHref: 'mailto:kamil.bronisz@begolden.com.pl',
   // WhatsApp w formacie międzynarodowym bez znaków (można nadpisać przez .env)
   whatsapp: (import.meta.env.VITE_WHATSAPP as string) || '48512491787',
+  // Wstępnie wypełniona wiadomość — niższy próg wejścia (pełnoprawna ścieżka leadowa)
+  whatsappText:
+    'Dzień dobry, chcę porozmawiać o magazynie energii i fotowoltaice. Proszę o kontakt.',
+  get whatsappHref() {
+    return `https://wa.me/${this.whatsapp}?text=${encodeURIComponent(this.whatsappText)}`
+  },
   area: 'Cała Polska — analiza online lub u Ciebie',
   social: {
     facebook: 'https://www.facebook.com/begoldenfotowoltaika',

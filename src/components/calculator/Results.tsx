@@ -280,7 +280,7 @@ export function Results({ result, input, name, onRecalculate }: Props) {
             <Download className="h-4 w-4" /> {pdfLoading ? 'Generuję PDF…' : 'Pobierz PDF z wyceną'}
           </button>
           <a
-            href={`https://wa.me/${site.whatsapp}`}
+            href={site.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track.ctaClick('results_whatsapp')}

@@ -33,7 +33,7 @@ export function FloatingActions() {
       </AnimatePresence>
 
       <a
-        href={`https://wa.me/${site.whatsapp}`}
+        href={site.whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Napisz na WhatsApp"
