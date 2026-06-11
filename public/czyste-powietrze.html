@@ -259,6 +259,29 @@
       @media (max-width: 560px) { .calc-lead .row { grid-template-columns: 1fr; } }
       .disclaimer { margin-top: 1.5rem; font-size: .8rem; color: rgba(255,255,255,.5); line-height: 1.55; }
       .cred { margin-top: .7rem; font-size: .85rem; color: var(--gold3); line-height: 1.5; }
+      /* Hero — zdanie-korzyść + haczyk z liczbami */
+      .hero-benefit { margin-top: 1.1rem; font-size: 1.12rem; color: var(--text); max-width: 720px; line-height: 1.55; }
+      .hero-benefit b { color: #fff; }
+      .hero-stats { display: flex; flex-wrap: wrap; gap: 1.2rem 2.4rem; margin-top: 1.7rem; }
+      .hero-stats .hs { display: flex; flex-direction: column; }
+      .hero-stats .hs .n { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 4.4vw, 2.2rem); background: linear-gradient(90deg, var(--gold3), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
+      .hero-stats .hs .l { color: var(--muted); font-size: .86rem; margin-top: .4rem; max-width: 170px; }
+      /* Pasek CTA w środku treści */
+      .cta-band { margin: 2rem 0 .4rem; border: 1px solid rgba(225,189,91,.28); border-radius: 22px; background: radial-gradient(120% 120% at 85% 0%, rgba(225,189,91,.15), transparent), var(--ink-800); padding: 1.5rem 1.7rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+      .cta-band .t { flex: 1 1 280px; }
+      .cta-band .t b { color: #fff; font-family: 'Sora', sans-serif; font-size: 1.12rem; display: block; }
+      .cta-band .t span { color: var(--muted); font-size: .92rem; }
+      .cta-band .acts { display: flex; flex-wrap: wrap; gap: .6rem; }
+      @media (max-width: 560px) { .cta-band .acts { width: 100%; } .cta-band .acts .btn { flex: 1; justify-content: center; } }
+      /* Dlaczego ja, a nie konkurencja — USP */
+      .why-grid { display: grid; gap: 1rem; margin-top: 1.6rem; grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 720px) { .why-grid { grid-template-columns: 1fr; } }
+      .why { display: flex; gap: .95rem; align-items: flex-start; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 16px; padding: 1.1rem 1.25rem; }
+      .why .ic { flex: none; font-size: 1.5rem; line-height: 1; }
+      .why h3 { color: #fff; font-family: 'Sora', sans-serif; font-size: 1.02rem; }
+      .why p { color: var(--muted); font-size: .92rem; margin-top: .3rem; }
+      /* Ikony na kartach „Co możesz sfinansować" */
+      .card .ic { font-size: 1.5rem; line-height: 1; margin-bottom: .5rem; }
     </style>
 
     <!-- Dane strukturalne: FAQ (rich results), nawigacja okruszkowa, usługa -->
@@ -359,14 +382,24 @@
         <div class="wrap">
           <span class="eyebrow">Dotacje 2026</span>
           <h1>Program <span class="g">Czyste Powietrze</span> — wymiana starego pieca i termomodernizacja z dofinansowaniem</h1>
+          <p class="hero-benefit">
+            <b>Wymiana pieca bez stresu z formalnościami — od wniosku po wypłatę dotacji.</b>
+            Sprawdź w 20 sekund, czy się łapiesz — oddzwaniam tego samego dnia.
+          </p>
           <p class="lead">
             Czyste Powietrze to rządowy program dla właścicieli i współwłaścicieli domów jednorodzinnych. Dopłaca do
             wymiany starego „kopciucha" na nowoczesne źródło ciepła — <b>pompę ciepła, piec na pellet lub piec
             zgazowujący drewno</b> — a także do ocieplenia domu, wymiany okien i drzwi oraz wentylacji. Sprawdzę, czy
             się kwalifikujesz, dobiorę najlepsze rozwiązanie i poprowadzę Cię przez cały wniosek.
           </p>
+          <div class="hero-stats">
+            <div class="hs"><span class="n">do 100%</span><span class="l">kosztów pokrytych z dotacji</span></div>
+            <div class="hs"><span class="n">20 sek</span><span class="l">i znasz wstępny wynik</span></div>
+            <div class="hs"><span class="n">5 lat</span><span class="l">doświadczenia w branży OZE</span></div>
+          </div>
           <div class="cta-row">
             <a class="btn btn-primary" href="#kwalifikacja">Sprawdź, czy się kwalifikujesz</a>
+            <a class="btn wa" href="https://wa.me/48512491787" target="_blank" rel="noopener noreferrer">Napisz na WhatsApp</a>
             <a class="btn btn-ghost" href="tel:+48512491787">Zadzwoń teraz</a>
           </div>
           <div class="trust">
@@ -479,7 +512,7 @@
                 <span>Wyrażam zgodę na kontakt telefoniczny i przetwarzanie moich danych w celu przygotowania oferty, zgodnie z <a href="polityka-prywatnosci.html">polityką prywatności</a>. *</span>
               </label>
               <div class="err" id="formErr"></div>
-              <button type="submit" class="btn btn-primary" id="submitBtn">Oddzwońcie do mnie</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn">Oddzwońcie do mnie — policzcie moją dotację</button>
               <p class="formnote">🔒 Dane bezpieczne, zgodnie z RODO · oddzwaniam zwykle tego samego dnia</p>
             </form>
 
@@ -496,12 +529,12 @@
           <h2 id="finansowanie">Co możesz sfinansować</h2>
           <p class="sub">Zakres dofinansowania zależy od wybranej ścieżki i poziomu dotacji.</p>
           <div class="grid grid-3">
-            <div class="card"><h3>Wymiana źródła ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesne ogrzewanie: pompę ciepła, piec na pellet lub piec zgazowujący drewno.</p></div>
-            <div class="card"><h3>Ocieplenie domu</h3><p>Docieplenie ścian, dachu, stropów i podłóg — niższe zużycie energii na ogrzewanie.</p></div>
-            <div class="card"><h3>Okna i drzwi</h3><p>Wymiana stolarki okiennej i drzwiowej na energooszczędną.</p></div>
-            <div class="card"><h3>Wentylacja z rekuperacją</h3><p>Odzysk ciepła z powietrza — komfort i dodatkowe oszczędności.</p></div>
-            <div class="card"><h3>Instalacja c.o. i c.w.u.</h3><p>Modernizacja instalacji grzewczej i ciepłej wody użytkowej.</p></div>
-            <div class="card"><h3>Audyt energetyczny</h3><p>W wybranych ścieżkach dofinansowany audyt, który wskazuje optymalny zakres prac.</p></div>
+            <div class="card"><div class="ic">🔥</div><h3>Wymiana źródła ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesne ogrzewanie: pompę ciepła, piec na pellet lub piec zgazowujący drewno.</p></div>
+            <div class="card"><div class="ic">🧱</div><h3>Ocieplenie domu</h3><p>Docieplenie ścian, dachu, stropów i podłóg — niższe zużycie energii na ogrzewanie.</p></div>
+            <div class="card"><div class="ic">🪟</div><h3>Okna i drzwi</h3><p>Wymiana stolarki okiennej i drzwiowej na energooszczędną.</p></div>
+            <div class="card"><div class="ic">💨</div><h3>Wentylacja z rekuperacją</h3><p>Odzysk ciepła z powietrza — komfort i dodatkowe oszczędności.</p></div>
+            <div class="card"><div class="ic">🔧</div><h3>Instalacja c.o. i c.w.u.</h3><p>Modernizacja instalacji grzewczej i ciepłej wody użytkowej.</p></div>
+            <div class="card"><div class="ic">📋</div><h3>Audyt energetyczny</h3><p>W wybranych ścieżkach dofinansowany audyt, który wskazuje optymalny zakres prac.</p></div>
           </div>
         </div>
       </section>
@@ -545,6 +578,17 @@
           <div class="note">
             💬 Nie wiesz, co wybrać? To naturalne — na bezpłatnej analizie porównam koszty i dobiorę rozwiązanie pod
             Twój dom. Często najlepszy efekt daje połączenie nowego źródła ciepła z fotowoltaiką i magazynem energii.
+          </div>
+
+          <div class="cta-band">
+            <div class="t">
+              <b>Nie zgaduj — policzę Twój poziom dotacji za darmo</b>
+              <span>Zostaw numer albo napisz na WhatsApp. Oddzwaniam tego samego dnia, bez zobowiązań.</span>
+            </div>
+            <div class="acts">
+              <a class="btn btn-primary" href="#kwalifikacja">Sprawdź dotację</a>
+              <a class="btn wa" href="https://wa.me/48512491787" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </div>
           </div>
         </div>
       </section>
@@ -679,14 +723,55 @@
             <img src="kamil-bronisz.jpg" alt="Kamil Bronisz — konsultant energetyczny" loading="lazy" />
             <div>
               <h3>Kamil Bronisz</h3>
-              <div class="rolelab">Konsultant energetyczny</div>
+              <div class="rolelab">Konsultant energetyczny · 5 lat w branży OZE</div>
               <p>
-                Pomagam właścicielom domów na terenie <b>całego województwa lubelskiego</b> (nie tylko w Lublinie)
-                przejść przez Czyste Powietrze i powiązane dotacje — od doboru źródła ciepła, przez wniosek, po
-                rozliczenie. Działam doradczo: tłumaczę opcje prostym językiem i dobieram rozwiązanie, które
-                najszybciej obniży rachunki.
+                Od <b>5 lat</b> doradzam właścicielom domów w fotowoltaice, magazynach energii i wymianie źródła
+                ciepła — przeprowadziłem przez ten proces dziesiątki rodzin na terenie <b>całego województwa
+                lubelskiego</b>. Wiem, gdzie wnioski się „sypią" i jak tego uniknąć.
+              </p>
+              <p>
+                Prowadzę Cię przez Czyste Powietrze i powiązane dotacje od A do Z — od doboru źródła ciepła, przez
+                wniosek, po wypłatę. Działam doradczo: tłumaczę opcje prostym językiem i dobieram rozwiązanie, które
+                najszybciej obniży Twoje rachunki — bez sprzedażowej presji.
               </p>
               <span class="proof">📍 Realizacje OZE — całe województwo lubelskie</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <h2>Dlaczego ja, a nie pierwszy lepszy instalator</h2>
+          <p class="sub">Większość firm sprzeda Ci to, co akurat ma w ofercie. Ja pracuję inaczej.</p>
+          <div class="why-grid">
+            <div class="why">
+              <span class="ic">🎯</span>
+              <div>
+                <h3>Nie jestem instalatorem jednej marki</h3>
+                <p>Dobieram źródło ciepła i sprzęt <b>niezależnie</b> — pod Twój dom i budżet, a nie pod magazyn jednego producenta.</p>
+              </div>
+            </div>
+            <div class="why">
+              <span class="ic">🤝</span>
+              <div>
+                <h3>Prowadzę od wniosku po wypłatę</h3>
+                <p>Nie znikam po podpisie. Zostaję z Tobą do <b>rozliczenia i wypłaty dotacji</b> — pilnuję terminów i statusu wniosku.</p>
+              </div>
+            </div>
+            <div class="why">
+              <span class="ic">📋</span>
+              <div>
+                <h3>Formalności biorę na siebie</h3>
+                <p>Wniosek, dokumenty, kontakt z programem — kompletuję i prowadzę to za Ciebie, żeby nic się nie „posypało".</p>
+              </div>
+            </div>
+            <div class="why">
+              <span class="ic">⚡</span>
+              <div>
+                <h3>Łączę dotacje w jedną całość</h3>
+                <p>Planuję Czyste Powietrze razem z <b>fotowoltaiką i magazynem energii</b> — tak, by maksymalnie obniżyć rachunki.</p>
+              </div>
             </div>
           </div>
         </div>
