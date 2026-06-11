@@ -242,6 +242,7 @@
       .ccard .ic { font-size: 1.6rem; }
       .ccard h3 { color: #fff; font-family: 'Sora', sans-serif; font-size: 1.02rem; margin-top: .4rem; }
       .ccard .cost { color: var(--muted); font-size: .88rem; margin-top: .5rem; }
+      .ccard .cost.small { font-size: .78rem; margin-top: .2rem; color: rgba(255,255,255,.5); }
       .ccard .save { font-family: 'Sora', sans-serif; font-weight: 800; color: #fff; font-size: 1.35rem; margin-top: .3rem; }
       .ccard .save span { color: var(--gold3); font-size: .9rem; }
       .ccard .badge-best { position: absolute; top: -11px; right: 12px; background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
@@ -594,19 +595,25 @@
               <h3 style="font-family: 'Sora', sans-serif; color: #fff; font-size: 1.15rem; margin-top: .2rem">Twój orientacyjny roczny koszt i oszczędność</h3>
               <div class="calc-cards" id="calcCards"></div>
               <div class="chart" id="calcChart"></div>
-              <div class="note">💰 W programie <b>Czyste Powietrze</b> możesz odzyskać znaczną część kosztów inwestycji — od <b>40%</b> do nawet <b>100%</b> w zależności od dochodu i zakresu prac. Dokładną kwotę policzymy na bezpłatnej analizie.</div>
+              <div class="note">💰 Pokazane kwoty dotyczą <b>kosztów utrzymania</b> (eksploatacji). Łączna oszczędność zależy dodatkowo od <b>wysokości dotacji</b> z programu Czyste Powietrze — od <b>40%</b> do nawet <b>100%</b> kosztów inwestycji. Dokładną kwotę policzymy na bezpłatnej analizie.</div>
 
               <div class="calc-lead">
                 <p style="color: #fff; font-weight: 600; margin-bottom: .2rem">Chcesz dokładne wyliczenia pod swój dom?</p>
                 <p class="sub" style="margin: .2rem 0 1rem">Zostaw telefon lub e-mail — przygotuję szczegółową, bezpłatną analizę.</p>
-                <div class="row">
-                  <div>
-                    <label class="fl" for="cl-phone">Telefon</label>
-                    <input class="inp" id="cl-phone" type="tel" placeholder="600 100 200" autocomplete="tel" />
+                <div class="lead-fields">
+                  <div style="margin-bottom: .9rem">
+                    <label class="fl" for="cl-name">Imię *</label>
+                    <input class="inp" id="cl-name" type="text" placeholder="Jan" autocomplete="given-name" />
                   </div>
-                  <div>
-                    <label class="fl" for="cl-email">E-mail</label>
-                    <input class="inp" id="cl-email" type="email" placeholder="jan@example.com" autocomplete="email" />
+                  <div class="row">
+                    <div>
+                      <label class="fl" for="cl-phone">Telefon *</label>
+                      <input class="inp" id="cl-phone" type="tel" placeholder="600 100 200" autocomplete="tel" />
+                    </div>
+                    <div>
+                      <label class="fl" for="cl-email">E-mail *</label>
+                      <input class="inp" id="cl-email" type="email" placeholder="jan@example.com" autocomplete="email" />
+                    </div>
                   </div>
                 </div>
                 <input type="text" id="cl-botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -988,13 +995,15 @@
         // efektywny koszt 1 kWh ciepła użytkowego (zł) dla OBECNEGO źródła:
         var CUR = { kopciuch: 0.38, gaz: 0.50, olej: 0.47, prad: 1.06, drewno: 0.27, inne: 0.45 };
         var EFF_PELLET = 0.88, EFF_ZGAZ = 0.85;
+        // roczny koszt serwisu/utrzymania nowego źródła (zł/rok)
+        var MAINT = { pompa: 350, pellet: 600, zgaz: 300 };
 
         function fmt(n) { return Math.round(n).toLocaleString('pl-PL'); }
         var calcDone = false, lastCalc = null;
 
         var calcForm = document.getElementById('calcForm');
-        if (calcForm) calcForm.addEventListener('submit', function (e) {
-          e.preventDefault();
+
+        function runCalc(scroll) {
           var err = document.getElementById('calcErr');
           err.classList.remove('show');
           var area = parseFloat(document.getElementById('c-area').value);
@@ -1002,7 +1011,7 @@
           var cost = parseFloat(document.getElementById('c-cost').value);
           var people = parseInt(document.getElementById('c-people').value, 10);
           var pv = document.getElementById('c-pv').checked;
-          function fail(m) { err.textContent = m; err.classList.add('show'); }
+          function fail(m) { err.textContent = m; err.classList.add('show'); return false; }
           if (!(area > 0)) return fail('Podaj powierzchnię domu.');
           if (!src) return fail('Wybierz obecne źródło ogrzewania.');
           if (!(cost > 0)) return fail('Podaj przybliżony roczny koszt ogrzewania.');
@@ -1013,33 +1022,33 @@
           var qArea = area * 100 + people * 900; // ogrzewanie + ciepła woda
           var Q = Math.min(Math.max(qCost, qArea * 0.6), qArea * 1.6);
 
-          var elec = pv ? PV_ELEC : PRICE_ELEC;
-          var costPompa = Q * (elec / SCOP);
-          var costPellet = Q * ((PRICE_PELLET_T / KWH_PELLET_T) / EFF_PELLET);
-          var costZgaz = Q * ((PRICE_WOOD_M3 / KWH_WOOD_M3) / EFF_ZGAZ);
+          var elec = pv ? PV_ELEC : PRICE_ELEC; // PV = tańszy prąd dla pompy
+          var fuelPompa = Q * (elec / SCOP);
+          var fuelPellet = Q * ((PRICE_PELLET_T / KWH_PELLET_T) / EFF_PELLET);
+          var fuelZgaz = Q * ((PRICE_WOOD_M3 / KWH_WOOD_M3) / EFF_ZGAZ);
 
           var items = [
-            { key: 'pompa', ic: '⚡', name: 'Pompa ciepła', cost: costPompa },
-            { key: 'pellet', ic: '🔥', name: 'Kocioł na pellet', cost: costPellet },
-            { key: 'zgaz', ic: '🪵', name: 'Kocioł zgazowujący drewno', cost: costZgaz },
+            { key: 'pompa', ic: '⚡', name: 'Pompa ciepła', fuel: fuelPompa, maint: MAINT.pompa },
+            { key: 'pellet', ic: '🔥', name: 'Kocioł na pellet', fuel: fuelPellet, maint: MAINT.pellet },
+            { key: 'zgaz', ic: '🪵', name: 'Kocioł zgazowujący drewno', fuel: fuelZgaz, maint: MAINT.zgaz },
           ];
-          items.forEach(function (it) { it.save = cost - it.cost; it.pct = Math.round(it.save / cost * 100); });
+          items.forEach(function (it) { it.total = it.fuel + it.maint; it.save = cost - it.total; });
           var best = items.reduce(function (a, b) { return b.save > a.save ? b : a; });
 
           document.getElementById('calcCards').innerHTML = items.map(function (it) {
             var isBest = it.key === best.key;
             return '<div class="ccard' + (isBest ? ' best' : '') + '">' + (isBest ? '<span class="badge-best">Najwięcej oszczędności</span>' : '')
               + '<div class="ic">' + it.ic + '</div><h3>' + it.name + '</h3>'
-              + '<div class="cost">Roczny koszt: <b>~' + fmt(it.cost) + ' zł</b></div>'
-              + '<div class="save">~' + fmt(Math.max(it.save, 0)) + ' zł <span>/rok</span></div>'
-              + '<div class="cost">oszczędność ' + (it.pct > 0 ? it.pct : 0) + '% rocznie</div></div>';
+              + '<div class="cost">Roczny koszt utrzymania: <b>~' + fmt(it.total) + ' zł</b></div>'
+              + '<div class="cost small">paliwo ~' + fmt(it.fuel) + ' zł + serwis ~' + fmt(it.maint) + ' zł / rok</div>'
+              + '<div class="save">~' + fmt(Math.max(it.save, 0)) + ' zł <span>/rok mniej</span></div></div>';
           }).join('');
 
           var bars = [
             { lab: 'Teraz', cost: cost, cls: 'cur' },
-            { lab: 'Pompa', cost: costPompa, cls: best.key === 'pompa' ? 'best' : '' },
-            { lab: 'Pellet', cost: costPellet, cls: best.key === 'pellet' ? 'best' : '' },
-            { lab: 'Zgazow.', cost: costZgaz, cls: best.key === 'zgaz' ? 'best' : '' },
+            { lab: 'Pompa', cost: items[0].total, cls: best.key === 'pompa' ? 'best' : '' },
+            { lab: 'Pellet', cost: items[1].total, cls: best.key === 'pellet' ? 'best' : '' },
+            { lab: 'Zgazow.', cost: items[2].total, cls: best.key === 'zgaz' ? 'best' : '' },
           ];
           var maxc = Math.max.apply(null, bars.map(function (b) { return b.cost; }));
           document.getElementById('calcChart').innerHTML = bars.map(function (b) {
@@ -1050,44 +1059,54 @@
 
           var results = document.getElementById('calcResults');
           results.classList.add('show');
-          results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (scroll) results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
           lastCalc = { area: area, zrodlo: src, koszt_obecny: cost, mieszkancy: people, pv: pv ? 'tak' : 'nie',
-            koszt_pompa: Math.round(costPompa), koszt_pellet: Math.round(costPellet), koszt_zgaz: Math.round(costZgaz),
+            koszt_pompa: Math.round(items[0].total), koszt_pellet: Math.round(items[1].total), koszt_zgaz: Math.round(items[2].total),
             najlepsze: best.name, oszczednosc: Math.round(Math.max(best.save, 0)) };
           if (!calcDone) { calcDone = true; track('calc_complete', Object.assign({ source: 'czyste-powietrze' }, lastCalc)); }
+          return true;
+        }
+
+        if (calcForm) calcForm.addEventListener('submit', function (e) { e.preventDefault(); runCalc(true); });
+        // Auto-przeliczenie po zmianie opcji „mam fotowoltaikę" (gdy wyniki już widoczne)
+        var cpv = document.getElementById('c-pv');
+        if (cpv) cpv.addEventListener('change', function () {
+          if (document.getElementById('calcResults').classList.contains('show')) runCalc(false);
         });
 
-        // Lead z kalkulatora (telefon lub e-mail)
+        // Lead z kalkulatora (imię + telefon + e-mail — wszystkie wymagane)
         var calcLeadBtn = document.getElementById('calcLeadBtn');
         if (calcLeadBtn) calcLeadBtn.addEventListener('click', async function () {
           var err = document.getElementById('calcLeadErr');
           err.classList.remove('show');
+          var name = document.getElementById('cl-name').value.trim();
           var phone = document.getElementById('cl-phone').value.trim();
           var email = document.getElementById('cl-email').value.trim();
           var consent = document.getElementById('cl-consent').checked;
           if (document.getElementById('cl-botcheck').value) return;
           function fail(m) { err.textContent = m; err.classList.add('show'); }
-          if (phone.replace(/\D/g, '').length < 9 && !/.+@.+\..+/.test(email)) return fail('Podaj telefon lub e-mail.');
+          if (!name) return fail('Podaj imię.');
+          if (phone.replace(/\D/g, '').length < 9) return fail('Podaj poprawny numer telefonu.');
+          if (!/.+@.+\..+/.test(email)) return fail('Podaj poprawny adres e-mail.');
           if (!consent) return fail('Zaznacz zgodę, żebym mógł się odezwać.');
           var btn = calcLeadBtn, orig = btn.textContent;
           btn.disabled = true; btn.textContent = 'Wysyłam…';
           var payload = Object.assign({
             access_key: WEB3FORMS_KEY,
-            subject: '📊 Lead KALKULATOR (Czyste Powietrze): ' + (phone || email),
+            subject: '📊 Lead KALKULATOR (Czyste Powietrze): ' + name + ' — ' + phone,
             from_name: 'Strona OZE — kalkulator Czyste Powietrze',
-            phone: phone, email: email, consent: 'tak',
+            name: name, phone: phone, email: email, replyto: email, consent: 'tak',
             source: 'kalkulator-czyste-powietrze',
             pageUrl: location.href, submittedAt: new Date().toISOString(),
           }, lastCalc || {});
-          if (email) payload.replyto = email;
           try {
             var r = await fetch('https://api.web3forms.com/submit', {
               method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
               body: JSON.stringify(payload),
             });
             if (!r.ok) throw new Error('http');
-            document.querySelector('.calc-lead .row').style.display = 'none';
+            document.querySelector('.calc-lead .lead-fields').style.display = 'none';
             document.querySelector('.calc-lead .consent').style.display = 'none';
             btn.style.display = 'none';
             document.getElementById('calcThanks').classList.add('show');
