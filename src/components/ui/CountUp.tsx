@@ -65,17 +65,32 @@ export function CountUp({
     return () => cancelAnimationFrame(raf)
   }, [inView, to, duration])
 
-  const formatted = new Intl.NumberFormat('pl-PL', {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-    useGrouping: separator,
-  }).format(value)
+  const fmt = (n: number) =>
+    new Intl.NumberFormat('pl-PL', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+      useGrouping: separator,
+    }).format(n)
 
+  const formatted = fmt(value)
+  const finalText = `${prefix}${fmt(to)}${suffix}`
+
+  // „Duch" rezerwuje docelową szerokość, więc liczba animuje się w miejscu —
+  // bez przeskakiwania układu (layout shift) podczas zliczania.
   return (
-    <span ref={ref} className={className}>
-      {prefix}
-      {formatted}
-      {suffix}
+    <span
+      ref={ref}
+      className={className}
+      style={{ display: 'inline-grid', fontVariantNumeric: 'tabular-nums' }}
+    >
+      <span aria-hidden="true" style={{ visibility: 'hidden', gridArea: '1 / 1' }}>
+        {finalText}
+      </span>
+      <span style={{ gridArea: '1 / 1' }}>
+        {prefix}
+        {formatted}
+        {suffix}
+      </span>
     </span>
   )
 }
