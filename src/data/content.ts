@@ -59,20 +59,19 @@ export const site = {
 }
 
 export const nav = [
-  { label: 'Dlaczego warto', href: '#dlaczego-warto' },
   { label: 'Magazyny', href: '#magazyny-energii' },
-  { label: 'Współpraca', href: '#wspolpraca' },
-  { label: 'O mnie', href: '#o-mnie' },
   { label: 'Kalkulator', href: '#kalkulator' },
+  { label: 'O mnie', href: '#o-mnie' },
   { label: 'Opinie', href: '#opinie' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Kontakt', href: '#kontakt' },
 ]
 
 export const hero = {
   badge: 'Inteligentne magazyny energii • HEMS • Taryfy dynamiczne',
-  title: 'Obniż rachunki za energię nawet o',
-  titleAccent: '90%',
-  titleEnd: 'i zyskaj niezależność energetyczną',
+  title: 'Konsultant, nie sprzedawca.',
+  titleAccent: 'Najpierw liczby i analiza',
+  titleEnd: '— decyzja zawsze Twoja.',
   subtitle:
     'Projektuję inteligentne systemy fotowoltaiczne z magazynami energii i zarządzaniem energią całego domu — dla domów i firm. Mniej rachunków, więcej kontroli.',
   primaryCta: 'Umów bezpłatną analizę',
@@ -178,7 +177,7 @@ export const about = {
   photo: kamilPhoto,
   lead: 'Pomagam właścicielom domów i firmom realnie obniżyć rachunki i uniezależnić się energetycznie — w oparciu o twarde liczby, nie obietnice.',
   paragraphs: [
-    'Od kilku lat doradzam w branży OZE i specjalizuję się w tym, co w 2026 roku decyduje o opłacalności: inteligentnych magazynach energii ze sztuczną inteligencją oraz nowoczesnym zarządzaniu energią całego domu (HEMS).',
+    'Od 5 lat doradzam w branży OZE i specjalizuję się w tym, co w 2026 roku decyduje o opłacalności: inteligentnych magazynach energii ze sztuczną inteligencją oraz nowoczesnym zarządzaniu energią całego domu (HEMS).',
     'Zamiast „sprzedawać instalację", najpierw analizuję Twoją sytuację i dobieram system, który naprawdę się opłaca — bez przewymiarowania. Pracuję w modelu konsultingowym: najpierw bezpłatna analiza i konkretne wyliczenia, a decyzja zawsze należy do Ciebie.',
     'Prowadzę Cię przez całość — od doboru rozwiązania i dotacji, przez montaż „pod klucz", po opiekę i optymalizację taryf dynamicznych po uruchomieniu. A dom z fotowoltaiką i magazynem jest dodatkowo więcej wart na rynku.',
   ],
