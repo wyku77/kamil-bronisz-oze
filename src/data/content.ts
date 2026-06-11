@@ -69,9 +69,9 @@ export const nav = [
 
 export const hero = {
   badge: 'Inteligentne magazyny energii • HEMS • Taryfy dynamiczne',
-  title: 'Konsultant, nie sprzedawca.',
-  titleAccent: 'Najpierw liczby i analiza',
-  titleEnd: '— decyzja zawsze Twoja.',
+  title: 'Przestań oddawać energię do sieci za bezcen.',
+  titleAccent: 'Zacznij ją magazynować.',
+  titleEnd: '',
   subtitle:
     'Projektuję inteligentne systemy fotowoltaiczne z magazynami energii i zarządzaniem energią całego domu — dla domów i firm. Mniej rachunków, więcej kontroli.',
   primaryCta: 'Umów bezpłatną analizę',
