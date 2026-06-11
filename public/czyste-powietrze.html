@@ -227,6 +227,37 @@
       .mobile-menu .mlinks a.gold { display: flex; align-items: center; gap: .5rem; border: 1px solid rgba(225,189,91,.3); background: rgba(225,189,91,.1); color: var(--gold3); font-weight: 600; margin-bottom: .4rem; }
       .mobile-menu .mfoot { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: .8rem; }
       .mobile-menu .mfoot a.phone { display: flex; align-items: center; gap: .5rem; color: #fff; font-weight: 600; text-decoration: none; }
+      /* Kalkulator oszczędności */
+      .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; margin-top: 1.4rem; }
+      @media (max-width: 560px) { .calc-grid { grid-template-columns: 1fr; } }
+      .calc-grid .full { grid-column: 1 / -1; }
+      .calc-check { display: flex; align-items: flex-start; gap: .6rem; color: var(--text); font-size: .9rem; line-height: 1.4; }
+      .calc-check input { width: 18px; height: 18px; margin-top: 1px; flex: none; }
+      .calc-results { display: none; margin-top: 1.6rem; }
+      .calc-results.show { display: block; animation: fade .3s ease; }
+      .calc-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.2rem; }
+      @media (max-width: 640px) { .calc-cards { grid-template-columns: 1fr; } }
+      .ccard { position: relative; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 18px; padding: 1.2rem 1.3rem; }
+      .ccard.best { border-color: rgba(225,189,91,.6); background: radial-gradient(120% 120% at 50% 0%, rgba(225,189,91,.12), transparent), rgba(255,255,255,.03); }
+      .ccard .ic { font-size: 1.6rem; }
+      .ccard h3 { color: #fff; font-family: 'Sora', sans-serif; font-size: 1.02rem; margin-top: .4rem; }
+      .ccard .cost { color: var(--muted); font-size: .88rem; margin-top: .5rem; }
+      .ccard .save { font-family: 'Sora', sans-serif; font-weight: 800; color: #fff; font-size: 1.35rem; margin-top: .3rem; }
+      .ccard .save span { color: var(--gold3); font-size: .9rem; }
+      .ccard .badge-best { position: absolute; top: -11px; right: 12px; background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+      .chart { margin-top: 1.6rem; display: flex; flex-direction: column; gap: .65rem; }
+      .chart .row { display: grid; grid-template-columns: 88px 1fr auto; align-items: center; gap: .7rem; font-size: .88rem; }
+      .chart .lab { color: var(--text); }
+      .chart .bar { height: 22px; border-radius: 6px; background: rgba(255,255,255,.07); overflow: hidden; }
+      .chart .bar > span { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, #5180bf, #3461a0); min-width: 2px; }
+      .chart .row.cur .bar > span { background: linear-gradient(90deg, #9a6c18, #bb8718); }
+      .chart .row.best .bar > span { background: linear-gradient(90deg, var(--gold3), #d4a017); }
+      .chart .val { color: #fff; font-weight: 600; white-space: nowrap; }
+      .calc-lead { margin-top: 1.6rem; border: 1px solid rgba(225,189,91,.28); background: rgba(225,189,91,.06); border-radius: 16px; padding: 1.2rem 1.3rem; }
+      .calc-lead .row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+      @media (max-width: 560px) { .calc-lead .row { grid-template-columns: 1fr; } }
+      .disclaimer { margin-top: 1.5rem; font-size: .8rem; color: rgba(255,255,255,.5); line-height: 1.55; }
+      .cred { margin-top: .7rem; font-size: .85rem; color: var(--gold3); line-height: 1.5; }
     </style>
 
     <!-- Dane strukturalne: FAQ (rich results), nawigacja okruszkowa, usługa -->
@@ -521,32 +552,72 @@
       <section class="block" id="oszczednosci">
         <div class="wrap">
           <div class="qual">
-            <span class="eyebrow">Szybki szacunek</span>
+            <span class="eyebrow">Kalkulator oszczędności</span>
             <h2 style="margin-top: .9rem">Ile możesz zaoszczędzić na ogrzewaniu?</h2>
-            <p class="sub">Orientacyjna roczna oszczędność po wymianie starego źródła na pompę ciepła. To tylko wstępny szacunek — dokładną kalkulację pod Twój dom zrobię na bezpłatnej analizie.</p>
-            <div class="steps">
-              <div class="q">
-                <div class="qlabel"><span class="num">A</span> Czym ogrzewasz teraz?</div>
-                <div class="copts" data-c="src">
-                  <button type="button" class="opt" data-v="wegiel">Węgiel</button>
-                  <button type="button" class="opt" data-v="gaz">Gaz</button>
-                  <button type="button" class="opt" data-v="prad">Prąd</button>
-                  <button type="button" class="opt" data-v="olej">Olej</button>
+            <p class="sub">Porównaj orientacyjny roczny koszt ogrzewania po wymianie starego źródła na <b>pompę ciepła</b>, <b>kocioł na pellet</b> lub <b>kocioł zgazowujący drewno</b>. Wyliczenia opierają się na średnich cenach energii i paliw w Polsce.</p>
+
+            <form id="calcForm" novalidate>
+              <div class="calc-grid">
+                <div>
+                  <label class="fl" for="c-area">Powierzchnia domu (m²) *</label>
+                  <input class="inp" id="c-area" type="number" inputmode="numeric" min="20" max="1000" placeholder="np. 140" />
                 </div>
-              </div>
-              <div class="q">
-                <div class="qlabel"><span class="num">B</span> Wielkość domu</div>
-                <div class="copts" data-c="size">
-                  <button type="button" class="opt" data-v="s">do 100 m²</button>
-                  <button type="button" class="opt" data-v="m">100–150 m²</button>
-                  <button type="button" class="opt" data-v="l">powyżej 150 m²</button>
+                <div>
+                  <label class="fl" for="c-src">Obecne źródło ogrzewania *</label>
+                  <select class="inp" id="c-src">
+                    <option value="">Wybierz…</option>
+                    <option value="kopciuch">Stary piec węglowy („kopciuch")</option>
+                    <option value="gaz">Kocioł gazowy</option>
+                    <option value="olej">Kocioł olejowy</option>
+                    <option value="prad">Ogrzewanie elektryczne</option>
+                    <option value="drewno">Stary kocioł na drewno</option>
+                    <option value="inne">Inne</option>
+                  </select>
                 </div>
+                <div>
+                  <label class="fl" for="c-cost">Roczny koszt ogrzewania (zł) *</label>
+                  <input class="inp" id="c-cost" type="number" inputmode="numeric" min="500" max="80000" placeholder="np. 6000" />
+                </div>
+                <div>
+                  <label class="fl" for="c-people">Liczba mieszkańców *</label>
+                  <input class="inp" id="c-people" type="number" inputmode="numeric" min="1" max="15" placeholder="np. 4" />
+                </div>
+                <label class="calc-check full">
+                  <input type="checkbox" id="c-pv" /> Mam już fotowoltaikę (lub ją planuję) — uwzględnij tańszy prąd dla pompy ciepła
+                </label>
               </div>
-            </div>
-            <div class="result" id="calcResult" aria-live="polite"></div>
-            <div class="cta-row" id="calcCta" style="display: none; margin-top: 1.3rem">
-              <a class="btn btn-primary" href="#kwalifikacja">Policz dokładnie — umów analizę</a>
-              <a class="btn btn-ghost" href="tel:+48512491787">📞 Zadzwoń: 512 491 787</a>
+              <div class="err" id="calcErr"></div>
+              <button type="submit" class="btn btn-primary" style="margin-top: 1.1rem; width: 100%; justify-content: center">Oblicz oszczędności</button>
+            </form>
+
+            <div class="calc-results" id="calcResults" aria-live="polite">
+              <h3 style="font-family: 'Sora', sans-serif; color: #fff; font-size: 1.15rem; margin-top: .2rem">Twój orientacyjny roczny koszt i oszczędność</h3>
+              <div class="calc-cards" id="calcCards"></div>
+              <div class="chart" id="calcChart"></div>
+              <div class="note">💰 W programie <b>Czyste Powietrze</b> możesz odzyskać znaczną część kosztów inwestycji — od <b>40%</b> do nawet <b>100%</b> w zależności od dochodu i zakresu prac. Dokładną kwotę policzymy na bezpłatnej analizie.</div>
+
+              <div class="calc-lead">
+                <p style="color: #fff; font-weight: 600; margin-bottom: .2rem">Chcesz dokładne wyliczenia pod swój dom?</p>
+                <p class="sub" style="margin: .2rem 0 1rem">Zostaw telefon lub e-mail — przygotuję szczegółową, bezpłatną analizę.</p>
+                <div class="row">
+                  <div>
+                    <label class="fl" for="cl-phone">Telefon</label>
+                    <input class="inp" id="cl-phone" type="tel" placeholder="600 100 200" autocomplete="tel" />
+                  </div>
+                  <div>
+                    <label class="fl" for="cl-email">E-mail</label>
+                    <input class="inp" id="cl-email" type="email" placeholder="jan@example.com" autocomplete="email" />
+                  </div>
+                </div>
+                <input type="text" id="cl-botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                <label class="consent"><input type="checkbox" id="cl-consent" /><span>Wyrażam zgodę na kontakt i przetwarzanie danych w celu przygotowania analizy, zgodnie z <a href="polityka-prywatnosci.html">polityką prywatności</a>. *</span></label>
+                <div class="err" id="calcLeadErr"></div>
+                <button type="button" class="btn btn-primary" id="calcLeadBtn" style="width: 100%; justify-content: center; margin-top: .9rem">Umów bezpłatną analizę i poznaj dokładne wyliczenia</button>
+                <div class="thanks" id="calcThanks" style="padding: 1rem .5rem"><p class="big">Dziękuję! 📞</p><p class="sub" style="margin: .5rem auto 0">Odezwę się i przygotuję dokładne wyliczenia dla Twojego domu.</p></div>
+              </div>
+
+              <p class="disclaimer">Przedstawione wartości mają charakter wyłącznie orientacyjny i zostały obliczone na podstawie średnich cen energii i paliw. Dokładne zapotrzebowanie budynku, koszty eksploatacji oraz wysokość możliwych oszczędności określamy podczas bezpłatnej analizy i spotkania z doradcą.</p>
+              <p class="cred">Każdy dom jest inny, dlatego ostateczne wyliczenia przygotowujemy indywidualnie po analizie budynku, obecnego systemu ogrzewania oraz dostępnych programów dofinansowania.</p>
             </div>
           </div>
         </div>
@@ -905,41 +976,127 @@
           }
         });
 
-        // === Mini-kalkulator oszczędności na ogrzewaniu ===
-        var calc = { src: null, size: null };
-        var COST = {
-          wegiel: { s: 3500, m: 5500, l: 8000 },
-          gaz: { s: 4500, m: 7000, l: 10000 },
-          prad: { s: 6500, m: 9500, l: 13500 },
-          olej: { s: 5500, m: 8500, l: 12500 },
-        };
-        var calcDone = false;
-        function fmt(n) { return n.toLocaleString('pl-PL'); }
-        document.querySelectorAll('.copts').forEach(function (group) {
-          group.addEventListener('click', function (e) {
-            var btn = e.target.closest('.opt');
-            if (!btn) return;
-            var c = group.getAttribute('data-c');
-            group.querySelectorAll('.opt').forEach(function (b) { b.classList.remove('sel'); b.setAttribute('aria-pressed', 'false'); });
-            btn.classList.add('sel');
-            btn.setAttribute('aria-pressed', 'true');
-            calc[c] = btn.getAttribute('data-v');
-            renderCalc();
-          });
+        // === Kalkulator oszczędności na ogrzewaniu ===
+        // Ceny paliw/energii — Polska, orientacyjne. ŁATWE DO AKTUALIZACJI:
+        var PRICE_ELEC = 1.05;       // zł/kWh energii elektrycznej (ok. 1,00–1,10)
+        var PRICE_PELLET_T = 1700;   // zł/tonę pelletu A1 (ok. 1600–1800)
+        var PRICE_WOOD_M3 = 325;     // zł/m³ drewna opałowego (ok. 250–400)
+        var KWH_PELLET_T = 4800;     // kWh w tonie pelletu A1
+        var KWH_WOOD_M3 = 2000;      // kWh w m³ sezonowanego drewna
+        var SCOP = 3.5;              // sezonowa sprawność pompy ciepła
+        var PV_ELEC = 0.55;          // efektywna cena prądu przy własnej fotowoltaice
+        // efektywny koszt 1 kWh ciepła użytkowego (zł) dla OBECNEGO źródła:
+        var CUR = { kopciuch: 0.38, gaz: 0.50, olej: 0.47, prad: 1.06, drewno: 0.27, inne: 0.45 };
+        var EFF_PELLET = 0.88, EFF_ZGAZ = 0.85;
+
+        function fmt(n) { return Math.round(n).toLocaleString('pl-PL'); }
+        var calcDone = false, lastCalc = null;
+
+        var calcForm = document.getElementById('calcForm');
+        if (calcForm) calcForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var err = document.getElementById('calcErr');
+          err.classList.remove('show');
+          var area = parseFloat(document.getElementById('c-area').value);
+          var src = document.getElementById('c-src').value;
+          var cost = parseFloat(document.getElementById('c-cost').value);
+          var people = parseInt(document.getElementById('c-people').value, 10);
+          var pv = document.getElementById('c-pv').checked;
+          function fail(m) { err.textContent = m; err.classList.add('show'); }
+          if (!(area > 0)) return fail('Podaj powierzchnię domu.');
+          if (!src) return fail('Wybierz obecne źródło ogrzewania.');
+          if (!(cost > 0)) return fail('Podaj przybliżony roczny koszt ogrzewania.');
+          if (!(people > 0)) return fail('Podaj liczbę mieszkańców.');
+
+          // zapotrzebowanie na ciepło użytkowe (kWh/rok) z aktualnego kosztu, z korektą wg powierzchni i liczby osób
+          var qCost = cost / (CUR[src] || 0.45);
+          var qArea = area * 100 + people * 900; // ogrzewanie + ciepła woda
+          var Q = Math.min(Math.max(qCost, qArea * 0.6), qArea * 1.6);
+
+          var elec = pv ? PV_ELEC : PRICE_ELEC;
+          var costPompa = Q * (elec / SCOP);
+          var costPellet = Q * ((PRICE_PELLET_T / KWH_PELLET_T) / EFF_PELLET);
+          var costZgaz = Q * ((PRICE_WOOD_M3 / KWH_WOOD_M3) / EFF_ZGAZ);
+
+          var items = [
+            { key: 'pompa', ic: '⚡', name: 'Pompa ciepła', cost: costPompa },
+            { key: 'pellet', ic: '🔥', name: 'Kocioł na pellet', cost: costPellet },
+            { key: 'zgaz', ic: '🪵', name: 'Kocioł zgazowujący drewno', cost: costZgaz },
+          ];
+          items.forEach(function (it) { it.save = cost - it.cost; it.pct = Math.round(it.save / cost * 100); });
+          var best = items.reduce(function (a, b) { return b.save > a.save ? b : a; });
+
+          document.getElementById('calcCards').innerHTML = items.map(function (it) {
+            var isBest = it.key === best.key;
+            return '<div class="ccard' + (isBest ? ' best' : '') + '">' + (isBest ? '<span class="badge-best">Najwięcej oszczędności</span>' : '')
+              + '<div class="ic">' + it.ic + '</div><h3>' + it.name + '</h3>'
+              + '<div class="cost">Roczny koszt: <b>~' + fmt(it.cost) + ' zł</b></div>'
+              + '<div class="save">~' + fmt(Math.max(it.save, 0)) + ' zł <span>/rok</span></div>'
+              + '<div class="cost">oszczędność ' + (it.pct > 0 ? it.pct : 0) + '% rocznie</div></div>';
+          }).join('');
+
+          var bars = [
+            { lab: 'Teraz', cost: cost, cls: 'cur' },
+            { lab: 'Pompa', cost: costPompa, cls: best.key === 'pompa' ? 'best' : '' },
+            { lab: 'Pellet', cost: costPellet, cls: best.key === 'pellet' ? 'best' : '' },
+            { lab: 'Zgazow.', cost: costZgaz, cls: best.key === 'zgaz' ? 'best' : '' },
+          ];
+          var maxc = Math.max.apply(null, bars.map(function (b) { return b.cost; }));
+          document.getElementById('calcChart').innerHTML = bars.map(function (b) {
+            return '<div class="row ' + b.cls + '"><span class="lab">' + b.lab + '</span>'
+              + '<span class="bar"><span style="width:' + Math.round(b.cost / maxc * 100) + '%"></span></span>'
+              + '<span class="val">~' + fmt(b.cost) + ' zł</span></div>';
+          }).join('');
+
+          var results = document.getElementById('calcResults');
+          results.classList.add('show');
+          results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+          lastCalc = { area: area, zrodlo: src, koszt_obecny: cost, mieszkancy: people, pv: pv ? 'tak' : 'nie',
+            koszt_pompa: Math.round(costPompa), koszt_pellet: Math.round(costPellet), koszt_zgaz: Math.round(costZgaz),
+            najlepsze: best.name, oszczednosc: Math.round(Math.max(best.save, 0)) };
+          if (!calcDone) { calcDone = true; track('calc_complete', Object.assign({ source: 'czyste-powietrze' }, lastCalc)); }
         });
-        function renderCalc() {
-          if (!calc.src || !calc.size) return;
-          var cost = COST[calc.src][calc.size];
-          var low = Math.round((cost * 0.4) / 100) * 100;
-          var high = Math.round((cost * 0.6) / 100) * 100;
-          var res = document.getElementById('calcResult');
-          res.innerHTML = 'Szacunkowa oszczędność po przejściu na <b>pompę ciepła</b>: '
-            + '<span class="pct">ok. ' + fmt(low) + '–' + fmt(high) + ' zł</span> rocznie.'
-            + '<br><br>To wartość <b>orientacyjna</b> — dokładną kalkulację pod Twój dom i taryfę policzę na bezpłatnej analizie.';
-          res.classList.add('show');
-          document.getElementById('calcCta').style.display = 'flex';
-          if (!calcDone) { calcDone = true; track('calc_complete', { source: 'czyste-powietrze', zrodlo: calc.src, wielkosc: calc.size, oszcz_min: low, oszcz_max: high }); }
-        }
+
+        // Lead z kalkulatora (telefon lub e-mail)
+        var calcLeadBtn = document.getElementById('calcLeadBtn');
+        if (calcLeadBtn) calcLeadBtn.addEventListener('click', async function () {
+          var err = document.getElementById('calcLeadErr');
+          err.classList.remove('show');
+          var phone = document.getElementById('cl-phone').value.trim();
+          var email = document.getElementById('cl-email').value.trim();
+          var consent = document.getElementById('cl-consent').checked;
+          if (document.getElementById('cl-botcheck').value) return;
+          function fail(m) { err.textContent = m; err.classList.add('show'); }
+          if (phone.replace(/\D/g, '').length < 9 && !/.+@.+\..+/.test(email)) return fail('Podaj telefon lub e-mail.');
+          if (!consent) return fail('Zaznacz zgodę, żebym mógł się odezwać.');
+          var btn = calcLeadBtn, orig = btn.textContent;
+          btn.disabled = true; btn.textContent = 'Wysyłam…';
+          var payload = Object.assign({
+            access_key: WEB3FORMS_KEY,
+            subject: '📊 Lead KALKULATOR (Czyste Powietrze): ' + (phone || email),
+            from_name: 'Strona OZE — kalkulator Czyste Powietrze',
+            phone: phone, email: email, consent: 'tak',
+            source: 'kalkulator-czyste-powietrze',
+            pageUrl: location.href, submittedAt: new Date().toISOString(),
+          }, lastCalc || {});
+          if (email) payload.replyto = email;
+          try {
+            var r = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            if (!r.ok) throw new Error('http');
+            document.querySelector('.calc-lead .row').style.display = 'none';
+            document.querySelector('.calc-lead .consent').style.display = 'none';
+            btn.style.display = 'none';
+            document.getElementById('calcThanks').classList.add('show');
+            track('lead_submit', { source: 'kalkulator-czyste-powietrze', najlepsze: lastCalc ? lastCalc.najlepsze : '' });
+          } catch (_) {
+            fail('Coś poszło nie tak z wysyłką. Zadzwoń: 512 491 787 — odbiorę.');
+            btn.disabled = false; btn.textContent = orig;
+          }
+        });
 
         // === Galeria realizacji (przed–po) ===
         // Gdy będą zdjęcia, dodaj wpisy (pliki w public/realizacje-czyste-powietrze/), np.:
