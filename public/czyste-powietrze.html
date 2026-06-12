@@ -283,6 +283,17 @@
       .hero-stats .hs { display: flex; flex-direction: column; }
       .hero-stats .hs .n { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 4.4vw, 2.2rem); background: linear-gradient(90deg, var(--gold3), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
       .hero-stats .hs .l { color: var(--muted); font-size: .86rem; margin-top: .4rem; max-width: 170px; }
+      /* Mobile: statystyki jako zwarte, poziome karty + równe przyciski CTA */
+      @media (max-width: 560px) {
+        .hero { padding: 2.4rem 0 2rem; }
+        .hero-stats { display: grid; grid-template-columns: 1fr; gap: .65rem; margin-top: 1.4rem; }
+        .hero-stats .hs { flex-direction: row; align-items: center; gap: 1rem; border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 14px; padding: .85rem 1.05rem; }
+        .hero-stats .hs .n { font-size: 1.45rem; flex: none; min-width: 6.7rem; }
+        .hero-stats .hs .l { margin-top: 0; max-width: none; font-size: .92rem; line-height: 1.35; }
+        .hero .cta-row { gap: .6rem; margin-top: 1.6rem; }
+        .hero .cta-row .btn-primary { flex: 1 1 100%; justify-content: center; }
+        .hero .cta-row .wa, .hero .cta-row .btn-ghost { flex: 1 1 auto; justify-content: center; padding-left: .8rem; padding-right: .8rem; }
+      }
       /* Pasek CTA w środku treści */
       .cta-band { margin: 2rem 0 .4rem; border: 1px solid rgba(225,189,91,.28); border-radius: 22px; background: radial-gradient(120% 120% at 85% 0%, rgba(225,189,91,.15), transparent), var(--ink-800); padding: 1.5rem 1.7rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
       .cta-band .t { flex: 1 1 280px; }
