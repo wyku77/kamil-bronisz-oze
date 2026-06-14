@@ -5,7 +5,6 @@ import { SectionCTA } from './components/SectionCTA'
 import { EnergyStorage } from './components/EnergyStorage'
 import { Process } from './components/Process'
 import { About } from './components/About'
-import { ServiceArea } from './components/ServiceArea'
 import { Approach } from './components/Approach'
 import { Calculator } from './components/calculator/Calculator'
 import { Testimonials } from './components/Testimonials'
@@ -41,7 +40,6 @@ export default function App() {
         <EnergyStorage />
         <Process />
         <About />
-        <ServiceArea />
         <Approach />
         <Calculator />
         <Testimonials />

@@ -1,5 +1,5 @@
 import { Facebook, Globe, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Youtube } from 'lucide-react'
-import { nav, site } from '../data/content'
+import { nav, site, serviceArea } from '../data/content'
 import { Logo } from './ui/Logo'
 
 const socialLinks = [
@@ -92,7 +92,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 sm:flex-row">
+        <p className="mt-10 border-t border-white/10 pt-6 text-xs leading-relaxed text-white/45">
+          <span className="font-medium text-white/60">Obszar działania:</span>{' '}
+          {serviceArea.cities.join(' · ')} — całe województwo lubelskie. Analiza online w całej Polsce.
+        </p>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 sm:flex-row">
           <p>
             © {year} {site.name} — {site.role}.
           </p>

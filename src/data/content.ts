@@ -55,7 +55,7 @@ export const site = {
   get whatsappHref() {
     return `https://wa.me/${this.whatsapp}?text=${encodeURIComponent(this.whatsappText)}`
   },
-  area: 'Woj. lubelskie — Lublin i okolice · analiza online w całej Polsce',
+  area: 'Całe województwo lubelskie · analiza online w całej Polsce',
   social: {
     facebook: 'https://www.facebook.com/begoldenfotowoltaika',
     instagram: '',
@@ -466,7 +466,7 @@ export const googleReviews = {
   attribution: 'Oceny firmy Begolden, z którą realizuję instalacje',
   cta: 'Zobacz opinie w Google',
   short: '4,9 ★ w Google',
-  local: 'Realizacje magazynów energii — Lublin i okolice (woj. lubelskie)',
+  local: 'Realizacje magazynów energii — całe województwo lubelskie',
 }
 
 // --- Kwalifikacja leada: kiedy planuje inwestycję (sygnał „temperatury") ---
