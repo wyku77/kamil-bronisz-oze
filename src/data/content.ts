@@ -91,7 +91,7 @@ export const hero = {
     { value: 90, suffix: '%', label: 'Mniejsze rachunki za prąd' },
     { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
-    { value: 1339, suffix: '', label: 'Opinii w Google · 4,9 ★' },
+    { value: 1340, suffix: '', label: 'Opinii w Google · 4,9 ★' },
   ],
   floating: {
     savingsLabel: 'Oszczędność rachunku',
@@ -459,7 +459,7 @@ export const exitIntent = {
 // --- Opinie w Google (wizytówka firmy Begolden) ---
 export const googleReviews = {
   rating: '4,9',
-  count: '1 339',
+  count: '1 340',
   url: 'https://share.google/igMkIhQFc3MaFw0Os',
   label: 'Opinie w Google',
   note: 'opinii w Google',
