@@ -80,7 +80,7 @@ export const hero = {
   titleEnd: '',
   subtitle:
     'Projektuję inteligentne systemy fotowoltaiczne z magazynami energii i zarządzaniem energią całego domu — dla domów i firm. Mniej rachunków, więcej kontroli.',
-  primaryCta: 'Umów bezpłatną analizę',
+  primaryCta: 'Zostaw numer — oddzwonię',
   secondaryCta: 'Oblicz swoje oszczędności',
   trust: [
     'Bezpłatna, niezobowiązująca analiza',
@@ -450,7 +450,7 @@ export const exitIntent = {
   title: 'Zanim wyjdziesz…',
   text: 'Zostaw numer telefonu — oddzwonię z bezpłatną wyceną oszczędności i powiem, czy załapiesz się na dotację do magazynu energii 2026. Bez zobowiązań.',
   phonePlaceholder: 'Twój numer telefonu',
-  button: 'Poproszę o kontakt',
+  button: 'Oddzwoń do mnie',
   dismiss: 'Nie, dziękuję',
   successTitle: 'Dziękuję! Wkrótce się odezwę.',
   successText: 'Zadzwonię na podany numer w dogodnym terminie.',
@@ -481,7 +481,7 @@ export const leadTimeframe = {
 }
 
 // --- Mikrocopy redukujące tarcie pod formularzami ---
-export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez nacisku • bez zobowiązań'
+export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez zobowiązań • bez nachalnej sprzedaży'
 
 // --- Pasek odliczania do naboru dotacji (FOMO oparte na realnym terminie) ---
 export const subsidyDeadline = {

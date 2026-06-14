@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Mail, MessageCircle, Phone, Send, Star } from 'lucide-react'
+import { CheckCircle2, Mail, MessageCircle, Phone, Star } from 'lucide-react'
 import { site, about, googleReviews, leadMicrocopy, leadTimeframe } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
@@ -12,10 +12,8 @@ type FormState = {
   name: string
   phone: string
   email: string
-  postalCode: string
   timeframe: string
   time: string
-  message: string
   consent: boolean
 }
 
@@ -23,10 +21,8 @@ const initial: FormState = {
   name: '',
   phone: '',
   email: '',
-  postalCode: '',
   timeframe: '',
   time: times[0],
-  message: '',
   consent: false,
 }
 
@@ -41,9 +37,9 @@ export function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!form.name.trim()) return setError('Podaj imię i nazwisko.')
+    if (!form.name.trim()) return setError('Podaj imię.')
     if (form.phone.replace(/\D/g, '').length < 9) return setError('Podaj poprawny numer telefonu.')
-    if (!/\S+@\S+\.\S+/.test(form.email)) return setError('Podaj poprawny adres e-mail.')
+    if (form.email.trim() && !/\S+@\S+\.\S+/.test(form.email)) return setError('Popraw adres e-mail lub zostaw pole puste.')
     if (!form.timeframe) return setError('Zaznacz, kiedy planujesz inwestycję.')
     if (!form.consent) return setError('Zaznacz zgodę na kontakt.')
     setError(null)
@@ -58,11 +54,9 @@ export function Contact() {
       name: form.name.trim(),
       phone: form.phone.trim(),
       email: form.email.trim(),
-      postalCode: form.postalCode.trim(),
       consent: form.consent,
       timeframe: form.timeframe,
       preferredTime: form.time,
-      message: form.message.trim(),
       leadTemperature: temperature,
       source: 'formularz-kontakt',
       submittedAt: new Date().toISOString(),
@@ -86,8 +80,8 @@ export function Contact() {
           <span className="eyebrow">Kontakt • bezpłatnie</span>
           <h2 className="mt-5 h-section text-white">Umów bezpłatną analizę energetyczną</h2>
           <p className="mt-5 text-lg leading-relaxed text-white/65">
-            Zostaw kontakt — oddzwonię w dogodnym terminie, przeanalizuję Twoje zużycie i przygotuję konkretne
-            wyliczenia. Bez zobowiązań.
+            Zostaw numer — oddzwonię w ciągu godziny, sprawdzę Twoje możliwości i powiem, ile możesz zaoszczędzić oraz
+            czy łapiesz się na dotację. Bez zobowiązań i bez nachalnej sprzedaży.
           </p>
         </Reveal>
 
@@ -180,7 +174,7 @@ export function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                  <h3 className="font-display text-xl font-bold text-white">Zarezerwuj bezpłatną analizę</h3>
+                  <h3 className="font-display text-xl font-bold text-white">Zostaw numer — oddzwonię w ciągu godziny</h3>
 
                   <div>
                     <p className="field-label">{leadTimeframe.label}*</p>
@@ -210,69 +204,39 @@ export function Contact() {
 
                   <div>
                     <label htmlFor="c-name" className="field-label">
-                      Imię i nazwisko*
+                      Imię*
                     </label>
                     <input
                       id="c-name"
                       type="text"
-                      autoComplete="name"
+                      autoComplete="given-name"
                       className="field"
-                      placeholder="Jan Kowalski"
+                      placeholder="Jan"
                       value={form.name}
                       onChange={(e) => set('name', e.target.value)}
                     />
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="c-phone" className="field-label">
-                        Telefon*
-                      </label>
-                      <input
-                        id="c-phone"
-                        type="tel"
-                        autoComplete="tel"
-                        className="field"
-                        placeholder="600 100 200"
-                        value={form.phone}
-                        onChange={(e) => set('phone', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="c-email" className="field-label">
-                        E-mail*
-                      </label>
-                      <input
-                        id="c-email"
-                        type="email"
-                        autoComplete="email"
-                        className="field"
-                        placeholder="jan@example.com"
-                        value={form.email}
-                        onChange={(e) => set('email', e.target.value)}
-                      />
-                    </div>
+                  <div>
+                    <label htmlFor="c-phone" className="field-label">
+                      Telefon*
+                    </label>
+                    <input
+                      id="c-phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      className="field"
+                      placeholder="600 100 200"
+                      value={form.phone}
+                      onChange={(e) => set('phone', e.target.value)}
+                    />
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label htmlFor="c-zip" className="field-label">
-                        Kod pocztowy
-                      </label>
-                      <input
-                        id="c-zip"
-                        type="text"
-                        inputMode="numeric"
-                        autoComplete="postal-code"
-                        className="field"
-                        placeholder="40-750"
-                        value={form.postalCode}
-                        onChange={(e) => set('postalCode', e.target.value)}
-                      />
-                    </div>
-                    <div>
                       <label htmlFor="c-time" className="field-label">
-                        Preferowana pora kontaktu
+                        Kiedy mam oddzwonić?
                       </label>
                       <select
                         id="c-time"
@@ -287,20 +251,20 @@ export function Contact() {
                         ))}
                       </select>
                     </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="c-message" className="field-label">
-                      Wiadomość
-                    </label>
-                    <textarea
-                      id="c-message"
-                      rows={3}
-                      className="field"
-                      placeholder="Napisz, czym jesteś zainteresowany…"
-                      value={form.message}
-                      onChange={(e) => set('message', e.target.value)}
-                    />
+                    <div>
+                      <label htmlFor="c-email" className="field-label">
+                        E-mail (opcjonalnie)
+                      </label>
+                      <input
+                        id="c-email"
+                        type="email"
+                        autoComplete="email"
+                        className="field"
+                        placeholder="jan@example.com"
+                        value={form.email}
+                        onChange={(e) => set('email', e.target.value)}
+                      />
+                    </div>
                   </div>
 
                   <label className="flex items-start gap-3 text-xs leading-relaxed text-white/70">
@@ -319,8 +283,8 @@ export function Contact() {
                   )}
 
                   <button type="submit" disabled={sending} className="btn-primary w-full disabled:opacity-60">
-                    {sending ? 'Wysyłam…' : 'Umów bezpłatną analizę'}
-                    {!sending && <Send className="h-4 w-4" />}
+                    {sending ? 'Wysyłam…' : 'Zostaw numer — oddzwonię'}
+                    {!sending && <Phone className="h-4 w-4" />}
                   </button>
 
                   <p className="text-center text-[11px] text-white/60">{leadMicrocopy}</p>

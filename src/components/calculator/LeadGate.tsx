@@ -24,8 +24,8 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!form.name.trim()) return setError('Podaj imię.')
-    if (!form.phone.trim()) return setError('Podaj numer telefonu.')
-    if (!form.email.trim()) return setError('Podaj adres e-mail.')
+    if (form.phone.replace(/\D/g, '').length < 9) return setError('Podaj poprawny numer telefonu.')
+    if (form.email.trim() && !/\S+@\S+\.\S+/.test(form.email)) return setError('Popraw adres e-mail lub zostaw pole puste.')
     if (!form.timeframe) return setError('Zaznacz, kiedy planujesz inwestycję.')
     if (!form.consent) return setError('Zaznacz zgodę, aby zobaczyć pełne wyniki.')
     setError(null)
@@ -73,7 +73,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
       <div className="rounded-3xl border border-gold-400/25 bg-white/[0.04] p-6 shadow-glow-gold backdrop-blur-sm sm:p-8">
         <h3 className="font-display text-xl font-bold text-white">Odblokuj pełne wyniki</h3>
         <p className="mt-1.5 text-sm text-white/70">
-          Wyślę Ci też pełną analizę i odezwę się, by odpowiedzieć na pytania. Bez spamu.
+          Oddzwonię i omówię wyniki. E-mail opcjonalnie — wyślę na niego pełną analizę. Bez spamu.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
@@ -126,7 +126,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
 
           <div>
             <label htmlFor="l-email" className="field-label">
-              Adres e-mail*
+              Adres e-mail (opcjonalnie)
             </label>
             <input
               id="l-email"
