@@ -55,7 +55,7 @@ export const site = {
   get whatsappHref() {
     return `https://wa.me/${this.whatsapp}?text=${encodeURIComponent(this.whatsappText)}`
   },
-  area: 'Cała Polska — analiza online lub u Ciebie',
+  area: 'Woj. lubelskie — Lublin i okolice · analiza online w całej Polsce',
   social: {
     facebook: 'https://www.facebook.com/begoldenfotowoltaika',
     instagram: '',
@@ -197,6 +197,15 @@ export const about = {
   responseNote: 'Odpowiadam zwykle w ciągu 1 godziny',
 }
 
+// --- Obszar działania (lokalne SEO: woj. lubelskie) ---
+export const serviceArea = {
+  eyebrow: 'Obszar działania',
+  title: 'Działam w całym województwie lubelskim',
+  lead: 'Osobiście dojeżdżam do klientów w Lublinie i okolicach — magazyny energii, fotowoltaika oraz pompy ciepła i wymiana pieca (Czyste Powietrze). W pozostałej części Polski prowadzę bezpłatną analizę i doradztwo online.',
+  cities: ['Lublin', 'Świdnik', 'Lubartów', 'Łęczna', 'Parczew', 'Puławy', 'Opole Lubelskie', 'Kraśnik'],
+  note: 'Twojej miejscowości nie ma na liście? Napisz lub zadzwoń — obsługuję całe województwo lubelskie.',
+}
+
 export type Testimonial = {
   name: string
   role: string
@@ -281,6 +290,10 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     {
       q: 'Czy można otrzymać dofinansowanie?',
       a: 'Tak. Poza dotacją na magazyn energii (szczegóły w sekcji Magazyny) dostępne są też dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+    },
+    {
+      q: 'W jakich miastach działasz?',
+      a: 'Osobiście obsługuję całe województwo lubelskie — m.in. Lublin, Świdnik, Lubartów, Łęczna, Parczew, Puławy, Opole Lubelskie i Kraśnik. W pozostałej części Polski prowadzę bezpłatną analizę i doradztwo online.',
     },
   ],
 }
