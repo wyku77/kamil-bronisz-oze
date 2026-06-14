@@ -179,8 +179,8 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
           <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
             <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
             <span>
-              <span className="font-semibold">{googleReviews.rating}</span> w Google · {googleReviews.count}{' '}
-              {googleReviews.note}
+              <span className="font-semibold">{googleReviews.rating}</span> · {googleReviews.count}{' '}
+              {googleReviews.note} — firmy Begolden
             </span>
           </div>
 

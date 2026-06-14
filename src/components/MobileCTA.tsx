@@ -6,8 +6,8 @@ import { track } from '../lib/analytics'
 export function MobileCTA() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink-900/95 backdrop-blur sm:hidden">
-      <p className="flex items-center justify-center gap-1.5 pt-1.5 text-[11px] text-white/60">
-        <span className="font-semibold text-gold-300">★ {googleReviews.rating} w Google</span>
+      <p className="flex flex-wrap items-center justify-center gap-x-1.5 pt-1.5 text-[11px] text-white/60">
+        <span className="font-semibold text-gold-300">★ {googleReviews.rating} Google (Begolden)</span>
         <span aria-hidden>•</span> oddzwaniam w 1 h
       </p>
       <div className="flex gap-2 px-3 pb-3 pt-1.5">

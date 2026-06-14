@@ -91,7 +91,7 @@ export const hero = {
     { value: 90, suffix: '%', label: 'Mniejsze rachunki za prąd' },
     { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
-    { value: 1340, suffix: '', label: 'Opinii w Google · 4,9 ★' },
+    { value: 1340, suffix: '', label: 'Opinii Google firmy Begolden · 4,9 ★' },
   ],
   floating: {
     savingsLabel: 'Oszczędność rachunku',
