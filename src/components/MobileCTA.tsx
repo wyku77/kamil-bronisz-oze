@@ -1,4 +1,4 @@
-import { Calculator as CalcIcon, Phone } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { site, googleReviews } from '../data/content'
 import { track } from '../lib/analytics'
 
@@ -14,16 +14,16 @@ export function MobileCTA() {
         <a
           href={site.phoneHref}
           onClick={() => track.ctaClick('mobilebar_call')}
-          className="btn-ghost flex-1 !py-3 !text-sm"
+          className="btn-primary flex-1 !py-3 !text-sm"
         >
           <Phone className="h-4 w-4" /> Zadzwoń
         </a>
         <a
-          href="#kalkulator"
-          onClick={() => track.ctaClick('mobilebar_calc')}
-          className="btn-primary flex-1 !py-3 !text-sm"
+          href="#kontakt"
+          onClick={() => track.ctaClick('mobilebar_leadform')}
+          className="btn-ghost flex-1 !py-3 !text-sm"
         >
-          <CalcIcon className="h-4 w-4" /> Oblicz oszczędności
+          Zostaw numer
         </a>
       </div>
     </div>
