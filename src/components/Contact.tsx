@@ -86,8 +86,8 @@ export function Contact() {
         </Reveal>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-          {/* Profil + kontakt */}
-          <Reveal direction="right" className="space-y-4">
+          {/* Profil + kontakt — na mobile POD formularzem (order), na desktopie po lewej */}
+          <Reveal direction="right" className="order-2 space-y-4 lg:order-1">
             <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
               <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-gold-300 to-gold-500 font-display text-xl font-bold text-ink-950">
                 KB
@@ -147,8 +147,8 @@ export function Contact() {
             </p>
           </Reveal>
 
-          {/* Formularz */}
-          <Reveal direction="left">
+          {/* Formularz — na mobile NAD profilem */}
+          <Reveal direction="left" className="order-1 lg:order-2">
             <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur-sm sm:p-8">
               {sent ? (
                 <div className="flex h-full min-h-[420px] flex-col items-center justify-center text-center">
