@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import './index.css'
+import { initClickTracking } from './lib/trackClicks'
 
 // Strona jest prerenderowana (statyczny HTML w dist/index.html — patrz
 // scripts/prerender.mjs), dzięki czemu roboty Google/Bing/AI od razu widzą pełną
@@ -12,3 +13,6 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </React.StrictMode>,
 )
+
+// Globalne śledzenie kliknięć „Zadzwoń" / WhatsApp (konwersje „na telefon").
+initClickTracking()
