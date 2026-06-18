@@ -178,40 +178,47 @@ export function buildLeadPayload(
 export type SubmitResult = { ok: boolean; mode: 'webhook' | 'email' | 'local' }
 
 export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
-  // 1) Tryb produkcyjny: webhook (n8n / Make / własny endpoint) — ma pierwszeństwo
-  if (WEBHOOK_URL) {
-    try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      if (res.ok) return { ok: true, mode: 'webhook' }
-    } catch (err) {
-      // sieć padła — zapisz lokalnie, by nie stracić leada
-      console.error('[leads] Błąd wysyłki na webhook, zapisuję lokalnie:', err)
-    }
-  }
+  // Wysyłamy DWOMA kanałami równolegle (redundancja — nie tracimy leada):
+  //  • webhook (Make/n8n → Telegram, SMS, CRM…) — gdy ustawiono VITE_LEAD_WEBHOOK_URL
+  //  • e-mail przez Web3Forms — drugi, niezależny kanał / backup
+  let okWebhook = false
+  let okEmail = false
+  await Promise.allSettled([
+    (async () => {
+      if (!WEBHOOK_URL) return
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+        okWebhook = res.ok
+      } catch (err) {
+        console.error('[leads] Błąd wysyłki na webhook:', err)
+      }
+    })(),
+    (async () => {
+      if (!WEB3FORMS_KEY) return
+      try {
+        const res = await fetch(WEB3FORMS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `🔥 Nowy lead OZE (${payload.leadTemperature}) — ${payload.name || 'bez nazwy'}`,
+            from_name: 'Strona OZE — kalkulator',
+            replyto: payload.email,
+            ...payload,
+          }),
+        })
+        okEmail = res.ok
+      } catch (err) {
+        console.error('[leads] Błąd wysyłki e-mail (Web3Forms):', err)
+      }
+    })(),
+  ])
 
-  // 2) Start: wyślij leada prosto na e-mail przez Web3Forms
-  if (WEB3FORMS_KEY) {
-    try {
-      const res = await fetch(WEB3FORMS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `🔥 Nowy lead OZE (${payload.leadTemperature}) — ${payload.name || 'bez nazwy'}`,
-          from_name: 'Strona OZE — kalkulator',
-          replyto: payload.email,
-          ...payload,
-        }),
-      })
-      if (res.ok) return { ok: true, mode: 'email' }
-    } catch (err) {
-      console.error('[leads] Błąd wysyłki e-mail (Web3Forms), zapisuję lokalnie:', err)
-    }
-  }
+  if (okWebhook || okEmail) return { ok: true, mode: okWebhook ? 'webhook' : 'email' }
 
   // 3) Fallback: zapis lokalny (deweloperski lub awaryjny)
   try {
@@ -256,37 +263,44 @@ export async function submitLeadMagnet(
     ...getUTM(),
   }
 
-  if (WEBHOOK_URL) {
-    try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(base),
-      })
-      if (res.ok) return { ok: true, mode: 'webhook' }
-    } catch (err) {
-      console.error('[leads] Błąd wysyłki magnetu na webhook:', err)
-    }
-  }
+  let okWebhook = false
+  let okEmail = false
+  await Promise.allSettled([
+    (async () => {
+      if (!WEBHOOK_URL) return
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(base),
+        })
+        okWebhook = res.ok
+      } catch (err) {
+        console.error('[leads] Błąd wysyłki magnetu na webhook:', err)
+      }
+    })(),
+    (async () => {
+      if (!WEB3FORMS_KEY) return
+      try {
+        const res = await fetch(WEB3FORMS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `📞 Nowy lead (${source}): ${phone || email}`,
+            from_name: 'Strona OZE — lead magnet',
+            ...(email ? { replyto: email } : {}),
+            ...base,
+          }),
+        })
+        okEmail = res.ok
+      } catch (err) {
+        console.error('[leads] Błąd wysyłki magnetu e-mail:', err)
+      }
+    })(),
+  ])
 
-  if (WEB3FORMS_KEY) {
-    try {
-      const res = await fetch(WEB3FORMS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `📞 Nowy lead (${source}): ${phone || email}`,
-          from_name: 'Strona OZE — lead magnet',
-          ...(email ? { replyto: email } : {}),
-          ...base,
-        }),
-      })
-      if (res.ok) return { ok: true, mode: 'email' }
-    } catch (err) {
-      console.error('[leads] Błąd wysyłki magnetu e-mail:', err)
-    }
-  }
+  if (okWebhook || okEmail) return { ok: true, mode: okWebhook ? 'webhook' : 'email' }
 
   try {
     const raw = localStorage.getItem(STORAGE_KEY)

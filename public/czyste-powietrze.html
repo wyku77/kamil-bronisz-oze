@@ -1000,6 +1000,21 @@
       (function () {
         var WEB3FORMS_KEY = 'eed5cd68-dee8-4328-9697-29e7ad4bed91';
 
+        // Webhook Make/n8n (powiadomienie Telegram, SMS, CRM…). Wklej URL, gdy gotowy.
+        // Pusty = pomijany. Działa równolegle z e-mailem (Web3Forms) — drugi kanał.
+        var LEAD_WEBHOOK = '';
+        function sendWebhook(data) {
+          if (!LEAD_WEBHOOK) return;
+          try {
+            fetch(LEAD_WEBHOOK, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+              keepalive: true,
+            });
+          } catch (e) {}
+        }
+
         // === Analityka (gotowe pod GTM / Meta Pixel / Google Ads) ===
         // Wpisz ID, gdy je założysz. Puste = nic się nie ładuje (brak śledzenia).
         var GA4_ID = 'G-2TVSMSFJYK'; // Google Analytics 4
@@ -1167,6 +1182,13 @@
             submittedAt: new Date().toISOString(),
           };
 
+          sendWebhook({
+            typ: 'czyste-powietrze', name: name, phone: phone, voivodeship: voiv, city: city,
+            obecne_zrodlo_ciepla: ans.heat || '', interesujace_zrodlo: ans.newsrc || '',
+            termin_wymiany: ans.when || '', leadTemperature: ans.when === 'asap' ? 'goracy' : 'cieply',
+            source: 'czyste-powietrze', pageUrl: location.href, submittedAt: new Date().toISOString(),
+          });
+
           try {
             var r = await fetch('https://api.web3forms.com/submit', {
               method: 'POST',
@@ -1305,6 +1327,12 @@
             source: 'kalkulator-czyste-powietrze',
             pageUrl: location.href, submittedAt: new Date().toISOString(),
           }, lastCalc || {});
+
+          sendWebhook(Object.assign({
+            typ: 'kalkulator-czyste-powietrze', name: name, phone: phone, email: email,
+            source: 'kalkulator-czyste-powietrze', pageUrl: location.href, submittedAt: new Date().toISOString(),
+          }, lastCalc || {}));
+
           try {
             var r = await fetch('https://api.web3forms.com/submit', {
               method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
