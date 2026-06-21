@@ -5,9 +5,12 @@ import { site, googleReviews } from '../data/content'
 import { track } from '../lib/analytics'
 
 /**
- * Dyskretny pasek CTA pojawiający się po przewinięciu — tylko desktop (lg+).
- * Wyśrodkowany na dole, więc nie koliduje z pływającym przyciskiem WhatsApp
- * (prawy dolny róg). Na mobile rolę tę pełni osobny <MobileCTA />.
+ * Dyskretny pasek CTA pojawiający się po przewinięciu — TYLKO w zakresie
+ * 1024–1279 px (lg, ale nie xl). Powód: navbar pokazuje własne CTA dopiero od
+ * xl (≥1280 px), a poniżej zwija się do hamburgera — wtedy na górze nie ma CTA,
+ * więc ten pasek wypełnia lukę. Na ≥1280 px navbar już to robi, więc chowamy
+ * pasek, żeby nie dublować. Wyśrodkowany na dole — nie koliduje z pływającym
+ * WhatsAppem. Na mobile rolę tę pełni osobny <MobileCTA />.
  */
 export function DesktopCTA() {
   const [show, setShow] = useState(false)
@@ -22,7 +25,7 @@ export function DesktopCTA() {
   return (
     // Centrowanie trzymamy na zewnętrznym kontenerze — wewnętrzny motion.div
     // ustawia własny transform (animacja y), który nadpisałby -translate-x-1/2.
-    <div className="fixed bottom-5 left-1/2 z-30 hidden -translate-x-1/2 lg:block">
+    <div className="fixed bottom-5 left-1/2 z-30 hidden -translate-x-1/2 lg:block xl:hidden">
       <AnimatePresence>
         {show && (
           <motion.div
