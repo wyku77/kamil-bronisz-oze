@@ -295,6 +295,22 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
       q: 'W jakich miastach działasz?',
       a: 'Osobiście obsługuję całe województwo lubelskie — m.in. Lublin, Świdnik, Lubartów, Łęczna, Parczew, Puławy, Opole Lubelskie i Kraśnik. W pozostałej części Polski prowadzę bezpłatną analizę i doradztwo online.',
     },
+    {
+      q: 'Czy magazyn energii jest bezpieczny? Słyszałem o pożarach baterii',
+      a: 'Stosuję ogniwa w technologii **LFP** (litowo-żelazowo-fosforanowej) — najbezpieczniejszej dla domu, odpornej na przegrzanie. Każdy magazyn ma certyfikaty, system zarządzania baterią (BMS) i zabezpieczenia.',
+    },
+    {
+      q: 'Co zimą, gdy słońca jest mało?',
+      a: 'Wtedy pracuje taryfa dynamiczna: system ładuje magazyn tanim prądem z sieci w nocy i oddaje go w drogich godzinach szczytu. Dzięki temu magazyn pracuje na Twój rachunek **przez cały rok**, nie tylko latem.',
+    },
+    {
+      q: 'Ile żyje magazyn energii?',
+      a: 'Nowoczesne magazyny LFP projektowane są na **6 000–10 000 cykli** — przy codziennym użyciu to kilkanaście lat pracy. Producenci dają zwykle ok. **10 lat gwarancji**.',
+    },
+    {
+      q: 'Mam już fotowoltaikę — da się dołożyć magazyn?',
+      a: 'W większości przypadków tak (**retrofit**) — przez falownik hybrydowy lub dodatkowy moduł z bramą wyspową. Na bezpłatnej analizie sprawdzam, co najlepiej pasuje do Twojej instalacji.',
+    },
   ],
 }
 
@@ -317,50 +333,6 @@ export const energyStorage = {
     loss: 'Bez magazynu większość taniej energii z paneli oddajesz do sieci za grosze — a wieczorem odkupujesz ją drożej. Magazyn kończy ten układ.',
     before: { label: 'Sama fotowoltaika', self: '30%', selfLabel: 'autokonsumpcja', bill: '~580 zł', billLabel: 'rachunek / mies.' },
     after: { label: 'Fotowoltaika + magazyn z AI', self: '86%', selfLabel: 'autokonsumpcja', bill: '~70 zł', billLabel: 'rachunek / mies.' },
-  },
-  objections: [
-    {
-      q: 'Czy magazyn opłaca się bez dotacji?',
-      a: [
-        'Tak. Cena odkupu nadwyżek oddanych do sieci jest dziś bardzo niska — dlatego liczy się zużycie **własnej** energii, a nie jej sprzedaż.',
-        'Magazyn pozwala korzystać z prądu z paneli wieczorem i w nocy. To tu — jak w przykładzie wyżej — powstają realne oszczędności, niezależnie od dotacji.',
-      ],
-    },
-    {
-      q: 'Czy to bezpieczne? Słyszałem o pożarach baterii',
-      a: [
-        'Stosuję ogniwa w technologii **LFP** (litowo-żelazowo-fosforanowej) — najbezpieczniejszej dla domu, odpornej na przegrzanie.',
-        'Każdy magazyn ma certyfikaty, system zarządzania baterią (BMS) i zabezpieczenia.',
-      ],
-    },
-    {
-      q: 'Co zimą, gdy słońca jest mało?',
-      a: [
-        'Wtedy pracuje taryfa dynamiczna: system ładuje magazyn tanim prądem z sieci w nocy i oddaje go w drogich godzinach szczytu.',
-        'Dzięki temu magazyn pracuje na Twój rachunek **przez cały rok**, nie tylko latem.',
-      ],
-    },
-    {
-      q: 'Ile żyje magazyn energii?',
-      a: [
-        'Nowoczesne magazyny LFP projektowane są na **6 000–10 000 cykli** — przy codziennym użyciu to kilkanaście lat pracy.',
-        'Producenci dają zwykle ok. **10 lat gwarancji**.',
-      ],
-    },
-    {
-      q: 'Mam już fotowoltaikę — da się dołożyć magazyn?',
-      a: [
-        'W większości przypadków tak (**retrofit**) — przez falownik hybrydowy lub dodatkowy moduł z bramą wyspową.',
-        'Na bezpłatnej analizie sprawdzam, co najlepiej pasuje do Twojej instalacji.',
-      ],
-    },
-  ],
-  subsidy: {
-    badge: 'Dotacja 2026',
-    title: 'Do 16 000 zł dotacji na magazyn energii',
-    text: 'Zapowiedziany program „Przydomowe Magazyny Energii" przewiduje dofinansowanie do 16 000 zł — ale z warunkami: magazyn musi mieć system zarządzania energią (EMS) i umieć pracować wyspowo (off-grid). Prosty magazyn bez aktywnego sterowania może nie przejść weryfikacji.',
-    note: 'Nabór planowany na II/III kwartał 2026. Dobieram rozwiązania, które te wymogi spełniają — i pomagam przejść przez formalności.',
-    cta: 'Sprawdź, czy się kwalifikujesz',
   },
   tariff: {
     title: 'Tak pracuje magazyn z taryfą dynamiczną',
@@ -410,7 +382,7 @@ export const approach = {
 // --- Lekkie paski CTA pomiędzy sekcjami ---
 export const sectionCtas = {
   afterBenefits: {
-    text: 'Ciekawi Cię, ile magazyn energii zaoszczędzi u Ciebie?',
+    text: 'Ciekawi Cię, ile magazyn energii zaoszczędzi właśnie u Ciebie?',
     button: 'Oblicz moje oszczędności',
     href: '#kalkulator',
     label: 'cta_after_benefits',

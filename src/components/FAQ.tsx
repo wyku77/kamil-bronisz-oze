@@ -4,6 +4,19 @@ import { Plus } from 'lucide-react'
 import { faq } from '../data/content'
 import { Reveal } from './ui/Reveal'
 
+/** Renderuje tekst z markerami **pogrubienia** (np. kluczowe liczby). */
+function renderBold(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-slate-900">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    ),
+  )
+}
+
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
@@ -53,7 +66,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <p className="px-6 pb-5 leading-relaxed text-slate-600">{item.a}</p>
+                      <p className="px-6 pb-5 leading-relaxed text-slate-600">{renderBold(item.a)}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

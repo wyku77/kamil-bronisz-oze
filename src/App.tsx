@@ -1,6 +1,5 @@
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
-import { Benefits } from './components/Benefits'
 import { SectionCTA } from './components/SectionCTA'
 import { EnergyStorage } from './components/EnergyStorage'
 import { Process } from './components/Process'
@@ -10,7 +9,6 @@ import { Calculator } from './components/calculator/Calculator'
 import { Testimonials } from './components/Testimonials'
 import { FAQ } from './components/FAQ'
 import { LeadMagnet } from './components/LeadMagnet'
-import { FinalCTA } from './components/FinalCTA'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { FloatingActions } from './components/FloatingActions'
@@ -34,19 +32,17 @@ export default function App() {
       <main>
         <Hero />
         <Brands />
+        <Approach />
         <SubsidyDeadline />
-        <Benefits />
         <SectionCTA {...sectionCtas.afterBenefits} />
         <EnergyStorage />
         <Process />
-        <About />
-        <Approach />
         <Calculator />
         <Testimonials />
         <SectionCTA {...sectionCtas.afterTestimonials} />
+        <About />
         <FAQ />
         <LeadMagnet />
-        <FinalCTA />
         <Contact />
       </main>
       <Footer />

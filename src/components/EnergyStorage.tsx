@@ -1,22 +1,7 @@
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, BadgePercent, Plus, Zap } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Zap } from 'lucide-react'
 import { energyStorage } from '../data/content'
 import { Reveal } from './ui/Reveal'
-import { track } from '../lib/analytics'
-
-/** Renderuje tekst z markerami **pogrubienia** (np. kluczowe liczby). */
-function renderBold(text: string) {
-  return text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? (
-      <strong key={i} className="font-semibold text-white">
-        {part.slice(2, -2)}
-      </strong>
-    ) : (
-      part
-    ),
-  )
-}
 
 // Reprezentatywna dobowa krzywa cen energii (zł/kWh) — ilustracja taryfy dynamicznej.
 const PRICES = [
@@ -83,8 +68,6 @@ function TariffChart() {
 }
 
 export function EnergyStorage() {
-  const [open, setOpen] = useState<number | null>(0)
-
   return (
     <section id="magazyny-energii" className="section relative overflow-hidden bg-ink-900">
       <div className="pointer-events-none absolute -left-24 top-1/4 h-80 w-80 rounded-full bg-gold-400/10 blur-3xl" />
@@ -128,79 +111,10 @@ export function EnergyStorage() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* Obiekcje (akordeon) */}
-          <Reveal direction="right" className="space-y-3">
-            {energyStorage.objections.map((item, i) => {
-              const isOpen = open === i
-              return (
-                <div
-                  key={item.q}
-                  className={`overflow-hidden rounded-2xl border transition-colors ${
-                    isOpen ? 'border-gold-400/30 bg-white/[0.04]' : 'border-white/10 bg-white/[0.02]'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                    aria-expanded={isOpen}
-                  >
-                    <span className="font-display text-sm font-semibold text-white sm:text-base">{item.q}</span>
-                    <span
-                      className={`grid h-7 w-7 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
-                        isOpen ? 'rotate-45 border-gold-400 bg-gold-400 text-ink-950' : 'border-white/20 text-white/70'
-                      }`}
-                    >
-                      <Plus className="h-3.5 w-3.5" />
-                    </span>
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        <div className="space-y-2 px-5 pb-4">
-                          {item.a.map((p, j) => (
-                            <p key={j} className="text-sm leading-relaxed text-white/70">
-                              {renderBold(p)}
-                            </p>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )
-            })}
-          </Reveal>
-
-          {/* Prawa kolumna: wykres taryfy + dotacja */}
-          <Reveal direction="left" className="space-y-6">
-            <TariffChart />
-
-            <div className="relative overflow-hidden rounded-3xl border border-gold-400/25 bg-gradient-to-br from-gold-400/15 via-ink-800 to-ink-900 p-6">
-              <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-gold-400/20 blur-2xl" />
-              <span className="eyebrow">
-                <BadgePercent className="h-3.5 w-3.5" /> {energyStorage.subsidy.badge}
-              </span>
-              <h3 className="mt-4 font-display text-xl font-bold text-white">{energyStorage.subsidy.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">{energyStorage.subsidy.text}</p>
-              <p className="mt-3 text-sm leading-relaxed text-gold-300/90">{energyStorage.subsidy.note}</p>
-              <a
-                href="#kontakt"
-                onClick={() => track.ctaClick('storage_subsidy')}
-                className="btn-primary group mt-5 w-full sm:w-auto"
-              >
-                {energyStorage.subsidy.cta}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </div>
-          </Reveal>
-        </div>
+        {/* Wykres taryfy dynamicznej */}
+        <Reveal className="mx-auto mt-10 max-w-3xl">
+          <TariffChart />
+        </Reveal>
       </div>
     </section>
   )
