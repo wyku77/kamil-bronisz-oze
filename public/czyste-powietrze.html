@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a1018" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- Twardo wyłącza instalację aplikacji (PWA) / prompt „dodaj do ekranu". -->
+    <script>
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault()
+        return false
+      })
+    </script>
     <!-- Ograniczenie cache'owania HTML, by zmiany były widoczne szybciej -->
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />

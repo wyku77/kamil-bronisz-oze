@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a1018" />
 
+    <!-- Twardo wyłącza instalację aplikacji (PWA) i prompt „dodaj do ekranu /
+         dostęp do plików". Strona nie ma już manifestu ani service workera, a ten
+         skrypt blokuje prompt nawet tam, gdzie przeglądarka trzyma stary cache. -->
+    <script>
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault()
+        return false
+      })
+    </script>
+
     <!-- Primary SEO -->
     <title>Magazyn energii i fotowoltaika — Lublin, woj. lubelskie | Kamil Bronisz</title>
     <meta
