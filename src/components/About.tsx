@@ -72,24 +72,23 @@ export function About() {
             ))}
           </ul>
 
-          {/* Kontakt + social */}
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <div className="flex flex-wrap gap-3">
-              <a href={site.phoneHref} className="btn-primary !py-2.5 !text-sm">
-                <Phone className="h-4 w-4" /> {site.phone}
-              </a>
-              <a
-                href={site.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline !py-2.5 !text-sm"
-              >
-                <MessageCircle className="h-4 w-4" /> WhatsApp
-              </a>
-              <a href={site.emailHref} className="btn-ghost !py-2.5 !text-sm">
-                <Mail className="h-4 w-4" /> E-mail
-              </a>
-            </div>
+          {/* Kontakt + social — na mobile Facebook ląduje w jednym wierszu z E-mailem;
+              na desktopie social jest odsunięty na prawo (sm:ml-auto). */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href={site.phoneHref} className="btn-primary !py-2.5 !text-sm">
+              <Phone className="h-4 w-4" /> {site.phone}
+            </a>
+            <a
+              href={site.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline !py-2.5 !text-sm"
+            >
+              <MessageCircle className="h-4 w-4" /> WhatsApp
+            </a>
+            <a href={site.emailHref} className="btn-ghost !py-2.5 !text-sm">
+              <Mail className="h-4 w-4" /> E-mail
+            </a>
 
             {socials.length > 0 && (
               <div className="flex gap-2 sm:ml-auto">

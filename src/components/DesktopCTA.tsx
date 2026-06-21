@@ -30,31 +30,29 @@ export function DesktopCTA() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="flex items-center gap-5 rounded-full border border-white/10 bg-ink-900/95 py-2.5 pl-6 pr-2.5 shadow-card backdrop-blur"
+            className="flex items-center gap-2.5 rounded-full border border-white/10 bg-ink-900/90 py-1.5 pl-4 pr-1.5 shadow-card backdrop-blur"
           >
-            <p className="text-sm text-white/80">
-              <span className="font-semibold text-gold-300">★ {googleReviews.rating} Google</span>
-              <span className="mx-2 text-white/30" aria-hidden>
+            <p className="text-xs text-white/75">
+              <span className="font-semibold text-gold-300">★ {googleReviews.rating}</span>
+              <span className="mx-1.5 text-white/30" aria-hidden>
                 •
               </span>
-              Bezpłatna analiza — oddzwaniam zwykle w 1 h
+              oddzwaniam w 1 h
             </p>
-            <div className="flex items-center gap-2">
-              <a
-                href={site.phoneHref}
-                onClick={() => track.ctaClick('desktopbar_call')}
-                className="btn-ghost !py-2 !text-sm"
-              >
-                <Phone className="h-4 w-4" /> Zadzwoń
-              </a>
-              <a
-                href="#kontakt"
-                onClick={() => track.ctaClick('desktopbar_leadform')}
-                className="btn-primary !py-2 !text-sm"
-              >
-                Zostaw numer — oddzwonię
-              </a>
-            </div>
+            <a
+              href={site.phoneHref}
+              onClick={() => track.ctaClick('desktopbar_call')}
+              className="btn-ghost !px-3 !py-1.5 !text-xs"
+            >
+              <Phone className="h-3.5 w-3.5" /> Zadzwoń
+            </a>
+            <a
+              href="#kontakt"
+              onClick={() => track.ctaClick('desktopbar_leadform')}
+              className="btn-primary !px-3 !py-1.5 !text-xs"
+            >
+              Zostaw numer
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
