@@ -1,4 +1,4 @@
-import { motion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none'
@@ -24,10 +24,14 @@ type RevealProps = {
  * Respektuje preferencję prefers-reduced-motion (Framer Motion robi to automatycznie).
  */
 export function Reveal({ children, className, delay = 0, direction = 'up', as = 'div' }: RevealProps) {
-  const { x, y } = offset[direction]
+  // Reduced-motion: bez przesunięć (x/y = 0) i treść od razu widoczna (opacity 1),
+  // niezależnie od tego, czy whileInView/IntersectionObserver zdąży zadziałać.
+  // To eliminuje też poziome wyjście poza ekran (x: ±40) na mobile.
+  const reduce = useReducedMotion()
+  const { x, y } = reduce ? { x: 0, y: 0 } : offset[direction]
 
   const variants: Variants = {
-    hidden: { opacity: 0, x, y },
+    hidden: { opacity: reduce ? 1 : 0, x, y },
     show: { opacity: 1, x: 0, y: 0 },
   }
 
