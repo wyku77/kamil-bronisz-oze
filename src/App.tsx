@@ -1,5 +1,6 @@
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
+import { Benefits } from './components/Benefits'
 import { SectionCTA } from './components/SectionCTA'
 import { EnergyStorage } from './components/EnergyStorage'
 import { Process } from './components/Process'
@@ -15,6 +16,7 @@ import { FloatingActions } from './components/FloatingActions'
 import { ExitIntent } from './components/ExitIntent'
 import { ConsentBanner } from './components/ConsentBanner'
 import { MobileCTA } from './components/MobileCTA'
+import { DesktopCTA } from './components/DesktopCTA'
 import { SubsidyDeadline } from './components/SubsidyDeadline'
 import { Brands } from './components/Brands'
 import { sectionCtas } from './data/content'
@@ -32,6 +34,7 @@ export default function App() {
       <main>
         <Hero />
         <Brands />
+        <Benefits />
         <Approach />
         <SubsidyDeadline />
         <SectionCTA {...sectionCtas.afterBenefits} />
@@ -50,6 +53,7 @@ export default function App() {
       <ExitIntent />
       <ConsentBanner />
       <MobileCTA />
+      <DesktopCTA />
     </>
   )
 }

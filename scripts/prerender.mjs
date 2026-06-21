@@ -36,7 +36,12 @@ try {
   // Daj animacjom wejścia (framer-motion) chwilę na ustabilizowanie się.
   await new Promise((r) => setTimeout(r, 2000))
 
-  const rootHtml = await page.$eval('#root', (el) => el.innerHTML)
+  const rawRootHtml = await page.$eval('#root', (el) => el.innerHTML)
+  // Puppeteer serializuje bezwzględne URL-e zasobów z origin podglądu
+  // (http://localhost:4188/assets/...). Na produkcji muszą być względne, więc
+  // usuwamy origin — zostają ścieżki typu /assets/... (działają na kamilbronisz.pl).
+  const origin = `http://localhost:${PORT}`
+  const rootHtml = rawRootHtml.split(origin).join('')
 
   const template = readFileSync(indexPath, 'utf8')
   const out = template.replace(

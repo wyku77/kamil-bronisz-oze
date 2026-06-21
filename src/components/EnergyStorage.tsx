@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Zap } from 'lucide-react'
 import { energyStorage } from '../data/content'
 import { Reveal } from './ui/Reveal'
+import { track } from '../lib/analytics'
 
 // Reprezentatywna dobowa krzywa cen energii (zł/kWh) — ilustracja taryfy dynamicznej.
 const PRICES = [
@@ -109,6 +110,19 @@ export function EnergyStorage() {
               </div>
             </div>
           </div>
+        </Reveal>
+
+        {/* CTA tuż pod tabelą porównawczą — moment najwyższej motywacji */}
+        <Reveal className="mx-auto mt-6 max-w-3xl text-center">
+          <a
+            href="#kalkulator"
+            onClick={() => track.ctaClick('storage_comparison')}
+            className="btn-primary group"
+          >
+            Policz swój wariant z magazynem
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+          <p className="mt-3 text-xs text-white/55">Bezpłatnie, bez zobowiązań — wynik w 2 minuty.</p>
         </Reveal>
 
         {/* Wykres taryfy dynamicznej */}

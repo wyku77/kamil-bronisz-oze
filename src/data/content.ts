@@ -121,8 +121,8 @@ export const benefits: { eyebrow: string; title: string; lead: string; items: Be
     },
     {
       icon: 'battery-charging',
-      title: 'Zasilanie awaryjne',
-      text: 'Inteligentny magazyn energii podtrzymuje pracę domu podczas przerw w dostawie prądu (backup). Lodówka i ogrzewanie działają dalej.',
+      title: 'Zasilanie awaryjne (backup)',
+      text: 'Gdy w okolicy znika prąd, Twój dom działa dalej — magazyn w ułamku sekundy przechodzi w tryb wyspowy. Lodówka, ogrzewanie, internet i oświetlenie pracują bez przerwy, a większy zestaw podtrzyma kluczowe obwody nawet przez 1–2 dni.',
     },
     {
       icon: 'cpu',
