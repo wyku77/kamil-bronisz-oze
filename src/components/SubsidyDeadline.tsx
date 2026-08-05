@@ -8,7 +8,10 @@ function daysLeft(target: string): number {
   return Math.max(0, Math.ceil(ms / 86_400_000))
 }
 
-/** Pasek FOMO: odliczanie do planowanego naboru dotacji (realny termin). */
+/**
+ * Pasek FOMO: odliczanie do startu naboru dotacji (4 września 2026 — realny termin).
+ * Po starcie licznik gaśnie, a pasek przechodzi na komunikat „nabór trwa do wyczerpania środków".
+ */
 export function SubsidyDeadline() {
   const [days, setDays] = useState(() => daysLeft(subsidyDeadline.targetDate))
 
@@ -25,7 +28,8 @@ export function SubsidyDeadline() {
             <Clock className="h-4 w-4" />
             {days > 0 ? (
               <span className="font-display text-sm font-bold text-white">
-                <span className="text-gradient">{days}</span> {subsidyDeadline.unit}
+                <span className="text-gradient">{days}</span>{' '}
+                {days === 1 ? subsidyDeadline.unitOne : subsidyDeadline.unitMany}
               </span>
             ) : (
               <span className="font-display text-sm font-bold text-white">{subsidyDeadline.passed}</span>

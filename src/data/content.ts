@@ -289,7 +289,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
-      a: 'Tak. Poza dotacją na magazyn energii (szczegóły w sekcji Magazyny) dostępne są też dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza **4 września 2026** i potrwa **do wyczerpania środków**. Dlatego liczy się gotowość: kto ma dobrany system i komplet dokumentów, składa wniosek od pierwszego dnia. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
     },
     {
       q: 'W jakich miastach działasz?',
@@ -413,7 +413,7 @@ export const leadMagnet = {
     'Ogniwa w technologii LFP — bezpieczeństwo i długa żywotność.',
     'Falownik hybrydowy lub gotowość pod retrofit, jeśli masz już fotowoltaikę.',
     'Integracja z taryfą dynamiczną — zarabianie na różnicy cen energii.',
-    'Komplet formalności i zgłoszenie w naborze (II/III kw. 2026).',
+    'Komplet formalności gotowy przed 4 września 2026 — start naboru, środki do wyczerpania.',
   ],
 }
 
@@ -455,13 +455,15 @@ export const leadTimeframe = {
 // --- Mikrocopy redukujące tarcie pod formularzami ---
 export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez zobowiązań • bez nachalnej sprzedaży'
 
-// --- Pasek odliczania do naboru dotacji (FOMO oparte na realnym terminie) ---
+// --- Pasek odliczania do startu naboru dotacji (FOMO oparte na realnym terminie) ---
 export const subsidyDeadline = {
-  // Orientacyjny termin (koniec II kwartału 2026) — łatwy do zmiany.
-  targetDate: '2026-06-30T23:59:59',
+  // Start naboru „Przydomowe Magazyny Energii" — 4 września 2026.
+  // Po tej dacie licznik znika, a pasek pokazuje `passed` (nabór trwa do wyczerpania środków).
+  targetDate: '2026-09-04T00:00:00',
   label: 'Dotacja na magazyn energii 2026',
-  text: 'Planowany nabór „Przydomowe Magazyny Energii" — II/III kwartał 2026. Przygotuj instalację, zanim ruszą wnioski.',
-  unit: 'dni do planowanego naboru',
+  text: 'Nabór „Przydomowe Magazyny Energii" rusza 4 września 2026 i trwa do wyczerpania środków. Przygotuj instalację, zanim ruszą wnioski.',
+  unitOne: 'dzień do startu naboru',
+  unitMany: 'dni do startu naboru',
   cta: 'Sprawdź, czy się łapiesz',
-  passed: 'Nabór coraz bliżej — nie przegap dofinansowania.',
+  passed: 'Nabór trwa — wnioski przyjmowane do wyczerpania środków.',
 }
