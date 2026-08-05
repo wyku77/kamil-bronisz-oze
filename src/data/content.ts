@@ -91,7 +91,7 @@ export const hero = {
     { value: 90, suffix: '%', label: 'Mniejsze rachunki za prąd' },
     { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
-    { value: 1340, suffix: '', label: 'Opinii Google firmy Begolden · 4,9 ★' },
+    { value: 1357, suffix: '', label: 'Opinii Google firmy Begolden · 4,8 ★' },
   ],
   floating: {
     savingsLabel: 'Oszczędność rachunku',
@@ -430,14 +430,14 @@ export const exitIntent = {
 
 // --- Opinie w Google (wizytówka firmy Begolden) ---
 export const googleReviews = {
-  rating: '4,9',
-  count: '1 340',
+  rating: '4,8',
+  count: '1 357',
   url: 'https://share.google/igMkIhQFc3MaFw0Os',
   label: 'Opinie w Google',
   note: 'opinii w Google',
   attribution: 'Oceny firmy Begolden, z którą realizuję instalacje',
   cta: 'Zobacz opinie w Google',
-  short: '4,9 ★ w Google',
+  short: '4,8 ★ w Google',
   local: 'Realizacje magazynów energii — całe województwo lubelskie',
 }
 

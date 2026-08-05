@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useInView } from 'framer-motion'
+import { useInView, useReducedMotion } from 'framer-motion'
 
 type CountUpProps = {
   to: number
@@ -30,20 +30,22 @@ export function CountUp({
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
-  const [value, setValue] = useState(from)
+  const prefersReduced = useReducedMotion()
+  const [value, setValue] = useState(() => (prefersReduced ? to : from))
   const startedFrom = useRef(from)
 
   useEffect(() => {
-    if (!inView) return
-
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
+    // Reduced-motion: pokazujemy wartość końcową od razu, NIEZALEŻNIE od `inView`.
+    // Wcześniej ten warunek był pod `if (!inView) return`, więc gdy IntersectionObserver
+    // nie zdążył zadziałać (np. w prerenderze, który emuluje reduced-motion i nie scrolluje),
+    // licznik zostawał na 0 — do statycznego HTML trafiało „0 opinii" i „0 zł dotacji".
     if (prefersReduced) {
       setValue(to)
+      startedFrom.current = to
       return
     }
+
+    if (!inView) return
 
     const start = startedFrom.current
     const startTime = performance.now()
@@ -63,7 +65,7 @@ export function CountUp({
 
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [inView, to, duration])
+  }, [inView, to, duration, prefersReduced])
 
   const fmt = (n: number) =>
     new Intl.NumberFormat('pl-PL', {
