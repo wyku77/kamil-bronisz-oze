@@ -372,6 +372,54 @@
       .why p { color: var(--muted); font-size: .92rem; margin-top: .3rem; }
       /* Ikony na kartach „Co możesz sfinansować" */
       .card .ic { font-size: 1.5rem; line-height: 1; margin-bottom: .5rem; }
+      /* Grafiki 3D (Higgsfield, pliki: public/grafiki-czyste-powietrze/) */
+      .card .ic-img { display: block; width: 60px; height: 60px; margin: -.35rem 0 .55rem -.35rem; filter: drop-shadow(0 8px 14px rgba(0,0,0,.4)); }
+      .why .why-ic { flex: none; width: 50px; height: 50px; margin: -.3rem 0 0 -.25rem; filter: drop-shadow(0 7px 12px rgba(0,0,0,.4)); }
+      .pick-img { height: 170px; margin: -.25rem -.35rem 1rem; border-radius: 14px; display: flex; align-items: flex-end; justify-content: center; background: radial-gradient(60% 65% at 50% 82%, rgba(225,189,91,.13), transparent 72%); }
+      .pick-img img { height: 100%; width: auto; max-width: 100%; object-fit: contain; filter: drop-shadow(0 14px 16px rgba(0,0,0,.45)); }
+      /* Hero: prawdziwe zdjęcie realizacji (po + miniatura przed) */
+      .hero-grid { display: grid; }
+      .hero-copy { display: contents; }
+      .hero-copy > .eyebrow { order: 1; justify-self: start; }
+      .hero-copy > h1 { order: 2; }
+      .hero-copy > .hero-benefit { order: 3; }
+      .hero-media { order: 4; }
+      .hero-copy > .lead { order: 5; }
+      .hero-copy > .hero-stats { order: 6; }
+      .hero-copy > .cta-row { order: 7; }
+      .hero-copy > .trust { order: 8; }
+      .hero-media { position: relative; display: block; width: 100%; max-width: 640px; margin-top: 1.5rem; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3; border: 1px solid rgba(225,189,91,.28); background: var(--ink-800); box-shadow: 0 24px 60px -20px rgba(0,0,0,.7); text-decoration: none; }
+      .hero-media .hm-po { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; transition: transform .8s cubic-bezier(.22,1,.36,1); }
+      .hero-media:hover .hm-po { transform: scale(1.03); }
+      .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,11,18,.72), rgba(7,11,18,0) 42%); pointer-events: none; }
+      .hm-chip { position: absolute; z-index: 2; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: .45rem; padding: .32rem .75rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold3); background: rgba(10,16,24,.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+      .hm-chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+      .hm-przed { position: absolute; z-index: 2; left: 12px; bottom: 12px; width: 30%; margin: 0; border-radius: 12px; overflow: hidden; border: 2px solid rgba(255,255,255,.85); box-shadow: 0 10px 24px rgba(0,0,0,.5); }
+      .hm-przed img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+      .hm-przed figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .2rem 0; text-align: center; font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: rgba(10,16,24,.72); }
+      .hm-link { position: absolute; z-index: 2; right: 12px; bottom: 14px; padding: .4rem .8rem; border-radius: 999px; font-size: .78rem; font-weight: 600; color: #fff; background: rgba(10,16,24,.72); border: 1px solid rgba(255,255,255,.18); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: border-color .2s, color .2s; }
+      .hero-media:hover .hm-link, .hero-media:focus-visible .hm-link { border-color: var(--gold); color: var(--gold3); }
+      .hero-media:focus-visible { outline: 2px solid var(--gold3); outline-offset: 3px; }
+      @media (min-width: 1100px) {
+        .hero .hero-grid { max-width: 1180px; grid-template-columns: minmax(0, 1fr) 420px; column-gap: 3.5rem; align-items: center; }
+        .hero-copy { display: block; }
+        .hero h1 { font-size: 2.7rem; }
+        .hero-media { margin-top: 0; aspect-ratio: 1 / 1; }
+        .hero-media .hm-po { object-position: 50% 50%; }
+      }
+      @media (prefers-reduced-motion: reduce) { .hero-media .hm-po { transition: none; } .hero-media:hover .hm-po { transform: none; } }
+      /* Końcowe CTA z tłem (ocieplony dom zimą) */
+      .final { position: relative; overflow: hidden; }
+      .final-bg { display: block; width: calc(100% + 4.8rem); height: 190px; margin: -2.4rem -2.4rem 1.3rem; object-fit: cover; object-position: 78% 62%; -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent); }
+      .final-body { position: relative; z-index: 2; }
+      @media (min-width: 760px) {
+        .final { display: flex; align-items: center; min-height: 330px; text-align: left; padding: 2.8rem 3rem; }
+        .final-bg { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; object-position: 85% 55%; -webkit-mask-image: none; mask-image: none; }
+        .final::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, var(--ink-800) 0%, rgba(19,28,43,.94) 36%, rgba(19,28,43,.45) 64%, rgba(19,28,43,.05) 100%); pointer-events: none; }
+        .final-body { max-width: 640px; }
+        .final h2 { font-size: 1.8rem; line-height: 1.2; }
+        .final .cta-row { justify-content: flex-start; }
+      }
       /* Pasek opinii Google (partner Begolden) */
       .greviews { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem 1.5rem; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 18px; padding: 1.3rem 1.5rem; margin-top: 1.4rem; }
       .greviews .gr-left { display: flex; align-items: flex-start; gap: .95rem; }
@@ -517,7 +565,8 @@
 
     <main>
       <section class="hero">
-        <div class="wrap">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
           <span class="eyebrow">Dotacje 2026</span>
           <h1>Program <span class="g">Czyste Powietrze</span> — wymiana starego pieca i termomodernizacja z dofinansowaniem</h1>
           <p class="hero-benefit">
@@ -545,6 +594,17 @@
             <span>📋 <b>Formalności biorę na siebie</b></span>
             <span>⚡ <b>Łączę z PV i magazynem energii</b></span>
           </div>
+          </div>
+          <!-- Prawdziwa realizacja (ta sama co 1. karta w galerii #realizacje): zdjęcie „po" + miniatura „przed" -->
+          <a class="hero-media" href="#realizacje">
+            <img class="hm-po" src="grafiki-czyste-powietrze/hero-realizacja-po-880.webp" srcset="grafiki-czyste-powietrze/hero-realizacja-po-560.webp 560w, grafiki-czyste-powietrze/hero-realizacja-po-880.webp 880w" sizes="(min-width: 1100px) 420px, calc(100vw - 2.5rem)" width="880" height="880" fetchpriority="high" decoding="async" alt="Prawdziwa realizacja z województwa lubelskiego: dom po dociepleniu i nowej elewacji" />
+            <span class="hm-chip">Realizacja · po</span>
+            <figure class="hm-przed">
+              <img src="grafiki-czyste-powietrze/hero-realizacja-przed-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ten sam dom przed termomodernizacją" />
+              <figcaption>Przed</figcaption>
+            </figure>
+            <span class="hm-link">Zobacz realizacje →</span>
+          </a>
         </div>
       </section>
 
@@ -667,12 +727,12 @@
           <h2 id="finansowanie">Co możesz sfinansować</h2>
           <p class="sub">Zakres dofinansowania zależy od wybranej ścieżki i poziomu dotacji.</p>
           <div class="grid grid-3">
-            <div class="card"><div class="ic">🔥</div><h3>Wymiana źródła ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesne ogrzewanie: pompę ciepła, piec na pellet lub piec zgazowujący drewno.</p></div>
-            <div class="card"><div class="ic">🧱</div><h3>Ocieplenie domu</h3><p>Docieplenie ścian, dachu, stropów i podłóg — niższe zużycie energii na ogrzewanie.</p></div>
-            <div class="card"><div class="ic">🪟</div><h3>Okna i drzwi</h3><p>Wymiana stolarki okiennej i drzwiowej na energooszczędną.</p></div>
-            <div class="card"><div class="ic">💨</div><h3>Wentylacja z rekuperacją</h3><p>Odzysk ciepła z powietrza — komfort i dodatkowe oszczędności.</p></div>
-            <div class="card"><div class="ic">🔧</div><h3>Instalacja c.o. i c.w.u.</h3><p>Modernizacja instalacji grzewczej i ciepłej wody użytkowej.</p></div>
-            <div class="card"><div class="ic">📋</div><h3>Audyt energetyczny</h3><p>W wybranych ścieżkach dofinansowany audyt, który wskazuje optymalny zakres prac.</p></div>
+            <div class="card"><img class="ic-img" src="grafiki-czyste-powietrze/ikona-zrodlo-ciepla.webp" width="60" height="60" alt="" loading="lazy" decoding="async" /><h3>Wymiana źródła ciepła</h3><p>Wymiana starego „kopciucha" na nowoczesne ogrzewanie: pompę ciepła, piec na pellet lub piec zgazowujący drewno.</p></div>
+            <div class="card"><img class="ic-img" src="grafiki-czyste-powietrze/ikona-ocieplenie.webp" width="60" height="60" alt="" loading="lazy" decoding="async" /><h3>Ocieplenie domu</h3><p>Docieplenie ścian, dachu, stropów i podłóg — niższe zużycie energii na ogrzewanie.</p></div>
+            <div class="card"><img class="ic-img" src="grafiki-czyste-powietrze/ikona-okna-drzwi.webp" width="60" height="60" alt="" loading="lazy" decoding="async" /><h3>Okna i drzwi</h3><p>Wymiana stolarki okiennej i drzwiowej na energooszczędną.</p></div>
+            <div class="card"><img class="ic-img" src="grafiki-czyste-powietrze/ikona-wentylacja.webp" width="60" height="60" alt="" loading="lazy" decoding="async" /><h3>Wentylacja z rekuperacją</h3><p>Odzysk ciepła z powietrza — komfort i dodatkowe oszczędności.</p></div>
+            <div class="card"><img class="ic-img" src="grafiki-czyste-powietrze/ikona-co-cwu.webp" width="60" height="60" alt="" loading="lazy" decoding="async" /><h3>Instalacja c.o. i c.w.u.</h3><p>Modernizacja instalacji grzewczej i ciepłej wody użytkowej.</p></div>
+            <div class="card"><img class="ic-img" src="grafiki-czyste-powietrze/ikona-audyt.webp" width="60" height="60" alt="" loading="lazy" decoding="async" /><h3>Audyt energetyczny</h3><p>W wybranych ścieżkach dofinansowany audyt, który wskazuje optymalny zakres prac.</p></div>
           </div>
         </div>
       </section>
@@ -683,6 +743,7 @@
           <p class="sub">Nie ma jednej dobrej drogi — dobieram źródło ciepła pod Twój dom, budżet i dostęp do paliwa. Oto trzy najczęstsze kierunki:</p>
           <div class="grid grid-3">
             <div class="pick">
+              <div class="pick-img"><img src="grafiki-czyste-powietrze/zrodlo-pompa-ciepla.webp" width="480" height="573" loading="lazy" decoding="async" alt="Pompa ciepła powietrzna — jednostka zewnętrzna (ilustracja poglądowa)" /></div>
               <h3>Pompa ciepła</h3>
               <p class="for">Dla ceniących wygodę i najniższe rachunki</p>
               <ul>
@@ -693,6 +754,7 @@
               </ul>
             </div>
             <div class="pick">
+              <div class="pick-img"><img src="grafiki-czyste-powietrze/zrodlo-piec-peletowy.webp" width="480" height="573" loading="lazy" decoding="async" alt="Piec peletowy z zasobnikiem na pellet (ilustracja poglądowa)" /></div>
               <h3>Piec peletowy</h3>
               <p class="for">Dla chcących „klasyczne" ciepło bez przebudowy</p>
               <ul>
@@ -703,6 +765,7 @@
               </ul>
             </div>
             <div class="pick">
+              <div class="pick-img"><img src="grafiki-czyste-powietrze/zrodlo-piec-zgazowujacy.webp" width="480" height="573" loading="lazy" decoding="async" alt="Piec zgazowujący drewno z drewnem opałowym (ilustracja poglądowa)" /></div>
               <h3>Piec zgazowujący drewno</h3>
               <p class="for">Dla mających dostęp do taniego drewna</p>
               <ul>
@@ -884,28 +947,28 @@
           <p class="sub">Większość firm sprzeda Ci to, co akurat ma w ofercie. Ja pracuję inaczej.</p>
           <div class="why-grid">
             <div class="why">
-              <span class="ic">🎯</span>
+              <img class="why-ic" src="grafiki-czyste-powietrze/ikona-niezaleznosc.webp" width="50" height="50" alt="" loading="lazy" decoding="async" />
               <div>
                 <h3>Nie jestem instalatorem jednej marki</h3>
                 <p>Dobieram źródło ciepła i sprzęt <b>niezależnie</b> — pod Twój dom i budżet, a nie pod magazyn jednego producenta.</p>
               </div>
             </div>
             <div class="why">
-              <span class="ic">🤝</span>
+              <img class="why-ic" src="grafiki-czyste-powietrze/ikona-wspolpraca.webp" width="50" height="50" alt="" loading="lazy" decoding="async" />
               <div>
                 <h3>Prowadzę od wniosku po wypłatę</h3>
                 <p>Nie znikam po podpisie. Zostaję z Tobą do <b>rozliczenia i wypłaty dotacji</b> — pilnuję terminów i statusu wniosku.</p>
               </div>
             </div>
             <div class="why">
-              <span class="ic">📋</span>
+              <img class="why-ic" src="grafiki-czyste-powietrze/ikona-formalnosci.webp" width="50" height="50" alt="" loading="lazy" decoding="async" />
               <div>
                 <h3>Formalności biorę na siebie</h3>
                 <p>Wniosek, dokumenty, kontakt z programem — kompletuję i prowadzę to za Ciebie, żeby nic się nie „posypało".</p>
               </div>
             </div>
             <div class="why">
-              <span class="ic">⚡</span>
+              <img class="why-ic" src="grafiki-czyste-powietrze/ikona-laczenie-dotacji.webp" width="50" height="50" alt="" loading="lazy" decoding="async" />
               <div>
                 <h3>Łączę dotacje w jedną całość</h3>
                 <p>Planuję Czyste Powietrze razem z <b>fotowoltaiką i magazynem energii</b> — tak, by maksymalnie obniżyć rachunki.</p>
@@ -1112,12 +1175,15 @@
 
       <section class="wrap" id="kontakt">
         <div class="final">
+          <img class="final-bg" src="grafiki-czyste-powietrze/cta-dom-zima-1600.webp" srcset="grafiki-czyste-powietrze/cta-dom-zima-800.webp 800w, grafiki-czyste-powietrze/cta-dom-zima-1600.webp 1600w" sizes="(min-width: 980px) 940px, 100vw" width="1600" height="905" alt="" loading="lazy" decoding="async" />
+          <div class="final-body">
           <h2>Sprawdź, czy łapiesz się na Czyste Powietrze</h2>
           <p>Bezpłatna analiza — sprawdzę Twój poziom dofinansowania i połączę go z oszczędnościami z fotowoltaiki i magazynu energii.</p>
           <div class="cta-row">
             <a class="btn btn-primary" href="#kwalifikacja">Umów bezpłatną analizę</a>
             <a class="btn btn-ghost" href="tel:+48512491787">📞 Zadzwoń: 512 491 787</a>
             <a class="btn wa" href="https://wa.me/48512491787" target="_blank" rel="noopener noreferrer">Napisz na WhatsApp</a>
+          </div>
           </div>
         </div>
       </section>
