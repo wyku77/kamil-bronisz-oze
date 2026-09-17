@@ -205,6 +205,7 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: WEB3FORMS_KEY,
+            botcheck: '',
             subject: `🔥 Nowy lead OZE (${payload.leadTemperature}) — ${payload.name || 'bez nazwy'}`,
             from_name: 'Strona OZE — kalkulator',
             replyto: payload.email,
@@ -287,6 +288,7 @@ export async function submitLeadMagnet(
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: WEB3FORMS_KEY,
+            botcheck: '',
             subject: `📞 Nowy lead (${source}): ${phone || email}`,
             from_name: 'Strona OZE — lead magnet',
             ...(email ? { replyto: email } : {}),

@@ -4,6 +4,7 @@ import type { CalcResult } from '../../lib/calc'
 import type { LeadContact } from '../../lib/leads'
 import { CountUp } from '../ui/CountUp'
 import { googleReviews, leadMicrocopy, leadTimeframe } from '../../data/content'
+import { Honeypot, isBotSubmit } from '../ui/Honeypot'
 
 type Props = {
   result: CalcResult
@@ -23,6 +24,8 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    // Bot wypełnił pole-pułapkę: przerywamy bez wysyłki.
+    if (isBotSubmit(e.target)) return
     if (!form.name.trim()) return setError('Podaj imię.')
     if (form.phone.replace(/\D/g, '').length < 9) return setError('Podaj poprawny numer telefonu.')
     if (form.email.trim() && !/\S+@\S+\.\S+/.test(form.email)) return setError('Popraw adres e-mail lub zostaw pole puste.')
@@ -77,6 +80,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
+          <Honeypot />
           <div>
             <label htmlFor="l-name" className="field-label">
               Imię*

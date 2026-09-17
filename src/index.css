@@ -99,6 +99,12 @@
   .field-label {
     @apply mb-1.5 block text-sm font-medium text-white/70;
   }
+
+  /* Pole-pułapka na boty (Honeypot.tsx) — poza ekranem, nie „display:none”,
+     bo część botów pomija pola całkowicie ukryte. */
+  .hp {
+    @apply pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0;
+  }
 }
 
 @layer utilities {

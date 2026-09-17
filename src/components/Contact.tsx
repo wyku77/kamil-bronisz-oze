@@ -5,6 +5,7 @@ import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
 import { submitLead, type LeadPayload } from '../lib/leads'
 import { track } from '../lib/analytics'
+import { Honeypot, isBotSubmit } from './ui/Honeypot'
 
 const times = ['Rano (8:00–12:00)', 'Popołudnie (12:00–16:00)', 'Po 16:00', 'Dowolna pora']
 
@@ -37,6 +38,8 @@ export function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    // Bot wypełnił pole-pułapkę: udajemy sukces, nic nie wysyłamy.
+    if (isBotSubmit(e.target)) return setSent(true)
     if (!form.name.trim()) return setError('Podaj imię.')
     if (form.phone.replace(/\D/g, '').length < 9) return setError('Podaj poprawny numer telefonu.')
     if (form.email.trim() && !/\S+@\S+\.\S+/.test(form.email)) return setError('Popraw adres e-mail lub zostaw pole puste.')
@@ -174,6 +177,7 @@ export function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <Honeypot />
                   <h3 className="font-display text-xl font-bold text-white">Zostaw numer — oddzwonię w ciągu godziny</h3>
 
                   <div>

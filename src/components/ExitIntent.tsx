@@ -4,6 +4,7 @@ import { CheckCircle2, Phone, X } from 'lucide-react'
 import { exitIntent } from '../data/content'
 import { submitLeadMagnet } from '../lib/leads'
 import { track } from '../lib/analytics'
+import { Honeypot, isBotSubmit } from './ui/Honeypot'
 
 const isPhone = (v: string) => v.replace(/\D/g, '').length >= 9
 const SEEN_KEY = 'kb_exit_seen'
@@ -39,6 +40,8 @@ export function ExitIntent() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    // Bot wypełnił pole-pułapkę: udajemy sukces, nic nie wysyłamy.
+    if (isBotSubmit(e.target)) return setStatus('done')
     if (!isPhone(phone)) {
       setError('Podaj poprawny numer telefonu.')
       return
@@ -82,6 +85,7 @@ export function ExitIntent() {
                 <h3 className="font-display text-2xl font-bold text-white">{exitIntent.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/65">{exitIntent.text}</p>
                 <form onSubmit={handleSubmit} className="mt-5 space-y-3">
+                  <Honeypot />
                   <div className="relative">
                     <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
                     <input

@@ -7,6 +7,7 @@ import { track } from '../lib/analytics'
 import cover600 from '../assets/grafiki/checklista-tablet-600.webp'
 import cover1200 from '../assets/grafiki/checklista-tablet-1200.webp'
 import cover1440 from '../assets/grafiki/checklista-tablet-1440.webp'
+import { Honeypot, isBotSubmit } from './ui/Honeypot'
 
 const isPhone = (v: string) => v.replace(/\D/g, '').length >= 9
 
@@ -18,6 +19,8 @@ export function LeadMagnet() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    // Bot wypełnił pole-pułapkę: udajemy sukces, nic nie wysyłamy.
+    if (isBotSubmit(e.target)) return setStatus('done')
     if (!isPhone(phone)) {
       setError('Podaj poprawny numer telefonu.')
       return
@@ -44,6 +47,7 @@ export function LeadMagnet() {
 
               {!unlocked ? (
                 <form onSubmit={handleSubmit} className="mt-6 space-y-3">
+                  <Honeypot />
                   <div className="relative">
                     <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
                     <input
