@@ -35,7 +35,9 @@ export function SubsidyDeadline() {
               <span className="font-display text-sm font-bold text-white">{subsidyDeadline.passed}</span>
             )}
           </span>
-          <p className="text-sm leading-relaxed text-white/70">{subsidyDeadline.text}</p>
+          <p className="text-sm leading-relaxed text-white/70">
+            {days > 0 ? subsidyDeadline.text : subsidyDeadline.textStarted}
+          </p>
           <a
             href="#kontakt"
             onClick={() => track.ctaClick('subsidy_deadline')}

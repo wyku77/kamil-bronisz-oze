@@ -3,6 +3,7 @@ import { ArrowRight, Zap } from 'lucide-react'
 import { energyStorage } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { track } from '../lib/analytics'
+import { EnergySystem } from './EnergySystem'
 
 // Reprezentatywna dobowa krzywa cen energii (zł/kWh) — ilustracja taryfy dynamicznej.
 const PRICES = [
@@ -77,6 +78,11 @@ export function EnergyStorage() {
           <span className="eyebrow">{energyStorage.eyebrow}</span>
           <h2 className="mt-5 h-section text-white">{energyStorage.title}</h2>
           <p className="mt-5 text-lg leading-relaxed text-white/65">{energyStorage.lead}</p>
+        </Reveal>
+
+        {/* Interaktywna ilustracja: jak działa dom z magazynem */}
+        <Reveal className="mx-auto mt-12 max-w-5xl">
+          <EnergySystem />
         </Reveal>
 
         {/* Mini-case: konkretne liczby + awersja do straty */}

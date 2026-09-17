@@ -4,6 +4,8 @@ import { leadMagnet } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { submitLeadMagnet } from '../lib/leads'
 import { track } from '../lib/analytics'
+import cover600 from '../assets/grafiki/checklista-tablet-600.webp'
+import cover1200 from '../assets/grafiki/checklista-tablet-1200.webp'
 
 const isPhone = (v: string) => v.replace(/\D/g, '').length >= 9
 
@@ -88,31 +90,40 @@ export function LeadMagnet() {
               )}
             </div>
 
-            {/* Checklista — rozmyta do czasu zapisu (mechanizm „odblokuj") */}
-            <div className="relative">
-              <ul
-                className={`space-y-2.5 transition-all duration-500 ${
-                  unlocked ? '' : 'pointer-events-none select-none blur-sm'
-                }`}
-              >
-                {leadMagnet.checklist.map((c, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/80"
-                  >
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gold-400/15 font-display text-xs font-bold text-gold-300">
-                      {i + 1}
-                    </span>
-                    {c}
-                  </li>
-                ))}
-              </ul>
-              {!unlocked && (
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="rounded-full border border-white/15 bg-ink-900/80 px-4 py-2 text-xs font-medium text-white/70 backdrop-blur">
-                    🔒 Zostaw numer, by odblokować
-                  </span>
-                </div>
+            {/* Przed zapisem: okładka checklisty (pokazuje, co dostajesz). Po zapisie: pełna checklista.
+                Na mobile okładka stoi nad formularzem, na desktopie obok niego. */}
+            <div className={unlocked ? '' : 'order-first lg:order-none'}>
+              {unlocked ? (
+                <ul className="space-y-2.5">
+                  {leadMagnet.checklist.map((c, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/80"
+                    >
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gold-400/15 font-display text-xs font-bold text-gold-300">
+                        {i + 1}
+                      </span>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <figure className="mx-auto max-w-xs sm:max-w-sm">
+                  <img
+                    src={cover1200}
+                    srcSet={`${cover600} 600w, ${cover1200} 1200w`}
+                    sizes="(min-width: 640px) 384px, 320px"
+                    width={1200}
+                    height={1200}
+                    loading="lazy"
+                    decoding="async"
+                    alt={leadMagnet.coverAlt}
+                    className="block h-auto w-full rounded-2xl border border-white/10 shadow-card"
+                  />
+                  <figcaption className="mt-3 text-center text-xs font-medium text-white/60">
+                    🔒 Pełna checklista po zostawieniu numeru
+                  </figcaption>
+                </figure>
               )}
             </div>
           </div>

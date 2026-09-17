@@ -39,3 +39,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Skille agentów AI (Higgsfield) — narzędzia lokalne, nie część strony
+.agents/
+skills-lock.json
+
+# Robocze pliki generacji grafik (oryginały z Higgsfield) — w repo tylko zoptymalizowane wersje
+/grafiki-ai/

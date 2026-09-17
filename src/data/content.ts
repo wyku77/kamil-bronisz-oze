@@ -289,7 +289,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
-      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza **4 września 2026** i potrwa **do wyczerpania środków**. Dlatego liczy się gotowość: kto ma dobrany system i komplet dokumentów, składa wniosek od pierwszego dnia. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — ruszył **4 września 2026** i potrwa **do wyczerpania środków**. Dlatego liczy się czas: kto ma dobrany system i komplet dokumentów, składa wniosek szybciej, zanim pula się wyczerpie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
     },
     {
       q: 'W jakich miastach działasz?',
@@ -340,6 +340,65 @@ export const energyStorage = {
     chargeLabel: 'Ładowanie (tanio)',
     dischargeLabel: 'Korzystanie z magazynu (drogo)',
   },
+}
+
+// --- Interaktywna ilustracja „jak działa dom z magazynem" (grafika poglądowa, nie realizacja) ---
+// x / y = położenie punktu w % szerokości / wysokości grafiki src/assets/grafiki/dom-system-energii-*.webp
+export const energySystem = {
+  title: 'Jak działa inteligentny dom z magazynem',
+  hint: 'Wybierz element, żeby zobaczyć, co robi w Twoim domu.',
+  alt: 'Ilustracja poglądowa: dom z fotowoltaiką, magazynem energii, ładowarką samochodu elektrycznego, pompą ciepła i przyłączem do sieci, połączonych przepływami energii',
+  defaultId: 'magazyn',
+  points: [
+    {
+      id: 'panele',
+      short: 'Panele PV',
+      title: 'Panele fotowoltaiczne',
+      text: 'W dzień produkują prąd. Bez magazynu nadwyżki oddajesz do sieci za grosze — a wieczorem kupujesz drogi prąd z powrotem.',
+      x: 47.2,
+      y: 21.1,
+    },
+    {
+      id: 'magazyn',
+      short: 'Magazyn energii',
+      title: 'Magazyn energii z falownikiem',
+      text: 'Serce systemu. Zatrzymuje energię z paneli na wieczór i noc, a przy awarii sieci przechodzi w tryb wyspowy — dom działa dalej.',
+      x: 35.5,
+      y: 49.4,
+    },
+    {
+      id: 'hems',
+      short: 'Zarządzanie (HEMS)',
+      title: 'Inteligentne zarządzanie energią (HEMS)',
+      text: 'System z AI sam decyduje, kiedy ładować magazyn, kiedy zasilać dom, a kiedy kupić prąd z sieci — tak, żeby rachunek był jak najniższy.',
+      x: 63.1,
+      y: 52.2,
+    },
+    {
+      id: 'auto',
+      short: 'Auto elektryczne',
+      title: 'Ładowanie samochodu',
+      text: 'Auto elektryczne lub hybrydę plug-in ładujesz własną energią z paneli albo w najtańszych godzinach nocnych.',
+      x: 27.2,
+      y: 63.9,
+    },
+    {
+      id: 'pompa',
+      short: 'Pompa ciepła',
+      title: 'Pompa ciepła',
+      text: 'Ogrzewanie i ciepła woda zasilane energią z paneli i magazynu — zamiast drogiego prądu w godzinach szczytu.',
+      x: 75.8,
+      y: 53.1,
+    },
+    {
+      id: 'siec',
+      short: 'Sieć i taryfa',
+      title: 'Sieć i taryfa dynamiczna',
+      text: 'Gdy ceny prądu spadają, magazyn ładuje się tanio z sieci, a gdy rosną — zasila dom. Zarabiasz na różnicy cen w ciągu doby.',
+      x: 87.2,
+      y: 17.8,
+    },
+  ],
 }
 
 // --- Sekcja: Konsultant, nie akwizytor + porównanie ---
@@ -403,6 +462,7 @@ export const leadMagnet = {
   phonePlaceholder: 'Twój numer telefonu',
   emailPlaceholder: 'E-mail (opcjonalnie — wyślę kopię)',
   button: 'Pokaż checklistę',
+  coverAlt: 'Okładka checklisty „Dotacja na magazyn energii 2026" na tablecie — 7 punktów, które decydują o dotacji i opłacalności magazynu',
   consent: 'Zostawiając numer, zgadzasz się na kontakt telefoniczny w sprawie analizy. Bez zobowiązań.',
   successTitle: 'Gotowe! Oto Twoja checklista 👇',
   successNote: 'Oddzwonię w dogodnym terminie i prześlę pełny poradnik.',
@@ -413,7 +473,7 @@ export const leadMagnet = {
     'Ogniwa w technologii LFP — bezpieczeństwo i długa żywotność.',
     'Falownik hybrydowy lub gotowość pod retrofit, jeśli masz już fotowoltaikę.',
     'Integracja z taryfą dynamiczną — zarabianie na różnicy cen energii.',
-    'Komplet formalności gotowy przed 4 września 2026 — start naboru, środki do wyczerpania.',
+    'Komplet formalności gotowy od ręki — nabór trwa od 4 września 2026, do wyczerpania środków.',
   ],
 }
 
@@ -461,7 +521,9 @@ export const subsidyDeadline = {
   // Po tej dacie licznik znika, a pasek pokazuje `passed` (nabór trwa do wyczerpania środków).
   targetDate: '2026-09-04T00:00:00',
   label: 'Dotacja na magazyn energii 2026',
+  // `text` przed startem naboru, `textStarted` po starcie — pasek wybiera sam na podstawie daty.
   text: 'Nabór „Przydomowe Magazyny Energii" rusza 4 września 2026 i trwa do wyczerpania środków. Przygotuj instalację, zanim ruszą wnioski.',
+  textStarted: 'Program „Przydomowe Magazyny Energii" (do 16 000 zł na magazyn) ruszył 4 września 2026. Pula jest ograniczona — sprawdź, czy się łapiesz, zanim środki się wyczerpią.',
   unitOne: 'dzień do startu naboru',
   unitMany: 'dni do startu naboru',
   cta: 'Sprawdź, czy się łapiesz',
