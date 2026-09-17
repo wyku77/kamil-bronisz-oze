@@ -99,7 +99,7 @@ Przepływ: **Formularz → Bramka leadowa (lead magnet) → Pełne wyniki**
    **czas zwrotu PO dofinansowaniu**, dofinansowanie, redukcja CO₂.
 
 > Kalkulator uwzględnia dofinansowanie z programu **„Przydomowe Magazyny Energii"** (nabór rusza
-> **4 września 2026**, wnioski do wyczerpania środków) — dotacja wyłącznie na **magazyn energii,
+> w **IV kwartale 2026**, wnioski do wyczerpania środków) — dotacja wyłącznie na **magazyn energii,
 > maks. 16 000 zł**. Program **nie obejmuje dofinansowania
 > do paneli PV**. Model **zakłada z góry korzystanie z taryfy dynamicznej** i obecny, duży arbitraż
 > cenowy — dzięki temu orientacyjny czas zwrotu typowej instalacji domowej to ok. **3,8–4,4 lat**,

@@ -14,7 +14,7 @@ export function SectionCTA({ text, button, href, label }: Props) {
   return (
     <div className="bg-ink-950 py-6">
       <div className="container-px">
-        <Reveal className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-gold-400/20 bg-gradient-to-r from-gold-400/12 via-white/[0.03] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
+        <Reveal className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-gold-400/20 bg-gradient-to-r from-gold-400/10 via-white/[0.03] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
           <p className="font-display text-base font-semibold text-white sm:text-lg">{text}</p>
           <a href={href} onClick={() => track.ctaClick(label)} className="btn-primary group shrink-0">
             {button}

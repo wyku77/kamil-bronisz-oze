@@ -192,7 +192,7 @@ export function Contact() {
                             className={`rounded-xl border px-4 py-3 text-left text-sm font-medium transition-all ${
                               active
                                 ? 'border-gold-400 bg-gold-400/15 text-white'
-                                : 'border-white/12 bg-white/[0.03] text-white/85 hover:border-gold-400/50 hover:bg-gold-400/10'
+                                : 'border-white/15 bg-white/[0.03] text-white/85 hover:border-gold-400/50 hover:bg-gold-400/10'
                             }`}
                           >
                             {o.label}

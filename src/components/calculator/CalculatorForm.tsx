@@ -48,7 +48,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
                 className={`flex flex-col items-center gap-2 rounded-2xl border px-3 py-4 text-sm font-medium transition-all ${
                   active
                     ? 'border-gold-400 bg-gold-400/10 text-gold-200 shadow-glow-gold'
-                    : 'border-white/12 bg-white/[0.03] text-white/70 hover:border-white/30'
+                    : 'border-white/15 bg-white/[0.03] text-white/70 hover:border-white/30'
                 }`}
               >
                 <o.icon className="h-6 w-6" strokeWidth={1.75} />
@@ -143,7 +143,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
                 className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
                   active
                     ? 'border-gold-400 bg-gold-400/10 text-gold-200'
-                    : 'border-white/12 bg-white/[0.03] text-white/70 hover:border-white/30'
+                    : 'border-white/15 bg-white/[0.03] text-white/70 hover:border-white/30'
                 }`}
               >
                 <span

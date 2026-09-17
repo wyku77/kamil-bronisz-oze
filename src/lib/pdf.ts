@@ -180,7 +180,7 @@ export async function generateWycenaPdf(
                 stack: [
                   { text: 'Dotacja 2026: do 16 000 zł', color: INK, bold: true, fontSize: 11 },
                   {
-                    text: 'Program „Przydomowe Magazyny Energii" — nabór trwa od 4 września 2026 do wyczerpania środków. Wymaga systemu zarządzania energią (EMS) i pracy wyspowej. Dobieram rozwiązania, które te wymogi spełniają.',
+                    text: 'Program „Przydomowe Magazyny Energii" — nabór rusza w IV kwartale 2026 i potrwa do wyczerpania środków. Wymaga systemu zarządzania energią (EMS) i pracy wyspowej. Dobieram rozwiązania, które te wymogi spełniają.',
                     color: TEXT,
                     fontSize: 9,
                     margin: [0, 4, 0, 0],

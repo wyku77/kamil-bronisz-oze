@@ -91,7 +91,7 @@ export const hero = {
     { value: 90, suffix: '%', label: 'Mniejsze rachunki za prąd' },
     { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
-    { value: 1357, suffix: '', label: 'Opinii Google firmy Begolden · 4,8 ★' },
+    { value: 1380, suffix: '', label: 'Opinii Google firmy Begolden · 4,9 ★' },
   ],
   floating: {
     savingsLabel: 'Oszczędność rachunku',
@@ -289,7 +289,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
-      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — ruszył **4 września 2026** i potrwa **do wyczerpania środków**. Dlatego liczy się czas: kto ma dobrany system i komplet dokumentów, składa wniosek szybciej, zanim pula się wyczerpie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza w **IV kwartale 2026** i potrwa **do wyczerpania środków**. Dlatego warto przygotować się wcześniej: kto ma dobrany system i komplet dokumentów, złoży wniosek od razu po starcie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
     },
     {
       q: 'W jakich miastach działasz?',
@@ -473,7 +473,7 @@ export const leadMagnet = {
     'Ogniwa w technologii LFP — bezpieczeństwo i długa żywotność.',
     'Falownik hybrydowy lub gotowość pod retrofit, jeśli masz już fotowoltaikę.',
     'Integracja z taryfą dynamiczną — zarabianie na różnicy cen energii.',
-    'Komplet formalności gotowy od ręki — nabór trwa od 4 września 2026, do wyczerpania środków.',
+    'Komplet formalności gotowy przed startem naboru (IV kwartał 2026) — środki są do wyczerpania.',
   ],
 }
 
@@ -490,14 +490,14 @@ export const exitIntent = {
 
 // --- Opinie w Google (wizytówka firmy Begolden) ---
 export const googleReviews = {
-  rating: '4,8',
-  count: '1 357',
+  rating: '4,9',
+  count: '1 380',
   url: 'https://share.google/igMkIhQFc3MaFw0Os',
   label: 'Opinie w Google',
   note: 'opinii w Google',
   attribution: 'Oceny firmy Begolden, z którą realizuję instalacje',
   cta: 'Zobacz opinie w Google',
-  short: '4,8 ★ w Google',
+  short: '4,9 ★ w Google',
   local: 'Realizacje magazynów energii — całe województwo lubelskie',
 }
 
@@ -515,15 +515,17 @@ export const leadTimeframe = {
 // --- Mikrocopy redukujące tarcie pod formularzami ---
 export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez zobowiązań • bez nachalnej sprzedaży'
 
-// --- Pasek odliczania do startu naboru dotacji (FOMO oparte na realnym terminie) ---
+// --- Pasek naboru dotacji (FOMO oparte na realnym terminie) ---
 export const subsidyDeadline = {
-  // Start naboru „Przydomowe Magazyny Energii" — 4 września 2026.
-  // Po tej dacie licznik znika, a pasek pokazuje `passed` (nabór trwa do wyczerpania środków).
-  targetDate: '2026-09-04T00:00:00',
+  // Nabór „Przydomowe Magazyny Energii" rusza w IV kwartale 2026 — dokładna data nie jest jeszcze znana,
+  // więc NIE odliczamy dni (licznik do umownej daty sugerowałby nieprawdziwy termin).
+  // Gdy data będzie znana: wpisz ją tutaj (np. '2026-11-03T00:00:00'). Pasek sam zacznie odliczać dni,
+  // a po starcie przełączy się na `passed` + `textStarted`.
+  targetDate: null as string | null,
+  badge: 'Nabór: IV kwartał 2026',
   label: 'Dotacja na magazyn energii 2026',
-  // `text` przed startem naboru, `textStarted` po starcie — pasek wybiera sam na podstawie daty.
-  text: 'Nabór „Przydomowe Magazyny Energii" rusza 4 września 2026 i trwa do wyczerpania środków. Przygotuj instalację, zanim ruszą wnioski.',
-  textStarted: 'Program „Przydomowe Magazyny Energii" (do 16 000 zł na magazyn) ruszył 4 września 2026. Pula jest ograniczona — sprawdź, czy się łapiesz, zanim środki się wyczerpią.',
+  text: 'Nabór „Przydomowe Magazyny Energii" (do 16 000 zł na magazyn) rusza w IV kwartale 2026 i potrwa do wyczerpania środków. Przygotuj dobór i dokumenty, zanim ruszą wnioski.',
+  textStarted: 'Nabór „Przydomowe Magazyny Energii" (do 16 000 zł na magazyn) już trwa. Pula jest ograniczona — sprawdź, czy się łapiesz, zanim środki się wyczerpią.',
   unitOne: 'dzień do startu naboru',
   unitMany: 'dni do startu naboru',
   cta: 'Sprawdź, czy się łapiesz',

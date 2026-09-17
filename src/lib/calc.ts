@@ -80,7 +80,7 @@ const STORAGE_COST_PER_KWH = 2200
 const SYSTEM_BASE_COST = 3000 // HEMS, osprzęt, integracja
 
 /**
- * Dofinansowanie — program „Przydomowe Magazyny Energii" (nabór od 4 września 2026,
+ * Dofinansowanie — program „Przydomowe Magazyny Energii" (nabór w IV kwartale 2026,
  * wnioski do wyczerpania środków).
  * Dotacja dotyczy wyłącznie MAGAZYNU ENERGII, maksymalnie 16 000 zł.
  * Program NIE przewiduje dofinansowania do paneli fotowoltaicznych (PV).
