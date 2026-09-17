@@ -1,6 +1,10 @@
-import { Check, Sparkles, X } from 'lucide-react'
+import { Check, X } from 'lucide-react'
 import { approach } from '../data/content'
 import { Reveal } from './ui/Reveal'
+// Ikony 3D nagłówków kolumn. Akwizytor jest celowo w chłodnej szarości (bez złota),
+// konsultant w złocie — kontrast widać, zanim ktoś przeczyta listy.
+import ikonaAkwizytor from '../assets/grafiki/ikony/akwizytor.webp'
+import ikonaKonsultant from '../assets/grafiki/ikony/konsultant.webp'
 
 export function Approach() {
   return (
@@ -16,7 +20,18 @@ export function Approach() {
         {/* Kontrast: akwizytor vs konsultant */}
         <div className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2">
           <Reveal direction="right" className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
-            <p className="font-display text-lg font-bold text-white/80">{approach.bad.title}</p>
+            <p className="flex items-center gap-3 font-display text-lg font-bold text-white/80">
+              <img
+                src={ikonaAkwizytor}
+                width={56}
+                height={56}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="-my-1 h-14 w-14 shrink-0 drop-shadow-[0_8px_14px_rgba(0,0,0,0.45)]"
+              />
+              {approach.bad.title}
+            </p>
             <ul className="mt-4 space-y-3">
               {approach.bad.items.map((it) => (
                 <li key={it} className="flex items-start gap-3 text-sm text-white/70">
@@ -33,8 +48,17 @@ export function Approach() {
             direction="left"
             className="rounded-3xl border border-gold-400/30 bg-gradient-to-br from-gold-400/10 to-ink-900 p-6 shadow-glow-gold"
           >
-            <p className="flex items-center gap-2 font-display text-lg font-bold text-white">
-              <Sparkles className="h-4 w-4 text-gold-300" /> {approach.good.title}
+            <p className="flex items-center gap-3 font-display text-lg font-bold text-white">
+              <img
+                src={ikonaKonsultant}
+                width={56}
+                height={56}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="-my-1 h-14 w-14 shrink-0 drop-shadow-[0_8px_14px_rgba(0,0,0,0.45)]"
+              />
+              {approach.good.title}
             </p>
             <ul className="mt-4 space-y-3">
               {approach.good.items.map((it) => (

@@ -3,6 +3,9 @@ import { energySystem } from '../data/content'
 import { track } from '../lib/analytics'
 import img800 from '../assets/grafiki/dom-system-energii-800.webp'
 import img1600 from '../assets/grafiki/dom-system-energii-1600.webp'
+// 2400 px dla ekranów retina — ilustracja jest wyświetlana na 1024 px, więc przy 2x DPR
+// wariant 1600 był rozciągany (1,5x) i wyglądał miękko.
+import img2400 from '../assets/grafiki/dom-system-energii-2400.webp'
 
 /**
  * Interaktywna ilustracja „jak działa dom z magazynem".
@@ -27,7 +30,7 @@ export function EnergySystem() {
       <div className="relative mt-6 overflow-hidden rounded-3xl border border-white/10 bg-[#050b16]">
         <img
           src={img1600}
-          srcSet={`${img800} 800w, ${img1600} 1600w`}
+          srcSet={`${img800} 800w, ${img1600} 1600w, ${img2400} 2400w`}
           sizes="(min-width: 1024px) 1024px, 100vw"
           width={1600}
           height={900}

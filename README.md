@@ -55,7 +55,7 @@ src/
 │   └── format.ts              # formatowanie liczb (pl-PL)
 ├── components/
 │   ├── Navbar, Hero, Benefits, Process, About,
-│   │   Testimonials, FAQ, FinalCTA, Contact, Footer, FloatingActions
+│   │   Testimonials, FAQ, Contact, Footer, FloatingActions
 │   ├── calculator/            # Calculator (orkiestrator), Form, LeadGate, Results, SavingsChart
 │   └── ui/                    # Reveal, SmartImage, CountUp, Logo, Icon
 └── App.tsx                    # kolejność sekcji
@@ -181,7 +181,7 @@ zdarzenia jako konwersje w Meta Ads / Google Ads.
 - `public/robots.txt`, `public/sitemap.xml`, `public/favicon.svg`
 
 > Po wdrożeniu na docelową domenę zmień adresy `https://kamilbronisz.pl/` w `index.html`,
-> `robots.txt`, `sitemap.xml` oraz wgraj grafikę `public/og-image.jpg` (1200×630).
+> `robots.txt`, `sitemap.xml` oraz podgląd linku `public/og-kamilbronisz-2026.jpg` (1200×630; przy podmianie zmień NAZWĘ pliku, bo Facebook cache’uje po URL).
 
 ---
 

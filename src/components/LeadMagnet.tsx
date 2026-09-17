@@ -6,6 +6,7 @@ import { submitLeadMagnet } from '../lib/leads'
 import { track } from '../lib/analytics'
 import cover600 from '../assets/grafiki/checklista-tablet-600.webp'
 import cover1200 from '../assets/grafiki/checklista-tablet-1200.webp'
+import cover1440 from '../assets/grafiki/checklista-tablet-1440.webp'
 
 const isPhone = (v: string) => v.replace(/\D/g, '').length >= 9
 
@@ -111,7 +112,7 @@ export function LeadMagnet() {
                 <figure className="mx-auto max-w-xs sm:max-w-sm">
                   <img
                     src={cover1200}
-                    srcSet={`${cover600} 600w, ${cover1200} 1200w`}
+                    srcSet={`${cover600} 600w, ${cover1200} 1200w, ${cover1440} 1440w`}
                     sizes="(min-width: 640px) 384px, 320px"
                     width={1200}
                     height={1200}

@@ -137,6 +137,7 @@
       .card h3 { color: #fff; font-size: 1.05rem; font-family: 'Sora', sans-serif; }
       .card p { color: var(--muted); font-size: .95rem; margin-top: .5rem; }
       .level { border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 18px; padding: 1.3rem 1.4rem; }
+      .level .lvl-ic { display: block; width: 76px; height: 76px; margin: -.45rem 0 .5rem -.4rem; filter: drop-shadow(0 9px 15px rgba(0,0,0,.42)); }
       .level .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--gold3); font-weight: 700; }
       .level .amt { font-family: 'Sora', sans-serif; font-weight: 800; color: #fff; font-size: 1.4rem; margin-top: .5rem; }
       .level p { color: var(--muted); font-size: .9rem; margin-top: .5rem; }
@@ -202,6 +203,8 @@
       .proc { display: grid; gap: 1rem; margin-top: 1.6rem; }
       .pstep { display: flex; gap: 1rem; align-items: flex-start; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 16px; padding: 1.1rem 1.3rem; }
       .pstep .n { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--gold3), #bb8718); color: var(--ink-950); font-family: 'Sora', sans-serif; font-weight: 800; }
+      .pstep .p-ic { flex: none; width: 54px; height: 54px; margin: -.3rem .1rem 0 -.2rem; filter: drop-shadow(0 8px 14px rgba(0,0,0,.42)); }
+      @media (max-width: 430px) { .pstep { gap: .7rem; padding: 1rem 1.05rem; } .pstep .p-ic { width: 42px; height: 42px; } }
       .pstep h3 { color: #fff; font-size: 1.02rem; font-family: 'Sora', sans-serif; }
       .pstep p { color: var(--muted); font-size: .92rem; margin-top: .3rem; }
       .about-wrap { display: grid; grid-template-columns: 200px 1fr; gap: 1.9rem; align-items: center; border: 1px solid rgba(225,189,91,.22); background: radial-gradient(120% 120% at 0% 0%, rgba(225,189,91,.10), transparent), var(--ink-900); border-radius: 24px; padding: 1.9rem; margin-top: 1.4rem; }
@@ -879,9 +882,9 @@
           <h2 id="poziomy">Trzy poziomy dofinansowania</h2>
           <p class="sub">Dotacja pokrywa <b>procent kosztów kwalifikowanych</b> — im niższy dochód w gospodarstwie, tym wyższy udział dofinansowania.</p>
           <div class="grid grid-3">
-            <div class="level"><span class="tag">Poziom podstawowy</span><div class="amt">do 40%</div><p>Dla wyższych dochodów — niższy udział dotacji, ale wciąż realne wsparcie do kosztów.</p></div>
-            <div class="level"><span class="tag">Poziom podwyższony</span><div class="amt">do 70%</div><p>Dla średnich dochodów — znacząco wyższy udział dofinansowania w kosztach inwestycji.</p></div>
-            <div class="level"><span class="tag">Poziom najwyższy</span><div class="amt">do 100%</div><p>Dla najniższych dochodów i kompleksowej termomodernizacji — nawet pełne pokrycie kosztów kwalifikowanych.</p></div>
+            <div class="level"><img class="lvl-ic" src="grafiki-czyste-powietrze/ikona-poziom-podstawowy.webp" width="76" height="76" alt="" loading="lazy" decoding="async" /><span class="tag">Poziom podstawowy</span><div class="amt">do 40%</div><p>Dla wyższych dochodów — niższy udział dotacji, ale wciąż realne wsparcie do kosztów.</p></div>
+            <div class="level"><img class="lvl-ic" src="grafiki-czyste-powietrze/ikona-poziom-podwyzszony.webp" width="76" height="76" alt="" loading="lazy" decoding="async" /><span class="tag">Poziom podwyższony</span><div class="amt">do 70%</div><p>Dla średnich dochodów — znacząco wyższy udział dofinansowania w kosztach inwestycji.</p></div>
+            <div class="level"><img class="lvl-ic" src="grafiki-czyste-powietrze/ikona-poziom-najwyzszy.webp" width="76" height="76" alt="" loading="lazy" decoding="async" /><span class="tag">Poziom najwyższy</span><div class="amt">do 100%</div><p>Dla najniższych dochodów i kompleksowej termomodernizacji — nawet pełne pokrycie kosztów kwalifikowanych.</p></div>
           </div>
           <div class="note">
             ⚠️ Procenty i progi dochodowe programu Czyste Powietrze bywają aktualizowane przez NFOŚiGW. Na bezpłatnej
@@ -908,11 +911,11 @@
           <h2>Jak wygląda współpraca — krok po kroku</h2>
           <p class="sub">Prowadzę Cię od pierwszej rozmowy aż po wypłatę dotacji. Formalności biorę na siebie.</p>
           <div class="proc">
-            <div class="pstep"><span class="n">1</span><div><h3>Analiza kwalifikacji</h3><p>Sprawdzam, czy i na jakim poziomie się kwalifikujesz oraz co realnie Ci przysługuje — bez zgadywania.</p></div></div>
-            <div class="pstep"><span class="n">2</span><div><h3>Dobór źródła ciepła i zakresu</h3><p>Porównuję pompę ciepła, piec peletowy i piec zgazowujący drewno, dobieram zakres prac (np. źródło + ocieplenie) pod Twój dom i budżet.</p></div></div>
-            <div class="pstep"><span class="n">3</span><div><h3>Wniosek i formalności</h3><p>Kompletujemy dokumenty i składamy wniosek — przeprowadzam Cię przez cały proces.</p></div></div>
-            <div class="pstep"><span class="n">4</span><div><h3>Realizacja</h3><p>Montaż nowego źródła ciepła i pozostałych prac przez sprawdzonych wykonawców.</p></div></div>
-            <div class="pstep"><span class="n">5</span><div><h3>Rozliczenie dotacji</h3><p>Pomagam rozliczyć inwestycję i wypłacić dofinansowanie. Mogę też połączyć ją z PV i magazynem energii.</p></div></div>
+            <div class="pstep"><span class="n">1</span><img class="p-ic" src="grafiki-czyste-powietrze/ikona-krok-analiza.webp" width="54" height="54" alt="" loading="lazy" decoding="async" /><div><h3>Analiza kwalifikacji</h3><p>Sprawdzam, czy i na jakim poziomie się kwalifikujesz oraz co realnie Ci przysługuje — bez zgadywania.</p></div></div>
+            <div class="pstep"><span class="n">2</span><img class="p-ic" src="grafiki-czyste-powietrze/ikona-krok-dobor.webp" width="54" height="54" alt="" loading="lazy" decoding="async" /><div><h3>Dobór źródła ciepła i zakresu</h3><p>Porównuję pompę ciepła, piec peletowy i piec zgazowujący drewno, dobieram zakres prac (np. źródło + ocieplenie) pod Twój dom i budżet.</p></div></div>
+            <div class="pstep"><span class="n">3</span><img class="p-ic" src="grafiki-czyste-powietrze/ikona-krok-wniosek.webp" width="54" height="54" alt="" loading="lazy" decoding="async" /><div><h3>Wniosek i formalności</h3><p>Kompletujemy dokumenty i składamy wniosek — przeprowadzam Cię przez cały proces.</p></div></div>
+            <div class="pstep"><span class="n">4</span><img class="p-ic" src="grafiki-czyste-powietrze/ikona-krok-realizacja.webp" width="54" height="54" alt="" loading="lazy" decoding="async" /><div><h3>Realizacja</h3><p>Montaż nowego źródła ciepła i pozostałych prac przez sprawdzonych wykonawców.</p></div></div>
+            <div class="pstep"><span class="n">5</span><img class="p-ic" src="grafiki-czyste-powietrze/ikona-krok-rozliczenie.webp" width="54" height="54" alt="" loading="lazy" decoding="async" /><div><h3>Rozliczenie dotacji</h3><p>Pomagam rozliczyć inwestycję i wypłacić dofinansowanie. Mogę też połączyć ją z PV i magazynem energii.</p></div></div>
           </div>
         </div>
       </section>
@@ -1175,7 +1178,7 @@
 
       <section class="wrap" id="kontakt">
         <div class="final">
-          <img class="final-bg" src="grafiki-czyste-powietrze/cta-dom-zima-1600.webp" srcset="grafiki-czyste-powietrze/cta-dom-zima-800.webp 800w, grafiki-czyste-powietrze/cta-dom-zima-1600.webp 1600w" sizes="(min-width: 980px) 940px, 100vw" width="1600" height="905" alt="" loading="lazy" decoding="async" />
+          <img class="final-bg" src="grafiki-czyste-powietrze/cta-dom-zima-1600.webp" srcset="grafiki-czyste-powietrze/cta-dom-zima-800.webp 800w, grafiki-czyste-powietrze/cta-dom-zima-1600.webp 1600w, grafiki-czyste-powietrze/cta-dom-zima-2400.webp 2400w" sizes="(min-width: 980px) 940px, 100vw" width="1600" height="905" alt="" loading="lazy" decoding="async" />
           <div class="final-body">
           <h2>Sprawdź, czy łapiesz się na Czyste Powietrze</h2>
           <p>Bezpłatna analiza — sprawdzę Twój poziom dofinansowania i połączę go z oszczędnościami z fotowoltaiki i magazynu energii.</p>
