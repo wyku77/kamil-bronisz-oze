@@ -20,9 +20,21 @@ export function Process() {
             <Reveal key={s.n} delay={i * 0.08} className="relative">
               <div className="card h-full p-7">
                 <div className="flex items-center justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-400 text-ink-950">
-                    <Icon name={s.icon} className="h-6 w-6" />
-                  </span>
+                  {s.image ? (
+                    <img
+                      src={s.image}
+                      width={64}
+                      height={64}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="-ml-1.5 -my-1.5 h-16 w-16 drop-shadow-[0_10px_16px_rgba(0,0,0,0.45)]"
+                    />
+                  ) : (
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-400 text-ink-950">
+                      <Icon name={s.icon} className="h-6 w-6" />
+                    </span>
+                  )}
                   <span className="font-display text-4xl font-extrabold text-white/10">{s.n}</span>
                 </div>
                 <h3 className="mt-5 font-display text-lg font-bold text-white">{s.title}</h3>

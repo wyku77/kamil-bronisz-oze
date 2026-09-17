@@ -91,11 +91,24 @@ export function Testimonials() {
               delay={(i % 3) * 0.08}
               className="card card-hover relative flex h-full flex-col overflow-hidden"
             >
-              <SmartImage
-                src={t.photo}
-                alt={`Realizacja — magazyn energii (${t.role})`}
-                className="h-60 w-full bg-ink-950/60 object-contain"
-              />
+              <div className="relative h-60 w-full overflow-hidden bg-ink-950">
+                {/* Rozmyta kopia tego samego zdjęcia wypełnia boki zamiast czarnych pasów.
+                    Samo zdjęcie realizacji zostaje w całości, bez kadrowania. */}
+                <img
+                  src={t.photo}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full scale-125 object-cover opacity-80 blur-xl saturate-150"
+                />
+                <div className="absolute inset-0 bg-ink-950/40" />
+                <SmartImage
+                  src={t.photo}
+                  alt={`Realizacja — magazyn energii (${t.role})`}
+                  className="relative h-60 w-full object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.5)]"
+                />
+              </div>
               <div className="flex flex-1 flex-col p-6">
                 <Stars rating={t.rating} />
                 <p className="mt-3 flex-1 leading-relaxed text-white/75">„{t.text}"</p>

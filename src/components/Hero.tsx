@@ -149,10 +149,6 @@ export function Hero() {
           ))}
         </div>
       </motion.div>
-
-      <div className="container-px relative mt-8 text-center text-xs text-white/60">
-        {hero.title} {hero.titleAccent} {hero.titleEnd}
-      </div>
     </section>
   )
 }

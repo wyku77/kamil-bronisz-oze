@@ -26,6 +26,20 @@ import logoJinko from '../assets/marki/jinko.png'
 import logoLesso from '../assets/marki/lesso.png'
 import logoTwsolar from '../assets/marki/tw-solar.jpg'
 
+// Ikony 3D (Higgsfield) — sekcje Dlaczego warto, Współpraca, O mnie
+import icNizszeRachunki from '../assets/grafiki/ikony/nizsze-rachunki.webp'
+import icZasilanieAwaryjne from '../assets/grafiki/ikony/zasilanie-awaryjne.webp'
+import icZarzadzanieAi from '../assets/grafiki/ikony/zarzadzanie-ai.webp'
+import icZyskTaryfy from '../assets/grafiki/ikony/zysk-taryfy.webp'
+import icAnaliza from '../assets/grafiki/ikony/analiza.webp'
+import icProjekt from '../assets/grafiki/ikony/projekt.webp'
+import icMontaz from '../assets/grafiki/ikony/montaz.webp'
+import icOpieka from '../assets/grafiki/ikony/opieka.webp'
+import icMagazyn from '../assets/grafiki/ikony/magazyn.webp'
+import icHems from '../assets/grafiki/ikony/hems.webp'
+import icTaryfy from '../assets/grafiki/ikony/taryfy.webp'
+import icDotacje from '../assets/grafiki/ikony/dotacje.webp'
+
 export const brands = {
   label: 'Pracuję na sprawdzonym sprzęcie uznanych marek',
   items: [
@@ -105,6 +119,8 @@ export const hero = {
 
 export type Benefit = {
   icon: string
+  /** Ikona 3D (plik) — gdy jest, zastępuje ikonę liniową. */
+  image?: string
   title: string
   text: string
 }
@@ -116,21 +132,25 @@ export const benefits: { eyebrow: string; title: string; lead: string; items: Be
   items: [
     {
       icon: 'piggy-bank',
+      image: icNizszeRachunki,
       title: 'Niższe rachunki za prąd',
       text: 'Zużywasz własną, tanią energię zamiast drogiej z sieci. Rachunek spada nawet o 90%.',
     },
     {
       icon: 'battery-charging',
+      image: icZasilanieAwaryjne,
       title: 'Zasilanie awaryjne (backup)',
       text: 'Gdy w okolicy znika prąd, Twój dom działa dalej — magazyn w ułamku sekundy przechodzi w tryb wyspowy. Lodówka, ogrzewanie, internet i oświetlenie pracują bez przerwy, a większy zestaw podtrzyma kluczowe obwody nawet przez 1–2 dni.',
     },
     {
       icon: 'cpu',
+      image: icZarzadzanieAi,
       title: 'Zarządzanie energią z AI',
       text: 'System HEMS automatycznie ładuje magazyn, gdy energia jest tania, i oddaje ją, gdy droga. Pracuje za Ciebie 24/7.',
     },
     {
       icon: 'gauge',
+      image: icZyskTaryfy,
       title: 'Zarabiasz na taryfach dynamicznych',
       text: 'Z magazynem i automatyką kupujesz prąd, gdy jest tani, a korzystasz z niego, gdy jest drogi — to dodatkowy zysk co miesiąc.',
     },
@@ -142,6 +162,8 @@ export type ProcessStep = {
   title: string
   text: string
   icon: string
+  /** Ikona 3D (plik) — gdy jest, zastępuje ikonę liniową. */
+  image?: string
 }
 
 export const process: { eyebrow: string; title: string; lead: string; steps: ProcessStep[] } = {
@@ -154,24 +176,28 @@ export const process: { eyebrow: string; title: string; lead: string; steps: Pro
       title: 'Bezpłatna analiza i konsultacja',
       text: 'Poznaję Twoje zużycie i rachunki, analizuję potrzeby i przygotowuję symulację oszczędności oraz dobór rozwiązania. Bez zobowiązań.',
       icon: 'clipboard-list',
+      image: icAnaliza,
     },
     {
       n: '02',
       title: 'Projekt rozwiązania',
       text: 'Projektuję system dopasowany do Ciebie: moc PV, pojemność magazynu, zarządzanie energią i dobór dotacji — z konkretnym czasem zwrotu.',
       icon: 'pencil-ruler',
+      image: icProjekt,
     },
     {
       n: '03',
       title: 'Montaż i uruchomienie',
       text: 'Realizacja „pod klucz": montaż, konfiguracja magazynu energii i systemu zarządzania (HEMS), formalności oraz zgłoszenie do sieci. Wszystko po mojej stronie.',
       icon: 'wrench',
+      image: icMontaz,
     },
     {
       n: '04',
       title: 'Opieka posprzedażowa',
       text: 'Monitoring pracy systemu, optymalizacja pod taryfy dynamiczne, serwis i wsparcie. Zostaję z Tobą również po uruchomieniu.',
       icon: 'heart-handshake',
+      image: icOpieka,
     },
   ],
 }
@@ -188,10 +214,10 @@ export const about = {
     'Prowadzę Cię przez całość — od doboru rozwiązania i dotacji, przez montaż „pod klucz", po opiekę i optymalizację taryf dynamicznych po uruchomieniu. A dom z fotowoltaiką i magazynem jest dodatkowo więcej wart na rynku.',
   ],
   highlights: [
-    { icon: 'battery-charging', label: 'Specjalizacja: inteligentne magazyny energii' },
-    { icon: 'cpu', label: 'Zarządzanie energią domu (HEMS) i AI' },
-    { icon: 'gauge', label: 'Optymalizacja taryf dynamicznych' },
-    { icon: 'badge-percent', label: 'Pomoc w dotacjach 2026' },
+    { icon: 'battery-charging', image: icMagazyn, label: 'Specjalizacja: inteligentne magazyny energii' },
+    { icon: 'cpu', image: icHems, label: 'Zarządzanie energią domu (HEMS) i AI' },
+    { icon: 'gauge', image: icTaryfy, label: 'Optymalizacja taryf dynamicznych' },
+    { icon: 'badge-percent', image: icDotacje, label: 'Pomoc w dotacjach 2026' },
   ],
   badges: ['Doradztwo konsultingowe', 'Indywidualne podejście', 'Bez przewymiarowania'],
   responseNote: 'Odpowiadam zwykle w ciągu 1 godziny',

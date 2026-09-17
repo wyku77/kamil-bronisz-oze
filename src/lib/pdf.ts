@@ -4,6 +4,23 @@
  * Roboto z paczki pdfmake. Auto-mail z PDF — w fazie n8n (dane są już w leadzie).
  */
 import { VOIVODESHIPS, type CalcInput, type CalcResult } from './calc'
+// Okładka PDF (ilustracja domu z magazynem). JPG, bo pdfmake nie obsługuje WebP.
+import okladkaUrl from '../assets/grafiki/pdf-okladka.jpg'
+
+/** Pobiera obraz jako data URL dla pdfmake; przy błędzie zwraca null (PDF powstaje bez okładki). */
+async function loadImageDataUrl(url: string): Promise<string | null> {
+  try {
+    const blob = await (await fetch(url)).blob()
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+    })
+  } catch {
+    return null
+  }
+}
 
 const INK = '#0a1018'
 const GOLD = '#c8951a'
@@ -27,9 +44,10 @@ export async function generateWycenaPdf(
   result: CalcResult,
   name: string,
 ): Promise<void> {
-  const [pdfMod, vfsMod] = await Promise.all([
+  const [pdfMod, vfsMod, okladka] = await Promise.all([
     import('pdfmake/build/pdfmake'),
     import('pdfmake/build/vfs_fonts'),
+    loadImageDataUrl(okladkaUrl),
   ])
   const pdfMake: any = (pdfMod as any).default ?? pdfMod
   const v: any = (vfsMod as any).default ?? vfsMod
@@ -99,8 +117,9 @@ export async function generateWycenaPdf(
                 columns: [
                   {
                     width: 'auto',
-                    table: { body: [[{ text: 'KB', color: INK, bold: true, fontSize: 15, margin: [7, 7, 7, 7] }]] },
-                    layout: { fillColor: () => GOLD, hLineWidth: () => 0, vLineWidth: () => 0 },
+                    // fillColor bezpośrednio w komórce — przez layout wypełnienie zagnieżdżonej tabeli się nie rysowało
+                    table: { body: [[{ text: 'KB', color: INK, bold: true, fontSize: 15, fillColor: GOLD, margin: [7, 7, 7, 7] }]] },
+                    layout: { hLineWidth: () => 0, vLineWidth: () => 0 },
                   },
                   {
                     width: '*',
@@ -131,6 +150,9 @@ export async function generateWycenaPdf(
         },
         layout: 'noBorders',
       },
+
+      // Okładka: ilustracja domu z magazynem, dosunięta do ciemnego paska nagłówka
+      ...(okladka ? [{ image: okladka, width: 515, margin: [0, 0, 0, 0] }] : []),
 
       { text: 'Wstępna analiza oszczędności', color: INK, bold: true, fontSize: 18, margin: [0, 18, 0, 2] },
       { text: 'Przygotowano dla: ' + (name || '—'), color: MUTED, fontSize: 11, margin: [0, 0, 0, 4] },
@@ -170,8 +192,9 @@ export async function generateWycenaPdf(
         ['Redukcja CO2', plnum(result.co2PerYear) + ' kg / rok'],
       ]),
 
-      // Dotacja
+      // Dotacja — od nowej strony: str. 1 = okładka + analiza, str. 2 = dotacja i następny krok
       {
+        pageBreak: 'before',
         table: {
           widths: ['*'],
           body: [

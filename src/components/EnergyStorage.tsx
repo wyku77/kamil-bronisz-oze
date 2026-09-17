@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Zap } from 'lucide-react'
 import { energyStorage } from '../data/content'
 import { Reveal } from './ui/Reveal'
@@ -15,6 +15,9 @@ const DISCHARGE_MIN = 0.95
 const MAXP = Math.max(...PRICES)
 
 function TariffChart() {
+  // Reduced-motion (także prerender): słupki od razu w docelowej wysokości — bez tego do
+  // statycznego HTML trafiał pusty wykres (wszystkie słupki height: 0px).
+  const reduce = useReducedMotion()
   return (
     <div className="card p-5 sm:p-6">
       <div className="flex items-center gap-2">
@@ -39,7 +42,7 @@ function TariffChart() {
           return (
             <div key={h} className="flex h-full flex-1 flex-col justify-end">
               <motion.div
-                initial={{ height: 0 }}
+                initial={{ height: reduce ? `${(p / MAXP) * 100}%` : 0 }}
                 whileInView={{ height: `${(p / MAXP) * 100}%` }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: h * 0.02, ease: [0.22, 1, 0.36, 1] }}

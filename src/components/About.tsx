@@ -64,9 +64,21 @@ export function About() {
           <ul className="mt-7 grid gap-3 sm:grid-cols-2">
             {about.highlights.map((h) => (
               <li key={h.label} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gold-400/15 text-gold-300">
-                  <Icon name={h.icon} className="h-5 w-5" />
-                </span>
+                {h.image ? (
+                  <img
+                    src={h.image}
+                    width={44}
+                    height={44}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="-my-1 h-11 w-11 shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.45)]"
+                  />
+                ) : (
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gold-400/15 text-gold-300">
+                    <Icon name={h.icon} className="h-5 w-5" />
+                  </span>
+                )}
                 <span className="text-sm font-medium text-white/80">{h.label}</span>
               </li>
             ))}
