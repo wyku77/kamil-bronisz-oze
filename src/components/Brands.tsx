@@ -1,11 +1,15 @@
+import type { CSSProperties } from 'react'
 import { brands } from '../data/content'
 import { Reveal } from './ui/Reveal'
 
 /**
- * Pasek logotypów marek: białe znaki bez kafelków, wyrównane wizualnie (wysokość z danych).
- * Po najechaniu kursorem logo „podświetla się" w oryginalnych kolorach marki na białej plakietce
- * (ciemne loga — Deye, Sigenergy, SolaX — na granatowym tle byłyby niewidoczne).
- * Wersje biała i kolorowa mają identyczne wymiary (grafiki-ai/logotypy-biale.mjs), więc zamiana jest płynna.
+ * Pasek logotypów marek.
+ * - Komputer: białe znaki bez kafelków; po najechaniu kursorem logo „podświetla się" w oryginalnych
+ *   kolorach na białej plakietce (ciemne loga — Deye, Sigenergy, SolaX — na granacie byłyby niewidoczne).
+ * - Telefon i urządzenia dotykowe (bez kursora): logotypy zawsze kolorowe na białych plakietkach —
+ *   reguła .brand-chip w src/index.css.
+ * Plakietki mają stałą wysokość, więc w kilku rzędach na telefonie wyglądają równo.
+ * Wersje biała i kolorowa mają identyczne wymiary (grafiki-ai/logotypy-biale.mjs).
  */
 export function Brands() {
   return (
@@ -15,20 +19,23 @@ export function Brands() {
           <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
             {brands.label}
           </p>
-          <div className="mx-auto mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-x-2 gap-y-3 sm:gap-x-4">
+          <div className="mx-auto mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-2 sm:gap-x-4 sm:gap-y-3">
             {brands.items.map((b) => (
               <div
                 key={b.alt}
                 title={b.alt}
-                className="group rounded-xl px-3 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_24px_-8px_rgba(255,255,255,0.35)]"
+                style={{ '--h': `${b.h}px` } as CSSProperties}
+                // telefon: równe plakietki po 3 w rzędzie (ostatnia wyśrodkowana), od sm szerokość wg logo
+                className="brand-chip group flex h-12 w-[calc((100%-1rem)/3)] items-center justify-center rounded-xl px-2 transition-all duration-300 sm:h-[52px] sm:w-auto sm:px-3 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_24px_-8px_rgba(255,255,255,0.35)]"
               >
-                <span className="relative block" style={{ height: b.h }}>
+                {/* na telefonie logo ok. 20% mniejsze — mieści się w plakietce */}
+                <span className="relative block h-[calc(var(--h)*0.8)] max-w-full sm:h-[var(--h)]">
                   <img
                     loading="lazy"
                     decoding="async"
                     src={b.src}
                     alt={b.alt}
-                    className="h-full w-auto max-w-[150px] opacity-75 transition-opacity duration-300 group-hover:opacity-0 sm:max-w-none"
+                    className="brand-white h-full w-auto max-w-full object-contain opacity-75 transition-opacity duration-300 group-hover:opacity-0"
                   />
                   <img
                     loading="lazy"
@@ -36,7 +43,7 @@ export function Brands() {
                     src={b.color}
                     alt=""
                     aria-hidden="true"
-                    className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="brand-color absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                 </span>
               </div>

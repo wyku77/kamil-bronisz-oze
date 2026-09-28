@@ -153,3 +153,17 @@
 select.field option {
   color: #0a1018;
 }
+
+/* Pasek marek (src/components/Brands.tsx): na telefonie i urządzeniach bez kursora logotypy zawsze
+   w oryginalnych kolorach na białych plakietkach — tam nie da się „najechać", żeby je podświetlić. */
+@media (max-width: 639px), (hover: none) {
+  .brand-chip {
+    background: #fff;
+  }
+  .brand-chip .brand-white {
+    opacity: 0;
+  }
+  .brand-chip .brand-color {
+    opacity: 1;
+  }
+}
