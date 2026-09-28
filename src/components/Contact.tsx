@@ -6,6 +6,7 @@ import { SmartImage } from './ui/SmartImage'
 import { submitLead, type LeadPayload } from '../lib/leads'
 import { track } from '../lib/analytics'
 import { Honeypot, isBotSubmit } from './ui/Honeypot'
+import { SendFailure } from './ui/SendFailure'
 
 const times = ['Rano (8:00–12:00)', 'Popołudnie (12:00–16:00)', 'Po 16:00', 'Dowolna pora']
 
@@ -32,6 +33,8 @@ export function Contact() {
   const [error, setError] = useState<string | null>(null)
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
+  // Zgłoszenie, które nie dotarło — trzymamy je do ponowienia jednym kliknięciem.
+  const [failedPayload, setFailedPayload] = useState<LeadPayload | null>(null)
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((f) => ({ ...f, [key]: value }))
@@ -66,11 +69,24 @@ export function Contact() {
       pageUrl: window.location.href,
     }
 
-    await submitLead(payload as LeadPayload)
-    track.leadSubmit({ source: 'formularz-kontakt', leadTemperature: temperature })
+    await send(payload as LeadPayload)
+  }
+
+  // „Dziękuję" tylko wtedy, gdy zgłoszenie naprawdę dotarło. Przy błędzie dane zostają w polach,
+  // a klient dostaje telefon, WhatsApp i ponowienie.
+  const send = async (payload: LeadPayload) => {
+    setSending(true)
+    const res = await submitLead(payload)
     setSending(false)
-    setSent(true)
-    setForm(initial)
+    if (res.ok) {
+      track.leadSubmit({ source: 'formularz-kontakt', leadTemperature: payload.leadTemperature })
+      setFailedPayload(null)
+      setSent(true)
+      setForm(initial)
+    } else {
+      track.leadError('formularz-kontakt')
+      setFailedPayload(payload)
+    }
   }
 
   return (
@@ -284,6 +300,10 @@ export function Contact() {
 
                   {error && (
                     <p className="rounded-lg bg-red-500/15 px-3 py-2 text-sm font-medium text-red-300">{error}</p>
+                  )}
+
+                  {failedPayload && !error && (
+                    <SendFailure source="kontakt" onRetry={() => send(failedPayload)} retrying={sending} />
                   )}
 
                   <button type="submit" disabled={sending} className="btn-primary w-full disabled:opacity-60">

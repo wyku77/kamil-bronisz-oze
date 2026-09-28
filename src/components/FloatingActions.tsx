@@ -4,7 +4,11 @@ import { ArrowUp, MessageCircle } from 'lucide-react'
 import { site } from '../data/content'
 import { track } from '../lib/analytics'
 
-/** Pływające przyciski: WhatsApp, telefon (mobile) i „do góry". */
+/**
+ * Pływające przyciski: WhatsApp i „do góry" — tylko od 640 px.
+ * Na telefonie ich nie ma: nachodziły na formularz i kalkulator, a kontakt (także WhatsApp)
+ * jest w przyklejonym pasku MobileCTA.
+ */
 export function FloatingActions() {
   const [showTop, setShowTop] = useState(false)
 
@@ -15,7 +19,7 @@ export function FloatingActions() {
   }, [])
 
   return (
-    <div className="fixed bottom-28 right-5 z-40 flex flex-col items-end gap-3 sm:bottom-5">
+    <div className="fixed bottom-5 right-5 z-40 hidden flex-col items-end gap-3 sm:flex">
       <AnimatePresence>
         {showTop && (
           <motion.button

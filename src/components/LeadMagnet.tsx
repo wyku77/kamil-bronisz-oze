@@ -8,6 +8,7 @@ import cover600 from '../assets/grafiki/checklista-tablet-600.webp'
 import cover1200 from '../assets/grafiki/checklista-tablet-1200.webp'
 import cover1440 from '../assets/grafiki/checklista-tablet-1440.webp'
 import { Honeypot, isBotSubmit } from './ui/Honeypot'
+import { SendFailure } from './ui/SendFailure'
 
 const isPhone = (v: string) => v.replace(/\D/g, '').length >= 9
 
@@ -16,6 +17,9 @@ export function LeadMagnet() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
   const [error, setError] = useState('')
+  // Numer nie dotarł (padł webhook i e-mail) — checklistę i tak odblokowujemy, ale z komunikatem.
+  const [sendFailed, setSendFailed] = useState(false)
+  const [retrying, setRetrying] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -27,9 +31,21 @@ export function LeadMagnet() {
     }
     setError('')
     setStatus('sending')
-    await submitLeadMagnet({ phone, email }, 'lead_magnet_dotacja')
-    track.leadSubmit({ source: 'lead_magnet', leadTemperature: 'cieply' })
+    await send()
     setStatus('done')
+  }
+
+  const send = async () => {
+    const res = await submitLeadMagnet({ phone, email }, 'lead_magnet_dotacja')
+    if (res.ok) track.leadSubmit({ source: 'lead_magnet', leadTemperature: 'cieply' })
+    else track.leadError('lead_magnet')
+    setSendFailed(!res.ok)
+  }
+
+  const retrySend = async () => {
+    setRetrying(true)
+    await send()
+    setRetrying(false)
   }
 
   const unlocked = status === 'done'
@@ -84,6 +100,15 @@ export function LeadMagnet() {
                   </button>
                   <p className="text-xs text-white/60">{leadMagnet.consent}</p>
                 </form>
+              ) : sendFailed ? (
+                <div className="mt-6">
+                  <SendFailure
+                    source="lead_magnet"
+                    message="Checklista jest obok, ale Twój numer do mnie nie dotarł. Zadzwoń albo napisz — przejdziemy przez nią razem."
+                    onRetry={retrySend}
+                    retrying={retrying}
+                  />
+                </div>
               ) : (
                 <div className="mt-6 flex items-center gap-3 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.07] p-4">
                   <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-300" />
@@ -115,13 +140,13 @@ export function LeadMagnet() {
               ) : (
                 <figure className="mx-auto max-w-xs sm:max-w-sm">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={cover1200}
                     srcSet={`${cover600} 600w, ${cover1200} 1200w, ${cover1440} 1440w`}
                     sizes="(min-width: 640px) 384px, 320px"
                     width={1200}
                     height={1200}
-                    loading="lazy"
-                    decoding="async"
                     alt={leadMagnet.coverAlt}
                     className="block h-auto w-full rounded-2xl border border-white/10 shadow-card"
                   />

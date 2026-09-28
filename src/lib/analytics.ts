@@ -51,6 +51,8 @@ export const track = {
   calculatorComplete: (payload: Record<string, unknown>) =>
     pushEvent('calculator_complete', payload),
   leadSubmit: (payload: Record<string, unknown>) => pushEvent('lead_submit', payload),
+  /** Zgłoszenie NIE dotarło (padł webhook i e-mail) — klient zobaczył komunikat z telefonem. */
+  leadError: (source: string) => pushEvent('lead_error', { source }),
   ctaClick: (label: string) => pushEvent('cta_click', { cta_label: label }),
   /** Kliknięcie „Zadzwoń" (tel:) — kluczowa konwersja przy strategii „na telefon". */
   callClick: (source: string) => pushEvent('call_click', { source }),

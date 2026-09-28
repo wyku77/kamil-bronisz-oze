@@ -17,7 +17,7 @@ export function Brands() {
                 className="flex h-12 w-24 items-center justify-center rounded-lg bg-white px-2.5 sm:h-14 sm:w-28"
                 title={b.alt}
               >
-                <img src={b.src} alt={b.alt} loading="lazy" className="max-h-7 max-w-full object-contain sm:max-h-8" />
+                <img loading="lazy" src={b.src} alt={b.alt} className="max-h-7 max-w-full object-contain sm:max-h-8" />
               </div>
             ))}
           </div>

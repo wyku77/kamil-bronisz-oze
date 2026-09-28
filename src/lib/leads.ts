@@ -20,6 +20,8 @@ export type LeadContact = {
   email: string
   postalCode: string
   consent: boolean
+  /** Dobrowolna, osobna zgoda na informacje marketingowe (dotacje, nowości). */
+  marketingConsent: boolean
   /** Kiedy klient planuje inwestycję — sygnał „temperatury" leada. */
   timeframe: string
 }
@@ -31,6 +33,7 @@ export type LeadPayload = {
   email: string
   postalCode: string
   consent: boolean
+  marketingConsent: boolean
   timeframe: string
 
   // Parametry z kalkulatora
@@ -135,6 +138,7 @@ export function buildLeadPayload(
     email: contact.email.trim(),
     postalCode: contact.postalCode.trim(),
     consent: contact.consent,
+    marketingConsent: contact.marketingConsent,
     timeframe: contact.timeframe,
 
     objectType: input.objectType,
@@ -177,74 +181,99 @@ export function buildLeadPayload(
 
 export type SubmitResult = { ok: boolean; mode: 'webhook' | 'email' | 'local' }
 
-export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
-  // Wysyłamy DWOMA kanałami równolegle (redundancja — nie tracimy leada):
-  //  • webhook (Make/n8n → Telegram, SMS, CRM…) — gdy ustawiono VITE_LEAD_WEBHOOK_URL
-  //  • e-mail przez Web3Forms — drugi, niezależny kanał / backup
-  let okWebhook = false
-  let okEmail = false
-  await Promise.allSettled([
-    (async () => {
-      if (!WEBHOOK_URL) return
-      try {
-        const res = await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        })
-        okWebhook = res.ok
-      } catch (err) {
-        console.error('[leads] Błąd wysyłki na webhook:', err)
-      }
-    })(),
-    (async () => {
-      if (!WEB3FORMS_KEY) return
-      try {
-        const res = await fetch(WEB3FORMS_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            botcheck: '',
-            subject: `🔥 Nowy lead OZE (${payload.leadTemperature}) — ${payload.name || 'bez nazwy'}`,
-            from_name: 'Strona OZE — kalkulator',
-            replyto: payload.email,
-            ...payload,
-          }),
-        })
-        okEmail = res.ok
-      } catch (err) {
-        console.error('[leads] Błąd wysyłki e-mail (Web3Forms):', err)
-      }
-    })(),
-  ])
+/** Czy jest skonfigurowany choć jeden kanał wysyłki (na produkcji: tak). */
+const CHANNELS_CONFIGURED = Boolean(WEBHOOK_URL || WEB3FORMS_KEY)
 
-  if (okWebhook || okEmail) return { ok: true, mode: okWebhook ? 'webhook' : 'email' }
+/**
+ * Wysyła leada DWOMA kanałami równolegle (redundancja — nie tracimy leada):
+ *  • webhook (Make/n8n → Telegram, SMS, CRM…) — gdy ustawiono VITE_LEAD_WEBHOOK_URL
+ *  • e-mail przez Web3Forms — drugi, niezależny kanał / backup
+ * Gdy oba zawiodą, ponawia raz po 1,5 s — chwilowy brak zasięgu na telefonie to częsta przyczyna.
+ */
+async function deliver(
+  webhookBody: object,
+  emailBody: object,
+): Promise<{ okWebhook: boolean; okEmail: boolean }> {
+  const attempt = async () => {
+    let okWebhook = false
+    let okEmail = false
+    await Promise.allSettled([
+      (async () => {
+        if (!WEBHOOK_URL) return
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookBody),
+          })
+          okWebhook = res.ok
+        } catch (err) {
+          console.error('[leads] Błąd wysyłki na webhook:', err)
+        }
+      })(),
+      (async () => {
+        if (!WEB3FORMS_KEY) return
+        try {
+          const res = await fetch(WEB3FORMS_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ access_key: WEB3FORMS_KEY, botcheck: '', ...emailBody }),
+          })
+          okEmail = res.ok
+        } catch (err) {
+          console.error('[leads] Błąd wysyłki e-mail (Web3Forms):', err)
+        }
+      })(),
+    ])
+    return { okWebhook, okEmail }
+  }
 
-  // 3) Fallback: zapis lokalny (deweloperski lub awaryjny)
+  const first = await attempt()
+  if (first.okWebhook || first.okEmail || !CHANNELS_CONFIGURED) return first
+  await new Promise((r) => setTimeout(r, 1500))
+  return attempt()
+}
+
+/**
+ * Zapis awaryjny w przeglądarce klienta i wynik dla formularza.
+ * Sukces tylko wtedy, gdy nie ma żadnego kanału (tryb deweloperski). Na produkcji zapis lokalny
+ * NIE jest sukcesem — lead leży wtedy w przeglądarce klienta, a nie u Kamila, więc formularz
+ * musi pokazać błąd i drogę kontaktu zamiast „Dziękuję".
+ */
+function saveLocally(entry: object): SubmitResult {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    const list: LeadPayload[] = raw ? JSON.parse(raw) : []
-    list.push(payload)
+    const list = raw ? JSON.parse(raw) : []
+    list.push(entry)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list))
   } catch (err) {
     console.error('[leads] Nie udało się zapisać leada lokalnie:', err)
     return { ok: false, mode: 'local' }
   }
-
-  if (!WEBHOOK_URL && !WEB3FORMS_KEY) {
+  if (!CHANNELS_CONFIGURED) {
     console.info(
       '%c[leads] Lead zapisany lokalnie (brak VITE_LEAD_WEBHOOK_URL i VITE_WEB3FORMS_KEY).',
       'color:#d4a017;font-weight:bold',
-      payload,
+      entry,
     )
   }
-  return { ok: true, mode: 'local' }
+  return { ok: !CHANNELS_CONFIGURED, mode: 'local' }
+}
+
+export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
+  const { okWebhook, okEmail } = await deliver(payload, {
+    subject: `🔥 Nowy lead OZE (${payload.leadTemperature}) — ${payload.name || 'bez nazwy'}`,
+    from_name: 'Strona OZE — kalkulator',
+    replyto: payload.email,
+    ...payload,
+  })
+  if (okWebhook || okEmail) return { ok: true, mode: okWebhook ? 'webhook' : 'email' }
+  return saveLocally(payload)
 }
 
 /**
  * Lekki lead z magnetu (telefon i/lub e-mail) — np. checklista/poradnik, exit-intent.
- * Wysyłka tą samą ścieżką co główne leady: webhook → e-mail → localStorage.
+ * Wysyłka tą samą ścieżką co główne leady: webhook + e-mail → (awaryjnie) localStorage.
  */
 export async function submitLeadMagnet(
   contact: { phone?: string; email?: string },
@@ -264,55 +293,14 @@ export async function submitLeadMagnet(
     ...getUTM(),
   }
 
-  let okWebhook = false
-  let okEmail = false
-  await Promise.allSettled([
-    (async () => {
-      if (!WEBHOOK_URL) return
-      try {
-        const res = await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(base),
-        })
-        okWebhook = res.ok
-      } catch (err) {
-        console.error('[leads] Błąd wysyłki magnetu na webhook:', err)
-      }
-    })(),
-    (async () => {
-      if (!WEB3FORMS_KEY) return
-      try {
-        const res = await fetch(WEB3FORMS_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            botcheck: '',
-            subject: `📞 Nowy lead (${source}): ${phone || email}`,
-            from_name: 'Strona OZE — lead magnet',
-            ...(email ? { replyto: email } : {}),
-            ...base,
-          }),
-        })
-        okEmail = res.ok
-      } catch (err) {
-        console.error('[leads] Błąd wysyłki magnetu e-mail:', err)
-      }
-    })(),
-  ])
-
+  const { okWebhook, okEmail } = await deliver(base, {
+    subject: `📞 Nowy lead (${source}): ${phone || email}`,
+    from_name: 'Strona OZE — lead magnet',
+    ...(email ? { replyto: email } : {}),
+    ...base,
+  })
   if (okWebhook || okEmail) return { ok: true, mode: okWebhook ? 'webhook' : 'email' }
-
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    const list = raw ? JSON.parse(raw) : []
-    list.push(base)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list))
-  } catch {
-    return { ok: false, mode: 'local' }
-  }
-  return { ok: true, mode: 'local' }
+  return saveLocally(base)
 }
 
 /** Eksport zebranych lokalnie leadów (np. do ręcznego wgrania do Airtable). */

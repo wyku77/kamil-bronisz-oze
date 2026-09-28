@@ -132,7 +132,7 @@ export function Results({ result, input, name, onRecalculate }: Props) {
           </span>
           <p className="mt-4 text-sm text-white/70">Roczne oszczędności</p>
           <p className="mt-1 font-display text-3xl font-extrabold text-gradient">
-            <CountUp to={result.annualSavings} suffix=" zł" />
+            <CountUp to={result.annualSavings} suffix={' zł'} />
           </p>
         </div>
 
@@ -222,13 +222,13 @@ export function Results({ result, input, name, onRecalculate }: Props) {
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <p className="text-xs text-white/65">W ciągu 10 lat</p>
                 <p className="mt-1 font-display text-2xl font-extrabold text-gradient">
-                  <CountUp to={result.savings10y} suffix=" zł" />
+                  <CountUp to={result.savings10y} suffix={' zł'} />
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <p className="text-xs text-white/65">W ciągu 20 lat</p>
                 <p className="mt-1 font-display text-2xl font-extrabold text-gradient">
-                  <CountUp to={result.savings20y} suffix=" zł" />
+                  <CountUp to={result.savings20y} suffix={' zł'} />
                 </p>
               </div>
             </div>

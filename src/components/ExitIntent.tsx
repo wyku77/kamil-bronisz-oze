@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCircle2, Phone, X } from 'lucide-react'
 import { exitIntent } from '../data/content'
 import { submitLeadMagnet } from '../lib/leads'
+import { SendFailure } from './ui/SendFailure'
 import { track } from '../lib/analytics'
 import { Honeypot, isBotSubmit } from './ui/Honeypot'
 
@@ -13,7 +14,7 @@ const SEEN_KEY = 'kb_exit_seen'
 export function ExitIntent() {
   const [open, setOpen] = useState(false)
   const [phone, setPhone] = useState('')
-  const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'failed'>('idle')
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -47,10 +48,20 @@ export function ExitIntent() {
       return
     }
     setError('')
+    await send()
+  }
+
+  // „Dziękuję" tylko, gdy numer naprawdę dotarł; inaczej komunikat z telefonem i ponowieniem.
+  const send = async () => {
     setStatus('sending')
-    await submitLeadMagnet({ phone }, 'exit_intent')
-    track.leadSubmit({ source: 'exit_intent', leadTemperature: 'cieply' })
-    setStatus('done')
+    const res = await submitLeadMagnet({ phone }, 'exit_intent')
+    if (res.ok) {
+      track.leadSubmit({ source: 'exit_intent', leadTemperature: 'cieply' })
+      setStatus('done')
+    } else {
+      track.leadError('exit_intent')
+      setStatus('failed')
+    }
   }
 
   return (
@@ -100,12 +111,13 @@ export function ExitIntent() {
                     />
                   </div>
                   {error && <p className="text-xs text-red-400">{error}</p>}
+                  {status === 'failed' && <SendFailure source="exit_intent" />}
                   <button
                     type="submit"
                     disabled={status === 'sending'}
                     className="btn-primary w-full disabled:opacity-60"
                   >
-                    {status === 'sending' ? 'Wysyłam…' : exitIntent.button}
+                    {status === 'sending' ? 'Wysyłam…' : status === 'failed' ? 'Spróbuj ponownie' : exitIntent.button}
                   </button>
                   <button
                     type="button"

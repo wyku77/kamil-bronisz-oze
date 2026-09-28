@@ -6,16 +6,16 @@
 
 // Zdjęcie importowane jako moduł — Vite sam ustawia poprawny adres (działa też
 // pod ścieżką GitHub Pages /kamil-bronisz-oze/). Aby zmienić zdjęcie, podmień plik
-// src/assets/kamil-bronisz.jpg.
-import kamilPhoto from '../assets/kamil-bronisz.jpg'
+// src/assets/kamil-bronisz.webp (WebP z grafiki-ai/zdjecia-webp.mjs; oryginał JPG w grafiki-ai/oryginaly-zdjec/).
+import kamilPhoto from '../assets/kamil-bronisz.webp'
 
-// Zdjęcia realizacji (zoptymalizowane) — przypisane do opinii klientów.
-import r1 from '../assets/realizacje/20241212_134324.jpg'
-import r2 from '../assets/realizacje/20254688_15685.jpg'
-import r3 from '../assets/realizacje/IMG-20260129-WA0007.jpg'
-import r4 from '../assets/realizacje/IMG-20260402-WA0005.jpg'
-import r5 from '../assets/realizacje/IMG-20260402-WA0007.jpg'
-import r6 from '../assets/realizacje/IMG-20260415-WA0003.jpg'
+// Zdjęcia realizacji — przypisane do opinii klientów. WebP maks. 560 px wysokości (ramka w opiniach ma 240 px).
+import r1 from '../assets/realizacje/20241212_134324.webp'
+import r2 from '../assets/realizacje/20254688_15685.webp'
+import r3 from '../assets/realizacje/IMG-20260129-WA0007.webp'
+import r4 from '../assets/realizacje/IMG-20260402-WA0005.webp'
+import r5 from '../assets/realizacje/IMG-20260402-WA0007.webp'
+import r6 from '../assets/realizacje/IMG-20260415-WA0003.webp'
 
 // Logotypy marek (pełny kolor) — pasek zaufania pod hero.
 import logoSigenergy from '../assets/marki/sigenergy.png'
@@ -103,7 +103,7 @@ export const hero = {
   ],
   stats: [
     { value: 90, suffix: '%', label: 'Mniejsze rachunki za prąd' },
-    { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
+    { value: 16000, prefix: '', suffix: ' zł', label: 'Dotacja na magazyn energii' },
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
     { value: 1380, suffix: '', label: 'Opinii Google firmy Begolden · 4,9 ★' },
   ],
@@ -315,7 +315,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
-      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza **20 października 2026** i potrwa **do wyczerpania środków**. Dlatego warto przygotować się wcześniej: kto ma dobrany system i komplet dokumentów, złoży wniosek od razu po starcie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza **20 października 2026** i potrwa **do wyczerpania środków**. Dlatego warto przygotować się wcześniej: kto ma dobrany system i komplet dokumentów, złoży wniosek od razu po starcie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
     },
     {
       q: 'W jakich miastach działasz?',
@@ -357,8 +357,8 @@ export const energyStorage = {
     badge: 'Przykład z życia',
     title: 'Dom 5 000 kWh/rok + magazyn 10 kWh',
     loss: 'Bez magazynu większość taniej energii z paneli oddajesz do sieci za grosze — a wieczorem odkupujesz ją drożej. Magazyn kończy ten układ.',
-    before: { label: 'Sama fotowoltaika', self: '30%', selfLabel: 'autokonsumpcja', bill: '~580 zł', billLabel: 'rachunek / mies.' },
-    after: { label: 'Fotowoltaika + magazyn z AI', self: '86%', selfLabel: 'autokonsumpcja', bill: '~70 zł', billLabel: 'rachunek / mies.' },
+    before: { label: 'Sama fotowoltaika', self: '30%', selfLabel: 'autokonsumpcja', bill: '~580 zł', billLabel: 'rachunek / mies.' },
+    after: { label: 'Fotowoltaika + magazyn z AI', self: '86%', selfLabel: 'autokonsumpcja', bill: '~70 zł', billLabel: 'rachunek / mies.' },
   },
   tariff: {
     title: 'Tak pracuje magazyn z taryfą dynamiczną',
@@ -458,7 +458,7 @@ export const approach = {
       { label: 'Prąd wieczorem i w nocy', pv: 'z sieci (drogo)', full: 'z magazynu' },
       { label: 'Zasilanie awaryjne (backup)', pv: 'nie', full: 'tak' },
       { label: 'Zysk z taryfy dynamicznej', pv: 'znikomy', full: 'tak (arbitraż)' },
-      { label: 'Dotacja 2026', pv: 'nie obejmuje paneli', full: 'do 16 000 zł' },
+      { label: 'Dotacja 2026', pv: 'nie obejmuje paneli', full: 'do 16 000 zł' },
       { label: 'Niezależność od podwyżek', pv: 'częściowa', full: 'wysoka' },
     ],
   },

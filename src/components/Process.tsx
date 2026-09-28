@@ -18,27 +18,35 @@ export function Process() {
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {process.steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.08} className="relative">
-              <div className="card h-full p-7">
-                <div className="flex items-center justify-between">
+              {/* Na telefonie ikona obok tekstu, a numer w rogu — karta o ok. 1/3 niższa. Od sm jak dotąd. */}
+              <div className="card relative h-full p-5 sm:p-7">
+                <span className="absolute right-5 top-4 font-display text-3xl font-extrabold text-white/10 sm:hidden">
+                  {s.n}
+                </span>
+                <div className="flex items-start gap-4 sm:block">
+                <div className="flex shrink-0 items-center justify-between">
                   {s.image ? (
                     <img
+                      loading="lazy"
+                      decoding="async"
                       src={s.image}
                       width={64}
                       height={64}
                       alt=""
-                      loading="lazy"
-                      decoding="async"
-                      className="-ml-1.5 -my-1.5 h-16 w-16 drop-shadow-[0_10px_16px_rgba(0,0,0,0.45)]"
+                      className="-ml-1.5 -my-1.5 h-14 w-14 drop-shadow-[0_10px_16px_rgba(0,0,0,0.45)] sm:h-16 sm:w-16"
                     />
                   ) : (
                     <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-400 text-ink-950">
                       <Icon name={s.icon} className="h-6 w-6" />
                     </span>
                   )}
-                  <span className="font-display text-4xl font-extrabold text-white/10">{s.n}</span>
+                  <span className="hidden font-display text-4xl font-extrabold text-white/10 sm:inline">{s.n}</span>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-bold text-white">{s.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-white/60">{s.text}</p>
+                <div className="pr-8 sm:pr-0">
+                  <h3 className="font-display text-lg font-bold text-white sm:mt-5">{s.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/60 sm:mt-2.5">{s.text}</p>
+                </div>
+                </div>
               </div>
 
               {/* Strzałka między krokami (desktop) */}

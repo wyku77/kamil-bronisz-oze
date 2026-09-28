@@ -47,12 +47,12 @@ export function SmartImage({ src, alt, className = '', priority = false, fallbac
 
   return (
     <img
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
       src={current}
       alt={alt}
-      loading={priority ? 'eager' : 'lazy'}
       // @ts-expect-error „fetchpriority" (małymi literami) to poprawny atrybut HTML — React renderuje go do DOM bez ostrzeżenia
       fetchpriority={priority ? 'high' : 'auto'}
-      decoding="async"
       onError={handleError}
       className={className}
     />

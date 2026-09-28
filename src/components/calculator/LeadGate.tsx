@@ -12,7 +12,15 @@ type Props = {
   onBack: () => void
 }
 
-const empty: LeadContact = { name: '', phone: '', email: '', postalCode: '', consent: false, timeframe: '' }
+const empty: LeadContact = {
+  name: '',
+  phone: '',
+  email: '',
+  postalCode: '',
+  consent: false,
+  marketingConsent: false,
+  timeframe: '',
+}
 
 export function LeadGate({ result, onUnlock, onBack }: Props) {
   const [form, setForm] = useState<LeadContact>(empty)
@@ -46,7 +54,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
         </span>
         <p className="mt-5 text-sm uppercase tracking-wider text-white/65">Szacowane roczne oszczędności</p>
         <p className="mt-1 font-display text-5xl font-extrabold text-gradient sm:text-6xl">
-          <CountUp to={result.annualSavings} suffix=" zł" />
+          <CountUp to={result.annualSavings} suffix={' zł'} />
         </p>
         <p className="mt-3 max-w-md leading-relaxed text-white/65">
           Podaj dane kontaktowe, aby odblokować <span className="font-semibold text-white">pełną analizę</span>:
@@ -169,8 +177,24 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
               checked={form.consent}
               onChange={(e) => set('consent', e.target.checked)}
             />
-            Wyrażam zgodę na kontakt oraz otrzymywanie informacji marketingowych i przetwarzanie danych zgodnie z
-            polityką prywatności.*
+            <span>
+              Wyrażam zgodę na kontakt w sprawie wyników analizy i przetwarzanie moich danych zgodnie z{' '}
+              <a href="polityka-prywatnosci.html" target="_blank" className="underline decoration-white/30 underline-offset-2 hover:text-gold-300">
+                polityką prywatności
+              </a>
+              .*
+            </span>
+          </label>
+
+          {/* Zgoda marketingowa osobno i dobrowolna — bez niej wyniki też się odblokują. */}
+          <label className="flex items-start gap-3 text-xs leading-relaxed text-white/60">
+            <input
+              type="checkbox"
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/30 bg-transparent text-gold-500 focus:ring-gold-400"
+              checked={form.marketingConsent}
+              onChange={(e) => set('marketingConsent', e.target.checked)}
+            />
+            Chcę też dostawać informacje o dotacjach i nowościach (opcjonalnie). Zgodę mogę wycofać w każdej chwili.
           </label>
 
           {error && <p className="rounded-lg bg-red-500/15 px-3 py-2 text-sm font-medium text-red-300">{error}</p>}

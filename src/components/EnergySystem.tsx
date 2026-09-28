@@ -29,13 +29,13 @@ export function EnergySystem() {
 
       <div className="relative mt-6 overflow-hidden rounded-3xl border border-white/10 bg-[#050b16]">
         <img
+          loading="lazy"
+          decoding="async"
           src={img1600}
           srcSet={`${img800} 800w, ${img1600} 1600w, ${img2400} 2400w`}
           sizes="(min-width: 1024px) 1024px, 100vw"
           width={1600}
           height={900}
-          loading="lazy"
-          decoding="async"
           alt={energySystem.alt}
           className="block h-auto w-full"
         />

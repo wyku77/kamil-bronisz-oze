@@ -2,12 +2,13 @@ import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Calculator as CalcIcon } from 'lucide-react'
 import { calculate, type CalcInput, type CalcResult } from '../../lib/calc'
-import { buildLeadPayload, submitLead, type LeadContact } from '../../lib/leads'
+import { buildLeadPayload, submitLead, type LeadContact, type LeadPayload } from '../../lib/leads'
 import { track } from '../../lib/analytics'
 import { Reveal } from '../ui/Reveal'
 import { CalculatorForm } from './CalculatorForm'
 import { LeadGate } from './LeadGate'
 import { Results } from './Results'
+import { SendFailure } from '../ui/SendFailure'
 
 type Stage = 'form' | 'gate' | 'results'
 
@@ -27,6 +28,9 @@ export function Calculator() {
   const [result, setResult] = useState<CalcResult | null>(null)
   const [stage, setStage] = useState<Stage>('form')
   const [leadName, setLeadName] = useState('')
+  // Zgłoszenie z bramki, które nie dotarło — wyniki i tak pokazujemy, ale z komunikatem i ponowieniem.
+  const [failedPayload, setFailedPayload] = useState<LeadPayload | null>(null)
+  const [retrying, setRetrying] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
 
   const scrollToPanel = () => {
@@ -54,15 +58,34 @@ export function Calculator() {
     if (!result) return
     setLeadName(contact.name)
     const payload = buildLeadPayload(contact, input, result, 'kalkulator')
-    await submitLead(payload)
-    track.leadSubmit({
-      source: 'kalkulator',
-      leadScore: payload.leadScore,
-      leadTemperature: payload.leadTemperature,
-      annualSavings: result.annualSavings,
-    })
+    const res = await submitLead(payload)
+    reportSend(res.ok, payload)
+    // Wyniki pokazujemy także przy błędzie wysyłki — klient podał dane i nie może na tym stracić.
     setStage('results')
     scrollToPanel()
+  }
+
+  const reportSend = (ok: boolean, payload: LeadPayload) => {
+    if (ok) {
+      track.leadSubmit({
+        source: 'kalkulator',
+        leadScore: payload.leadScore,
+        leadTemperature: payload.leadTemperature,
+        annualSavings: payload.annualSavings,
+      })
+      setFailedPayload(null)
+    } else {
+      track.leadError('kalkulator')
+      setFailedPayload(payload)
+    }
+  }
+
+  const retrySend = async () => {
+    if (!failedPayload) return
+    setRetrying(true)
+    const res = await submitLead(failedPayload)
+    setRetrying(false)
+    reportSend(res.ok, failedPayload)
   }
 
   const handleRecalculate = () => {
@@ -123,6 +146,16 @@ export function Calculator() {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.35 }}
                 >
+                  {failedPayload && (
+                    <div className="mb-6">
+                      <SendFailure
+                        source="kalkulator"
+                        message="Twoje wyniki są poniżej, ale Twój numer do mnie nie dotarł. Zadzwoń albo napisz — omówię je z Tobą."
+                        onRetry={retrySend}
+                        retrying={retrying}
+                      />
+                    </div>
+                  )}
                   <Results result={result} input={input} name={leadName} onRecalculate={handleRecalculate} />
                 </motion.div>
               )}

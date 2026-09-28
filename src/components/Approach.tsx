@@ -22,12 +22,12 @@ export function Approach() {
           <Reveal direction="right" className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
             <p className="flex items-center gap-3 font-display text-lg font-bold text-white/80">
               <img
+                loading="lazy"
+                decoding="async"
                 src={ikonaAkwizytor}
                 width={56}
                 height={56}
                 alt=""
-                loading="lazy"
-                decoding="async"
                 className="-my-1 h-14 w-14 shrink-0 drop-shadow-[0_8px_14px_rgba(0,0,0,0.45)]"
               />
               {approach.bad.title}
@@ -50,12 +50,12 @@ export function Approach() {
           >
             <p className="flex items-center gap-3 font-display text-lg font-bold text-white">
               <img
+                loading="lazy"
+                decoding="async"
                 src={ikonaKonsultant}
                 width={56}
                 height={56}
                 alt=""
-                loading="lazy"
-                decoding="async"
                 className="-my-1 h-14 w-14 shrink-0 drop-shadow-[0_8px_14px_rgba(0,0,0,0.45)]"
               />
               {approach.good.title}

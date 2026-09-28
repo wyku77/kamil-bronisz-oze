@@ -1,4 +1,5 @@
-import { CheckCircle2, Clock, Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone, Youtube } from 'lucide-react'
+import { useState } from 'react'
+import { CheckCircle2, ChevronDown, Clock, Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone, Youtube } from 'lucide-react'
 import { about, site } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { Icon } from './ui/Icon'
@@ -13,6 +14,8 @@ const socialLinks = [
 
 export function About() {
   const socials = socialLinks.filter((s) => site.social[s.key])
+  // Na telefonie widać pierwszy akapit, resztę po „Czytaj więcej" (od sm zawsze całość)
+  const [more, setMore] = useState(false)
 
   return (
     <section id="o-mnie" className="section relative overflow-hidden bg-ink-950">
@@ -25,7 +28,7 @@ export function About() {
             <SmartImage
               src={about.photo}
               alt={`${about.name} — ${about.role}`}
-              className="h-[460px] w-full object-cover"
+              className="h-[360px] w-full object-cover sm:h-[460px]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-transparent to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6">
@@ -53,12 +56,22 @@ export function About() {
           <p className="mt-5 text-lg leading-relaxed text-white/75">{about.lead}</p>
 
           <div className="mt-5 space-y-3 text-white/60">
-            {about.paragraphs.map((p) => (
-              <p key={p} className="leading-relaxed">
+            {about.paragraphs.map((p, i) => (
+              <p key={p} className={`leading-relaxed ${i > 0 && !more ? 'hidden sm:block' : ''}`}>
                 {p}
               </p>
             ))}
           </div>
+          {about.paragraphs.length > 1 && !more && (
+            <button
+              type="button"
+              onClick={() => setMore(true)}
+              aria-expanded={more}
+              className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-gold-300 sm:hidden"
+            >
+              Czytaj więcej o mnie <ChevronDown className="h-4 w-4" />
+            </button>
+          )}
 
           {/* Wyróżniki specjalizacji */}
           <ul className="mt-7 grid gap-3 sm:grid-cols-2">
@@ -66,12 +79,12 @@ export function About() {
               <li key={h.label} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
                 {h.image ? (
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={h.image}
                     width={44}
                     height={44}
                     alt=""
-                    loading="lazy"
-                    decoding="async"
                     className="-my-1 h-11 w-11 shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.45)]"
                   />
                 ) : (

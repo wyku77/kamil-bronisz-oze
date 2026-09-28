@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import { MapPin, Star } from 'lucide-react'
 import { testimonials, googleReviews } from '../data/content'
 import { Reveal } from './ui/Reveal'
@@ -42,6 +43,17 @@ function GoogleG() {
 }
 
 export function Testimonials() {
+  // Która karta karuzeli jest na środku (tylko do kropek na telefonie)
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(0)
+  const onScroll = () => {
+    const el = scrollerRef.current
+    const card = el?.firstElementChild as HTMLElement | null
+    if (!el || !card) return
+    const step = card.offsetWidth + 16 // szerokość karty + gap-4
+    setActive(Math.min(testimonials.items.length - 1, Math.max(0, Math.round(el.scrollLeft / step))))
+  }
+
   return (
     <section id="opinie" className="section relative overflow-hidden bg-ink-900">
       <div className="pointer-events-none absolute inset-0 bg-mesh-gold opacity-50" />
@@ -83,43 +95,66 @@ export function Testimonials() {
           {googleReviews.local}
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.items.map((t, i) => (
-            <Reveal
-              as="article"
-              key={t.name}
-              delay={(i % 3) * 0.08}
-              className="card card-hover relative flex h-full flex-col overflow-hidden"
-            >
-              <div className="relative h-60 w-full overflow-hidden bg-ink-950">
-                {/* Rozmyta kopia tego samego zdjęcia wypełnia boki zamiast czarnych pasów.
-                    Samo zdjęcie realizacji zostaje w całości, bez kadrowania. */}
-                <img
-                  src={t.photo}
-                  alt=""
-                  aria-hidden="true"
-                  loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full scale-125 object-cover opacity-80 blur-xl saturate-150"
-                />
-                <div className="absolute inset-0 bg-ink-950/40" />
-                <SmartImage
-                  src={t.photo}
-                  alt={`Realizacja — magazyn energii (${t.role})`}
-                  className="relative h-60 w-full object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.5)]"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <Stars rating={t.rating} />
-                <p className="mt-3 flex-1 leading-relaxed text-white/75">„{t.text}"</p>
-                <div className="mt-5 border-t border-white/10 pt-4">
-                  <p className="font-display font-bold text-white">{t.name}</p>
-                  <p className="text-sm text-gold-300/80">{t.role}</p>
+        {/* Na telefonie karuzela z przewijaniem w bok (kolejna karta wystaje, żeby było widać, że jest
+            więcej) — 6 kart jedna pod drugą zajmowało ok. 5 ekranów. Od md zwykła siatka.
+            Karty bez własnego Reveal: przy przesuwaniu w bok animacja wejścia zostawiała pustą,
+            wystającą kartę, dopóki nie wjechała cała. */}
+        <Reveal className="mt-12">
+          <div
+            ref={scrollerRef}
+            onScroll={onScroll}
+            className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden"
+          >
+            {testimonials.items.map((t) => (
+              <article
+                key={t.name}
+                className="card card-hover relative flex w-[85%] shrink-0 snap-center flex-col overflow-hidden md:w-auto"
+              >
+                <div className="relative h-60 w-full overflow-hidden bg-ink-950">
+                  {/* Rozmyta kopia tego samego zdjęcia wypełnia boki zamiast czarnych pasów.
+                      Samo zdjęcie realizacji zostaje w całości, bez kadrowania. */}
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={t.photo}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 h-full w-full scale-125 object-cover opacity-80 blur-xl saturate-150"
+                  />
+                  <div className="absolute inset-0 bg-ink-950/40" />
+                  <SmartImage
+                    src={t.photo}
+                    alt={`Realizacja — magazyn energii (${t.role})`}
+                    className="relative h-60 w-full object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.5)]"
+                  />
                 </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <Stars rating={t.rating} />
+                  <p className="mt-3 flex-1 leading-relaxed text-white/75">„{t.text}”</p>
+                  <div className="mt-5 border-t border-white/10 pt-4">
+                    <p className="font-display font-bold text-white">{t.name}</p>
+                    <p className="text-sm text-gold-300/80">{t.role}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Kropki i podpowiedź — tylko na telefonie */}
+          <div className="mt-4 flex items-center justify-center gap-3 md:hidden">
+            <div className="flex gap-1.5" aria-hidden="true">
+              {testimonials.items.map((t, i) => (
+                <span
+                  key={t.name}
+                  className={`h-1.5 rounded-full transition-all ${i === active ? 'w-5 bg-gold-400' : 'w-1.5 bg-white/25'}`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-white/60">
+              {active + 1} / {testimonials.items.length} · przesuń w bok
+            </span>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
