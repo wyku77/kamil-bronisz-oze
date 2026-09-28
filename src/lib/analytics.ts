@@ -31,7 +31,7 @@ export function pushEvent(event: string, payload: Record<string, unknown> = {}):
   // Jeśli wpięty jest Meta Pixel — przekaż też tam kluczowe zdarzenia.
   if (typeof window.fbq === 'function') {
     if (event === 'lead_submit') window.fbq('track', 'Lead', payload)
-    if (event === 'calculator_complete') window.fbq('track', 'CompleteRegistration', payload)
+    if (event === 'calculator_complete' || event === 'quiz_complete') window.fbq('track', 'CompleteRegistration', payload)
     if (event === 'call_click' || event === 'whatsapp_click') window.fbq('track', 'Contact', payload)
   }
 

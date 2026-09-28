@@ -5,7 +5,7 @@ import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
 import { track } from '../lib/analytics'
 
-function Stars({ rating }: { rating: number }) {
+export function Stars({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5" aria-label={`Ocena ${rating} na 5`}>
       {Array.from({ length: 5 }).map((_, i) => (
@@ -19,7 +19,7 @@ function Stars({ rating }: { rating: number }) {
 }
 
 /** Logo Google (4-kolorowe „G"). */
-function GoogleG() {
+export function GoogleG() {
   return (
     <svg viewBox="0 0 48 48" className="h-8 w-8 shrink-0" aria-hidden="true">
       <path

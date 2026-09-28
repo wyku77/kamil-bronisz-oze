@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Calculator as CalcIcon, Sparkles } from 'lucide-react'
 import { about, googleReviews, hero, site } from '../data/content'
+import { Reveal } from './ui/Reveal'
 import { CountUp } from './ui/CountUp'
 import { track } from '../lib/analytics'
 // Wizualizacja AI (koncepcja A, retusz i eksport: grafiki-ai/hero-koncepcje/retusz-eksport.mjs).
@@ -154,13 +155,9 @@ export function Hero() {
       </div>
 
       {/* Statystyki */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="container-px relative mt-12 pb-14 lg:mt-4 lg:pb-16"
-      >
+      {/* Reveal (nie motion.div z whileInView): przy ograniczonym ruchu — także w prerenderze — pasek
+          od razu jest widoczny. Wcześniej trafiał do HTML z opacity: 0. */}
+      <Reveal className="container-px relative mt-12 pb-14 lg:mt-4 lg:pb-16">
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md md:grid-cols-4">
           {hero.stats.map((s) => (
             <div key={s.label} className="bg-ink-900/40 px-6 py-7 text-center">
@@ -172,7 +169,7 @@ export function Hero() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </Reveal>
     </section>
   )
 }

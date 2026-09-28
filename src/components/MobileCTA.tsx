@@ -1,4 +1,4 @@
-import { MessageCircle, Phone, PhoneIncoming } from 'lucide-react'
+import { MessageCircle, Phone, PhoneIncoming, type LucideIcon } from 'lucide-react'
 import { site, googleReviews } from '../data/content'
 import { track } from '../lib/analytics'
 
@@ -8,7 +8,15 @@ import { track } from '../lib/analytics'
  * Wcześniej oba przyciski miały równą szerokość i duże marginesy — „Zostaw numer" jako pusta ramka
  * wyglądał na puste pole, a na telefonach 360 px napisy łamały się na dwie linie (przyciski 66 px).
  */
-export function MobileCTA() {
+type MobileCTAProps = {
+  /** Trzeci przycisk (domyślnie „Zostaw numer" → formularz kontaktowy). */
+  secondary?: { href: string; label: string; icon: LucideIcon; track: string }
+}
+
+export function MobileCTA({
+  secondary = { href: '#kontakt', label: 'Zostaw numer', icon: PhoneIncoming, track: 'mobilebar_leadform' },
+}: MobileCTAProps = {}) {
+  const SecondaryIcon = secondary.icon
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink-900/95 backdrop-blur sm:hidden">
       <p className="flex items-center justify-center gap-x-1.5 whitespace-nowrap pt-1.5 text-xs text-white/60">
@@ -35,11 +43,11 @@ export function MobileCTA() {
           <MessageCircle className="h-5 w-5" />
         </a>
         <a
-          href="#kontakt"
-          onClick={() => track.ctaClick('mobilebar_leadform')}
+          href={secondary.href}
+          onClick={() => track.ctaClick(secondary.track)}
           className="btn h-12 flex-auto whitespace-nowrap border border-gold-400/50 bg-gold-400/15 !px-4 !py-0 !text-sm text-gold-100 active:bg-gold-400/25"
         >
-          <PhoneIncoming className="h-4 w-4 shrink-0 text-gold-300" /> Zostaw numer
+          <SecondaryIcon className="h-4 w-4 shrink-0 text-gold-300" /> {secondary.label}
         </a>
       </div>
     </div>

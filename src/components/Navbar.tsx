@@ -1,11 +1,35 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Leaf, Menu, Phone, X } from 'lucide-react'
+import { Leaf, Menu, Phone, X, type LucideIcon } from 'lucide-react'
 import { nav, site } from '../data/content'
 import { Logo } from './ui/Logo'
 import { track } from '../lib/analytics'
 
-export function Navbar() {
+type NavItem = { label: string; href: string }
+
+type NavbarProps = {
+  /** Linki w pasku (komputer). */
+  items?: NavItem[]
+  /** Linki w menu mobilnym — domyślnie te same co w pasku. */
+  mobileItems?: NavItem[]
+  /** Złota plakietka z odnośnikiem do drugiej strony (Czyste Powietrze ⇄ magazyny energii). */
+  pill?: { href: string; label: string; mobileLabel: string; icon: LucideIcon; track: string }
+  /** Dokąd prowadzi „Bezpłatna analiza". */
+  ctaHref?: string
+  logoHref?: string
+}
+
+const defaultPill: NonNullable<NavbarProps['pill']> = {
+  href: 'czyste-powietrze.html',
+  label: 'Czyste Powietrze',
+  mobileLabel: 'Czyste Powietrze — dotacja',
+  icon: Leaf,
+  track: 'navbar_czyste_powietrze',
+}
+
+export function Navbar({ items = nav, mobileItems, pill = defaultPill, ctaHref = '#kontakt', logoHref }: NavbarProps = {}) {
+  const PillIcon = pill.icon
+  const menuItems = mobileItems ?? items
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -34,18 +58,18 @@ export function Navbar() {
       }`}
     >
       <nav className="container-px flex items-center justify-between">
-        <Logo />
+        <Logo href={logoHref} />
 
         <div className="hidden items-center gap-0.5 xl:flex">
           <a
-            href="czyste-powietrze.html"
-            onClick={() => track.ctaClick('navbar_czyste_powietrze')}
+            href={pill.href}
+            onClick={() => track.ctaClick(pill.track)}
             className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-gold-400/30 bg-gold-400/10 px-3 py-2 text-sm font-semibold text-gold-300 transition-colors hover:bg-gold-400/20"
           >
-            <Leaf className="h-4 w-4 shrink-0" />
-            Czyste Powietrze
+            <PillIcon className="h-4 w-4 shrink-0" />
+            {pill.label}
           </a>
-          {nav.map((item) => (
+          {items.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -66,7 +90,7 @@ export function Navbar() {
             {site.phone}
           </a>
           <a
-            href="#kontakt"
+            href={ctaHref}
             onClick={() => track.ctaClick('navbar_cta')}
             className="btn-primary whitespace-nowrap !py-2.5 !text-sm"
           >
@@ -103,7 +127,7 @@ export function Navbar() {
               className="absolute right-0 top-0 flex h-full w-[82%] max-w-sm flex-col bg-ink-900 p-6 shadow-2xl"
             >
               <div className="flex items-center justify-between">
-                <Logo />
+                <Logo href={logoHref} />
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
@@ -116,13 +140,13 @@ export function Navbar() {
 
               <div className="mt-8 flex flex-col gap-1">
                 <a
-                  href="czyste-powietrze.html"
+                  href={pill.href}
                   onClick={() => setOpen(false)}
                   className="mb-1 flex items-center gap-2 rounded-xl border border-gold-400/30 bg-gold-400/10 px-4 py-3 text-base font-semibold text-gold-300"
                 >
-                  <Leaf className="h-4 w-4" /> Czyste Powietrze — dotacja
+                  <PillIcon className="h-4 w-4" /> {pill.mobileLabel}
                 </a>
-                {nav.map((item) => (
+                {menuItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
@@ -139,7 +163,7 @@ export function Navbar() {
                   <Phone className="h-4 w-4 text-gold-400" />
                   {site.phone}
                 </a>
-                <a href="#kontakt" onClick={() => setOpen(false)} className="btn-primary w-full">
+                <a href={ctaHref} onClick={() => setOpen(false)} className="btn-primary w-full">
                   Umów bezpłatną analizę
                 </a>
               </div>

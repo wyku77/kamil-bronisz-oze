@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
 import { faq } from '../data/content'
 import { Reveal } from './ui/Reveal'
@@ -17,10 +16,12 @@ function renderBold(text: string) {
   )
 }
 
-export function FAQ() {
+type FAQData = { eyebrow: string; title: string; lead: string; items: { q: string; a: string }[] }
+
+export function FAQ({ data = faq }: { data?: FAQData } = {}) {
   const [open, setOpen] = useState<number | null>(0)
-  const polowa = Math.ceil(faq.items.length / 2)
-  const zNumerem = faq.items.map((item, i) => ({ item, i }))
+  const polowa = Math.ceil(data.items.length / 2)
+  const zNumerem = data.items.map((item, i) => ({ item, i }))
   const kolumny = [zNumerem.slice(0, polowa), zNumerem.slice(polowa)]
 
   return (
@@ -29,11 +30,11 @@ export function FAQ() {
         <Reveal className="section-head-split">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-300">
-              {faq.eyebrow}
+              {data.eyebrow}
             </span>
-            <h2 className="mt-5 h-section text-slate-900">{faq.title}</h2>
+            <h2 className="mt-5 h-section text-slate-900">{data.title}</h2>
           </div>
-          <p className="text-lg leading-relaxed text-slate-600">{faq.lead}</p>
+          <p className="text-lg leading-relaxed text-slate-600">{data.lead}</p>
         </Reveal>
 
         {/* Od lg dwie niezależne kolumny (każda rozwija się osobno) — jedna kolumna 14 pytań
@@ -67,18 +68,18 @@ export function FAQ() {
                         <Plus className="h-4 w-4" />
                       </span>
                     </button>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        >
-                          <p className="px-6 pb-5 leading-relaxed text-slate-600">{renderBold(item.a)}</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {/* Odpowiedź zawsze jest w HTML (zwinięta przez grid-rows 0fr) — roboty widzą wszystkie
+                        odpowiedzi, zgodnie z danymi FAQPage w <head>. Wcześniej zamknięte odpowiedzi nie
+                        istniały w kodzie strony. */}
+                    <div
+                      className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                        isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                      }`}
+                    >
+                      <div className="overflow-hidden" aria-hidden={!isOpen}>
+                        <p className="px-6 pb-5 leading-relaxed text-slate-600">{renderBold(item.a)}</p>
+                      </div>
+                    </div>
                   </div>
                 )
               })}

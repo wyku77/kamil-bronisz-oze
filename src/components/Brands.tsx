@@ -11,16 +11,22 @@ import { Reveal } from './ui/Reveal'
  * Plakietki mają stałą wysokość, więc w kilku rzędach na telefonie wyglądają równo.
  * Wersje biała i kolorowa mają identyczne wymiary (grafiki-ai/logotypy-biale.mjs).
  */
-export function Brands() {
+type BrandsProps = {
+  id?: string
+  label?: string
+  items?: { src: string; color: string; alt: string; h: number }[]
+}
+
+export function Brands({ id = 'marki', label = brands.label, items = brands.items }: BrandsProps = {}) {
   return (
-    <section id="marki" className="bg-ink-950 pb-6 pt-2 sm:pb-10 sm:pt-4">
+    <section id={id} className="bg-ink-950 pb-6 pt-2 sm:pb-10 sm:pt-4">
       <div className="container-px">
         <Reveal>
           <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
-            {brands.label}
+            {label}
           </p>
           <div className="mx-auto mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-2 sm:gap-x-4 sm:gap-y-3">
-            {brands.items.map((b) => (
+            {items.map((b) => (
               <div
                 key={b.alt}
                 title={b.alt}

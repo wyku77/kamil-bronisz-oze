@@ -5,7 +5,7 @@ type LogoProps = {
 
 /**
  * Logo marki osobistej: Kamil Bronisz — Konsultant energetyczny.
- * Wzór wspólny z public/czyste-powietrze.html (klasy .brand*) — przy zmianie popraw oba miejsca:
+ * Wspólne dla strony głównej i podstrony Czyste Powietrze (src/cp/). Wzór:
  * ikona 40 px (radius 12, gradient 135° #ecd28a → #d4a017 → #bb8718), nazwa Sora 800 18 px,
  * podpis 11 px, wersaliki, odstęp liter 0.14em, w jednej linii.
  */

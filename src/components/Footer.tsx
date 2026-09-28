@@ -9,7 +9,29 @@ const socialLinks = [
   { key: 'youtube', icon: Youtube, label: 'YouTube', hover: 'hover:bg-[#FF0000]' },
 ] as const
 
-export function Footer() {
+type FooterProps = {
+  /** Opis pod logo. */
+  about?: string
+  /** Linki w kolumnie „Nawigacja". */
+  items?: { label: string; href: string }[]
+  /** Odnośnik do drugiej strony (na końcu listy „Nawigacja"). */
+  crossLink?: { label: string; href: string }
+  ctaHref?: string
+  logoHref?: string
+  /** Dodatkowe zastrzeżenie na dole (np. warunki programu określa NFOŚiGW). */
+  disclaimer?: string
+}
+
+const defaultAbout = `${site.tagline} Projektuję inteligentne systemy: magazyny energii z AI, fotowoltaika, zarządzanie energią domu (HEMS) i taryfy dynamiczne — dla domów i firm.`
+
+export function Footer({
+  about = defaultAbout,
+  items = nav,
+  crossLink = { label: 'Czyste Powietrze', href: 'czyste-powietrze.html' },
+  ctaHref = '#kontakt',
+  logoHref,
+  disclaimer,
+}: FooterProps = {}) {
   const year = new Date().getFullYear()
   const socials = socialLinks.filter((s) => site.social[s.key])
 
@@ -19,11 +41,8 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr]">
           {/* Marka */}
           <div>
-            <Logo />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-              {site.tagline} Projektuję inteligentne systemy: magazyny energii z AI, fotowoltaika, zarządzanie
-              energią domu (HEMS) i taryfy dynamiczne — dla domów i firm.
-            </p>
+            <Logo href={logoHref} />
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">{about}</p>
             <div className="mt-5 flex gap-3">
               <a
                 href={site.whatsappHref}
@@ -53,7 +72,7 @@ export function Footer() {
           <div>
             <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">Nawigacja</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {nav.map((n) => (
+              {items.map((n) => (
                 <li key={n.href}>
                   <a href={n.href} className="transition-colors hover:text-gold-300">
                     {n.label}
@@ -61,8 +80,8 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <a href="czyste-powietrze.html" className="transition-colors hover:text-gold-300">
-                  Czyste Powietrze
+                <a href={crossLink.href} className="transition-colors hover:text-gold-300">
+                  {crossLink.label}
                 </a>
               </li>
             </ul>
@@ -86,7 +105,7 @@ export function Footer() {
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" /> {site.area}
               </li>
             </ul>
-            <a href="#kontakt" className="btn-primary mt-5 !py-2.5 !text-sm">
+            <a href={ctaHref} className="btn-primary mt-5 !py-2.5 !text-sm">
               Bezpłatna analiza
             </a>
           </div>
@@ -106,6 +125,12 @@ export function Footer() {
             Begolden
           </a>{' '}
           — {site.name} jest jej konsultantem energetycznym.
+          {disclaimer && (
+            <>
+              <br />
+              {disclaimer}
+            </>
+          )}
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 sm:flex-row">

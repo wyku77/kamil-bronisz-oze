@@ -319,6 +319,71 @@ export async function submitLeadMagnet(
   return saveLocally(base)
 }
 
+/** Odpowiedzi z quizu Czystego Powietrza (wartości jak w dawnej podstronie HTML). */
+export type CpAnswers = {
+  owner: string | null
+  heat: string | null
+  insul: string | null
+  newsrc: string | null
+  when: string | null
+}
+
+/**
+ * Lead z podstrony Czyste Powietrze (quiz #kwalifikacja albo formularz #kontakt).
+ * Pola webhooka są IDENTYCZNE jak w dawnej podstronie HTML — na nich opiera się mapowanie
+ * w Make (wiadomość na Telegramie). Nie zmieniaj nazw pól bez poprawienia scenariusza w Make.
+ */
+export async function submitCzystePowietrze(lead: {
+  name: string
+  phone: string
+  voivodeship: string
+  city: string
+  answers: CpAnswers
+  /** 'czyste-powietrze' (quiz) albo 'czyste-powietrze-kontakt' (formularz na dole strony). */
+  source: string
+}): Promise<SubmitResult> {
+  const { name, phone, voivodeship, city, answers: a, source } = lead
+  const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
+  const submittedAt = new Date().toISOString()
+  const webhook = {
+    typ: 'czyste-powietrze',
+    name,
+    phone,
+    voivodeship,
+    city,
+    obecne_zrodlo_ciepla: a.heat ?? '',
+    interesujace_zrodlo: a.newsrc ?? '',
+    termin_wymiany: a.when ?? '',
+    leadTemperature: a.when === 'asap' ? 'goracy' : 'cieply',
+    source,
+    pageUrl,
+    submittedAt,
+  }
+  const gdzie = [city, voivodeship].filter(Boolean).join(', ')
+  const email = {
+    subject: `📞 Lead Czyste Powietrze${source === 'czyste-powietrze' ? '' : ' (formularz)'}: ${name} — ${phone}${gdzie ? ` (${gdzie})` : ''}`,
+    from_name: 'Strona OZE — Czyste Powietrze',
+    name,
+    phone,
+    voivodeship,
+    city,
+    consent: 'tak',
+    wlasciciel: a.owner ?? '',
+    obecne_zrodlo_ciepla: a.heat ?? '',
+    dom_ocieplony: a.insul ?? '',
+    interesujace_zrodlo: a.newsrc ?? '',
+    termin_wymiany: a.when ?? '',
+    source,
+    pageUrl,
+    submittedAt,
+    referrer: typeof document !== 'undefined' ? document.referrer : '',
+    ...getUTM(),
+  }
+  const { okWebhook, okEmail } = await deliver(webhook, email)
+  if (okWebhook || okEmail) return { ok: true, mode: okWebhook ? 'webhook' : 'email' }
+  return saveLocally(email)
+}
+
 /** Eksport zebranych lokalnie leadów (np. do ręcznego wgrania do Airtable). */
 export function exportLocalLeads(): LeadPayload[] {
   try {
