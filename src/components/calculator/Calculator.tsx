@@ -15,7 +15,7 @@ type Stage = 'form' | 'gate' | 'results'
 const defaultInput: CalcInput = {
   monthlyBill: 400,
   annualConsumption: 0,
-  voivodeship: 'slaskie',
+  voivodeship: 'lubelskie', // obszar działania; wcześniej domyślnie było śląskie
   objectType: 'dom',
   heatPump: false,
   ev: false,

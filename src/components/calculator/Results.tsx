@@ -16,7 +16,7 @@ import {
 import { SUBSIDY_PROGRAM, type CalcInput, type CalcResult } from '../../lib/calc'
 import { site } from '../../data/content'
 import { CountUp } from '../ui/CountUp'
-import { formatPLN, formatNumber } from '../../lib/format'
+import { formatPLN, formatNumber, formatZl } from '../../lib/format'
 import { generateWycenaPdf } from '../../lib/pdf'
 import { SavingsChart } from './SavingsChart'
 import { track } from '../../lib/analytics'
@@ -130,9 +130,13 @@ export function Results({ result, input, name, onRecalculate }: Props) {
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-gold-400/15 text-gold-300">
             <PiggyBank className="h-6 w-6" />
           </span>
-          <p className="mt-4 text-sm text-white/70">Roczne oszczędności</p>
+          <p className="mt-4 text-sm text-white/70">Łączna korzyść rocznie</p>
           <p className="mt-1 font-display text-3xl font-extrabold text-gradient">
             <CountUp to={result.annualSavings} suffix={' zł'} />
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-white/60">
+            {formatZl(result.billSavings)} niższy rachunek
+            {result.tariffGain > 0 && <> + {formatZl(result.tariffGain)} z taryfy dynamicznej</>}
           </p>
         </div>
 
@@ -214,9 +218,10 @@ export function Results({ result, input, name, onRecalculate }: Props) {
       <div className="card p-6 sm:p-8">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-center">
           <div>
-            <h4 className="font-display text-lg font-bold text-white">Twoje oszczędności w czasie</h4>
+            <h4 className="font-display text-lg font-bold text-white">Twoja korzyść w czasie</h4>
             <p className="mt-1.5 text-sm text-white/70">
-              Skumulowane oszczędności z uwzględnieniem wzrostu cen energii (~5%/rok).
+              Niższy rachunek{result.tariffGain > 0 ? ' i zarobek na taryfie dynamicznej' : ''} łącznie, z
+              uwzględnieniem wzrostu cen energii (~5%/rok).
             </p>
             <div className="mt-5 grid grid-cols-2 gap-4">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">

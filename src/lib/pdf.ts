@@ -31,7 +31,11 @@ const MUTED = '#5b6b7a'
 const LINE = '#e6ebf0'
 
 const plnum = (n: number, dec = 0) =>
-  n.toLocaleString('pl-PL', { minimumFractionDigits: dec, maximumFractionDigits: dec })
+  n.toLocaleString('pl-PL', {
+    minimumFractionDigits: dec,
+    maximumFractionDigits: dec,
+    useGrouping: 'always',
+  } as unknown as Intl.NumberFormatOptions)
 
 const OBJ: Record<string, string> = {
   dom: 'Dom jednorodzinny',
@@ -176,19 +180,23 @@ export async function generateWycenaPdf(
         margin: [0, 0, 0, 4],
       },
 
-      ...sectionTitle('Twoje oszczędności i zwrot'),
+      // Łączna korzyść w tytule sekcji (bez dodatkowego wiersza) — PDF ma się mieścić na 2 stronach
+      ...sectionTitle('Twoja korzyść: ' + plnum(result.annualSavings) + ' zł rocznie'),
       {
+        // Niższy rachunek i zarobek na taryfie osobno — suma bywała większa niż cały rachunek
         columns: [
-          statBox(plnum(result.annualSavings) + ' zł', 'Roczne oszczędności'),
-          statBox(Math.round(result.billReduction * 100) + '%', 'Niższy rachunek'),
+          statBox(plnum(result.billSavings) + ' zł', 'Niższy rachunek / rok (' + Math.round(result.billReduction * 100) + '%)'),
+          result.tariffGain > 0
+            ? statBox('+' + plnum(result.tariffGain) + ' zł', 'Taryfa dynamiczna / rok')
+            : statBox(Math.round(result.billReduction * 100) + '%', 'Niższy rachunek'),
           statBox(plnum(result.paybackYears, 1) + ' lat', 'Zwrot po dotacji'),
         ],
         columnGap: 10,
         margin: [0, 0, 0, 6],
       },
       kv([
-        ['Skumulowane oszczędności w 10 lat', plnum(result.savings10y) + ' zł'],
-        ['Skumulowane oszczędności w 20 lat', plnum(result.savings20y) + ' zł'],
+        ['Obecny rachunek za energię', plnum(result.annualBill) + ' zł / rok'],
+        ['Skumulowana korzyść w 10 / 20 lat', plnum(result.savings10y) + ' zł / ' + plnum(result.savings20y) + ' zł'],
         ['Redukcja CO2', plnum(result.co2PerYear) + ' kg / rok'],
       ]),
 

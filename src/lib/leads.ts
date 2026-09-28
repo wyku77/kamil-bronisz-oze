@@ -51,6 +51,8 @@ export type LeadPayload = {
   storageKwh: number
   selfConsumptionPct: number
   annualSavings: number
+  billSavings: number
+  tariffGain: number
   savings10y: number
   savings20y: number
   paybackYears: number
@@ -154,6 +156,8 @@ export function buildLeadPayload(
     storageKwh: result.storageKwh,
     selfConsumptionPct: Math.round(result.selfConsumption * 100),
     annualSavings: result.annualSavings,
+    billSavings: result.billSavings,
+    tariffGain: result.tariffGain,
     savings10y: result.savings10y,
     savings20y: result.savings20y,
     paybackYears: result.paybackYears,

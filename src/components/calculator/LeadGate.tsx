@@ -5,6 +5,7 @@ import type { LeadContact } from '../../lib/leads'
 import { CountUp } from '../ui/CountUp'
 import { googleReviews, leadMicrocopy, leadTimeframe } from '../../data/content'
 import { Honeypot, isBotSubmit } from '../ui/Honeypot'
+import { formatZl } from '../../lib/format'
 
 type Props = {
   result: CalcResult
@@ -52,10 +53,22 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
         <span className="eyebrow w-fit">
           <Sparkles className="h-3.5 w-3.5" /> Twoja wstępna analiza jest gotowa
         </span>
-        <p className="mt-5 text-sm uppercase tracking-wider text-white/65">Szacowane roczne oszczędności</p>
+        {/* Nagłówkiem jest sam niższy rachunek — nigdy większy niż rachunek. Zarobek na taryfie
+            dynamicznej osobno, żeby klient nie widział „oszczędzisz więcej, niż płacisz". */}
+        <p className="mt-5 text-sm uppercase tracking-wider text-white/65">Twój rachunek za prąd niższy o</p>
         <p className="mt-1 font-display text-5xl font-extrabold text-gradient sm:text-6xl">
-          <CountUp to={result.annualSavings} suffix={' zł'} />
+          <CountUp to={result.billSavings} suffix={' zł'} />
+          <span className="ml-2 font-sans text-lg font-semibold text-white/60 sm:text-xl">rocznie</span>
         </p>
+        <p className="mt-2 text-sm text-white/65">
+          To ok. <span className="font-semibold text-white">{Math.round(result.billReduction * 100)}%</span> obecnego
+          rachunku ({formatZl(result.annualBill)} rocznie).
+        </p>
+        {result.tariffGain > 0 && (
+          <p className="mt-1 text-sm font-medium text-gold-300">
+            + ok. {formatZl(result.tariffGain)} rocznie z taryfy dynamicznej
+          </p>
+        )}
         <p className="mt-3 max-w-md leading-relaxed text-white/65">
           Podaj dane kontaktowe, aby odblokować <span className="font-semibold text-white">pełną analizę</span>:
           rekomendowaną moc instalacji, dobór magazynu energii, autokonsumpcję, czas zwrotu, projekcję na 10 i 20 lat

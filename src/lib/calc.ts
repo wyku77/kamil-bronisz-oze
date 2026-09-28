@@ -62,6 +62,8 @@ const SELF_MAX = 0.92
 
 /** Stały zysk z inteligentnego zarządzania energią (AI/HEMS) — optymalizacja zużycia. */
 const SMART_MANAGEMENT_UPLIFT = 0.05
+/** Maksymalna obniżka samego rachunku — zostają opłaty stałe (dystrybucja, abonament). */
+const MAX_BILL_REDUCTION = 0.95
 
 /**
  * Taryfy dynamiczne: dodatkowy zysk z arbitrażu (ładuj tanio / korzystaj drogo).
@@ -132,11 +134,18 @@ export type CalcResult = {
   selfConsumption: number
   /** Roczna produkcja PV (kWh). */
   pvProduction: number
-  /** Roczne oszczędności (zł). */
+  /** Obecny roczny rachunek za całą energię (zł) — z planowanymi urządzeniami. */
+  annualBill: number
+  /** O ile spadnie sam rachunek (zł/rok): energia z paneli zużyta na miejscu + rozliczenie nadwyżek.
+   *  Nigdy nie więcej niż MAX_BILL_REDUCTION rachunku. */
+  billSavings: number
+  /** Dodatkowy zarobek na taryfie dynamicznej (zł/rok): magazyn ładowany tanio, energia zużywana drogo. */
+  tariffGain: number
+  /** Łączna roczna korzyść (zł) = billSavings + tariffGain. Z niej liczony jest zwrot i projekcje. */
   annualSavings: number
-  /** Udział oszczędności w obecnym rachunku (0–1). */
+  /** O ile procent spadnie sam rachunek (0–MAX_BILL_REDUCTION). */
   billReduction: number
-  /** Skumulowane oszczędności w 10 i 20 lat (zł). */
+  /** Skumulowana korzyść w 10 i 20 lat (zł). */
   savings10y: number
   savings20y: number
   /** Orientacyjny czas zwrotu inwestycji (lata). */
@@ -225,11 +234,17 @@ export function calculate(input: CalcInput): CalcResult {
     input.ev && input.dynamicTariff ? LOAD_EV * EV_SMART_CHARGE_SHARE * ARBITRAGE_SPREAD : 0
 
   // Inteligentne zarządzanie (AI/HEMS) dokłada stały zysk z optymalizacji zużycia.
-  const annualSavings =
-    Math.round(
-      ((avoidedPurchase + exportRevenue + arbitrage + evArbitrage) * (1 + SMART_MANAGEMENT_UPLIFT)) / 10,
-    ) * 10
-  const billReduction = clamp(annualSavings / referenceAnnualCost, 0, 0.95)
+  const smart = 1 + SMART_MANAGEMENT_UPLIFT
+  const round10 = (n: number) => Math.round(n / 10) * 10
+  // Dwie osobne pozycje. Wcześniej była jedna suma nazwana „oszczędnościami", która przy typowych
+  // rachunkach wynosiła 120–140% CAŁEGO rachunku (przez dodany arbitraż) — klient widział
+  // „oszczędzisz więcej, niż płacisz" i tracił zaufanie do wyniku.
+  const billSavings = round10(
+    Math.min((avoidedPurchase + exportRevenue) * smart, referenceAnnualCost * MAX_BILL_REDUCTION),
+  )
+  const tariffGain = round10((arbitrage + evArbitrage) * smart)
+  const annualSavings = billSavings + tariffGain
+  const billReduction = clamp(billSavings / referenceAnnualCost, 0, MAX_BILL_REDUCTION)
 
   // 7. Projekcja 10 / 20 lat (z indeksacją cen energii)
   const savings10y = Math.round(cumulativeSavings(annualSavings, 10) / 100) * 100
@@ -257,6 +272,9 @@ export function calculate(input: CalcInput): CalcResult {
     storageKwh,
     selfConsumption,
     pvProduction: Math.round(pvProduction),
+    annualBill: round10(referenceAnnualCost),
+    billSavings,
+    tariffGain,
     annualSavings,
     billReduction,
     savings10y,
