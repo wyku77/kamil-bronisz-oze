@@ -26,6 +26,14 @@ import logoDeye from '../assets/marki/biale/deye.png'
 import logoJinko from '../assets/marki/biale/jinko.png'
 import logoLesso from '../assets/marki/biale/lesso.png'
 import logoTwsolar from '../assets/marki/biale/tw-solar.png'
+// Te same logotypy w oryginalnych kolorach (na białym tle) — pokazywane po najechaniu kursorem
+import logoSigenergyKolor from '../assets/marki/kolor/sigenergy.png'
+import logoFoxessKolor from '../assets/marki/kolor/foxess.png'
+import logoSolaxKolor from '../assets/marki/kolor/solax.png'
+import logoDeyeKolor from '../assets/marki/kolor/deye.png'
+import logoJinkoKolor from '../assets/marki/kolor/jinko.png'
+import logoLessoKolor from '../assets/marki/kolor/lesso.png'
+import logoTwsolarKolor from '../assets/marki/kolor/tw-solar.png'
 
 // Ikony 3D (Higgsfield) — sekcje Dlaczego warto, Współpraca, O mnie
 import icNizszeRachunki from '../assets/grafiki/ikony/nizsze-rachunki.webp'
@@ -46,13 +54,13 @@ export const brands = {
   // h = wysokość znaku w px, wyrównana wg powierzchni (szerokie logo niższe, wąskie wyższe),
   // żeby każde „ważyło" tyle samo. Sigenergy (główna marka) celowo nieco większe.
   items: [
-    { src: logoSigenergy, alt: 'Sigenergy', h: 36 },
-    { src: logoFoxess, alt: 'FoxESS', h: 34 },
-    { src: logoSolax, alt: 'SolaX', h: 30 },
-    { src: logoDeye, alt: 'Deye', h: 32 },
-    { src: logoJinko, alt: 'Jinko Solar', h: 30 },
-    { src: logoLesso, alt: 'Lesso', h: 25 },
-    { src: logoTwsolar, alt: 'TW-Solar', h: 22 },
+    { src: logoSigenergy, color: logoSigenergyKolor, alt: 'Sigenergy', h: 36 },
+    { src: logoFoxess, color: logoFoxessKolor, alt: 'FoxESS', h: 34 },
+    { src: logoSolax, color: logoSolaxKolor, alt: 'SolaX', h: 30 },
+    { src: logoDeye, color: logoDeyeKolor, alt: 'Deye', h: 32 },
+    { src: logoJinko, color: logoJinkoKolor, alt: 'Jinko Solar', h: 30 },
+    { src: logoLesso, color: logoLessoKolor, alt: 'Lesso', h: 25 },
+    { src: logoTwsolar, color: logoTwsolarKolor, alt: 'TW-Solar', h: 22 },
   ],
 }
 
