@@ -3,7 +3,7 @@ import { CheckCircle2, Mail, MessageCircle, Phone, Star } from 'lucide-react'
 import { site, about, googleReviews, leadMicrocopy, leadTimeframe } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
-import { submitLead, type LeadPayload } from '../lib/leads'
+import { getUTM, submitLead, type LeadPayload } from '../lib/leads'
 import { track } from '../lib/analytics'
 import { Honeypot, isBotSubmit } from './ui/Honeypot'
 import { SendFailure } from './ui/SendFailure'
@@ -67,6 +67,9 @@ export function Contact() {
       source: 'formularz-kontakt',
       submittedAt: new Date().toISOString(),
       pageUrl: window.location.href,
+      // Z której reklamy/linku przyszedł klient (utm_*) — jak w kalkulatorze i checkliście
+      referrer: document.referrer,
+      ...getUTM(),
     }
 
     await send(payload as LeadPayload)

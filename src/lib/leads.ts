@@ -82,7 +82,7 @@ const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined
 const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 const STORAGE_KEY = 'kb_leads'
 
-function getUTM() {
+export function getUTM() {
   if (typeof window === 'undefined') return {}
   const p = new URLSearchParams(window.location.search)
   return {
@@ -275,6 +275,13 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
   return saveLocally(payload)
 }
 
+/** Czytelne nazwy źródeł lekkich leadów (temat e-maila i pole „typ"). */
+const SOURCE_LABELS: Record<string, string> = {
+  powiadomienie_nabor: 'Powiadom o starcie naboru',
+  lead_magnet_dotacja: 'Checklista dotacji',
+  exit_intent: 'Okienko przy wyjściu ze strony',
+}
+
 /**
  * Lekki lead z magnetu (telefon i/lub e-mail) — np. checklista/poradnik, exit-intent.
  * Wysyłka tą samą ścieżką co główne leady: webhook + e-mail → (awaryjnie) localStorage.
@@ -285,12 +292,16 @@ export async function submitLeadMagnet(
 ): Promise<SubmitResult> {
   const phone = (contact.phone ?? '').trim()
   const email = (contact.email ?? '').trim()
+  const typ = SOURCE_LABELS[source] ?? source
   const base = {
-    name: '',
+    // Te formularze nie pytają o imię — w jego miejscu nazwa zgłoszenia, żeby na Telegramie
+    // (szablon wiadomości w Make pokazuje imię) od razu było widać, skąd jest lead.
+    name: typ,
     phone,
     email,
     consent: true,
     source,
+    typ,
     submittedAt: new Date().toISOString(),
     pageUrl: typeof window !== 'undefined' ? window.location.href : '',
     referrer: typeof document !== 'undefined' ? document.referrer : '',
@@ -298,7 +309,8 @@ export async function submitLeadMagnet(
   }
 
   const { okWebhook, okEmail } = await deliver(base, {
-    subject: `📞 Nowy lead (${source}): ${phone || email}`,
+    // Temat do wyszukania w skrzynce, np. 20.10: „Powiadom o starcie naboru"
+    subject: `📞 ${typ} — ${phone || email}`,
     from_name: 'Strona OZE — lead magnet',
     ...(email ? { replyto: email } : {}),
     ...base,
