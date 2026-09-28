@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CheckCircle2, ChevronDown, Clock, MessageCircle, Phone } from 'lucide-react'
+import { CheckCircle2, ChevronDown, MessageCircle, Phone } from 'lucide-react'
 import { about, site } from '../data/content'
 import { cpAbout } from '../data/cp'
 import { Reveal } from '../components/ui/Reveal'
@@ -29,13 +29,7 @@ export function CpAbout() {
                 <p className="text-sm text-gold-300">{cpAbout.role}</p>
               </div>
             </div>
-            <div className="absolute -right-3 top-8 flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
-              <Clock className="h-4 w-4 text-gold-300" />
-              <div className="leading-tight">
-                <p className="text-xs text-white/60">Oddzwaniam</p>
-                <p className="text-sm font-bold text-white">tego samego dnia</p>
-              </div>
-            </div>
+            {/* Bez plakietki na zdjęciu — zasłaniała twarz (prośba Kamila) */}
           </Reveal>
 
           <Reveal direction="left">

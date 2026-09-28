@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Lock, MessageCircle, Phone, Star } from 'lucide-react'
+import { CheckCircle2, Lock, Mail, MessageCircle, Phone, Star } from 'lucide-react'
 import { about, googleReviews, site } from '../data/content'
 import { cpContact, cpQuiz } from '../data/cp'
 import { Reveal } from '../components/ui/Reveal'
@@ -111,6 +111,20 @@ export function CpContact({ answers, setAnswer }: Props) {
               className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               <MessageCircle className="h-5 w-5" /> Napisz na WhatsApp
+            </a>
+
+            <a
+              href={site.emailHref}
+              onClick={() => track.ctaClick('cp_contact_email')}
+              className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:bg-white/[0.08]"
+            >
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-500/20 text-brand-300">
+                <Mail className="h-6 w-6" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm text-white/65">Napisz e-mail</span>
+                <span className="block break-all font-medium">{site.email}</span>
+              </span>
             </a>
 
             <p className="flex items-center gap-2 px-1 text-sm text-white/65">

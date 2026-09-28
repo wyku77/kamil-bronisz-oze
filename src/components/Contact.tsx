@@ -111,13 +111,11 @@ export function Contact() {
           {/* Profil + kontakt — na mobile POD formularzem (order), na desktopie po lewej */}
           <Reveal direction="right" className="order-2 space-y-4 lg:order-1">
             <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-gold-300 to-gold-500 font-display text-xl font-bold text-ink-950">
-                KB
-              </span>
+              {/* object-top: w kwadracie widać całą głowę (środek kadru ucinał czubek głowy) */}
               <SmartImage
                 src={about.photo}
                 alt={`${site.name} — ${site.role}`}
-                className="h-14 w-14 shrink-0 rounded-2xl object-cover ring-1 ring-gold-400/30"
+                className="h-14 w-14 shrink-0 rounded-2xl object-cover object-top ring-1 ring-gold-400/30"
               />
               <div>
                 <p className="font-display text-lg font-bold">{site.name}</p>
