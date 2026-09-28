@@ -19,7 +19,7 @@ function TariffChart() {
   // statycznego HTML trafiał pusty wykres (wszystkie słupki height: 0px).
   const reduce = useReducedMotion()
   return (
-    <div className="card p-5 sm:p-6">
+    <div className="card h-full p-5 sm:p-6">
       <div className="flex items-center gap-2">
         <span className="grid h-8 w-8 place-items-center rounded-lg bg-gold-400/15 text-gold-300">
           <Zap className="h-4 w-4" />
@@ -52,7 +52,7 @@ function TariffChart() {
           )
         })}
       </div>
-      <div className="mt-2 flex justify-between text-[10px] text-white/60">
+      <div className="mt-2 flex justify-between text-xs text-white/60">
         <span>00:00</span>
         <span>06:00</span>
         <span>12:00</span>
@@ -77,20 +77,24 @@ export function EnergyStorage() {
     <section id="magazyny-energii" className="section relative overflow-hidden bg-ink-900">
       <div className="pointer-events-none absolute -left-24 top-1/4 h-80 w-80 rounded-full bg-gold-400/10 blur-3xl" />
       <div className="container-px relative">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">{energyStorage.eyebrow}</span>
-          <h2 className="mt-5 h-section text-white">{energyStorage.title}</h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/65">{energyStorage.lead}</p>
+        <Reveal className="section-head-split mx-auto max-w-5xl">
+          <div>
+            <span className="eyebrow">{energyStorage.eyebrow}</span>
+            <h2 className="mt-5 h-section text-white">{energyStorage.title}</h2>
+          </div>
+          <p className="text-lg leading-relaxed text-white/65">{energyStorage.lead}</p>
         </Reveal>
 
         {/* Interaktywna ilustracja: jak działa dom z magazynem */}
-        <Reveal className="mx-auto mt-12 max-w-5xl">
+        <Reveal className="mx-auto mt-10 max-w-5xl">
           <EnergySystem />
         </Reveal>
 
+        {/* Od lg przykład z życia i wykres taryfy obok siebie (wcześniej jeden pod drugim — ok. 400 px więcej) */}
+        <div className="mx-auto mt-8 grid max-w-5xl gap-5 lg:grid-cols-2">
         {/* Mini-case: konkretne liczby + awersja do straty */}
-        <Reveal className="mx-auto mt-10 max-w-3xl">
-          <div className="rounded-3xl border border-gold-400/20 bg-white/[0.03] p-6 sm:p-8">
+        <Reveal className="h-full">
+          <div className="h-full rounded-3xl border border-gold-400/20 bg-white/[0.03] p-6 sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <span className="eyebrow">{energyStorage.miniCase.badge}</span>
               <p className="font-display text-sm font-semibold text-white/80">{energyStorage.miniCase.title}</p>
@@ -102,9 +106,9 @@ export function EnergyStorage() {
               <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-center">
                 <p className="text-xs text-white/70">{energyStorage.miniCase.before.label}</p>
                 <p className="mt-3 font-display text-3xl font-bold text-white/70">{energyStorage.miniCase.before.self}</p>
-                <p className="text-[11px] text-white/65">{energyStorage.miniCase.before.selfLabel}</p>
+                <p className="text-xs text-white/65">{energyStorage.miniCase.before.selfLabel}</p>
                 <p className="mt-3 font-display text-xl font-bold text-white/70">{energyStorage.miniCase.before.bill}</p>
-                <p className="text-[11px] text-white/65">{energyStorage.miniCase.before.billLabel}</p>
+                <p className="text-xs text-white/65">{energyStorage.miniCase.before.billLabel}</p>
               </div>
               <div className="grid place-items-center text-gold-300">
                 <ArrowRight className="hidden h-6 w-6 sm:block" />
@@ -113,16 +117,22 @@ export function EnergyStorage() {
               <div className="rounded-2xl border border-gold-400/30 bg-gold-400/10 p-5 text-center">
                 <p className="text-xs text-gold-200/90">{energyStorage.miniCase.after.label}</p>
                 <p className="mt-3 font-display text-3xl font-extrabold text-gradient">{energyStorage.miniCase.after.self}</p>
-                <p className="text-[11px] text-white/60">{energyStorage.miniCase.after.selfLabel}</p>
+                <p className="text-xs text-white/60">{energyStorage.miniCase.after.selfLabel}</p>
                 <p className="mt-3 font-display text-xl font-extrabold text-gradient">{energyStorage.miniCase.after.bill}</p>
-                <p className="text-[11px] text-white/60">{energyStorage.miniCase.after.billLabel}</p>
+                <p className="text-xs text-white/60">{energyStorage.miniCase.after.billLabel}</p>
               </div>
             </div>
           </div>
         </Reveal>
 
-        {/* CTA tuż pod tabelą porównawczą — moment najwyższej motywacji */}
-        <Reveal className="mx-auto mt-6 max-w-3xl text-center">
+        {/* Wykres taryfy dynamicznej */}
+        <Reveal className="h-full">
+          <TariffChart />
+        </Reveal>
+        </div>
+
+        {/* CTA tuż pod porównaniem — moment najwyższej motywacji */}
+        <Reveal className="mx-auto mt-8 max-w-3xl text-center">
           <a
             href="#kalkulator"
             onClick={() => track.ctaClick('storage_comparison')}
@@ -132,11 +142,6 @@ export function EnergyStorage() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
           <p className="mt-3 text-xs text-white/55">Bezpłatnie, bez zobowiązań — wynik w 2 minuty.</p>
-        </Reveal>
-
-        {/* Wykres taryfy dynamicznej */}
-        <Reveal className="mx-auto mt-10 max-w-3xl">
-          <TariffChart />
         </Reveal>
       </div>
     </section>

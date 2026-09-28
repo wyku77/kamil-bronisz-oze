@@ -41,7 +41,7 @@ export function About() {
           <div className="absolute -right-3 top-8 flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
             <Clock className="h-4 w-4 text-gold-300" />
             <div className="leading-tight">
-              <p className="text-[11px] text-white/60">Kontakt</p>
+              <p className="text-xs text-white/60">Kontakt</p>
               <p className="text-sm font-bold text-white">w ciągu 1 h</p>
             </div>
           </div>

@@ -8,13 +8,15 @@ export function Benefits() {
       <div className="pointer-events-none absolute inset-0 bg-mesh-gold opacity-70" />
 
       <div className="container-px relative">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">{benefits.eyebrow}</span>
-          <h2 className="mt-5 h-section text-white">{benefits.title}</h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/65">{benefits.lead}</p>
+        <Reveal className="section-head-split">
+          <div>
+            <span className="eyebrow">{benefits.eyebrow}</span>
+            <h2 className="mt-5 h-section text-white">{benefits.title}</h2>
+          </div>
+          <p className="text-lg leading-relaxed text-white/65">{benefits.lead}</p>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.items.map((b, i) => (
             <Reveal as="article" key={b.title} delay={i * 0.06} className="card card-hover group flex gap-4 p-5 sm:block sm:p-7">
               {b.image ? (

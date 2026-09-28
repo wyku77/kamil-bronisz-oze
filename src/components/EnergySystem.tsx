@@ -55,7 +55,7 @@ export function EnergySystem() {
             >
               {!on && <span className="absolute inset-1.5 animate-ping rounded-full bg-gold-400/40" />}
               <span
-                className={`relative grid h-6 w-6 place-items-center rounded-full border font-display text-[11px] font-bold shadow-lg transition-all duration-200 sm:h-8 sm:w-8 sm:text-xs ${
+                className={`relative grid h-6 w-6 place-items-center rounded-full border font-display text-xs font-bold shadow-lg transition-all duration-200 sm:h-8 sm:w-8 sm:text-xs ${
                   on
                     ? 'scale-110 border-white bg-gold-400 text-ink-950'
                     : 'border-gold-300/70 bg-ink-950/85 text-gold-200 hover:bg-gold-400 hover:text-ink-950'

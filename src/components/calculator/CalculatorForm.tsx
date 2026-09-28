@@ -79,7 +79,7 @@ export function CalculatorForm({ value, onChange, onSubmit }: Props) {
           onChange={(e) => set('monthlyBill', Number(e.target.value))}
           className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-full bg-white/10 accent-gold-400"
         />
-        <div className="mt-1 flex justify-between text-[11px] text-white/60">
+        <div className="mt-1 flex justify-between text-xs text-white/60">
           <span>50 zł</span>
           <span>3000 zł</span>
         </div>

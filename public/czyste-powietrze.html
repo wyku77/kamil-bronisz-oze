@@ -81,13 +81,14 @@
       /* Top bar */
       header.top { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(10, 16, 24, 0.85); backdrop-filter: blur(8px); }
       .top .wrap { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.25rem; }
-      .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: #fff; }
-      .brand .badge { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--gold3), #bb8718); color: var(--ink-950); box-shadow: 0 0 40px -12px rgba(212, 160, 23, 0.5); }
+      /* Logo — wzór wspólny ze stroną główną (src/components/ui/Logo.tsx); przy zmianie popraw oba miejsca */
+      .brand { display: flex; flex-shrink: 0; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+      .brand .badge { display: grid; flex-shrink: 0; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #ecd28a 0%, #d4a017 55%, #bb8718 100%); color: var(--ink-950); box-shadow: 0 0 60px -12px rgba(212, 160, 23, 0.5); }
       .brand .badge svg { width: 20px; height: 20px; }
-      .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
-      .brand-text b { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.125rem; letter-spacing: -0.01em; color: #fff; }
-      .brand-text .grad { background: linear-gradient(90deg, var(--gold3), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .brand-sub { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); margin-top: 3px; }
+      .brand-text { display: flex; flex-direction: column; }
+      .brand-text b { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 18px; line-height: 1; letter-spacing: -0.01em; color: #fff; }
+      .brand-text .grad { background: linear-gradient(90deg, #e1bd5b, #ecd28a, #d4a017); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .brand-sub { margin-top: 5px; white-space: nowrap; font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
       .top .right { margin-left: auto; display: flex; gap: .6rem; align-items: center; }
       .btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .65rem 1.2rem; font-weight: 600; font-size: .9rem; text-decoration: none; transition: .2s; white-space: nowrap; }
       .btn-primary { background: linear-gradient(to right, #e1bd5b, #bb8718); color: var(--ink-950); box-shadow: 0 0 60px -12px rgba(212, 160, 23, 0.5); }
@@ -115,8 +116,6 @@
       }
       @media (max-width: 560px) {
         .top .wrap { padding: .7rem 1rem; }
-        .brand-text b { font-size: 1.05rem; }
-        .brand .badge { width: 38px; height: 38px; }
       }
       /* Hero */
       .hero { padding: 4rem 0 2.5rem; }
@@ -138,7 +137,7 @@
       .card p { color: var(--muted); font-size: .95rem; margin-top: .5rem; }
       .level { border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 18px; padding: 1.3rem 1.4rem; }
       .level .lvl-ic { display: block; width: 76px; height: 76px; margin: -.45rem 0 .5rem -.4rem; filter: drop-shadow(0 9px 15px rgba(0,0,0,.42)); }
-      .level .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--gold3); font-weight: 700; }
+      .level .tag { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--gold3); font-weight: 700; }
       .level .amt { font-family: 'Sora', sans-serif; font-weight: 800; color: #fff; font-size: 1.4rem; margin-top: .5rem; }
       .level p { color: var(--muted); font-size: .9rem; margin-top: .5rem; }
       ul.list { list-style: none; margin-top: 1rem; }
@@ -257,7 +256,7 @@
       .rz-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transform: scale(1.06); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform 5s cubic-bezier(.22,1,.36,1); }
       .rz-img.on { opacity: 1; transform: scale(1); }
       .rz-noanim .rz-img, .rz-noanim .rz-toggle::before { transition: none !important; }
-      .rz-chip { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: .45rem; padding: .32rem .75rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: rgba(10,16,24,.78); color: rgba(255,255,255,.85); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: color .45s ease; }
+      .rz-chip { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: .45rem; padding: .32rem .75rem; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: rgba(10,16,24,.78); color: rgba(255,255,255,.85); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: color .45s ease; }
       .rz-chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
       .rz-stage.is-after .rz-chip { color: var(--gold3); }
       .rz-toggle { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); width: max-content; display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: rgba(10,16,24,.8); border: 1px solid rgba(255,255,255,.14); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
@@ -268,7 +267,7 @@
         .rz-toggle { bottom: 10px; padding: 3px; }
         .rz-toggle::before { top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); }
         .rz-toggle button { min-width: 74px; font-size: .76rem; padding: .42rem .8rem; }
-        .rz-chip { top: 10px; left: 10px; font-size: .66rem; padding: .28rem .62rem; }
+        .rz-chip { top: 10px; left: 10px; font-size: .75rem; padding: .28rem .62rem; }
       }
       .rz-toggle button[aria-pressed="true"] { color: #fff; }
       .rz-stage.is-after .rz-toggle button[aria-pressed="true"] { color: #0a1018; }
@@ -332,7 +331,7 @@
       .ccard .cost.small { font-size: .78rem; margin-top: .2rem; color: rgba(255,255,255,.5); }
       .ccard .save { font-family: 'Sora', sans-serif; font-weight: 800; color: #fff; font-size: 1.35rem; margin-top: .3rem; }
       .ccard .save span { color: var(--gold3); font-size: .9rem; }
-      .ccard .badge-best { position: absolute; top: -11px; right: 12px; background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+      .ccard .badge-best { position: absolute; top: -11px; right: 12px; background: linear-gradient(90deg, var(--gold3), #d4a017); color: var(--ink-950); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
       .chart { margin-top: 1.6rem; display: flex; flex-direction: column; gap: .65rem; }
       .chart .row { display: grid; grid-template-columns: 88px 1fr auto; align-items: center; gap: .7rem; font-size: .88rem; }
       .chart .lab { color: var(--text); }
@@ -400,11 +399,11 @@
       .hero-media .hm-po { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; transition: transform .8s cubic-bezier(.22,1,.36,1); }
       .hero-media:hover .hm-po { transform: scale(1.03); }
       .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,11,18,.72), rgba(7,11,18,0) 42%); pointer-events: none; }
-      .hm-chip { position: absolute; z-index: 2; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: .45rem; padding: .32rem .75rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold3); background: rgba(10,16,24,.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+      .hm-chip { position: absolute; z-index: 2; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: .45rem; padding: .32rem .75rem; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold3); background: rgba(10,16,24,.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
       .hm-chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
       .hm-przed { position: absolute; z-index: 2; left: 12px; bottom: 12px; width: 30%; margin: 0; border-radius: 12px; overflow: hidden; border: 2px solid rgba(255,255,255,.85); box-shadow: 0 10px 24px rgba(0,0,0,.5); }
       .hm-przed img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
-      .hm-przed figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .2rem 0; text-align: center; font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: rgba(10,16,24,.72); }
+      .hm-przed figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .2rem 0; text-align: center; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: rgba(10,16,24,.72); }
       .hm-link { position: absolute; z-index: 2; right: 12px; bottom: 14px; padding: .4rem .8rem; border-radius: 999px; font-size: .78rem; font-weight: 600; color: #fff; background: rgba(10,16,24,.72); border: 1px solid rgba(255,255,255,.18); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: border-color .2s, color .2s; }
       .hero-media:hover .hm-link, .hero-media:focus-visible .hm-link { border-color: var(--gold); color: var(--gold3); }
       .hero-media:focus-visible { outline: 2px solid var(--gold3); outline-offset: 3px; }
@@ -1210,6 +1209,12 @@
     </main>
 
     <footer class="bot">
+      <div class="wrap" style="margin-bottom: 1.1rem">
+        <a class="brand" href="./" aria-label="Kamil Bronisz — strona główna">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" /></svg></span>
+          <span class="brand-text"><b>Kamil <span class="grad">Bronisz</span></b><span class="brand-sub">Konsultant energetyczny</span></span>
+        </a>
+      </div>
       <div class="wrap">
         <span class="disc">Informacje mają charakter ogólny i nie stanowią porady; aktualne warunki programu określa NFOŚiGW.</span>
         <a href="./">← Wróć na stronę główną</a>

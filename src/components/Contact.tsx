@@ -314,7 +314,7 @@ export function Contact() {
                     {!sending && <Phone className="h-4 w-4" />}
                   </button>
 
-                  <p className="text-center text-[11px] text-white/60">{leadMicrocopy}</p>
+                  <p className="text-center text-xs text-white/60">{leadMicrocopy}</p>
                   <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
                     <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
                     <span>

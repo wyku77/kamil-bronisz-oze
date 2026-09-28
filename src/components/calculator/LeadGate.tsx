@@ -80,7 +80,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
           <div className="grid grid-cols-3 gap-3 blur-[6px]">
             {['Moc PV', 'Magazyn', 'Autokonsumpcja', 'Zwrot', 'Oszczędności 20 lat', 'CO₂'].map((l) => (
               <div key={l} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-[11px] text-white/65">{l}</p>
+                <p className="text-xs text-white/65">{l}</p>
                 <p className="mt-2 h-5 w-12 rounded bg-white/15" />
               </div>
             ))}
@@ -216,7 +216,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
             {sending ? 'Przygotowuję wyniki…' : 'Pokaż moje pełne wyniki'}
           </button>
 
-          <p className="text-center text-[11px] text-white/60">{leadMicrocopy}</p>
+          <p className="text-center text-xs text-white/60">{leadMicrocopy}</p>
           <div className="flex items-center justify-center gap-1.5 text-xs text-gold-300/90">
             <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
             <span>
@@ -225,7 +225,7 @@ export function LeadGate({ result, onUnlock, onBack }: Props) {
             </span>
           </div>
 
-          <div className="flex items-center justify-center gap-4 text-[11px] text-white/60">
+          <div className="flex items-center justify-center gap-4 text-xs text-white/60">
             <button type="button" onClick={onBack} className="flex items-center gap-1 hover:text-white/70">
               <ArrowLeft className="h-3.5 w-3.5" /> Zmień dane
             </button>

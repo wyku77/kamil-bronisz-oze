@@ -154,7 +154,7 @@ export function SubsidyDeadline() {
                 {notifyStatus === 'failed' && (
                   <SendFailure source="powiadomienie_nabor" onRetry={sendNotify} />
                 )}
-                <p className="text-[11px] leading-relaxed text-white/55">{notify.note}</p>
+                <p className="text-xs leading-relaxed text-white/55">{notify.note}</p>
               </form>
             )}
           </div>

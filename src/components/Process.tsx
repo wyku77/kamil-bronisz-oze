@@ -9,13 +9,15 @@ export function Process() {
       <div className="pointer-events-none absolute inset-0 bg-grid-pattern bg-[length:48px_48px] opacity-[0.4] [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]" />
 
       <div className="container-px relative">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">{process.eyebrow}</span>
-          <h2 className="mt-5 h-section text-white">{process.title}</h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/65">{process.lead}</p>
+        <Reveal className="section-head-split">
+          <div>
+            <span className="eyebrow">{process.eyebrow}</span>
+            <h2 className="mt-5 h-section text-white">{process.title}</h2>
+          </div>
+          <p className="text-lg leading-relaxed text-white/65">{process.lead}</p>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {process.steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.08} className="relative">
               {/* Na telefonie ikona obok tekstu, a numer w rogu — karta o ok. 1/3 niższa. Od sm jak dotąd. */}
@@ -59,7 +61,7 @@ export function Process() {
           ))}
         </div>
 
-        <Reveal className="mt-12 text-center">
+        <Reveal className="mt-10 text-center">
           <a href="#kontakt" className="btn-primary group">
             Zacznij od bezpłatnej analizy
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -25,7 +25,7 @@ export function SavingsChart({ data, paybackYear }: SavingsChartProps) {
           return (
             <div key={d.year} className="group relative flex h-full flex-1 flex-col items-center justify-end">
               {/* Tooltip */}
-              <div className="pointer-events-none absolute -top-9 z-10 whitespace-nowrap rounded-lg border border-white/15 bg-ink-800 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-card transition-opacity group-hover:opacity-100">
+              <div className="pointer-events-none absolute -top-9 z-10 whitespace-nowrap rounded-lg border border-white/15 bg-ink-800 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-card transition-opacity group-hover:opacity-100">
                 Rok {d.year}: {formatPLN(d.value)}
               </div>
               <motion.div
@@ -47,7 +47,7 @@ export function SavingsChart({ data, paybackYear }: SavingsChartProps) {
       {/* Oś X — co 5 lat */}
       <div className="mt-2 flex gap-1.5 sm:gap-2">
         {data.map((d) => (
-          <div key={d.year} className="flex-1 text-center text-[10px] text-white/60">
+          <div key={d.year} className="flex-1 text-center text-xs text-white/60">
             {d.year % 5 === 0 || d.year === 1 ? `${d.year}` : ''}
           </div>
         ))}

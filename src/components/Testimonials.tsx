@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { MapPin, ShieldCheck, Star } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight, MapPin, ShieldCheck, Star } from 'lucide-react'
 import { testimonials, googleReviews } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
@@ -43,30 +43,51 @@ function GoogleG() {
 }
 
 export function Testimonials() {
-  // Która karta karuzeli jest na środku (tylko do kropek na telefonie)
+  // Karuzela na wszystkich szerokościach: telefon ~1 karta, md 2, lg 3 naraz.
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
-  const onScroll = () => {
+  const [perView, setPerView] = useState(1)
+  const krok = () => {
     const el = scrollerRef.current
     const card = el?.firstElementChild as HTMLElement | null
-    if (!el || !card) return
-    const step = card.offsetWidth + 16 // szerokość karty + gap-4
-    setActive(Math.min(testimonials.items.length - 1, Math.max(0, Math.round(el.scrollLeft / step))))
+    if (!el || !card) return null
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 16
+    return { el, step: card.offsetWidth + gap, gap }
   }
+  const measure = () => {
+    const k = krok()
+    if (!k) return
+    setPerView(Math.max(1, Math.round((k.el.clientWidth + k.gap) / k.step)))
+    setActive(Math.round(k.el.scrollLeft / k.step))
+  }
+  useEffect(() => {
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+  const pozycje = Math.max(1, testimonials.items.length - perView + 1)
+  const idzDo = (i: number) => {
+    const k = krok()
+    if (!k) return
+    k.el.scrollTo({ left: Math.max(0, Math.min(pozycje - 1, i)) * k.step, behavior: 'smooth' })
+  }
+  const aktywna = Math.min(active, pozycje - 1)
 
   return (
     <section id="opinie" className="section relative overflow-hidden bg-ink-900">
       <div className="pointer-events-none absolute inset-0 bg-mesh-gold opacity-50" />
 
       <div className="container-px relative">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <div className="section-head-split">
+        <Reveal>
           <span className="eyebrow">{testimonials.eyebrow}</span>
           <h2 className="mt-5 h-section text-white">{testimonials.title}</h2>
           <p className="mt-5 text-lg leading-relaxed text-white/65">{testimonials.lead}</p>
         </Reveal>
 
+        <div>
         {/* Pasek zaufania — opinie Google */}
-        <Reveal className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-4 sm:flex-row sm:gap-5">
+        <Reveal className="flex flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-4 sm:flex-row sm:gap-5">
           <GoogleG />
           <div className="text-center sm:text-left">
             <div className="flex items-center justify-center gap-2 sm:justify-start">
@@ -76,7 +97,7 @@ export function Testimonials() {
             <p className="text-xs text-white/70">
               <span className="font-semibold text-white/80">{googleReviews.count}</span> {googleReviews.note}
             </p>
-            <p className="mt-0.5 text-[11px] text-white/60">{googleReviews.attribution}</p>
+            <p className="mt-0.5 text-xs text-white/60">{googleReviews.attribution}</p>
           </div>
           <a
             href={googleReviews.url}
@@ -90,25 +111,27 @@ export function Testimonials() {
         </Reveal>
 
         {/* Lokalny dowód społeczny (statyczny, prawdziwy) */}
-        <Reveal className="mx-auto mt-3 flex max-w-xl items-center justify-center gap-2 text-center text-xs text-white/70">
+        <Reveal className="mt-3 flex items-center justify-center gap-2 text-center text-xs text-white/70 lg:justify-start">
           <MapPin className="h-3.5 w-3.5 shrink-0 text-gold-300" />
           {googleReviews.local}
         </Reveal>
+        </div>
+        </div>
 
-        {/* Na telefonie karuzela z przewijaniem w bok (kolejna karta wystaje, żeby było widać, że jest
-            więcej) — 6 kart jedna pod drugą zajmowało ok. 5 ekranów. Od md zwykła siatka.
+        {/* Karuzela: na telefonie kolejna karta wystaje (widać, że jest więcej), od md 2 karty, od lg 3
+            naraz ze strzałkami — wcześniej na komputerze siatka 2×3 zajmowała ok. 2 ekrany.
             Karty bez własnego Reveal: przy przesuwaniu w bok animacja wejścia zostawiała pustą,
             wystającą kartę, dopóki nie wjechała cała. */}
-        <Reveal className="mt-12">
+        <Reveal className="relative mt-10">
           <div
             ref={scrollerRef}
-            onScroll={onScroll}
-            className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden"
+            onScroll={measure}
+            className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 md:mx-0 md:gap-5 md:px-0 [&::-webkit-scrollbar]:hidden"
           >
             {testimonials.items.map((t) => (
               <article
                 key={t.name}
-                className="card card-hover relative flex w-[85%] shrink-0 snap-center flex-col overflow-hidden md:w-auto"
+                className="card card-hover relative flex w-[85%] shrink-0 snap-center flex-col overflow-hidden md:w-[calc((100%-1.25rem)/2)] md:snap-start lg:w-[calc((100%-2.5rem)/3)]"
               >
                 <div className="relative h-60 w-full overflow-hidden bg-ink-950">
                   {/* Rozmyta kopia tego samego zdjęcia wypełnia boki zamiast czarnych pasów.
@@ -140,19 +163,40 @@ export function Testimonials() {
             ))}
           </div>
 
-          {/* Kropki i podpowiedź — tylko na telefonie */}
-          <div className="mt-4 flex items-center justify-center gap-3 md:hidden">
-            <div className="flex gap-1.5" aria-hidden="true">
-              {testimonials.items.map((t, i) => (
-                <span
-                  key={t.name}
-                  className={`h-1.5 rounded-full transition-all ${i === active ? 'w-5 bg-gold-400' : 'w-1.5 bg-white/25'}`}
-                />
+          {/* Nawigacja: strzałki (od md) i kropki — jedna kropka na pozycję karuzeli */}
+          <div className="mt-5 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => idzDo(aktywna - 1)}
+              disabled={aktywna === 0}
+              aria-label="Poprzednie opinie"
+              className="hidden h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/[0.04] text-white transition-colors hover:border-gold-400/50 hover:text-gold-300 disabled:opacity-30 md:grid"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <div className="flex items-center gap-1.5">
+              {Array.from({ length: pozycje }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => idzDo(i)}
+                  aria-label={`Opinie — pozycja ${i + 1} z ${pozycje}`}
+                  className="grid h-6 place-items-center"
+                >
+                  <span className={`block h-1.5 rounded-full transition-all ${i === aktywna ? 'w-5 bg-gold-400' : 'w-1.5 bg-white/25'}`} />
+                </button>
               ))}
             </div>
-            <span className="text-xs text-white/60">
-              {active + 1} / {testimonials.items.length} · przesuń w bok
-            </span>
+            <span className="text-xs text-white/60 md:hidden">przesuń w bok</span>
+            <button
+              type="button"
+              onClick={() => idzDo(aktywna + 1)}
+              disabled={aktywna >= pozycje - 1}
+              aria-label="Następne opinie"
+              className="hidden h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/[0.04] text-white transition-colors hover:border-gold-400/50 hover:text-gold-300 disabled:opacity-30 md:grid"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
 
           {/* Obowiązek informacyjny (Omnibus): skąd pochodzą opinie i jak je weryfikuję */}
