@@ -93,13 +93,15 @@ export const nav = [
 export const hero = {
   badge: 'Magazyny energii · Lublin i całe woj. lubelskie',
   // Na telefonie krótsza — pełna etykieta łamała się tam na dwie linie
-  badgeShort: 'Magazyny energii · woj. lubelskie',
+  // (z fontem Inter „· woj. lubelskie" też łamało się na 390 px)
+  badgeShort: 'Magazyny energii · Lubelskie',
   title: 'Przestań oddawać energię do sieci za bezcen.',
   titleAccent: 'Zacznij ją magazynować.',
   titleEnd: '',
-  // Krótszy podtytuł (2 linie zamiast 5 na telefonie) — pasek zaufania mieści się w pierwszym ekranie
+  // Krótki podtytuł (2 linie) — pasek zaufania mieści się w pierwszym ekranie. Wariant A wybrany przez
+  // Kamila: nagłówek mówi „co", podtytuł „dlaczego ja i co dalej" (konsultant, nie akwizytor).
   subtitle:
-    'Dobieram magazyn energii do Twoich rachunków i prowadzę przez dotację do 16 000 zł — bez przewymiarowania.',
+    'Najpierw policzę, czy magazyn się u Ciebie opłaca. Potem dobór, dotacja do 16 000 zł i montaż — bez presji.',
   // Grafika sekcji otwierającej: wizualizacja AI (koncepcja A) — nie jest to zdjęcie realizacji.
   // Bez widocznego podpisu (decyzja Kamila); opis alternatywny mówi, że to wizualizacja.
   // Źródło i retusz: grafiki-ai/hero-koncepcje/.

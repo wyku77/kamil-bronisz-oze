@@ -15,7 +15,7 @@ export function Hero() {
       {/* Scena: grafika + tekst. Na telefonie grafika to pas u góry (pod przezroczystą nawigacją),
           od lg — tło całej sceny z tekstem po lewej. */}
       <div className="relative">
-        <div className="relative h-[300px] sm:h-[380px] lg:absolute lg:inset-0 lg:h-auto">
+        <div className="relative h-[280px] sm:h-[380px] lg:absolute lg:inset-0 lg:h-auto">
           <img
             loading="eager"
             decoding="async"
@@ -45,7 +45,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="eyebrow bg-ink-950/50"
+              className="eyebrow bg-ink-950/50 max-sm:tracking-[0.14em]"
             >
               <Sparkles className="h-3.5 w-3.5" />
               <span className="sm:hidden">{hero.badgeShort}</span>
@@ -56,7 +56,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="mt-5 font-display text-[2rem] font-extrabold leading-[1.08] tracking-tight sm:mt-6 sm:text-5xl lg:text-[3rem] xl:text-[3.4rem]"
+              className="mt-4 font-display text-[2rem] font-extrabold leading-[1.08] tracking-tight sm:mt-6 sm:text-5xl lg:text-[3rem] xl:text-[3.4rem]"
             >
               {hero.title}{' '}
               <span className="text-gradient">{hero.titleAccent}</span>{' '}
@@ -67,7 +67,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className="mt-4 max-w-lg text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg"
+              className="mt-3 max-w-lg text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg"
             >
               {hero.subtitle}
             </motion.p>
@@ -76,7 +76,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center lg:mt-7"
+              className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center lg:mt-7"
             >
               <a href="#kontakt" onClick={() => track.ctaClick('hero_primary')} className="btn-primary group">
                 {hero.primaryCta}
