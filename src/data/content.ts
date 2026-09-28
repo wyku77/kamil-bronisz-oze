@@ -17,14 +17,15 @@ import r4 from '../assets/realizacje/IMG-20260402-WA0005.webp'
 import r5 from '../assets/realizacje/IMG-20260402-WA0007.webp'
 import r6 from '../assets/realizacje/IMG-20260415-WA0003.webp'
 
-// Logotypy marek (pełny kolor) — pasek zaufania pod hero.
-import logoSigenergy from '../assets/marki/sigenergy.png'
-import logoFoxess from '../assets/marki/foxess.jpg'
-import logoSolax from '../assets/marki/solax.png'
-import logoDeye from '../assets/marki/deye.png'
-import logoJinko from '../assets/marki/jinko.png'
-import logoLesso from '../assets/marki/lesso.png'
-import logoTwsolar from '../assets/marki/tw-solar.jpg'
+// Logotypy marek — białe znaki przycięte do treści (grafiki-ai/logotypy-biale.mjs z plików w
+// src/assets/marki/). Pasek zaufania pod sekcją otwierającą.
+import logoSigenergy from '../assets/marki/biale/sigenergy.png'
+import logoFoxess from '../assets/marki/biale/foxess.png'
+import logoSolax from '../assets/marki/biale/solax.png'
+import logoDeye from '../assets/marki/biale/deye.png'
+import logoJinko from '../assets/marki/biale/jinko.png'
+import logoLesso from '../assets/marki/biale/lesso.png'
+import logoTwsolar from '../assets/marki/biale/tw-solar.png'
 
 // Ikony 3D (Higgsfield) — sekcje Dlaczego warto, Współpraca, O mnie
 import icNizszeRachunki from '../assets/grafiki/ikony/nizsze-rachunki.webp'
@@ -42,14 +43,16 @@ import icDotacje from '../assets/grafiki/ikony/dotacje.webp'
 
 export const brands = {
   label: 'Pracuję na sprawdzonym sprzęcie uznanych marek',
+  // h = wysokość znaku w px, wyrównana wg powierzchni (szerokie logo niższe, wąskie wyższe),
+  // żeby każde „ważyło" tyle samo. Sigenergy (główna marka) celowo nieco większe.
   items: [
-    { src: logoSigenergy, alt: 'Sigenergy' },
-    { src: logoFoxess, alt: 'FoxESS' },
-    { src: logoSolax, alt: 'SolaX' },
-    { src: logoDeye, alt: 'Deye' },
-    { src: logoJinko, alt: 'Jinko Solar' },
-    { src: logoLesso, alt: 'Lesso' },
-    { src: logoTwsolar, alt: 'TW-Solar' },
+    { src: logoSigenergy, alt: 'Sigenergy', h: 36 },
+    { src: logoFoxess, alt: 'FoxESS', h: 34 },
+    { src: logoSolax, alt: 'SolaX', h: 30 },
+    { src: logoDeye, alt: 'Deye', h: 32 },
+    { src: logoJinko, alt: 'Jinko Solar', h: 30 },
+    { src: logoLesso, alt: 'Lesso', h: 25 },
+    { src: logoTwsolar, alt: 'TW-Solar', h: 22 },
   ],
 }
 
@@ -89,11 +92,20 @@ export const nav = [
 
 export const hero = {
   badge: 'Magazyny energii · Lublin i całe woj. lubelskie',
+  // Na telefonie krótsza — pełna etykieta łamała się tam na dwie linie
+  badgeShort: 'Magazyny energii · woj. lubelskie',
   title: 'Przestań oddawać energię do sieci za bezcen.',
   titleAccent: 'Zacznij ją magazynować.',
   titleEnd: '',
+  // Krótszy podtytuł (2 linie zamiast 5 na telefonie) — pasek zaufania mieści się w pierwszym ekranie
   subtitle:
-    'Projektuję inteligentne systemy fotowoltaiczne z magazynami energii i zarządzaniem energią całego domu — dla domów i firm. Mniej rachunków, więcej kontroli.',
+    'Dobieram magazyn energii do Twoich rachunków i prowadzę przez dotację do 16 000 zł — bez przewymiarowania.',
+  // Grafika sekcji otwierającej: wizualizacja AI (koncepcja A) — nie jest to zdjęcie realizacji.
+  // Bez widocznego podpisu (decyzja Kamila); opis alternatywny mówi, że to wizualizacja.
+  // Źródło i retusz: grafiki-ai/hero-koncepcje/.
+  image: {
+    alt: 'Wizualizacja: nowoczesny dom o zmierzchu z fotowoltaiką na dachu i magazynem energii przy garażu',
+  },
   primaryCta: 'Zostaw numer — oddzwonię',
   secondaryCta: 'Oblicz swoje oszczędności',
   // Twarz i firma w pierwszym ekranie: kto oddzwoni i z kim realizowane są instalacje
@@ -112,14 +124,6 @@ export const hero = {
     { value: 85, suffix: '%', label: 'Autokonsumpcji z magazynem' },
     { value: 1380, suffix: '', label: 'Opinii Google firmy Begolden · 4,9 ★' },
   ],
-  floating: {
-    savingsLabel: 'Oszczędność rachunku',
-    savingsValue: '−90%',
-    savingsNote: 'przy magazynie i taryfie dynamicznej',
-    liveLabel: 'Magazyn naładowany',
-    liveValue: '94%',
-    liveNote: '⚡ energia na wieczór gotowa',
-  },
 }
 
 export type Benefit = {

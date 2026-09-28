@@ -1,24 +1,30 @@
 import { brands } from '../data/content'
 import { Reveal } from './ui/Reveal'
 
-/** Kompaktowy pasek logotypów marek (pełny kolor na białych kafelkach). */
+/**
+ * Pasek logotypów marek: białe znaki bez kafelków, wyrównane wizualnie (wysokość z danych).
+ * Wcześniej: kolorowe logo w białych prostokątach o różnej wielkości — część ledwo czytelna.
+ */
 export function Brands() {
   return (
-    <section id="marki" className="bg-ink-950 py-8 sm:py-10">
+    <section id="marki" className="bg-ink-950 pb-6 pt-2 sm:pb-10 sm:pt-4">
       <div className="container-px">
         <Reveal>
-          <p className="text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
             {brands.label}
           </p>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+          <div className="mx-auto mt-6 flex max-w-5xl flex-wrap items-center justify-center gap-x-9 gap-y-6 sm:gap-x-12">
             {brands.items.map((b) => (
-              <div
+              <img
                 key={b.alt}
-                className="flex h-12 w-24 items-center justify-center rounded-lg bg-white px-2.5 sm:h-14 sm:w-28"
+                loading="lazy"
+                decoding="async"
+                src={b.src}
+                alt={b.alt}
                 title={b.alt}
-              >
-                <img loading="lazy" src={b.src} alt={b.alt} className="max-h-7 max-w-full object-contain sm:max-h-8" />
-              </div>
+                style={{ height: b.h }}
+                className="w-auto max-w-[150px] opacity-75 transition-opacity hover:opacity-100 sm:max-w-none"
+              />
             ))}
           </div>
         </Reveal>

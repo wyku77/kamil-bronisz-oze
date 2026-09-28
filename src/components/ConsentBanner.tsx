@@ -32,21 +32,22 @@ export function ConsentBanner() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[70] p-3 sm:p-4">
-      <div className="mx-auto flex max-w-3xl flex-col gap-3 rounded-2xl border border-white/15 bg-ink-900/95 p-4 shadow-2xl backdrop-blur sm:flex-row sm:items-center">
-        <p className="text-sm leading-relaxed text-white/70">
-          Używamy plików cookies do analityki i reklam, aby ulepszać stronę i lepiej docierać z ofertą.
-          Szczegóły w{' '}
+    // Kompaktowo: na telefonie niska belka nad paskiem kontaktu, na komputerze mała karta w lewym dolnym
+    // rogu — wcześniej baner zasłaniał ok. 20% ekranu telefonu i pasek z oceną w sekcji otwierającej.
+    <div className="fixed inset-x-0 bottom-0 z-[70] p-2 sm:inset-x-auto sm:bottom-4 sm:left-4 sm:w-[340px] sm:p-0">
+      <div className="rounded-2xl border border-white/15 bg-ink-900/95 p-3 shadow-2xl backdrop-blur sm:p-4">
+        <p className="text-[13px] leading-snug text-white/75">
+          Cookies do analityki i reklam —{' '}
           <a href="polityka-prywatnosci.html" className="font-medium text-gold-300 underline">
-            Polityce prywatności
+            szczegóły
           </a>
           .
         </p>
-        <div className="flex shrink-0 gap-2 sm:ml-auto">
-          <button type="button" onClick={reject} className="btn-ghost !py-2.5 !text-sm">
+        <div className="mt-2.5 flex gap-2">
+          <button type="button" onClick={reject} className="btn-ghost flex-1 whitespace-nowrap !px-3 !py-2 !text-[13px]">
             Tylko niezbędne
           </button>
-          <button type="button" onClick={accept} className="btn-primary !py-2.5 !text-sm">
+          <button type="button" onClick={accept} className="btn-primary flex-1 whitespace-nowrap !px-3 !py-2 !text-[13px]">
             Akceptuję
           </button>
         </div>
