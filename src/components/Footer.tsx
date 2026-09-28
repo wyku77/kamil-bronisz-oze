@@ -95,6 +95,17 @@ export function Footer() {
         <p className="mt-10 border-t border-white/10 pt-6 text-xs leading-relaxed text-white/45">
           <span className="font-medium text-white/60">Obszar działania:</span>{' '}
           {serviceArea.cities.join(' · ')} — całe województwo lubelskie. Analiza online w całej Polsce.
+          <br />
+          <span className="font-medium text-white/60">Realizacja instalacji:</span> firma{' '}
+          <a
+            href="https://www.begolden.com.pl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-white/25 underline-offset-2 transition-colors hover:text-gold-300"
+          >
+            Begolden
+          </a>{' '}
+          — {site.name} jest jej konsultantem energetycznym.
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 sm:flex-row">

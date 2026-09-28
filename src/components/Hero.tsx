@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, BatteryCharging, Calculator as CalcIcon, Sparkles } from 'lucide-react'
-import { hero } from '../data/content'
+import { about, googleReviews, hero, site } from '../data/content'
 import { SmartImage } from './ui/SmartImage'
 import { CountUp } from './ui/CountUp'
 import { track } from '../lib/analytics'
@@ -82,6 +82,37 @@ export function Hero() {
               </li>
             ))}
           </motion.ul>
+
+          {/* Kto oddzwoni i z kim realizowane są instalacje — twarz i wyjaśnienie oceny Begolden
+              już w pierwszym ekranie (wcześniej zdjęcie było dopiero w sekcji „O mnie"). */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="mt-7 flex max-w-xl items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] p-3 pr-4"
+          >
+            <img
+              loading="eager"
+              decoding="async"
+              src={about.photo}
+              width={52}
+              height={52}
+              alt={site.name}
+              className="h-[52px] w-[52px] shrink-0 rounded-xl object-cover object-top ring-1 ring-gold-400/30"
+            />
+            <div className="text-sm leading-snug">
+              <p className="text-white">
+                <span className="font-semibold">{site.name}</span>
+                <span className="text-white/60"> — {hero.person.note}</span>
+              </p>
+              <p className="mt-0.5 text-white/60">
+                {hero.person.company} ·{' '}
+                <span className="whitespace-nowrap font-semibold text-gold-300">
+                  ★ {googleReviews.rating} w Google ({googleReviews.count}{' '}opinii)
+                </span>
+              </p>
+            </div>
+          </motion.div>
         </div>
 
         {/* Prawa kolumna — obraz + pływające karty */}

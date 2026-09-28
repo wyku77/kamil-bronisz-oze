@@ -88,7 +88,7 @@ export const nav = [
 ]
 
 export const hero = {
-  badge: 'Inteligentne magazyny energii • HEMS • Taryfy dynamiczne',
+  badge: 'Magazyny energii · Lublin i całe woj. lubelskie',
   title: 'Przestań oddawać energię do sieci za bezcen.',
   titleAccent: 'Zacznij ją magazynować.',
   titleEnd: '',
@@ -96,6 +96,11 @@ export const hero = {
     'Projektuję inteligentne systemy fotowoltaiczne z magazynami energii i zarządzaniem energią całego domu — dla domów i firm. Mniej rachunków, więcej kontroli.',
   primaryCta: 'Zostaw numer — oddzwonię',
   secondaryCta: 'Oblicz swoje oszczędności',
+  // Twarz i firma w pierwszym ekranie: kto oddzwoni i z kim realizowane są instalacje
+  person: {
+    note: 'oddzwaniam osobiście',
+    company: 'Instalacje realizuję z firmą Begolden',
+  },
   trust: [
     'Bezpłatna, niezobowiązująca analiza',
     'Dobór bez przewymiarowania',
@@ -240,10 +245,19 @@ export type Testimonial = {
   photo: string
 }
 
-export const testimonials: { eyebrow: string; title: string; lead: string; items: Testimonial[] } = {
+export const testimonials: {
+  eyebrow: string
+  title: string
+  lead: string
+  verification: string
+  items: Testimonial[]
+} = {
   eyebrow: 'Realizacje i opinie',
   title: 'Zaufali mi właściciele domów i firm',
   lead: 'Najlepszą rekomendacją są realne realizacje i klienci, którzy obniżyli rachunki i odzyskali kontrolę nad energią.',
+  // Obowiązek informacyjny (Omnibus, od 2023): czy i jak zapewniam, że opinie pochodzą od klientów
+  verification:
+    'Skąd te opinie? Publikuję wyłącznie wypowiedzi klientów po zakończonym montażu, a zdjęcia przedstawiają moje realizacje. Ocena 4,9 ★ pochodzi z wizytówki Google firmy Begolden, z którą współpracuję.',
   items: [
     {
       name: 'Marek W.',
@@ -302,6 +316,10 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
       a: 'Tak — ale dziś opłaca się fotowoltaika połączona z magazynem energii. Cena odkupu nadwyżek oddanych do sieci jest niska, dlatego o opłacalności decyduje magazyn. Szczegóły w sekcji Magazyny energii.',
     },
     {
+      q: 'Ile kosztuje magazyn energii?',
+      a: 'To zależy głównie od **pojemności magazynu**, od tego, czy masz już fotowoltaikę i falownik, oraz od zakresu montażu. Dlatego nie podaję cen „z katalogu” — po krótkiej, **bezpłatnej analizie** Twojego zużycia dostaniesz konkretną kwotę, od razu z uwzględnieniem dotacji.',
+    },
+    {
       q: 'Jak działa taryfa dynamiczna?',
       a: 'Cena prądu zmienia się w ciągu doby. Obowiązek oferowania taryf dynamicznych mają już więksi sprzedawcy (od 2024 r.), a w 2026 dochodzą 15-minutowe interwały rozliczeń i szybsza zmiana sprzedawcy. Najwięcej zyskują osoby z magazynem energii — jak to działa, pokazuję w sekcji Magazyny energii.',
     },
@@ -310,12 +328,20 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
       a: 'Nowoczesny magazyn energii ze sztuczną inteligencją łączy falownik, baterię, opcjonalną ładowarkę do auta i zarządzanie energią w jednym, kompaktowym systemie. AI automatycznie optymalizuje pracę pod taryfy dynamiczne — ładuje, gdy prąd jest tani, i oddaje energię, gdy jest drogi — a Ty sterujesz całym domem z poziomu aplikacji. Najczęściej dobieram do tego Sigenergy — z systemem zarządzania energią (EMS) i pracą wyspową, co spełnia też wymogi nowej dotacji.',
     },
     {
+      q: 'Jaką pojemność magazynu wybrać?',
+      a: 'Pojemność dobieram do tego, ile prądu zużywasz **wieczorem i w nocy**, do mocy fotowoltaiki i do wymogów dotacji. Za duży magazyn to zamrożone pieniądze, a za mały nie pokryje wieczoru. Na analizie policzę to na Twoich danych — **bez przewymiarowania**.',
+    },
+    {
       q: 'Ile trwa montaż?',
       a: 'Sam montaż instalacji fotowoltaicznej z magazynem energii to zwykle 1–2 dni. Cały proces — od analizy i umowy, przez formalności i dotacje, po uruchomienie oraz zgłoszenie do sieci — trwa najczęściej kilka tygodni. Formalności biorę na siebie.',
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
       a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza **20 października 2026** i potrwa **do wyczerpania środków**. Dlatego warto przygotować się wcześniej: kto ma dobrany system i komplet dokumentów, złoży wniosek od razu po starcie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+    },
+    {
+      q: 'Mam starszą instalację w net-meteringu — czy też dostanę dotację?',
+      a: 'Tak — program obejmuje także osoby rozliczające się w starszym systemie (**net-metering**), ale kwota dotacji jest wtedy **niższa** niż w net-billingu. Sprawdzę, w jakim systemie się rozliczasz i ile dokładnie Ci przysługuje.',
     },
     {
       q: 'W jakich miastach działasz?',
@@ -336,6 +362,10 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     {
       q: 'Mam już fotowoltaikę — da się dołożyć magazyn?',
       a: 'W większości przypadków tak (**retrofit**) — przez falownik hybrydowy lub dodatkowy moduł z bramą wyspową. Na bezpłatnej analizie sprawdzam, co najlepiej pasuje do Twojej instalacji.',
+    },
+    {
+      q: 'Czy mogę mieć magazyn energii bez fotowoltaiki?',
+      a: 'Technicznie tak — magazyn może ładować się tanim prądem z sieci w taryfie dynamicznej i oddawać energię w drogich godzinach. Dotacja z programu „Przydomowe Magazyny Energii” wymaga jednak **posiadania mikroinstalacji** (np. fotowoltaiki) przyłączonej do sieci. Na analizie sprawdzę, który wariant bardziej opłaca się u Ciebie.',
     },
   ],
 }
@@ -557,5 +587,14 @@ export const subsidyDeadline = {
   unitOne: 'dzień do startu naboru',
   unitMany: 'dni do startu naboru',
   cta: 'Sprawdź, czy się łapiesz',
+  // Lżejsza ścieżka dla osób, które nie są jeszcze gotowe na rozmowę (znika po starcie naboru)
+  notify: {
+    button: 'Powiadom mnie o starcie',
+    placeholder: 'Telefon lub e-mail',
+    submit: 'Powiadom mnie',
+    note: 'Dam Ci znać SMS-em lub e-mailem, gdy ruszy nabór. Zostawiając kontakt, zgadzasz się na tę wiadomość i kontakt w sprawie dotacji. Bez spamu.',
+    success: 'Gotowe — dam Ci znać, gdy ruszy nabór.',
+    error: 'Podaj numer telefonu (9 cyfr) albo adres e-mail.',
+  },
   passed: 'Nabór trwa — wnioski przyjmowane do wyczerpania środków.',
 }

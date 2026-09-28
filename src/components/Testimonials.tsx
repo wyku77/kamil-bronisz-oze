@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { MapPin, Star } from 'lucide-react'
+import { MapPin, ShieldCheck, Star } from 'lucide-react'
 import { testimonials, googleReviews } from '../data/content'
 import { Reveal } from './ui/Reveal'
 import { SmartImage } from './ui/SmartImage'
@@ -154,6 +154,12 @@ export function Testimonials() {
               {active + 1} / {testimonials.items.length} · przesuń w bok
             </span>
           </div>
+
+          {/* Obowiązek informacyjny (Omnibus): skąd pochodzą opinie i jak je weryfikuję */}
+          <p className="mx-auto mt-6 flex max-w-2xl items-start justify-center gap-2 text-center text-xs leading-relaxed text-white/55">
+            <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-300/80" />
+            <span>{testimonials.verification}</span>
+          </p>
         </Reveal>
       </div>
     </section>

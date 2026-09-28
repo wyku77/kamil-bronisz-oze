@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react'
-import { ArrowRight, Clock } from 'lucide-react'
+import { useEffect, useState, type FormEvent } from 'react'
+import { ArrowRight, Bell, CheckCircle2, Clock } from 'lucide-react'
 import { subsidyDeadline } from '../data/content'
 import { track } from '../lib/analytics'
+import { submitLeadMagnet } from '../lib/leads'
+import { Honeypot, isBotSubmit } from './ui/Honeypot'
+import { SendFailure } from './ui/SendFailure'
+
+const isEmail = (v: string) => v.includes('@')
+const validContact = (v: string) => (isEmail(v) ? /\S+@\S+\.\S+/.test(v) : v.replace(/\D/g, '').length >= 9)
 
 function daysLeft(target: string): number {
   const ms = new Date(target).getTime() - Date.now()
@@ -26,6 +32,30 @@ export function SubsidyDeadline() {
     const id = window.setInterval(() => setDays(daysLeft(target)), 60_000)
     return () => window.clearInterval(id)
   }, [target])
+
+  // „Powiadom mnie o starcie" — lżejsza ścieżka kontaktu (tylko przed startem naboru)
+  const notify = subsidyDeadline.notify
+  const [open, setOpen] = useState(false)
+  const [contact, setContact] = useState('')
+  const [notifyStatus, setNotifyStatus] = useState<'idle' | 'sending' | 'done' | 'failed'>('idle')
+  const [notifyError, setNotifyError] = useState('')
+
+  const sendNotify = async () => {
+    const v = contact.trim()
+    setNotifyStatus('sending')
+    const res = await submitLeadMagnet(isEmail(v) ? { email: v } : { phone: v }, 'powiadomienie_nabor')
+    if (res.ok) track.leadSubmit({ source: 'powiadomienie_nabor', leadTemperature: 'cieply' })
+    else track.leadError('powiadomienie_nabor')
+    setNotifyStatus(res.ok ? 'done' : 'failed')
+  }
+
+  const handleNotify = async (e: FormEvent) => {
+    e.preventDefault()
+    if (isBotSubmit(e.target)) return setNotifyStatus('done')
+    if (!validContact(contact.trim())) return setNotifyError(notify.error)
+    setNotifyError('')
+    await sendNotify()
+  }
 
   const started = days !== null && days <= 0
   const counting = days !== null && !started
@@ -69,15 +99,66 @@ export function SubsidyDeadline() {
           <p className="text-sm leading-relaxed text-white/70">
             {started ? subsidyDeadline.textStarted : subsidyDeadline.text}
           </p>
-          <a
-            href="#kontakt"
-            onClick={() => track.ctaClick('subsidy_deadline')}
-            className="btn-primary shrink-0 !py-2 !text-xs sm:ml-auto"
-          >
-            {subsidyDeadline.cta}
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
+          <div className="flex shrink-0 flex-wrap items-center justify-center gap-2 sm:ml-auto">
+            <a
+              href="#kontakt"
+              onClick={() => track.ctaClick('subsidy_deadline')}
+              className="btn-primary !py-2 !text-xs"
+            >
+              {subsidyDeadline.cta}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+            {counting && !open && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(true)
+                  track.ctaClick('subsidy_notify_open')
+                }}
+                className="btn-ghost !py-2 !text-xs"
+              >
+                <Bell className="h-3.5 w-3.5" /> {notify.button}
+              </button>
+            )}
+          </div>
         </div>
+
+        {counting && open && (
+          <div className="mx-auto mt-3 max-w-xl pb-1">
+            {notifyStatus === 'done' ? (
+              <p className="flex items-center justify-center gap-2 text-sm font-medium text-emerald-300">
+                <CheckCircle2 className="h-4 w-4" /> {notify.success}
+              </p>
+            ) : (
+              <form onSubmit={handleNotify} className="space-y-2" noValidate>
+                <Honeypot />
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <input
+                    type="text"
+                    autoComplete="on"
+                    placeholder={notify.placeholder}
+                    aria-label={notify.placeholder}
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    className="field !py-2.5 text-sm"
+                  />
+                  <button
+                    type="submit"
+                    disabled={notifyStatus === 'sending'}
+                    className="btn-primary shrink-0 !py-2.5 !text-sm disabled:opacity-60"
+                  >
+                    {notifyStatus === 'sending' ? 'Wysyłam…' : notify.submit}
+                  </button>
+                </div>
+                {notifyError && <p className="text-xs text-red-300">{notifyError}</p>}
+                {notifyStatus === 'failed' && (
+                  <SendFailure source="powiadomienie_nabor" onRetry={sendNotify} />
+                )}
+                <p className="text-[11px] leading-relaxed text-white/55">{notify.note}</p>
+              </form>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
