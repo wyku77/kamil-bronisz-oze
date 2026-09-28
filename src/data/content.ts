@@ -315,7 +315,7 @@ export const faq: { eyebrow: string; title: string; lead: string; items: Faq[] }
     },
     {
       q: 'Czy można otrzymać dofinansowanie?',
-      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza w **IV kwartale 2026** i potrwa **do wyczerpania środków**. Dlatego warto przygotować się wcześniej: kto ma dobrany system i komplet dokumentów, złoży wniosek od razu po starcie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
+      a: 'Tak. Nabór programu „Przydomowe Magazyny Energii" — do **16 000 zł** na magazyn energii — rusza **20 października 2026** i potrwa **do wyczerpania środków**. Dlatego warto przygotować się wcześniej: kto ma dobrany system i komplet dokumentów, złoży wniosek od razu po starcie. Poza tym dostępne są dofinansowania do magazynów ciepła oraz program Czyste Powietrze na termomodernizację i pompy ciepła. Sprawdzę, co Ci przysługuje, i pomogę z formalnościami.',
     },
     {
       q: 'W jakich miastach działasz?',
@@ -499,7 +499,7 @@ export const leadMagnet = {
     'Ogniwa w technologii LFP — bezpieczeństwo i długa żywotność.',
     'Falownik hybrydowy lub gotowość pod retrofit, jeśli masz już fotowoltaikę.',
     'Integracja z taryfą dynamiczną — zarabianie na różnicy cen energii.',
-    'Komplet formalności gotowy przed startem naboru (IV kwartał 2026) — środki są do wyczerpania.',
+    'Komplet formalności gotowy przed startem naboru (20 października 2026) — środki są do wyczerpania.',
   ],
 }
 
@@ -543,15 +543,17 @@ export const leadMicrocopy = 'Oddzwaniam zwykle w ciągu 1 h • bez zobowiąza�
 
 // --- Pasek naboru dotacji (FOMO oparte na realnym terminie) ---
 export const subsidyDeadline = {
-  // Nabór „Przydomowe Magazyny Energii" rusza w IV kwartale 2026 — dokładna data nie jest jeszcze znana,
-  // więc NIE odliczamy dni (licznik do umownej daty sugerowałby nieprawdziwy termin).
-  // Gdy data będzie znana: wpisz ją tutaj (np. '2026-11-03T00:00:00'). Pasek sam zacznie odliczać dni,
-  // a po starcie przełączy się na `passed` + `textStarted`.
-  targetDate: null as string | null,
-  badge: 'Nabór: IV kwartał 2026',
+  // Nabór „Przydomowe Magazyny Energii” rusza 20 października 2026. Pasek odlicza dni do tej daty,
+  // a po starcie sam przełącza się na `passed` + `textStarted`.
+  // Strefa czasowa jawnie (+02:00, czas letni w PL do 25.10) — samo '2026-10-20' to północ UTC,
+  // czyli 2:00 w Polsce, i licznik przeskakiwałby o dwie godziny za późno.
+  // Ustaw null, jeśli termin znów będzie niepewny — pokaże się wtedy stała plakietka `badge`.
+  targetDate: '2026-10-20T00:00:00+02:00' as string | null,
+  badge: 'Nabór od 20 października 2026',
+  dateLabel: '20 października 2026',
   label: 'Dotacja na magazyn energii 2026',
-  text: 'Nabór „Przydomowe Magazyny Energii" (do 16 000 zł na magazyn) rusza w IV kwartale 2026 i potrwa do wyczerpania środków. Przygotuj dobór i dokumenty, zanim ruszą wnioski.',
-  textStarted: 'Nabór „Przydomowe Magazyny Energii" (do 16 000 zł na magazyn) już trwa. Pula jest ograniczona — sprawdź, czy się łapiesz, zanim środki się wyczerpią.',
+  text: 'Nabór „Przydomowe Magazyny Energii” (do 16 000 zł na magazyn) rusza 20 października 2026 i potrwa do wyczerpania środków. Przygotuj dobór i dokumenty, zanim ruszą wnioski.',
+  textStarted: 'Nabór „Przydomowe Magazyny Energii” (do 16 000 zł na magazyn) już trwa. Pula jest ograniczona — sprawdź, czy się łapiesz, zanim środki się wyczerpią.',
   unitOne: 'dzień do startu naboru',
   unitMany: 'dni do startu naboru',
   cta: 'Sprawdź, czy się łapiesz',

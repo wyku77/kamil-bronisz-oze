@@ -99,7 +99,7 @@ Przepływ: **Formularz → Bramka leadowa (lead magnet) → Pełne wyniki**
    **czas zwrotu PO dofinansowaniu**, dofinansowanie, redukcja CO₂.
 
 > Kalkulator uwzględnia dofinansowanie z programu **„Przydomowe Magazyny Energii"** (nabór rusza
-> w **IV kwartale 2026**, wnioski do wyczerpania środków) — dotacja wyłącznie na **magazyn energii,
+> **20 października 2026**, wnioski do wyczerpania środków) — dotacja wyłącznie na **magazyn energii,
 > maks. 16 000 zł**. Program **nie obejmuje dofinansowania
 > do paneli PV**. Model **zakłada z góry korzystanie z taryfy dynamicznej** i obecny, duży arbitraż
 > cenowy — dzięki temu orientacyjny czas zwrotu typowej instalacji domowej to ok. **3,8–4,4 lat**,
@@ -181,7 +181,7 @@ zdarzenia jako konwersje w Meta Ads / Google Ads.
 - `public/robots.txt`, `public/sitemap.xml`, `public/favicon.svg`
 
 > Po wdrożeniu na docelową domenę zmień adresy `https://kamilbronisz.pl/` w `index.html`,
-> `robots.txt`, `sitemap.xml` oraz podgląd linku `public/og-kamilbronisz-2026.jpg` (1200×630; przy podmianie zmień NAZWĘ pliku, bo Facebook cache’uje po URL).
+> `robots.txt`, `sitemap.xml` oraz podgląd linku `public/og-kamilbronisz-2026-10.jpg` (1200×630; przy podmianie zmień NAZWĘ pliku, bo Facebook cache’uje po URL).
 
 ---
 
